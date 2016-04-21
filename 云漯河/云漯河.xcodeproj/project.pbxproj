@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0D465E191CC869BD009F502D /* post_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D465E181CC869BD009F502D /* post_normal@2x.png */; };
+		0D465E1B1CC88DE6009F502D /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D3DF9951AEE31EE00090760 /* CoreTelephony.framework */; };
+		0D465E1C1CC88DE6009F502D /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DB7DB441BE3A44E00389A8E /* TencentOpenAPI.framework */; };
 		6D017A311BCE4F0800F6FC1A /* (null) in Resources */ = {isa = PBXBuildFile; };
 		6D017A5A1BCE588500F6FC1A /* TMCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D017A541BCE588500F6FC1A /* TMCache.m */; };
 		6D017A5B1BCE588500F6FC1A /* TMDiskCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D017A571BCE588500F6FC1A /* TMDiskCache.m */; };
@@ -81,7 +83,6 @@
 		6D3D1DD51BFD7C5A00B03FCB /* ApplyActItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D3D1DD41BFD7C5A00B03FCB /* ApplyActItemCell.m */; };
 		6D3DF9921AEE31DD00090760 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D3DF9911AEE31DD00090760 /* SystemConfiguration.framework */; };
 		6D3DF9941AEE31E600090760 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D3DF9931AEE31E600090760 /* QuartzCore.framework */; };
-		6D3DF9961AEE31EE00090760 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D3DF9951AEE31EE00090760 /* CoreTelephony.framework */; };
 		6D3DF9971AEE31FA00090760 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D8ED8671AE4F12100D023EC /* libicucore.dylib */; };
 		6D3DF9991AEE320E00090760 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D3DF9981AEE320E00090760 /* Security.framework */; };
 		6D3DF99B1AEE321B00090760 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D3DF99A1AEE321B00090760 /* ImageIO.framework */; };
@@ -719,7 +720,6 @@
 		6DAA4C951BAFD9D700C43C63 /* ArticleFavoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DAA4C941BAFD9D700C43C63 /* ArticleFavoController.m */; };
 		6DABC9991C06DE6B0070FDFD /* PostingMenuVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DABC9981C06DE6B0070FDFD /* PostingMenuVC.m */; };
 		6DB695CF1B21395F00FD0911 /* YZPickView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DB695CE1B21395F00FD0911 /* YZPickView.m */; };
-		6DB7DB5D1BE3A44E00389A8E /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DB7DB441BE3A44E00389A8E /* TencentOpenAPI.framework */; };
 		6DB7DB5E1BE3A44E00389A8E /* TencentOpenApi_IOS_Bundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6DB7DB451BE3A44E00389A8E /* TencentOpenApi_IOS_Bundle.bundle */; };
 		6DB7DB5F1BE3A44E00389A8E /* libWeiboSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DB7DB471BE3A44E00389A8E /* libWeiboSDK.a */; };
 		6DB7DB601BE3A44E00389A8E /* WeiboSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6DB7DB511BE3A44E00389A8E /* WeiboSDK.bundle */; };
@@ -1005,7 +1005,6 @@
 		8AB7CC5A1AA00D7E007A17E8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8AB7CC591AA00D7E007A17E8 /* Images.xcassets */; };
 		8AB7CC691AA00D7E007A17E8 /* ClanTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AB7CC681AA00D7E007A17E8 /* ClanTests.m */; };
 		8AB7CC811AA0512E007A17E8 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AB7CC801AA0512E007A17E8 /* BaseViewController.m */; };
-		8AB7CCBB1AA404A2007A17E8 /* ThemeStyle.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8AB7CCBA1AA404A2007A17E8 /* ThemeStyle.plist */; };
 		8AB7CCD41AA5A327007A17E8 /* YZHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AB7CCD31AA5A327007A17E8 /* YZHelper.m */; };
 		8AB7CCD81AA5A49D007A17E8 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AB7CCD71AA5A49D007A17E8 /* AssetsLibrary.framework */; };
 		8AB7CCDA1AA5A6E4007A17E8 /* libxml2.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AB7CCD91AA5A6E4007A17E8 /* libxml2.2.dylib */; };
@@ -2684,10 +2683,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6D3DF9961AEE31EE00090760 /* CoreTelephony.framework in Frameworks */,
-				6DB7DB5D1BE3A44E00389A8E /* TencentOpenAPI.framework in Frameworks */,
-				6D3DF9961AEE31EE00090760 /* CoreTelephony.framework in Frameworks */,
-				6DB7DB5D1BE3A44E00389A8E /* TencentOpenAPI.framework in Frameworks */,
+				0D465E1B1CC88DE6009F502D /* CoreTelephony.framework in Frameworks */,
+				0D465E1C1CC88DE6009F502D /* TencentOpenAPI.framework in Frameworks */,
 				6D3DF9941AEE31E600090760 /* QuartzCore.framework in Frameworks */,
 				6D3DF9971AEE31FA00090760 /* libicucore.dylib in Frameworks */,
 				6DB7DB611BE3A44E00389A8E /* libWeChatSDK.a in Frameworks */,
@@ -5520,7 +5517,7 @@
 		8AB7CC411AA00D7D007A17E8 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0610;
+				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = Youzu;
 				TargetAttributes = {
 					8AB7CC481AA00D7D007A17E8 = {
@@ -5747,7 +5744,6 @@
 				6DB7DB5E1BE3A44E00389A8E /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				6D65EF191C0ECCD70032B5DD /* 2_4_H@3x.png in Resources */,
 				6D65F0571C0ECCD70032B5DD /* sousuoshouye@3x.png in Resources */,
-				8AB7CCBB1AA404A2007A17E8 /* ThemeStyle.plist in Resources */,
 				6D65F00E1C0ECCD70032B5DD /* jiantou_post_up@2x.png in Resources */,
 				6D65EEF51C0ECCD70032B5DD /* 1_4_H@3x.png in Resources */,
 				6D65EFFE1C0ECCD70032B5DD /* default_image@2x.png in Resources */,
@@ -6885,6 +6881,7 @@
 				);
 				INFOPLIST_FILE = ClanTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.youzu.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Clan.app/Clan";
 			};
@@ -6900,6 +6897,7 @@
 				);
 				INFOPLIST_FILE = ClanTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.youzu.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Clan.app/Clan";
 			};
