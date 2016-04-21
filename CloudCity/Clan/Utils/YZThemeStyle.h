@@ -22,7 +22,7 @@
 #define kShareAppSecretTecent @"ShareAppSecretTecent"
 #define kShareAppRedirectUriSina @"ShareAppRedirectUriSina"
 #define kBOARDSTYLE @"BOARDSTYLE" //版块儿样式
-#define kBIGAPPVERSION @"BIGAPPVERSION" //bigApp Version
+#define kCLOUDCITYAPPVERSION @"CLOUDCITYAPPVERSION" //bigApp Version
 #define KCustomItemNotifi @"customItemNOtifi" //自定义itemBar通知
 
 //ThridpartLoginConfig 第三方登录配置文件

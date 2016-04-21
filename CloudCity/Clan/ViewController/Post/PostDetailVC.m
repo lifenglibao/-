@@ -1513,7 +1513,7 @@ typedef enum {
                           @"type" : @"dz",
                           @"debug" : @"false",
                           @"platform" : @"iOS",
-                          @"version" : avoidNullStr([NSString returnStringWithPlist:kBIGAPPVERSION]),
+                          @"version" : avoidNullStr([NSString returnStringWithPlist:kCLOUDCITYAPPVERSION]),
                           @"theme" : @{@"color" : avoidNullStr([UIColor hexValueFromUIColor:[Util mainThemeColor]])},
                           @"postData" : _isArticle ? @{@"aid" : avoidNullStr(_postModel.tid)} : @{@"tid" : avoidNullStr(_postModel.tid)}, //帖子ID
                           @"network" : avoidNullStr(@(networkStatus)),
@@ -1528,7 +1528,7 @@ typedef enum {
                 @"type" : @"dz",
                 @"debug" : @"true",
                 @"platform" : @"iOS",
-                @"version" : avoidNullStr([NSString returnStringWithPlist:kBIGAPPVERSION]), //发布版本号跟插件保持一致
+                @"version" : avoidNullStr([NSString returnStringWithPlist:kCLOUDCITYAPPVERSION]), //发布版本号跟插件保持一致
                 @"theme" : @{@"color" : avoidNullStr([UIColor hexValueFromUIColor:[Util mainThemeColor]])},
                 @"postData" : _isArticle ? @{@"aid" : avoidNullStr(_postModel.tid)} : @{@"tid" : avoidNullStr(_postModel.tid)}, //帖子ID
                 @"network" : avoidNullStr(@(networkStatus)),

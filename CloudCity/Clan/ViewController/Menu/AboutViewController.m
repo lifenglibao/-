@@ -49,7 +49,7 @@
     lbl_version.font = [UIFont fontWithSize:12.f];
     lbl_version.textColor = K_COLOR_DARK_Cell;
     lbl_version.textAlignment = NSTextAlignmentCenter;
-    lbl_version.text = [NSString stringWithFormat:@"版本号：%@ (%@)",[Util currentAppVersion],[NSString returnStringWithPlist:kBIGAPPVERSION]];
+    lbl_version.text = [NSString stringWithFormat:@"版本号：%@ (%@)",[Util currentAppVersion],[NSString returnStringWithPlist:kCLOUDCITYAPPVERSION]];
     [scrolview addSubview:lbl_version];
     
     UIFont *desFont = [UIFont fontWithSize:12.f];

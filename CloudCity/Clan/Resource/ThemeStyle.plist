@@ -10,7 +10,7 @@
 	<string>http://192.168.1.123/</string>
 	<key>YZBasePath</key>
 	<string>cloudCity/bbs/upload/api/mobile/iyz_index.php</string>
-	<key>BIGAPPVERSION</key>
+	<key>CLOUDCITYAPPVERSION</key>
 	<string>9003</string>
 	<key>APPSTYLE</key>
 	<string>2</string>
