@@ -2508,7 +2508,7 @@
 		8AB793851BE0CE4F002A9BFE /* PostActivityInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostActivityInfoVC.m; sourceTree = "<group>"; };
 		8AB793871BE0DCB3002A9BFE /* PostActivityIntroduceVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostActivityIntroduceVC.h; sourceTree = "<group>"; };
 		8AB793881BE0DCB3002A9BFE /* PostActivityIntroduceVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostActivityIntroduceVC.m; sourceTree = "<group>"; };
-		8AB7CC491AA00D7D007A17E8 /* 云漯河.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "云漯河.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8AB7CC491AA00D7D007A17E8 /* CloudCity.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CloudCity.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8AB7CC4D1AA00D7D007A17E8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8AB7CC4E1AA00D7D007A17E8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8AB7CC501AA00D7D007A17E8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = ../AppDelegate.h; sourceTree = "<group>"; };
@@ -4886,7 +4886,7 @@
 		8AB7CC4A1AA00D7D007A17E8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8AB7CC491AA00D7D007A17E8 /* 云漯河.app */,
+				8AB7CC491AA00D7D007A17E8 /* CloudCity.app */,
 				8AB7CC621AA00D7E007A17E8 /* 云漯河Tests.xctest */,
 			);
 			name = Products;
@@ -5476,9 +5476,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		8AB7CC481AA00D7D007A17E8 /* 云漯河 */ = {
+		8AB7CC481AA00D7D007A17E8 /* CloudCity */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8AB7CC6C1AA00D7E007A17E8 /* Build configuration list for PBXNativeTarget "云漯河" */;
+			buildConfigurationList = 8AB7CC6C1AA00D7E007A17E8 /* Build configuration list for PBXNativeTarget "CloudCity" */;
 			buildPhases = (
 				8AB7CC451AA00D7D007A17E8 /* Sources */,
 				8AB7CC461AA00D7D007A17E8 /* Frameworks */,
@@ -5488,9 +5488,9 @@
 			);
 			dependencies = (
 			);
-			name = "云漯河";
+			name = CloudCity;
 			productName = Clan;
-			productReference = 8AB7CC491AA00D7D007A17E8 /* 云漯河.app */;
+			productReference = 8AB7CC491AA00D7D007A17E8 /* CloudCity.app */;
 			productType = "com.apple.product-type.application";
 		};
 		8AB7CC611AA00D7E007A17E8 /* 云漯河Tests */ = {
@@ -5535,7 +5535,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 8AB7CC441AA00D7D007A17E8 /* Build configuration list for PBXProject "云漯河" */;
+			buildConfigurationList = 8AB7CC441AA00D7D007A17E8 /* Build configuration list for PBXProject "CloudCity" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -5559,7 +5559,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				8AB7CC481AA00D7D007A17E8 /* 云漯河 */,
+				8AB7CC481AA00D7D007A17E8 /* CloudCity */,
 				8AB7CC611AA00D7E007A17E8 /* 云漯河Tests */,
 			);
 		};
@@ -6650,7 +6650,7 @@
 /* Begin PBXTargetDependency section */
 		8AB7CC641AA00D7E007A17E8 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 8AB7CC481AA00D7D007A17E8 /* 云漯河 */;
+			target = 8AB7CC481AA00D7D007A17E8 /* CloudCity */;
 			targetProxy = 8AB7CC631AA00D7E007A17E8 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -6906,7 +6906,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		8AB7CC441AA00D7D007A17E8 /* Build configuration list for PBXProject "云漯河" */ = {
+		8AB7CC441AA00D7D007A17E8 /* Build configuration list for PBXProject "CloudCity" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8AB7CC6A1AA00D7E007A17E8 /* Debug */,
@@ -6915,7 +6915,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8AB7CC6C1AA00D7E007A17E8 /* Build configuration list for PBXNativeTarget "云漯河" */ = {
+		8AB7CC6C1AA00D7E007A17E8 /* Build configuration list for PBXNativeTarget "CloudCity" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8AB7CC6D1AA00D7E007A17E8 /* Debug */,

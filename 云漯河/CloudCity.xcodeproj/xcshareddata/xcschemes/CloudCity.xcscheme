@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "8AB7CC481AA00D7D007A17E8"
-               BuildableName = "&#x4e91;&#x6f2f;&#x6cb3;.app"
-               BlueprintName = "&#x4e91;&#x6f2f;&#x6cb3;"
-               ReferencedContainer = "container:&#x4e91;&#x6f2f;&#x6cb3;.xcodeproj">
+               BuildableName = "CloudCity.app"
+               BlueprintName = "CloudCity"
+               ReferencedContainer = "container:CloudCity.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8AB7CC481AA00D7D007A17E8"
-            BuildableName = "&#x4e91;&#x6f2f;&#x6cb3;.app"
-            BlueprintName = "&#x4e91;&#x6f2f;&#x6cb3;"
-            ReferencedContainer = "container:&#x4e91;&#x6f2f;&#x6cb3;.xcodeproj">
+            BuildableName = "CloudCity.app"
+            BlueprintName = "CloudCity"
+            ReferencedContainer = "container:CloudCity.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -56,9 +56,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8AB7CC481AA00D7D007A17E8"
-            BuildableName = "&#x4e91;&#x6f2f;&#x6cb3;.app"
-            BlueprintName = "&#x4e91;&#x6f2f;&#x6cb3;"
-            ReferencedContainer = "container:&#x4e91;&#x6f2f;&#x6cb3;.xcodeproj">
+            BuildableName = "CloudCity.app"
+            BlueprintName = "CloudCity"
+            ReferencedContainer = "container:CloudCity.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -75,9 +75,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8AB7CC481AA00D7D007A17E8"
-            BuildableName = "&#x4e91;&#x6f2f;&#x6cb3;.app"
-            BlueprintName = "&#x4e91;&#x6f2f;&#x6cb3;"
-            ReferencedContainer = "container:&#x4e91;&#x6f2f;&#x6cb3;.xcodeproj">
+            BuildableName = "CloudCity.app"
+            BlueprintName = "CloudCity"
+            ReferencedContainer = "container:CloudCity.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
@@ -86,6 +86,7 @@
    </AnalyzeAction>
    <ArchiveAction
       buildConfiguration = "Release"
+      customArchiveName = "&#x4e91;&#x6f2f;&#x6cb3;"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>
