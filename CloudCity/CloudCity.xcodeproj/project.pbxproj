@@ -2514,7 +2514,7 @@
 		8AB7CC501AA00D7D007A17E8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = ../AppDelegate.h; sourceTree = "<group>"; };
 		8AB7CC511AA00D7D007A17E8 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = ../AppDelegate.m; sourceTree = "<group>"; };
 		8AB7CC591AA00D7E007A17E8 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		8AB7CC621AA00D7E007A17E8 /* 云漯河Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "云漯河Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8AB7CC621AA00D7E007A17E8 /* CloudCityTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CloudCityTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8AB7CC671AA00D7E007A17E8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8AB7CC681AA00D7E007A17E8 /* ClanTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClanTests.m; sourceTree = "<group>"; };
 		8AB7CC7F1AA0512E007A17E8 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
@@ -4887,7 +4887,7 @@
 			isa = PBXGroup;
 			children = (
 				8AB7CC491AA00D7D007A17E8 /* CloudCity.app */,
-				8AB7CC621AA00D7E007A17E8 /* 云漯河Tests.xctest */,
+				8AB7CC621AA00D7E007A17E8 /* CloudCityTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -5493,9 +5493,9 @@
 			productReference = 8AB7CC491AA00D7D007A17E8 /* CloudCity.app */;
 			productType = "com.apple.product-type.application";
 		};
-		8AB7CC611AA00D7E007A17E8 /* 云漯河Tests */ = {
+		8AB7CC611AA00D7E007A17E8 /* CloudCityTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8AB7CC6F1AA00D7E007A17E8 /* Build configuration list for PBXNativeTarget "云漯河Tests" */;
+			buildConfigurationList = 8AB7CC6F1AA00D7E007A17E8 /* Build configuration list for PBXNativeTarget "CloudCityTests" */;
 			buildPhases = (
 				8AB7CC5E1AA00D7E007A17E8 /* Sources */,
 				8AB7CC5F1AA00D7E007A17E8 /* Frameworks */,
@@ -5506,9 +5506,9 @@
 			dependencies = (
 				8AB7CC641AA00D7E007A17E8 /* PBXTargetDependency */,
 			);
-			name = "云漯河Tests";
+			name = CloudCityTests;
 			productName = ClanTests;
-			productReference = 8AB7CC621AA00D7E007A17E8 /* 云漯河Tests.xctest */;
+			productReference = 8AB7CC621AA00D7E007A17E8 /* CloudCityTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -5560,7 +5560,7 @@
 			projectRoot = "";
 			targets = (
 				8AB7CC481AA00D7D007A17E8 /* CloudCity */,
-				8AB7CC611AA00D7E007A17E8 /* 云漯河Tests */,
+				8AB7CC611AA00D7E007A17E8 /* CloudCityTests */,
 			);
 		};
 /* End PBXProject section */
@@ -6924,7 +6924,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8AB7CC6F1AA00D7E007A17E8 /* Build configuration list for PBXNativeTarget "云漯河Tests" */ = {
+		8AB7CC6F1AA00D7E007A17E8 /* Build configuration list for PBXNativeTarget "CloudCityTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8AB7CC701AA00D7E007A17E8 /* Debug */,
