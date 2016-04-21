@@ -4879,8 +4879,8 @@
 		8AB7CC401AA00D7D007A17E8 = {
 			isa = PBXGroup;
 			children = (
-				8AB7CC4B1AA00D7D007A17E8 /* Clan */,
-				8AB7CC651AA00D7E007A17E8 /* ClanTests */,
+				8AB7CC4B1AA00D7D007A17E8 /* CloudCity */,
+				8AB7CC651AA00D7E007A17E8 /* CloudCityTests */,
 				8AB7CC4A1AA00D7D007A17E8 /* Products */,
 				3DB707BE3E821E83FB93A447 /* Frameworks */,
 			);
@@ -4895,7 +4895,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		8AB7CC4B1AA00D7D007A17E8 /* Clan */ = {
+		8AB7CC4B1AA00D7D007A17E8 /* CloudCity */ = {
 			isa = PBXGroup;
 			children = (
 				6DFF6A751C1933FD00310161 /* www1 */,
@@ -4920,6 +4920,7 @@
 				8AB7CC591AA00D7E007A17E8 /* Images.xcassets */,
 				8AB7CC4C1AA00D7D007A17E8 /* Supporting Files */,
 			);
+			name = CloudCity;
 			path = Clan;
 			sourceTree = "<group>";
 		};
@@ -4934,12 +4935,13 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		8AB7CC651AA00D7E007A17E8 /* ClanTests */ = {
+		8AB7CC651AA00D7E007A17E8 /* CloudCityTests */ = {
 			isa = PBXGroup;
 			children = (
 				8AB7CC681AA00D7E007A17E8 /* ClanTests.m */,
 				8AB7CC661AA00D7E007A17E8 /* Supporting Files */,
 			);
+			name = CloudCityTests;
 			path = ClanTests;
 			sourceTree = "<group>";
 		};
