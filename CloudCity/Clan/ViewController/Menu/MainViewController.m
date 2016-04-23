@@ -84,12 +84,12 @@ static float interval = 60.f;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificationCome:) name:@"KNEWS_MESSAGE_COME" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificationCome:) name:@"KNEWS_FRIEND_MESSAGE" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificationCome:) name:@"GET_kBOARDSTYLE" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificationCome:) name:@"Avatar_Changed" object:nil];
 
     UserModel *cUser = [UserModel currentUserInfo];
     [cUser addObserver:self forKeyPath:@"logined" options:NSKeyValueObservingOptionNew context:NULL];
     [cUser addObserver:self forKeyPath:@"avatar" options:NSKeyValueObservingOptionNew context:NULL];
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificationCome:) name:@"Avatar_Changed" object:nil];
+
     [self customTabBarView];
     [self newMessTip];
     [self loadBoardStyleVC:[NSString returnPlistWithKeyValue:kBOARDSTYLE]];

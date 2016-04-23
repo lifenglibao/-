@@ -21,11 +21,10 @@
 #import "ArticleModel.h"
 #import "ArticleListModel.h"
 #import "PostDetailVC.h"
+#import "LoginViewController.h"
+
 static const CGFloat itemWidth = 93.f;
 static const CGFloat itemHeight = 90.f;
-
-
-
 
 @implementation YZGridView
 
@@ -149,9 +148,25 @@ static const CGFloat itemHeight = 90.f;
     }
     if ([link.type isEqualToString:@"1"]) {
         //跳webview
-        TOWebViewController *web = [[TOWebViewController alloc]initWithURLString:link.url];
-        web.hidesBottomBarWhenPushed = YES;
-        [self.additionsViewController.navigationController pushViewController:web animated:YES];
+        
+        // 判断 gridview 点击时跳到哪个VC
+        if ([link.url isEqualToString:@"bus_search"]) {
+            // go to bus search function
+        }else if ([link.url isEqualToString:@"car_fine_search"]){
+            TOWebViewController *web = [[TOWebViewController alloc]initWithURLString:@"http://0395.weizhangwang.com"]; //hard code
+            web.hidesBottomBarWhenPushed = YES;
+            [self.additionsViewController.navigationController pushViewController:web animated:YES];
+            
+        }else if ([link.url isEqualToString:@"weather"]){
+            TOWebViewController *web = [[TOWebViewController alloc]initWithURLString:@"http://henan.weather.com.cn/luohe/index.shtml"]; //hard code
+            web.hidesBottomBarWhenPushed = YES;
+            [self.additionsViewController.navigationController pushViewController:web animated:YES];
+            
+        }else if ([link.url isEqualToString:@"post_news"]){
+            [self sendNormalPost];
+        }
+        
+
     }else if ([link.type isEqualToString:@"2"]){
         //跳帖子详情
 //        PostDetailViewController *detail = [[PostDetailViewController alloc]init];
@@ -218,4 +233,82 @@ static const CGFloat itemHeight = 90.f;
     [self bringSubviewToFront:bottonLine];
 
 }
+
+- (void)sendNormalPost
+{
+    if ([self checkLoginState])
+    {
+        [self showProgressHUDWithStatus:@"" withLock:YES];
+        WEAKSELF
+        
+        HomeViewModel *homeViewModel = [[HomeViewModel alloc] init];
+
+        [homeViewModel request_boardBlock:^(id data) {
+            STRONGSELF
+            [SVProgressHUD dismiss];
+            id forumsdata = [UserDefaultsHelper valueForDefaultsKey:kUserDefaultsKey_ForumsStore];
+            if (forumsdata && [forumsdata isKindOfClass:[NSArray class]]) {
+                NSArray *forumsDataArr = (NSArray *)forumsdata;
+                NSMutableArray *forumsArr = [NSMutableArray new];
+                for (NSDictionary *dic in forumsDataArr) {
+                    BoardModel *boardModel = [BoardModel objectWithKeyValues:dic];
+                    [forumsArr addObject:boardModel];
+                    //                    if (boardModel.forums && boardModel.forums.count>0) {
+                    //                        [forumsArr addObjectsFromArray:boardModel.forums];
+                    //                    }
+                }
+                //存储forums
+                if (forumsArr && forumsArr.count > 0) {
+                    //存在版块儿 跳转到
+                    PostSendViewController *send = [[PostSendViewController alloc]init];
+                    send.fromShouYe = YES;
+                    send.dataSourceArray = [[NSArray alloc]initWithArray:forumsArr];
+                    UINavigationController *navi = [[UINavigationController alloc]initWithRootViewController:send];
+                    [strongSelf.additionsViewController presentViewController:navi animated:YES completion:NULL];
+                } else {
+                    [strongSelf showHudTipStr:@"抱歉，暂无板块儿可以发帖！"];
+                }
+            }
+        }];
+    }
+}
+
+- (BOOL)checkLoginState
+{
+    UserModel *_cuser = [UserModel currentUserInfo];
+    if (!_cuser || !_cuser.logined) {
+        //没有登录 跳出登录页面
+        LoginViewController *login = [[LoginViewController alloc]init];
+        UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:login];
+        nav.modalPresentationStyle = UIModalPresentationFullScreen;
+        [self.additionsViewController.navigationController presentViewController:nav animated:YES completion:nil];
+        if (self.additionsViewController.sideMenuViewController) {
+            [self.additionsViewController.sideMenuViewController hideMenuViewController];
+        }
+        return NO;
+    } else {
+        return YES;
+    }
+}
+
+- (void)showProgressHUDWithStatus:(NSString *)string withLock:(BOOL)lock
+{
+    [SVProgressHUD setBackgroundColor:[UIColor blackColor]];
+    [SVProgressHUD setForegroundColor:[UIColor whiteColor]];
+    if (!string || [@"" isEqualToString:string]) {
+        if (lock) {
+            [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
+            return;
+        }
+        [SVProgressHUD show];
+        return;
+    }
+    if (lock) {
+        [SVProgressHUD showWithStatus:string maskType:SVProgressHUDMaskTypeBlack];
+        return;
+    }
+    [SVProgressHUD showWithStatus:string];
+}
+
 @end
+

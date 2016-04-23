@@ -425,14 +425,14 @@ static NSString *const customRecommendType = @"2";
             }
             customHomeModel.link = linkArray;
         }
-//        else if ([dicType[@"type"] isEqualToString:@"hot"]){
-//            NSMutableArray *hotArray = [NSMutableArray array];
-//            for (NSDictionary *hotDic in dicType[@"setting"]) {
-//                ForumModel *forumModel = [ForumModel objectWithKeyValues:hotDic];
-//                [hotArray addObject:forumModel];
-//            }
-//            customHomeModel.forum = hotArray;
-//        }
+        else if ([dicType[@"type"] isEqualToString:@"hot"]){
+            NSMutableArray *hotArray = [NSMutableArray array];
+            for (NSDictionary *hotDic in dicType[@"setting"]) {
+                ForumModel *forumModel = [ForumModel objectWithKeyValues:hotDic];
+                [hotArray addObject:forumModel];
+            }
+            customHomeModel.forum = hotArray;
+        }// not using now
         else if ([dicType[@"type"] isEqualToString:@"recomm"]){
             NSMutableArray *recomm = [NSMutableArray array];
             for (NSDictionary *recommDic in dicType[@"recommend"][@"thread_config"]) {

@@ -79,7 +79,7 @@ static NSString *const customRecommendType = @"2";
         [view removeFromSuperview];
     }
     
-    [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"sousuoshouye"] style:UIBarButtonItemStylePlain target:self action:@selector(searchAction)] animated:NO];
+//    [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"sousuoshouye"] style:UIBarButtonItemStylePlain target:self action:@selector(searchAction)] animated:NO];
     
     
     NSNumber *valNum = [[NSUserDefaults standardUserDefaults] objectForKey:@"KNEWS_MESSAGE"];
@@ -159,7 +159,7 @@ static NSString *const customRecommendType = @"2";
     //排序按钮
     [self viewForOrderBy];
     //sectionHeaderView
-    [self addGridView];
+//    [self addGridView];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doAutoUpdate) name:@"AUTO_REFRESH_SHOWYE" object:nil];
     self.navigationItem.title = _customHomeModel.navTitle.length > 0 ? _customHomeModel.navTitle : [NSString returnStringWithPlist:YZBBSName];
     if (!_homeViewModel) {
@@ -253,6 +253,7 @@ static NSString *const customRecommendType = @"2";
 - (void)requestData:(CustomHomeListModel *)listType
 {
     [self.view endLoading];
+    [self initNav];
     if (!listType && !_customHomeModel) {
         [self.view endLoading];
         [self.tableView endHeaderRefreshing];
@@ -378,7 +379,9 @@ static NSString *const customRecommendType = @"2";
 {
     if (section == 3) {
         if (_customHomeModel.recommend.count > 1) {
-            return 44;
+//            return 44;
+            return 0;
+
         } else {
             return ([_listType.type isEqualToString:customRecommendType]) ? 30 : CGFLOAT_MIN;
         }
@@ -413,37 +416,37 @@ static NSString *const customRecommendType = @"2";
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     
-    if (section == 3) {
-        if (_customHomeModel.recommend.count > 1) {
-            return _headerView;
-        }else{
-            if (_hotArray.count > 0 && [_listType.type isEqualToString:customRecommendType]) {
-                UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 30)];
-                view.backgroundColor = [UIColor whiteColor];
-                UILabel *label = [UILabel new];
-                label.font = [UIFont fontWithSize:12.f];
-                label.textColor = K_COLOR_DARK_Cell;
-                label.text = [NSString stringWithFormat:@"%@",[(CustomHomeListModel *)_customHomeModel.recommend[0] title]];
-                [view addSubview:label];
-                [label mas_makeConstraints:^(MASConstraintMaker *make) {
-                    make.leading.equalTo(view.mas_leading).offset(15);
-                    make.trailing.equalTo(view.mas_trailing).offset(-10);
-                    make.top.equalTo(view.mas_top).offset(0);
-                    make.bottom.equalTo(view.mas_bottom);
-                }];
-                UIView *line = [UIView new];
-                line.backgroundColor = K_COLOR_MOST_LIGHT_GRAY;
-                [view addSubview:line];
-                [line mas_makeConstraints:^(MASConstraintMaker *make) {
-                    make.leading.equalTo(view.mas_leading);
-                    make.trailing.equalTo(view.mas_trailing);
-                    make.bottom.equalTo(view.mas_bottom).offset(0);
-                    make.height.equalTo(@(0.5));
-                }];
-                return view;
-            }
-        }
-    }
+//    if (section == 3) {
+//        if (_customHomeModel.recommend.count > 1) {
+//            return _headerView;
+//        }else{
+//            if (_hotArray.count > 0 && [_listType.type isEqualToString:customRecommendType]) {
+//                UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 30)];
+//                view.backgroundColor = [UIColor whiteColor];
+//                UILabel *label = [UILabel new];
+//                label.font = [UIFont fontWithSize:12.f];
+//                label.textColor = K_COLOR_DARK_Cell;
+//                label.text = [NSString stringWithFormat:@"%@",[(CustomHomeListModel *)_customHomeModel.recommend[0] title]];
+//                [view addSubview:label];
+//                [label mas_makeConstraints:^(MASConstraintMaker *make) {
+//                    make.leading.equalTo(view.mas_leading).offset(15);
+//                    make.trailing.equalTo(view.mas_trailing).offset(-10);
+//                    make.top.equalTo(view.mas_top).offset(0);
+//                    make.bottom.equalTo(view.mas_bottom);
+//                }];
+//                UIView *line = [UIView new];
+//                line.backgroundColor = K_COLOR_MOST_LIGHT_GRAY;
+//                [view addSubview:line];
+//                [line mas_makeConstraints:^(MASConstraintMaker *make) {
+//                    make.leading.equalTo(view.mas_leading);
+//                    make.trailing.equalTo(view.mas_trailing);
+//                    make.bottom.equalTo(view.mas_bottom).offset(0);
+//                    make.height.equalTo(@(0.5));
+//                }];
+//                return view;
+//            }
+//        }
+//    }
     return nil;
 }
 
@@ -579,7 +582,7 @@ static NSString *const customRecommendType = @"2";
     
     if (searchDic) {
         if ([searchDic[@"enable"] isEqualToString:@"1"]) {
-//            [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"sousuoshouye"] style:UIBarButtonItemStylePlain target:self action:@selector(searchAction)] animated:NO];
+            [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"sousuoshouye"] style:UIBarButtonItemStylePlain target:self action:@selector(searchAction)] animated:NO];
             for (NSDictionary *dic in searchDic[@"setting"]) {
                 if ([dic[@"key"] isEqualToString:@"forum"]) {
                     //论坛搜索

@@ -7,9 +7,9 @@
 	<key>YZBBSName</key>
 	<string>云漯河</string>
 	<key>YZBaseURL</key>
-	<string>http://192.168.1.123/</string>
+	<string>http://192.168.1.171/community/</string>
 	<key>YZBasePath</key>
-	<string>cloudCity/bbs/upload/api/mobile/iyz_index.php</string>
+	<string>upload/api/mobile/iyz_index.php</string>
 	<key>CLOUDCITYAPPVERSION</key>
 	<string>9003</string>
 	<key>APPSTYLE</key>

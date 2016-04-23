@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "CustomHomeMode.h"
 #import "TAPageControl.h"
+#import "HomeViewModel.h"
+#import "BoardModel.h"
+#import "PostSendViewController.h"
 
 @interface YZGridView : UIView <UIScrollViewDelegate>
 
