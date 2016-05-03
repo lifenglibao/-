@@ -533,7 +533,7 @@ static NSString *const customRecommendType = @"2";
 {
     if (indexPath.section == 0) {
         //等比例调整banner
-        float heightCycle = (kSCREEN_WIDTH * 342.f)/750.f;
+        float heightCycle = (kSCREEN_WIDTH * 250.f)/750.f;
         return (_customHomeModel.banner && _customHomeModel.banner.count > 0) ? heightCycle : 0;
     }else if (indexPath.section == 1){
         return _customHomeModel.link ? kVIEW_H(_gridview) : 0;
@@ -602,7 +602,7 @@ static NSString *const customRecommendType = @"2";
 - (void)viewForOrderBy{
     NSArray *listArray = _customHomeModel.recommend;
     if (listArray && listArray.count > 0) {
-        _listType = listArray[0];
+        _listType = listArray[2];
     }
 }
 

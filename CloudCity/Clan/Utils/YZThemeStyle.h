@@ -13,6 +13,7 @@
 #define YZBBSName @"YZBBSName" //论坛名
 #define YZBaseURL @"YZBaseURL"
 #define YZBasePath @"YZBasePath"
+#define MAPKEY @"AMAPKEY"
 #define kAPP_DOWNLOAD_URL @"kAPP_DOWNLOAD_URL" //app下载地址
 #define kShareAppkeySina @"ShareAppkeySina"
 #define kShareAppkeyTecent @"ShareAppkeyTecent"

@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>AMAPKEY</key>
+	<string>538bfdad39cc324e9cacf1a7d11154b3</string>
 	<key>YZSegMent</key>
 	<string>35,174,230</string>
 	<key>YZBBSName</key>

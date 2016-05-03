@@ -11,17 +11,17 @@
 
 @implementation SegmentView
 
-- (id)initWithFrameRect:(CGRect)rect andTitleArray:(NSArray *)titleArray clickBlock:(void(^)(NSInteger index))segIndexBlock
+- (id)initWithFrameRect:(CGRect)rect andTitleArray:(NSArray *)titleArray andIconArray:(NSArray *)iconArray clickBlock:(void(^)(NSInteger index))segIndexBlock
 {
     if ((self=[super initWithFrame:rect])) {
         NSMutableArray *segItems = [NSMutableArray array];
-        for (NSString *title in titleArray) {
-            PPiFlatSegmentItem *segItem = [[PPiFlatSegmentItem alloc]initWithTitle:title andIcon:nil];
+        for (int i=0; i<titleArray.count; i++) {
+            PPiFlatSegmentItem *segItem = [[PPiFlatSegmentItem alloc]initWithTitle:titleArray[i] andIcon:iconArray[i]];
             [segItems addObject:segItem];
-            }
+        }
         PPiFlatSegmentedControl *segmented=[[PPiFlatSegmentedControl alloc] initWithFrame:self.bounds
                                                                                     items:segItems
-                                                                             iconPosition:IconPositionRight
+                                                                             iconPosition:IconPositionLeft
                                                                         andSelectionBlock:^(NSUInteger segmentIndex) {
                                                                             segIndexBlock(segmentIndex);
 //                                                                            NSLog(@"%lu",(unsigned long)segmentIndex);
@@ -30,11 +30,11 @@
         segmented.color=[UIColor whiteColor];
         segmented.borderWidth=0.5;
         segmented.borderColor=[UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1];
-        segmented.selectedColor=[UIColor returnColorWithPlist:YZSegMentColor];
+//        segmented.selectedColor=[UIColor returnColorWithPlist:YZSegMentColor];
         segmented.textAttributes=@{NSFontAttributeName:[UIFont systemFontOfSize:13],
                                    NSForegroundColorAttributeName:[UIColor returnColorWithPlist:YZSegMentColor]};
         segmented.selectedTextAttributes=@{NSFontAttributeName:[UIFont systemFontOfSize:13],
-                                           NSForegroundColorAttributeName:[UIColor whiteColor]};
+                                           NSForegroundColorAttributeName:[UIColor returnColorWithPlist:YZSegMentColor]};
         [self addSubview:segmented];
     }
     return self;

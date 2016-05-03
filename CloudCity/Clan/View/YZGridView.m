@@ -22,7 +22,7 @@
 #import "ArticleListModel.h"
 #import "PostDetailVC.h"
 #import "LoginViewController.h"
-
+#import "BusViewController.h"
 static const CGFloat itemWidth = 93.f;
 static const CGFloat itemHeight = 90.f;
 
@@ -151,13 +151,19 @@ static const CGFloat itemHeight = 90.f;
         
         // 判断 gridview 点击时跳到哪个VC
         if ([link.url isEqualToString:@"bus_search"]) {
+            BusViewController *bus = [[BusViewController alloc] init];
+            bus.hidesBottomBarWhenPushed = YES;
+            [self.additionsViewController.navigationController pushViewController:bus animated:YES];
+
             // go to bus search function
         }else if ([link.url isEqualToString:@"car_fine_search"]){
+            
             TOWebViewController *web = [[TOWebViewController alloc]initWithURLString:@"http://0395.weizhangwang.com"]; //hard code
             web.hidesBottomBarWhenPushed = YES;
             [self.additionsViewController.navigationController pushViewController:web animated:YES];
             
         }else if ([link.url isEqualToString:@"weather"]){
+            
             TOWebViewController *web = [[TOWebViewController alloc]initWithURLString:@"http://henan.weather.com.cn/luohe/index.shtml"]; //hard code
             web.hidesBottomBarWhenPushed = YES;
             [self.additionsViewController.navigationController pushViewController:web animated:YES];

@@ -332,4 +332,14 @@ static NSDateFormatter *_displayFormatter = nil;
 	return [NSDate timestampFormatString];
 }
 
++ (NSString *)getBusTimeFromString:(NSString *)string {
+    NSDateFormatter *inputFormatter = [[NSDateFormatter alloc] init];
+    [inputFormatter setDateFormat:@"HHmm"];
+    NSDate* inputDate = [inputFormatter dateFromString:string];
+    
+    NSDateFormatter *outputFormatter = [[NSDateFormatter alloc] init];
+    [outputFormatter setDateFormat:@"HH:mm"];
+    NSString *str = [outputFormatter stringFromDate:inputDate];
+    return str;
+}
 @end

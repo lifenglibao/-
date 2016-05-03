@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface SegmentView : UIView
--(id)initWithFrameRect:(CGRect)rect andTitleArray:(NSArray *)titleArray clickBlock:(void(^)(NSInteger index))segIndexBlock;
+-(id)initWithFrameRect:(CGRect)rect andTitleArray:(NSArray *)titleArray andIconArray:(NSArray *)iconArray clickBlock:(void(^)(NSInteger index))segIndexBlock;
 
 @end

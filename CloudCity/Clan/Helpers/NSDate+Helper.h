@@ -63,5 +63,6 @@
 + (NSString *)timeFormatString;
 + (NSString *)timestampFormatString;
 + (NSString *)dbFormatString;
++ (NSString *)getBusTimeFromString:(NSString *)string;
 
 @end
