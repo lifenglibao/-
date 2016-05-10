@@ -1,30 +1,31 @@
 //
-//  BusLineViewController.m
+//  BusStopViewController.m
 //  CloudCity
 //
-//  Created by iAPPS Pte Ltd on 26/04/16.
+//  Created by iAPPS Pte Ltd on 04/05/16.
 //  Copyright © 2016年 Youzu. All rights reserved.
 //
 
-#import "BusLineViewController.h"
+#import "BusStopViewController.h"
 #import "CustomeTextField.h"
-#import "BusLineDetailViewController.h"
-#import "AMapTipAnnotation.h"
+#import "BusStopDetailViewController.h"
 
-@interface BusLineViewController ()
+@interface BusStopViewController ()
 
 @end
 
-@implementation BusLineViewController
+@implementation BusStopViewController
+
 
 - (void)viewWillAppear:(BOOL)animated
 {
+
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.tips = [NSMutableArray array];
-    [self initBusLineSearchField];
+    [self initBusStopSearchField];
     [self initSearch];
     [self initSearchDisplay];
     // Do any additional setup after loading the view.
@@ -39,7 +40,7 @@
 
 - (void)initSearchDisplay
 {
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(self.busLineSearchFiled.frame.origin.x, self.busLineSearchFiled.bottom + 5, self.busLineSearchFiled.width, 200) style:UITableViewStylePlain];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(self.busStopSearchFiled.frame.origin.x, self.busStopSearchFiled.bottom + 5, self.busStopSearchFiled.width, 200) style:UITableViewStylePlain];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.hidden = YES;
@@ -47,15 +48,14 @@
     
 }
 
-- (void)initBusLineSearchField
+- (void)initBusStopSearchField
 {
-    self.busLineSearchFiled = [[CustomeTextField alloc] initWithFrame:CGRectMake(20, 20, ScreenWidth - 40, 50)];
-    self.busLineSearchFiled.delegate = self;
-    self.busLineSearchFiled.placeholder = @"输入线路名";
-    [self.busLineSearchFiled addTarget:self action:@selector(isEditing:) forControlEvents:UIControlEventAllEditingEvents];
-    [self.view addSubview:self.busLineSearchFiled];
+    self.busStopSearchFiled = [[CustomeTextField alloc] initWithFrame:CGRectMake(20, 20, ScreenWidth - 40, 50)];
+    self.busStopSearchFiled.delegate = self;
+    self.busStopSearchFiled.placeholder = @"输入站点名";
+    [self.busStopSearchFiled addTarget:self action:@selector(isEditing:) forControlEvents:UIControlEventAllEditingEvents];
+    [self.view addSubview:self.busStopSearchFiled];
 }
-
 
 - (void) textFieldDidEndEditing:(UITextField *)textField
 {
@@ -64,8 +64,8 @@
 
 - (void) textFieldDidBeginEditing:(UITextField *)textField
 {
-    if (textField == self.busLineSearchFiled) {
-        self.tableView.frame = CGRectMake(self.busLineSearchFiled.frame.origin.x, self.busLineSearchFiled.bottom + 5, self.busLineSearchFiled.width, 200);
+    if (textField == self.busStopSearchFiled) {
+        self.tableView.frame = CGRectMake(self.busStopSearchFiled.frame.origin.x, self.busStopSearchFiled.bottom + 5, self.busStopSearchFiled.width, 200);
     }
     self.tableView.hidden = NO;
 }
@@ -142,13 +142,12 @@
 
 - (void)clearAndShowAnnotationWithTip:(AMapTip *)tip
 {
-    if ([self.busLineSearchFiled isFirstResponder]) {
-        
-        AMapBusLineNameSearchRequest *line = [[AMapBusLineNameSearchRequest alloc] init];
-        line.keywords           = tip.name;
-        line.city               = @"0395";
-        line.requireExtension = YES;
-        [self.search AMapBusLineNameSearch:line];
+    if ([self.busStopSearchFiled isFirstResponder]) {
+    
+        AMapBusStopSearchRequest *stop = [[AMapBusStopSearchRequest alloc] init];
+        stop.keywords = tip.name;
+        stop.city     = @"0395";
+        [self.search AMapBusStopSearch:stop];
     }
 }
 
@@ -159,25 +158,18 @@
     [self.tableView reloadData];
 }
 
-/* 公交路线搜索回调. */
-- (void)onBusLineSearchDone:(AMapBusLineBaseSearchRequest *)request response:(AMapBusLineSearchResponse *)response
+/* 公交站点搜索回调. */
+
+- (void)onBusStopSearchDone:(AMapBusStopSearchRequest *)request response:(AMapBusStopSearchResponse *)response
 {
-    if (response.buslines.count != 0)
+    if (response.busstops.count != 0)
     {
         [self.view endEditing:YES];
-        AMapTip *tip = self.tips[self.tableView.indexPathForSelectedRow.row];
-        BusLineDetailViewController *vc = [[BusLineDetailViewController alloc] init];
-        vc.busLineArray = [NSMutableArray arrayWithArray:response.buslines];
-        vc.title = tip.name;
+        BusStopDetailViewController *vc = [[BusStopDetailViewController alloc] init];
+        vc.busStopArray = [NSMutableArray arrayWithArray:response.busstops];
         [self.parentViewController.navigationController pushViewController:vc animated:YES];
     }
 }
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 
 
 @end

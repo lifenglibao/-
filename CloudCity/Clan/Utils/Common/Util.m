@@ -202,6 +202,15 @@
         case myArticle:
             fileKey = kKEY_FAVO_ARTICLES;
             break;
+        case myBusLine:
+            fileKey = kKEY_FAVO_BUSLINE;
+            break;
+        case myBusStop:
+            fileKey = kKEY_FAVO_BUSSTOP;
+            break;
+        case myBusTransfer:
+            fileKey = kKEY_FAVO_BUSTRANSFER;
+            break;
         default:
             fileKey = kKEY_FAVO_THREADS;
             break;
@@ -226,6 +235,15 @@
             break;
         case myArticle:
             fileKey = kKEY_FAVO_ARTICLES;
+            break;
+        case myBusLine:
+            fileKey = kKEY_FAVO_BUSLINE;
+            break;
+        case myBusStop:
+            fileKey = kKEY_FAVO_BUSSTOP;
+            break;
+        case myBusTransfer:
+            fileKey = kKEY_FAVO_BUSTRANSFER;
             break;
         default:
             fileKey = kKEY_FAVO_THREADS;
@@ -261,6 +279,15 @@
         case myArticle:
             fileKey = kKEY_FAVO_ARTICLES;
             break;
+        case myBusLine:
+            fileKey = kKEY_FAVO_BUSLINE;
+            break;
+        case myBusStop:
+            fileKey = kKEY_FAVO_BUSSTOP;
+            break;
+        case myBusTransfer:
+            fileKey = kKEY_FAVO_BUSTRANSFER;
+            break;
         default:
             fileKey = kKEY_FAVO_THREADS;
             break;
@@ -286,6 +313,9 @@
     [[NSUserDefaults standardUserDefaults]setObject:nil forKey:kKEY_FAVO_THREADS];
     [[NSUserDefaults standardUserDefaults]setObject:nil forKey:kKEY_FAVO_FORUMS];
     [[NSUserDefaults standardUserDefaults]setObject:nil forKey:kKEY_FAVO_ARTICLES];
+    [[NSUserDefaults standardUserDefaults]setObject:nil forKey:kKEY_FAVO_BUSLINE];
+    [[NSUserDefaults standardUserDefaults]setObject:nil forKey:kKEY_FAVO_BUSSTOP];
+    [[NSUserDefaults standardUserDefaults]setObject:nil forKey:kKEY_FAVO_BUSTRANSFER];
 }
 
 //通过帖子或者版块ID 得到收藏ID
@@ -710,6 +740,21 @@
 + (UIImage *)circleCoveredImage
 {
     return kIMG(@"faceCornerRadius");
+}
+
++ (CGFloat)heightForText:(NSString*)text font:(UIFont*)font withinWidth:(CGFloat)width {
+    
+    CGSize constraint = CGSizeMake(width, 20000.0f);
+    CGSize size;
+    
+    CGSize boundingBox = [text boundingRectWithSize:constraint
+                                            options:(NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading)
+                                         attributes:@{NSFontAttributeName:font}
+                                            context:nil].size;
+    
+    size = CGSizeMake(ceil(boundingBox.width), ceil(boundingBox.height));
+    
+    return size.height;
 }
 
 @end

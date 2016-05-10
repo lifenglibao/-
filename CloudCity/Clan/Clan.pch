@@ -82,6 +82,9 @@ alpha:1.0]
 #define kKEY_FAVO_THREADS @"kKEY_FAVO_THREADS"
 #define kKEY_FAVO_FORUMS @"kKEY_FAVO_Forum"
 #define kKEY_FAVO_ARTICLES @"kKEY_FAVO_Article"
+#define kKEY_FAVO_BUSLINE @"kKEY_FAVO_Busline"
+#define kKEY_FAVO_BUSSTOP @"kKEY_FAVO_Busstop"
+#define kKEY_FAVO_BUSTRANSFER @"kKEY_FAVO_Bustransfer"
 
 #define kKEY_NEWS_MESS_COME @"kKEY_NOTI_NEWS_MESS_COME"
 

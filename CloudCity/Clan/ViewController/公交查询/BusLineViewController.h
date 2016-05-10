@@ -7,11 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "BaseMapViewController.h"
-@interface BusLineViewController : BaseViewController <UITableViewDataSource,UITableViewDelegate,CLLocationManagerDelegate>
+#import <AMapSearchKit/AMapSearchKit.h>
 
+@interface BusLineViewController : BaseViewController <UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate,AMapSearchDelegate,UISearchDisplayDelegate,UISearchBarDelegate>
+
+@property (nonatomic, strong) UITextField *busLineSearchFiled;
 @property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic, strong) NSMutableArray *busStopArray;
-@property (nonatomic, strong) NSDictionary *tableDic;
-@property (nonatomic) CGFloat lastScrollOffset;
+@property (nonatomic, strong) NSMutableArray *tips;
+@property (nonatomic, strong) AMapSearchAPI *search;
 @end

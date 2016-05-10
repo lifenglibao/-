@@ -20,21 +20,6 @@
 
 #pragma mark - Utility
 
-- (void)clearMapView
-{
-    self.mapView.showsUserLocation = NO;
-    
-    [self.mapView removeAnnotations:self.mapView.annotations];
-    
-    [self.mapView removeOverlays:self.mapView.overlays];
-    
-    self.mapView.delegate = nil;
-}
-
-- (void)clearSearch
-{
-    self.search.delegate = nil;
-}
 
 /**
  *  hook,子类覆盖它,实现想要在viewDidAppear中执行一次的方法,搜索中有用到
@@ -46,14 +31,6 @@
 
 #pragma mark - Handle Action
 
-- (void)returnAction
-{
-    [self.navigationController popViewControllerAnimated:YES];
-    
-    [self clearMapView];
-    
-    [self clearSearch];
-}
 
 #pragma mark - AMapSearchDelegate
 
@@ -69,7 +46,6 @@
 {
     self.mapView.frame = self.view.bounds;
     self.mapView.delegate = self;
-    self.mapView.visibleMapRect = MAMapRectMake(219274180.99575466, 107631269.07922892, 0, 0);
     [self.view addSubview:self.mapView];
 }
 
@@ -78,13 +54,6 @@
     self.search.delegate = self;
 }
 
-- (void)initBaseNavigationBar
-{
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back"
-                                                                             style:UIBarButtonItemStyleBordered
-                                                                            target:self
-                                                                            action:@selector(returnAction)];
-}
 
 - (void)initTitle:(NSString *)title
 {
@@ -126,17 +95,13 @@
     return scheme;
 }
 
-- (void)configMapKey
-{
-    [MAMapServices sharedServices].apiKey = [NSString returnStringWithPlist:MAPKEY];
-}
+
 
 #pragma mark - Life Cycle
 
 - (void)dealloc
 {
-    [self clearMapView];
-    [self clearSearch];
+
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -154,7 +119,6 @@
 {
     [super viewDidLoad];
     _isFirstAppear = YES;
-    [self configMapKey];
     
     [self initTitle:self.title];
     

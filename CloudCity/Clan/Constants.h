@@ -25,7 +25,11 @@ typedef enum
 typedef NS_ENUM(NSInteger, CollcetionType) {
     myPost = 0, //帖子收藏
     myPlate,    //版块儿收藏
-    myArticle   //文章收藏
+    myArticle,   //文章收藏
+    myBusLine,   //公交线路收藏
+    myBusStop,   //公交站点收藏
+    myBusTransfer   //公交换乘收藏
+
 };
 
 //*  根据Id 1 2 3 4 5 分别为

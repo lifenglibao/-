@@ -69,6 +69,7 @@ typedef enum {
 //增加本地收藏
 + (BOOL)addFavoed_withID:(NSString *)sid withFavoID:(NSString *)favoID forType:(CollcetionType)type;
 
+
 //清除收藏
 + (void)cleanUpLocalFavoArray;
 
@@ -138,4 +139,6 @@ typedef enum {
 
 + (UIImage *)circleCoveredImage;
 
+//自适应高度
++ (CGFloat)heightForText:(NSString*)text font:(UIFont*)font withinWidth:(CGFloat)width;
 @end

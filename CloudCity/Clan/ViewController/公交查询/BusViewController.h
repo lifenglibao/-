@@ -11,13 +11,10 @@
 #import "BaseMapViewController.h"
 
 @class CustomBusMode;
-@interface BusViewController : BaseViewController<UIScrollViewDelegate,UISearchBarDelegate, UISearchDisplayDelegate, UITableViewDataSource, UITableViewDelegate,UITextFieldDelegate,AMapSearchDelegate>
 
+@interface BusViewController : UITabBarController<AMapSearchDelegate,CLLocationManagerDelegate>
 
-@property (nonatomic, strong) UITextField *searchFiled;
-@property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic, strong) NSMutableArray *tips;
-@property (nonatomic, strong) NSMutableArray *busLines;
 @property (nonatomic, strong) AMapSearchAPI *search;
+@property (nonatomic, strong) CLLocationManager *locationManager;
 
 @end

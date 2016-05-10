@@ -40,5 +40,31 @@
     return self;
 }
 
+- (id)initWithFrameRect:(CGRect)rect andTitleArray:(NSArray *)titleArray clickBlock:(void(^)(NSInteger index))segIndexBlock
+{
+    if ((self=[super initWithFrame:rect])) {
+        NSMutableArray *segItems = [NSMutableArray array];
+        for (int i=0; i<titleArray.count; i++) {
+            PPiFlatSegmentItem *segItem = [[PPiFlatSegmentItem alloc]initWithTitle:titleArray[i] andIcon:nil];
+            [segItems addObject:segItem];
+        }
+        PPiFlatSegmentedControl *segmented=[[PPiFlatSegmentedControl alloc] initWithFrame:self.bounds
+                                                                                    items:segItems
+                                                                             iconPosition:IconPositionLeft
+                                                                        andSelectionBlock:^(NSUInteger segmentIndex) {
+                                                                            segIndexBlock(segmentIndex);
+                                                                        }
+                                                                           iconSeparation:0];
+        segmented.color=[UIColor whiteColor];
+        segmented.borderWidth=0.5;
+        segmented.borderColor=[UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1];
+        segmented.textAttributes=@{NSFontAttributeName:[UIFont systemFontOfSize:13],
+                                   NSForegroundColorAttributeName:[UIColor darkGrayColor]};
+        segmented.selectedTextAttributes=@{NSFontAttributeName:[UIFont systemFontOfSize:13],
+                                           NSForegroundColorAttributeName:[UIColor returnColorWithPlist:YZSegMentColor]};
+        [self addSubview:segmented];
+    }
+    return self;
+}
 
 @end

@@ -13,7 +13,7 @@
 
 +(NSArray *)getGridTitle{
     
-    return [NSArray arrayWithObjects:@"线路",@"站点",@"换乘", nil];
+    return [NSArray arrayWithObjects:@"附近",@"线路",@"站点",@"换乘",@"收藏", nil];
 }
 
 +(UIView*)setRightViewWithTextField:(UITextField *)textField imageName:(NSString *)imageName{
@@ -52,5 +52,18 @@
     [gpsBtn setImage:[UIImage imageNamed:@"shezhi"] forState:UIControlStateSelected];
     [gpsBtn addTarget:tar action:ac forControlEvents:UIControlEventTouchUpInside];
     return gpsBtn;
+}
+
++(UIButton*)setTrafficButtonWithTitle:(NSString *)title imageName:(NSString *)imageName CGRect:(CGRect)frame target:(id)tar action:(SEL)ac{
+    
+    UIButton *trafficBtn = [[UIButton alloc] init];
+    trafficBtn.frame = frame;
+    if (title) {
+        [trafficBtn setTitle:title forState:UIControlStateNormal];
+    }
+    [trafficBtn setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
+    [trafficBtn setImage:[UIImage imageNamed:@"shezhi"] forState:UIControlStateSelected];
+    [trafficBtn addTarget:tar action:ac forControlEvents:UIControlEventTouchUpInside];
+    return trafficBtn;
 }
 @end

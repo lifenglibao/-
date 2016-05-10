@@ -34,7 +34,6 @@
 - (void)setUp
 {
     self.backgroundColor = [UIColor whiteColor];
-    self.placeholder = @"输入线路名";
     self.borderStyle = UITextBorderStyleNone;
     self.clearButtonMode = UITextFieldViewModeWhileEditing;
     self.leftView = [CustomBusMode setLeftViewWithTextField:self imageName:@"sousuo_gray"];

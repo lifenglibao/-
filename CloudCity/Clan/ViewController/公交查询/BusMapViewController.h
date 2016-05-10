@@ -11,5 +11,6 @@
 @interface BusMapViewController : BaseMapViewController
 
 @property (nonatomic, strong) UIButton *gpsBtn;
+@property (nonatomic, strong) UIButton *trafficBtn;
 
 @end

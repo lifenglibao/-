@@ -37,7 +37,6 @@
 - (void)initMapAssistFunction
 {
     self.mapView.showsUserLocation = YES;
-    
     [self addUserGPS];
     [self addTraffic];
     
@@ -45,29 +44,33 @@
 
 - (void)addUserGPS
 {
-    self.gpsBtn = [CustomBusMode setGPSButtonWithTitle:@"" imageName:@"write_upload_del" CGRect:CGRectMake(10, self.view.bottom - 50, 30, 30) target:self action:@selector(findUserLocation)];
+    self.gpsBtn = [CustomBusMode setGPSButtonWithTitle:@"" imageName:@"write_upload_del" CGRect:CGRectMake(10, self.mapView.bottom - 100, 30, 30) target:self action:@selector(findUserLocation)];
     [self.mapView addSubview:self.gpsBtn];
 }
 
 - (void)addTraffic
 {
-    self.mapView.showTraffic = YES;
-    
+    self.trafficBtn = [CustomBusMode setGPSButtonWithTitle:@"" imageName:@"write_upload_del" CGRect:CGRectMake(self.mapView.right - 100, 100, 30, 30) target:self action:@selector(showTrafficLine)];
+    [self.mapView addSubview:self.trafficBtn];
 }
 
 #pragma mark - GPS
 
 - (void)findUserLocation
 {
-    self.gpsBtn.selected = !self.gpsBtn.selected;
-    if (self.gpsBtn.selected) {
-        [self.mapView setUserTrackingMode:MAUserTrackingModeFollow animated:YES];
-        NSArray * annotations = [NSArray arrayWithObject:self.mapView.userLocation];
-        [self.mapView setVisibleMapRect:[CommonUtility minMapRectForAnnotations:annotations] edgePadding:UIEdgeInsetsMake(BusLinePaddingEdge, BusLinePaddingEdge, BusLinePaddingEdge, BusLinePaddingEdge) animated:YES];
+    [self.mapView setUserTrackingMode:MAUserTrackingModeFollow animated:YES];
+}
+
+#pragma mark - GPS
+
+- (void)showTrafficLine
+{
+    self.trafficBtn.selected = !self.trafficBtn.selected;
+    if (self.trafficBtn.selected) {
+        self.mapView.showTraffic = YES;
     }else{
-        [self.mapView setUserTrackingMode:MAUserTrackingModeNone animated:YES];
+        self.mapView.showTraffic = NO;
     }
-    
 }
 
 #pragma mark - BUS
@@ -137,12 +140,16 @@
         if (poiAnnotationView == nil)
         {
             poiAnnotationView = [[MAPinAnnotationView alloc] initWithAnnotation:annotation
-                                                                reuseIdentifier:busStopIdentifier];
+                                                             reuseIdentifier:busStopIdentifier];
+            
+        }else {
+            while ([poiAnnotationView.subviews lastObject] != nil)
+            {
+                [(MAPinAnnotationView*)[poiAnnotationView.subviews lastObject] removeFromSuperview];
+            }
         }
         
         poiAnnotationView.canShowCallout = YES;
-//        poiAnnotationView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
-        
         /* 起点. */
         if ([[annotation title] isEqualToString:self.busLine.startStop])
         {
@@ -153,7 +160,9 @@
         {
             poiAnnotationView.image = [UIImage imageNamed:@"endPoint"];
         }
-        
+        else {
+            poiAnnotationView.image = [UIImage imageNamed:@"bus"];
+        }
         return poiAnnotationView;
     }
     
