@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
-
+#import <MAMapKit/MAMapKit.h>
 
 @interface ArrowImageView : UIImageView <CLLocationManagerDelegate> {
 	CLLocationManager *locationManager;

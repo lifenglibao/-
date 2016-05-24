@@ -8,10 +8,10 @@
 
 #import "BusLineDetailViewController.h"
 #import "CustomGridView.h"
-#import "NSDate+Helper.h"
 #import "SegmentView.h"
 #import "Util.h"
 #import "LoginViewController.h"
+#import "CustomBusMode.h"
 
 @interface BusLineDetailViewController ()
 @property (strong, nonatomic) UIView *headerView;
@@ -77,26 +77,35 @@
     
     [_headerView addSubview:gridView];
     
-    UIView * busInfo = [[UIView alloc] initWithFrame:CGRectMake(0, gridView.bottom, ScreenWidth, 20)];
+    UIView * busInfo = [[UIView alloc] initWithFrame:CGRectMake(0, gridView.bottom, ScreenWidth, 25)];
     busInfo.backgroundColor = [UIColor clearColor];
     
-    UILabel * firstBus = [[UILabel alloc] initWithFrame:CGRectMake(25, 0, 70, 20)];
-    firstBus.font = [UIFont systemFontOfSize:12];
-    firstBus.text = [NSString stringWithFormat:@"首班: %@",[NSDate getBusTimeFromString:self.line.startTime]];
+    UIImageView *firstBusImg = [[UIImageView alloc] initWithFrame:CGRectMake(15, 0, 15, 15)];
+    firstBusImg.image = kIMG(@"icon_bus_start");
+    firstBusImg.layer.cornerRadius = 1.5f;
+    firstBusImg.layer.masksToBounds = YES;
     
-    UILabel * endBus = [[UILabel alloc] initWithFrame:CGRectMake(firstBus.right, 0, 70, 20)];
-    endBus.font = [UIFont systemFontOfSize:12];
-    endBus.text = [NSString stringWithFormat:@"末班: %@",[NSDate getBusTimeFromString:self.line.endTime]];
+    firstBus = [[UILabel alloc] initWithFrame:CGRectMake(firstBusImg.right + 5, 0, 50, 20)];
+    firstBus.font = [UIFont systemFontOfSize:14];
     
-    UILabel * busDistance = [[UILabel alloc] initWithFrame:CGRectMake(endBus.right, 0, 100, 20)];
-    busDistance.font = [UIFont systemFontOfSize:12];
-    busDistance.text = [NSString stringWithFormat:@"全程: %.2f公里", self.line.distance];
+    UIImageView *endBusImg = [[UIImageView alloc] initWithFrame:CGRectMake(firstBus.right, 0, 15, 15)];
+    endBusImg.image = kIMG(@"icon_bus_end");
+    endBusImg.layer.cornerRadius = 1.5f;
+    endBusImg.layer.masksToBounds = YES;
     
-    UILabel * busPrice = [[UILabel alloc] initWithFrame:CGRectMake(busDistance.right, 0, 100, 20)];
-    busPrice.font = [UIFont systemFontOfSize:12];
-    busPrice.text = [NSString stringWithFormat:@"票价: %.1f-%.1f元",self.line.basicPrice,self.line.totalPrice];
+    endBus = [[UILabel alloc] initWithFrame:CGRectMake(endBusImg.right + 5, 0, 50, 20)];
+    endBus.font = [UIFont systemFontOfSize:14];
     
+    busDistance = [[UILabel alloc] initWithFrame:CGRectMake(endBus.right, 0, 100, 20)];
+    busDistance.font = [UIFont systemFontOfSize:14];
+    
+    busPrice = [[UILabel alloc] initWithFrame:CGRectMake(busDistance.right + 10, 0, 100, 20)];
+    busPrice.font = [UIFont systemFontOfSize:14];
+    
+
+    [busInfo addSubview:firstBusImg];
     [busInfo addSubview:firstBus];
+    [busInfo addSubview:endBusImg];
     [busInfo addSubview:endBus];
     [busInfo addSubview:busDistance];
     [busInfo addSubview:busPrice];
@@ -112,6 +121,7 @@
                             bezierPathWithRect:shadowFrame].CGPath;
     _headerView.layer.shadowPath = shadowPath;
     
+    [self updateHeaderViewInfomation];
     [self.view addSubview:_headerView];
     
 }
@@ -153,10 +163,21 @@
     [self.view addSubview:_tableView];
 }
 
+- (void)updateHeaderViewInfomation {
+    firstBus.text = [NSString stringWithFormat:@"%@",![[CustomBusMode getBusTimeFromString:self.line.startTime] isEqual: @"00:00"] ? [CustomBusMode getBusTimeFromString:self.line.startTime] : @"未知" ];
+    endBus.text = [NSString stringWithFormat:@"%@",![[CustomBusMode getBusTimeFromString:self.line.endTime] isEqual: @"00:00"] ? [CustomBusMode getBusTimeFromString:self.line.endTime] : @"未知"];
+    busDistance.text = [NSString stringWithFormat:@"全程: %.2f公里", self.line.distance];
+    if (self.line.basicPrice == self.line.totalPrice ) {
+        busPrice.text = [NSString stringWithFormat:@"票价: %.1f元",self.line.basicPrice];
+    }else{
+        busPrice.text = [NSString stringWithFormat:@"票价: %.1f-%.1f元",self.line.basicPrice,self.line.totalPrice];
+    }
+}
 - (void)headerViewAction:(id)sender {
     
     NSInteger index = [sender tag]-1000;
     self.line = self.busLineArray[index];
+    [self updateHeaderViewInfomation];
     [self.tableView reloadData];
 }
 
@@ -244,10 +265,22 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                       reuseIdentifier:busCellIdentifier];
     }
-    
-    cell.contentView.backgroundColor = [UIColor whiteColor];
     cell.textLabel.text = [self.line.busStops[indexPath.row] valueForKey:@"name"];
     
+    if ([cell.textLabel.text isEqualToString:self.line.startStop] ) {
+        cell.imageView.image = kIMG(@"icon_start_stop");
+        cell.imageView.layer.cornerRadius = 15;
+    }
+    else if ([cell.textLabel.text isEqualToString:self.line.endStop] ) {
+        cell.imageView.image = kIMG(@"icon_end_stop");
+        cell.imageView.layer.cornerRadius = 15;
+    }
+    else {
+        cell.imageView.image = kIMG(@"icon_stop");
+        cell.imageView.layer.cornerRadius = 10;
+    }
+    cell.contentView.backgroundColor = [UIColor whiteColor];
+    cell.imageView.layer.masksToBounds = YES;
     return cell;
 }
 

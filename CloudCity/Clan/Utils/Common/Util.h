@@ -141,4 +141,7 @@ typedef enum {
 
 //自适应高度
 + (CGFloat)heightForText:(NSString*)text font:(UIFont*)font withinWidth:(CGFloat)width;
+
+//自适应宽度
++ (CGFloat)widthForText:(NSString*)text font:(UIFont*)font withinHeight:(CGFloat)height;
 @end

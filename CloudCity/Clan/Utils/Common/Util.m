@@ -757,4 +757,19 @@
     return size.height;
 }
 
++ (CGFloat)widthForText:(NSString*)text font:(UIFont*)font withinHeight:(CGFloat)height {
+    
+    CGSize constraint = CGSizeMake(300.0f, height);
+    CGSize size;
+    
+    CGSize boundingBox = [text boundingRectWithSize:constraint
+                                            options:(NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading)
+                                         attributes:@{NSFontAttributeName:font}
+                                            context:nil].size;
+    
+    size = CGSizeMake(ceil(boundingBox.width), ceil(boundingBox.height));
+    
+    return size.width + 10;
+}
+
 @end

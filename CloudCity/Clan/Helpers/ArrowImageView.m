@@ -168,8 +168,10 @@
 #pragma mark  -
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
 {
-	self.currentLocation = newLocation;
-    
+    CLLocationCoordinate2D  gaodeGPS = MACoordinateConvert(self.locationManager.location.coordinate, MACoordinateTypeGPS);
+    newLocation = [[CLLocation alloc] initWithLatitude:gaodeGPS.latitude longitude:gaodeGPS.longitude];
+    self.currentLocation = newLocation;
+
 	//NPLog(@"lat: %f, long: %f", currentLocation.coordinate.latitude, currentLocation.coordinate.longitude);
 }
 

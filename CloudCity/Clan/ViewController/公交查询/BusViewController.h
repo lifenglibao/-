@@ -12,9 +12,7 @@
 
 @class CustomBusMode;
 
-@interface BusViewController : UITabBarController<AMapSearchDelegate,CLLocationManagerDelegate>
+@interface BusViewController : UITabBarController
 
-@property (nonatomic, strong) AMapSearchAPI *search;
-@property (nonatomic, strong) CLLocationManager *locationManager;
 
 @end

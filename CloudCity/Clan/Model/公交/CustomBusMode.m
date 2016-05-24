@@ -66,4 +66,155 @@
     [trafficBtn addTarget:tar action:ac forControlEvents:UIControlEventTouchUpInside];
     return trafficBtn;
 }
+
++ (NSString*)timeformatFromSeconds:(long)seconds
+{
+    NSString *minute = [NSString stringWithFormat:@"%ld",(seconds%3600)/60];
+    NSString *format_time = [NSString stringWithFormat:@"%@分钟",minute];
+    return format_time;
+}
+
++ (NSString*)metresConvertToKM:(long)metres
+{
+    if (metres<1000) {
+        return [NSString stringWithFormat:@"%ld米",metres];
+    }
+    NSString *strKM = [NSString stringWithFormat:@"%.2f公里",(metres/1000.00)];
+    return strKM;
+}
+
++ (NSString *)handleStringWithBrackets:(NSString *)str{
+    
+    NSMutableString * muStr = [NSMutableString stringWithString:str];
+    while (1) {
+        NSRange range = [muStr rangeOfString:@"("];
+        NSRange range1 = [muStr rangeOfString:@")"];
+        if (range.location != NSNotFound) {
+            NSInteger loc = range.location;
+            NSInteger len = range1.location - range.location;
+            [muStr deleteCharactersInRange:NSMakeRange(loc, len + 1)];
+        }else{
+            break;
+        }
+    }
+    
+    return muStr;
+}
+
++ (NSString *)handleStringWithCharRoad:(NSString *)str{
+    
+    NSMutableString * muStr = [NSMutableString stringWithString:str];
+
+    NSRange range = [str rangeOfString:@"路("];
+    if (range.location != NSNotFound ) {
+        NSInteger loc = range.location+1;
+        [muStr deleteCharactersInRange:NSMakeRange(loc, muStr.length - loc)];
+    }
+    
+    return muStr;
+}
+
++ (NSString *)handleStringGetBrackets:(NSString *)str{
+    
+    NSString *substring = @"";
+    
+    while (1) {
+        NSRange range = [str rangeOfString:@"("];
+        NSRange range1 = [str rangeOfString:@")"];
+        if (range.location != NSNotFound && range1.location != NSNotFound) {
+            NSCharacterSet *delimiters = [NSCharacterSet characterSetWithCharactersInString:@"()"];
+            NSArray *splitString = [str componentsSeparatedByCharactersInSet:delimiters];
+            substring = [splitString objectAtIndex:1];
+            return substring;
+        }else{
+            break;
+        }
+    }
+    
+    return substring;
+}
+
++ (NSString *)replaceStringWithBusModel:(NSString *)str{
+    
+    NSString *string = str;
+    
+    if (str == nil || str == NULL) {
+        string = @"未知";
+        return string;
+    }
+    if ([str isKindOfClass:[NSNull class]]) {
+        
+        string = @"未知";
+        return string;
+    }
+    if ([[str stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] length]==0) {
+        
+        string = @"未知";
+        return string;
+    }
+    if ([str isEqualToString:@"00:00"]) {
+        string = @"未知";
+        return string;
+    }
+    if ([str isEqualToString:@"0"]) {
+        string = @"未知";
+        return string;
+    }
+    return string;
+}
+
++ (NSString *)getBusTimeFromString:(NSString *)string {
+    NSDateFormatter *inputFormatter = [[NSDateFormatter alloc] init];
+    [inputFormatter setDateFormat:@"HHmm"];
+    NSDate* inputDate = [inputFormatter dateFromString:string];
+    
+    NSDateFormatter *outputFormatter = [[NSDateFormatter alloc] init];
+    [outputFormatter setDateFormat:@"HH:mm"];
+    NSString *str = [outputFormatter stringFromDate:inputDate];
+    return str;
+}
+
++ (NSString *)getRoutePlanningBusNumber:(NSArray*)array {
+    NSString *string = @"";
+    AMapBusLine *tempBusLine;
+    
+    for (AMapSegment *_seg in array) {
+        if (_seg.buslines.count!=0) {
+            tempBusLine = _seg.buslines.firstObject;
+            if ([string isEqualToString:@""]) {
+                string = [self handleStringWithCharRoad:tempBusLine.name];
+            }else{
+                string = [string stringByAppendingString:@" > "];
+                string = [string stringByAppendingString:[self handleStringWithBrackets:tempBusLine.name]];
+            }
+        }
+    }
+    return string;
+}
+
++ (NSString *)getRoutePlanningBusInfo:(AMapTransit*)transit {
+    //min distance walking price
+    NSString *string = @"";
+
+    NSLog(@"%@",[[NSNumber numberWithDouble:transit.cost] stringValue]);
+    if (![[[NSNumber numberWithDouble:transit.cost] stringValue] isEqualToString:@"0"]) {
+        string = [NSString stringWithFormat:@"%@ | %@ | %@ | %.1f元",[self timeformatFromSeconds:transit.duration], [self metresConvertToKM:transit.distance], [self metresConvertToKM:transit.walkingDistance], [[NSNumber numberWithDouble:transit.cost] floatValue]];
+    }else{
+        string = [NSString stringWithFormat:@"%@ | %@ | %@",[self timeformatFromSeconds:transit.duration], [self metresConvertToKM:transit.distance], [self metresConvertToKM:transit.walkingDistance]];
+    }
+    return string;
+}
+
++ (NSString *)getRoutePlanningBusStartStop:(NSArray *)array {
+    NSString *string = @"";
+    AMapBusLine *tempBusLine;
+    
+    AMapSegment *_seg = array.firstObject;
+    if (_seg.buslines.count!=0) {
+        tempBusLine = _seg.buslines.firstObject;
+        string = ![tempBusLine.departureStop.name isEqualToString:@""] ? tempBusLine.departureStop.name : @"未知";
+    }
+    return string;
+}
+
 @end

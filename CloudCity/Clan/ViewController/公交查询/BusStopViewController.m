@@ -40,10 +40,11 @@
 
 - (void)initSearchDisplay
 {
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(self.busStopSearchFiled.frame.origin.x, self.busStopSearchFiled.bottom + 5, self.busStopSearchFiled.width, 200) style:UITableViewStylePlain];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(self.busStopSearchFiled.frame.origin.x, self.busStopSearchFiled.bottom + 5, self.busStopSearchFiled.width, self.view.height - self.busStopSearchFiled.bottom) style:UITableViewStylePlain];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.hidden = YES;
+    self.tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
     [self.view addSubview:self.tableView];
     
 }
@@ -57,15 +58,11 @@
     [self.view addSubview:self.busStopSearchFiled];
 }
 
-- (void) textFieldDidEndEditing:(UITextField *)textField
-{
-    self.tableView.hidden = YES;
-}
 
 - (void) textFieldDidBeginEditing:(UITextField *)textField
 {
     if (textField == self.busStopSearchFiled) {
-        self.tableView.frame = CGRectMake(self.busStopSearchFiled.frame.origin.x, self.busStopSearchFiled.bottom + 5, self.busStopSearchFiled.width, 200);
+        self.tableView.frame = CGRectMake(self.busStopSearchFiled.frame.origin.x, self.busStopSearchFiled.bottom + 5, self.busStopSearchFiled.width, self.view.height - self.busStopSearchFiled.bottom);
     }
     self.tableView.hidden = NO;
 }
@@ -142,13 +139,10 @@
 
 - (void)clearAndShowAnnotationWithTip:(AMapTip *)tip
 {
-    if ([self.busStopSearchFiled isFirstResponder]) {
-    
-        AMapBusStopSearchRequest *stop = [[AMapBusStopSearchRequest alloc] init];
-        stop.keywords = tip.name;
-        stop.city     = @"0395";
-        [self.search AMapBusStopSearch:stop];
-    }
+    AMapBusStopSearchRequest *stop = [[AMapBusStopSearchRequest alloc] init];
+    stop.keywords = tip.name;
+    stop.city     = @"0395";
+    [self.search AMapBusStopSearch:stop];
 }
 
 /* 输入提示回调. */

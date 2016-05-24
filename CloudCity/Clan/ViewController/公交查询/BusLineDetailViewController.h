@@ -10,6 +10,12 @@
 #import "BusViewController.h"
 
 @interface BusLineDetailViewController : BaseViewController <UITableViewDataSource,UITableViewDelegate>
+{
+    UILabel * firstBus;
+    UILabel * endBus;
+    UILabel * busDistance;
+    UILabel * busPrice;
+}
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *busLineArray;
@@ -18,5 +24,6 @@
 @property (nonatomic, strong) UIButton *favBtn;
 @property (nonatomic, strong) AMapBusLine *line;
 @property (nonatomic, strong) MAMapView *mapView;
+@property (nonatomic, strong) NSString *nearByStop;
 
 @end

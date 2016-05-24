@@ -39,10 +39,11 @@
 
 - (void)initSearchDisplay
 {
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(self.busLineSearchFiled.frame.origin.x, self.busLineSearchFiled.bottom + 5, self.busLineSearchFiled.width, 200) style:UITableViewStylePlain];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(self.busLineSearchFiled.frame.origin.x, self.busLineSearchFiled.bottom + 5, self.busLineSearchFiled.width, self.view.height - self.busLineSearchFiled.bottom) style:UITableViewStylePlain];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.hidden = YES;
+    self.tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
     [self.view addSubview:self.tableView];
     
 }
@@ -57,15 +58,10 @@
 }
 
 
-- (void) textFieldDidEndEditing:(UITextField *)textField
-{
-    self.tableView.hidden = YES;
-}
-
 - (void) textFieldDidBeginEditing:(UITextField *)textField
 {
     if (textField == self.busLineSearchFiled) {
-        self.tableView.frame = CGRectMake(self.busLineSearchFiled.frame.origin.x, self.busLineSearchFiled.bottom + 5, self.busLineSearchFiled.width, 200);
+        self.tableView.frame = CGRectMake(self.busLineSearchFiled.frame.origin.x, self.busLineSearchFiled.bottom + 5, self.busLineSearchFiled.width, self.view.height - self.busLineSearchFiled.bottom);
     }
     self.tableView.hidden = NO;
 }
@@ -91,6 +87,7 @@
     AMapInputTipsSearchRequest *tips = [[AMapInputTipsSearchRequest alloc] init];
     tips.keywords = key;
     tips.city     = @"0395";
+    tips.types    = @"交通设施服务";
     tips.cityLimit = YES; //是否限制城市
     
     [self.search AMapInputTipsSearch:tips];
@@ -142,20 +139,25 @@
 
 - (void)clearAndShowAnnotationWithTip:(AMapTip *)tip
 {
-    if ([self.busLineSearchFiled isFirstResponder]) {
-        
-        AMapBusLineNameSearchRequest *line = [[AMapBusLineNameSearchRequest alloc] init];
-        line.keywords           = tip.name;
-        line.city               = @"0395";
-        line.requireExtension = YES;
-        [self.search AMapBusLineNameSearch:line];
-    }
+    AMapBusLineNameSearchRequest *line = [[AMapBusLineNameSearchRequest alloc] init];
+    line.keywords           = tip.name;
+    line.city               = @"0395";
+    line.requireExtension = YES;
+    [self.search AMapBusLineNameSearch:line];
 }
 
 /* 输入提示回调. */
 - (void)onInputTipsSearchDone:(AMapInputTipsSearchRequest *)request response:(AMapInputTipsSearchResponse *)response
 {
-    [self.tips setArray:response.tips];
+    if (response.tips.count == 0) {
+        return;
+    }
+    [self.tips removeAllObjects];
+    for (int i = 0; i<response.tips.count; i++) {
+        if (![[(AMapTip*)response.tips[i] uid] isEqualToString:@""] && [(AMapTip*)response.tips[i] location] == NULL) {
+            [self.tips addObject:response.tips[i]];
+        }
+    }
     [self.tableView reloadData];
 }
 
