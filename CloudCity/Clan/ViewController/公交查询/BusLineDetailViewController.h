@@ -23,7 +23,5 @@
 @property (nonatomic) BOOL isFav;
 @property (nonatomic, strong) UIButton *favBtn;
 @property (nonatomic, strong) AMapBusLine *line;
-@property (nonatomic, strong) MAMapView *mapView;
-@property (nonatomic, strong) NSString *nearByStop;
 
 @end

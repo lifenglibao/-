@@ -7,7 +7,6 @@
 //
 
 #import "BaseViewController.h"
-#import "BaseMapViewController.h"
 #import <AMapSearchKit/AMapSearchKit.h>
 
 @interface BusNearbyViewController : BaseViewController<UITableViewDataSource,UITableViewDelegate,CLLocationManagerDelegate,AMapSearchDelegate>
@@ -23,5 +22,4 @@
 @property (assign, nonatomic) BOOL isReadMore;
 @property (assign, nonatomic) BOOL isNoMore;
 @property (strong, nonatomic) UIView *maskView;
-
 @end

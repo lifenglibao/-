@@ -8,6 +8,7 @@
 
 #import "BusTransferListViewController.h"
 #import "BusTransferListTableViewCell.h"
+#import "BusTransferDetailViewController.h"
 #import "CustomBusMode.h"
 
 @interface BusTransferListViewController ()
@@ -18,6 +19,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"换乘方案";
     [self initTableView];
 
     // Do any additional setup after loading the view from its nib.
@@ -81,10 +83,13 @@
 - (void)tableView:(UITableView *)tableView willDisplayCell:(BusTransferListTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     cell.lbl_routePlanningBusNumber.text    = [CustomBusMode getRoutePlanningBusNumber:[self.busRoute.transits[indexPath.section] segments]];
+    cell.lbl_routePlanningBusNumber.height  = [Util heightForText:cell.lbl_routePlanningBusNumber.text font:cell.lbl_routePlanningBusNumber.font withinWidth:cell.lbl_routePlanningBusNumber.width];
     cell.lbl_routePlanningBusInfo.text      = [CustomBusMode getRoutePlanningBusInfo:self.busRoute.transits[indexPath.section]];
     cell.lbl_routePlanningBusStartStop.text = [CustomBusMode getRoutePlanningBusStartStop:[self.busRoute.transits[indexPath.section] segments]];
     
     cell.lbl_routePlanningBusStartStop.width = [Util widthForText:cell.lbl_routePlanningBusStartStop.text font:cell.lbl_routePlanningBusStartStop.font withinHeight:cell.lbl_routePlanningBusStartStop.height];
+    
+    [cell.contentView needsUpdateConstraints];
 }
 
 #pragma mark - UITableViewDelegate
@@ -93,15 +98,12 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-//    if ([Util isBlankString:[(AMapBusLine*)self.lineArray[indexPath.section][self.currentIndex] uid]]) {
-//        [self showHudTipStr:@"当前车辆信息可能出错了."];
-//        return;
-//    }
-//    BusLineDetailViewController *vc = [[BusLineDetailViewController alloc] init];
-//    vc.title = [self.nearByArray[indexPath.section] valueForKey:@"address"];
-//    //    vc.nearByStop = [self.nearByArray[self.tableView.indexPathForSelectedRow.section] valueForKey:@"name"];
-//    vc.busLineArray = [NSMutableArray arrayWithArray:self.lineArray[indexPath.section]];
-//    [self.parentViewController.navigationController pushViewController:vc animated:YES];
+    BusTransferDetailViewController *vc = [[BusTransferDetailViewController alloc] init];
+    vc.currentCourse = indexPath.section;
+    vc.busRoute  = self.busRoute;
+    vc.routeStartLocation = self.routeStartLocation;
+    vc.routeDestinationLocation = self.routeDestinationLocation;
+    [self.parentViewController.navigationController pushViewController:vc animated:YES];
 }
 
 

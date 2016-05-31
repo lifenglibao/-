@@ -12,7 +12,7 @@
 #import "Util.h"
 #import "LoginViewController.h"
 #import "CustomBusMode.h"
-
+#import "BusMapViewController.h"
 @interface BusLineDetailViewController ()
 @property (strong, nonatomic) UIView *headerView;
 @property (strong, nonatomic) UIView *footerView;
@@ -30,19 +30,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.line = self.busLineArray.firstObject;
-    [self initMapView];
     [self initTableView];
     [self addHeaderView];
     [self addFooterView];
     
     // Do any additional setup after loading the view.
-}
-
-- (void)initMapView
-{
-    [MAMapServices sharedServices].apiKey = [NSString returnStringWithPlist:MAPKEY];
-    self.mapView = [[MAMapView alloc] initWithFrame:self.view.bounds];
-    self.mapView.visibleMapRect = MAMapRectMake(219274180.99575466, 107631269.07922892, 0, 0);
 }
 
 - (void)initNavBar
@@ -183,12 +175,10 @@
 
 - (void)go2Map {
     
-    NSString *className = @"BusMapViewController";
-    
-    BaseMapViewController *subViewController = [[NSClassFromString(className) alloc] init];
-    subViewController.mapView = self.mapView;
+    BusMapViewController *subViewController = [[BusMapViewController alloc] init];
     subViewController.busLine = self.line;
-    [self.navigationController pushViewController:(UIViewController*)subViewController animated:YES];
+    [self.navigationController pushViewController:subViewController animated:YES];
+    
 }
 
 - (void)favAction:(UIButton *)sender{
@@ -289,12 +279,10 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    NSString *className = @"BusMapViewController";
     
-    BaseMapViewController *subViewController = [[NSClassFromString(className) alloc] init];
-    subViewController.mapView = self.mapView;
+    BusMapViewController *subViewController = [[BusMapViewController alloc] init];
     subViewController.busStop = self.line.busStops[indexPath.row];
-    [self.navigationController pushViewController:(UIViewController*)subViewController animated:YES];
+    [self.navigationController pushViewController:subViewController animated:YES];
 }
 
 @end

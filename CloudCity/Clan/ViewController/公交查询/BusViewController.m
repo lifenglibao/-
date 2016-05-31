@@ -32,7 +32,8 @@
     self.title = @"公交";
     [self initTabBar];
     [self addGridView];
-    
+    [self initAMapSearchSer];
+
     // Do any additional setup after loading the view.
 }
 
@@ -41,6 +42,9 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)initAMapSearchSer {
+    [AMapSearchServices sharedServices].apiKey = [NSString returnStringWithPlist:MAPKEY];
+}
 
 - (void)addGridView {
     

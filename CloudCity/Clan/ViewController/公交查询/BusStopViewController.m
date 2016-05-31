@@ -19,15 +19,20 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-
+    [super viewWillAppear:animated];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [[NSNotificationCenter defaultCenter] addObserverForName:@"BusSearchNotiFication" object:nil queue:NSOperationQueuePriorityNormal usingBlock:^(NSNotification * _Nonnull note) {
+        self.busStopSearchFiled.text = (NSString *)note.userInfo;
+    }];
     self.tips = [NSMutableArray array];
     [self initBusStopSearchField];
+    [self initSearchBtn];
     [self initSearch];
     [self initSearchDisplay];
+    [self addSearchHistory];
     // Do any additional setup after loading the view.
 }
 
@@ -35,7 +40,6 @@
 {
     self.search = [[AMapSearchAPI alloc] init];
     self.search.delegate = self;
-    [AMapSearchServices sharedServices].apiKey = [NSString returnStringWithPlist:MAPKEY];
 }
 
 - (void)initSearchDisplay
@@ -58,6 +62,26 @@
     [self.view addSubview:self.busStopSearchFiled];
 }
 
+- (void)initSearchBtn
+{
+    self.searchBtn = [UIButton buttonWithTitle:@"查询" andImage:@"" andFrame:CGRectMake(self.busStopSearchFiled.frame.origin.x, self.busStopSearchFiled.bottom + 20, self.busStopSearchFiled.width, 44) target:self action:@selector(searchBtnClicked:)];
+    self.searchBtn.backgroundColor = kColourWithRGB(72, 185, 132);
+    [self.view addSubview:self.searchBtn];
+}
+
+- (void)addSearchHistory
+{
+    _historyTableView = [[BusSearchHistoryViewController alloc] initWithFrame:CGRectMake(self.tableView.frame.origin.x, self.searchBtn.bottom + 50, self.busStopSearchFiled.width, 300) style:UITableViewStylePlain];
+    [_historyTableView setHistoryType:BusSearchHistoryTypeStop];
+    [self.view addSubview:_historyTableView];
+}
+
+- (void)searchBtnClicked:(UIButton *)sender
+{
+    [self showProgressHUDWithStatus:@""];
+    [self clearAndShowAnnotationWithTip:self.busStopSearchFiled.text];
+    [self.historyTableView writeHistoryPlist:self.busStopSearchFiled.text];
+}
 
 - (void) textFieldDidBeginEditing:(UITextField *)textField
 {
@@ -65,6 +89,7 @@
         self.tableView.frame = CGRectMake(self.busStopSearchFiled.frame.origin.x, self.busStopSearchFiled.bottom + 5, self.busStopSearchFiled.width, self.view.height - self.busStopSearchFiled.bottom);
     }
     self.tableView.hidden = NO;
+    [self.view bringSubviewToFront:self.tableView];    
 }
 
 - (void) isEditing:(UITextField *)textField
@@ -72,8 +97,9 @@
     [self searchTipsWithKey:textField.text];
     [self.tableView reloadData];
     self.tableView.hidden = NO;
-    
+    [self.view bringSubviewToFront:self.tableView];
     if ([textField.text isEqualToString:@""]) {
+        [self.view sendSubviewToBack:self.tableView];
         self.tableView.hidden = YES;
     }
 }
@@ -87,7 +113,8 @@
     
     AMapInputTipsSearchRequest *tips = [[AMapInputTipsSearchRequest alloc] init];
     tips.keywords = key;
-    tips.city     = @"0395";
+    tips.types    = BUS_STOP_SEARCH_STYPE;
+    tips.city     = CURRENT_AREA_CODE;
     tips.cityLimit = YES; //是否限制城市
     
     [self.search AMapInputTipsSearch:tips];
@@ -132,22 +159,33 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    AMapTip *tip = self.tips[indexPath.row];
     
-    [self clearAndShowAnnotationWithTip:tip];
+    if (tableView == self.tableView) {
+        [self.view endEditing:YES];
+        [self.tableView setHidden:YES];
+        [self.view sendSubviewToBack:self.tableView];
+        AMapTip *tip = self.tips[indexPath.row];
+        self.busStopSearchFiled.text = tip.name;
+        
+    }else if (tableView == _historyTableView) {
+        self.busStopSearchFiled.text = _historyTableView.historyArray[indexPath.row];
+    }
 }
 
-- (void)clearAndShowAnnotationWithTip:(AMapTip *)tip
+- (void)clearAndShowAnnotationWithTip:(NSString *)tip
 {
     AMapBusStopSearchRequest *stop = [[AMapBusStopSearchRequest alloc] init];
-    stop.keywords = tip.name;
-    stop.city     = @"0395";
+    stop.keywords = tip;
+    stop.city     = CURRENT_AREA_CODE;
     [self.search AMapBusStopSearch:stop];
 }
 
 /* 输入提示回调. */
 - (void)onInputTipsSearchDone:(AMapInputTipsSearchRequest *)request response:(AMapInputTipsSearchResponse *)response
 {
+    if (response.tips.count == 0) {
+        return;
+    }
     [self.tips setArray:response.tips];
     [self.tableView reloadData];
 }
@@ -156,14 +194,27 @@
 
 - (void)onBusStopSearchDone:(AMapBusStopSearchRequest *)request response:(AMapBusStopSearchResponse *)response
 {
+    [self hideProgressHUD];
+    
+    if (response.busstops.count == 0)
+    {
+        [self showHudTipStr:@"抱歉,未找到该线路信息或者网络出了点问题😢"];
+        return;
+    }
     if (response.busstops.count != 0)
     {
         [self.view endEditing:YES];
+        self.tableView.hidden = YES;
         BusStopDetailViewController *vc = [[BusStopDetailViewController alloc] init];
         vc.busStopArray = [NSMutableArray arrayWithArray:response.busstops];
         [self.parentViewController.navigationController pushViewController:vc animated:YES];
     }
 }
 
+- (void)AMapSearchRequest:(id)request didFailWithError:(NSError *)error
+{
+    [self hideProgressHUD];
+    [self showHudTipStr:@"抱歉,未找到该线路信息或者网络出了点问题😢"];
+}
 
 @end

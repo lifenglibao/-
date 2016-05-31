@@ -83,6 +83,22 @@
     return strKM;
 }
 
++ (NSString *)handleStringWithHalfBrackets:(NSString *)str{
+    
+    NSMutableString * muStr = [NSMutableString stringWithString:str];
+    while (1) {
+        NSRange range = [muStr rangeOfString:@"("];
+        if (range.location != NSNotFound) {
+            NSInteger loc = range.location;
+            [muStr deleteCharactersInRange:NSMakeRange(loc, muStr.length - loc)];
+        }else{
+            break;
+        }
+    }
+    
+    return muStr;
+}
+
 + (NSString *)handleStringWithBrackets:(NSString *)str{
     
     NSMutableString * muStr = [NSMutableString stringWithString:str];
@@ -106,8 +122,13 @@
     NSMutableString * muStr = [NSMutableString stringWithString:str];
 
     NSRange range = [str rangeOfString:@"路("];
+    NSRange range2 = [str rangeOfString:@"路..."];
+
     if (range.location != NSNotFound ) {
         NSInteger loc = range.location+1;
+        [muStr deleteCharactersInRange:NSMakeRange(loc, muStr.length - loc)];
+    }else if (range2.location != NSNotFound ) {
+        NSInteger loc = range2.location+3;
         [muStr deleteCharactersInRange:NSMakeRange(loc, muStr.length - loc)];
     }
     
@@ -132,6 +153,22 @@
     }
     
     return substring;
+}
+
++ (NSString *)handleStringIncludeBrackets:(NSString *)str{
+    
+    NSMutableString * muStr = [NSMutableString stringWithString:str];
+    while (1) {
+        NSRange range = [muStr rangeOfString:@"("];
+        if (range.location != NSNotFound) {
+            NSInteger loc = range.location + 1;
+            [muStr deleteCharactersInRange:NSMakeRange(loc, muStr.length - (muStr.length - loc))];
+        }else{
+            break;
+        }
+    }
+    
+    return muStr;
 }
 
 + (NSString *)replaceStringWithBusModel:(NSString *)str{
@@ -215,6 +252,150 @@
         string = ![tempBusLine.departureStop.name isEqualToString:@""] ? tempBusLine.departureStop.name : @"未知";
     }
     return string;
+}
+
++ (NSMutableArray *)getRoutePlanningBusDetailLine:(AMapTransit *)transit {
+    
+    NSMutableArray *result = [NSMutableArray array];
+    
+    if (transit == nil || transit.segments.count == 0)
+    {
+        return nil;
+    }
+    
+    [transit.segments enumerateObjectsUsingBlock:^(AMapSegment *segment, NSUInteger idx, BOOL *stop) {
+        
+//         [result addObjectsFromArray:[self naviRouteForSegment:segment segmentIdx:idx]];
+        [result addObjectsFromArray:[self naviRouteForWalking:segment.walking]];
+        [result addObjectsFromArray:[self naviRouteForBusLine:segment.buslines]];
+    }];
+    
+    
+    return result;
+}
+
+//+ (NSMutableArray *)naviRouteForSegment:(AMapSegment *)segment segmentIdx:(NSUInteger)idx
+//{
+//    NSMutableArray * temp = [NSMutableArray array];
+//
+//    if (segment == nil)
+//    {
+//        return nil;
+//    }
+//    
+//    [temp addObjectsFromArray:[self naviRouteForWalking:segment.walking]];
+//    [temp addObjectsFromArray:[self naviRouteForBusLine:segment.buslines]];
+//
+//    return temp;
+//}
+
+
++ (NSMutableArray *)naviRouteForBusLine:(NSArray *)busLine
+{
+    NSMutableArray * temp = [NSMutableArray array];
+    
+    if (busLine == nil || busLine.count == 0)
+    {
+        return nil;
+    }
+    
+    [busLine enumerateObjectsUsingBlock:^(AMapBusLine *line, NSUInteger idx, BOOL *stop) {
+        
+        [temp addObject:[NSDictionary dictionaryWithObject:line.departureStop.name forKey:@"departureStop"]];
+        [temp addObject:[NSDictionary dictionaryWithObject:line.name forKey:@"busName"]];
+        [temp addObject:[NSDictionary dictionaryWithObjectsAndKeys:line.viaBusStops,@"viaBusStops",line.arrivalStop.name,@"arrivalStop", nil]];
+
+    }];
+    
+    return temp;
+}
+
++ (NSMutableArray *)naviRouteForWalking:(AMapWalking *)walking
+{
+    NSMutableArray * temp = [NSMutableArray array];
+
+    if (walking == nil || walking.steps.count == 0)
+    {
+        return nil;
+    }
+    
+    [walking.steps enumerateObjectsUsingBlock:^(AMapStep *step, NSUInteger idx, BOOL *stop) {
+        [temp addObject:[NSDictionary dictionaryWithObjectsAndKeys:step.instruction,@"tips", nil]];
+    }];
+    
+    return temp;
+}
+
++ (UIView *)locationServiceUnEnabled:(CGRect) frame
+{
+    UIView *maskView = [[UIView alloc] initWithFrame:frame];
+    UIImageView *img = [[UIImageView alloc] initWithFrame:CGRectMake(0, 50, frame.size.width, 150)];
+    img.image = kIMG(@"dataNothing");
+    img.contentMode = UIViewContentModeScaleAspectFit;
+    
+    UILabel *lbl = [[UILabel alloc] initWithFrame:CGRectMake(0, img.bottom + 20, frame.size.width, 50)];
+    lbl.textAlignment = NSTextAlignmentCenter;
+    lbl.font = [UIFont boldSystemFontOfSize:20];
+    lbl.textColor = [UIColor lightGrayColor];
+    lbl.numberOfLines = 0;
+    lbl.text = @"抱歉\n定位失败,或者您还未开启定位服务";
+    
+    [maskView addSubview:img];
+    [maskView addSubview:lbl];
+    return maskView;
+}
+
++ (NSMutableAttributedString *) changeTextColorToRed :(NSString *)string withRange:(NSString *)subString
+{
+    NSMutableAttributedString *noteStr = [[NSMutableAttributedString alloc] initWithString:string];
+    NSRange redRange = NSMakeRange([[noteStr string] rangeOfString:subString].location, [[noteStr string] rangeOfString:subString].length);
+    [noteStr addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:redRange];
+    
+    return noteStr;
+}
+
++ (NSDictionary *)calculateNearestStopWithUserLocation:(CLLocationCoordinate2D )userLocation data:(AMapBusLine *)line
+{
+    MAMapPoint point1 = MAMapPointForCoordinate(userLocation);
+    NSMutableArray *res = [NSMutableArray array];
+    for (AMapBusStop *stop in line.busStops) {
+        
+        MAMapPoint point2 = MAMapPointForCoordinate(CLLocationCoordinate2DMake(stop.location.latitude,stop.location.longitude));
+        CLLocationDistance distance = MAMetersBetweenMapPoints(point1,point2);
+        
+        NSLog(@"%f",distance);
+        NSLog(@"%@",[NSNumber numberWithDouble:distance]);
+        [res addObject:[NSDictionary dictionaryWithObjectsAndKeys:
+                        stop.name,@"name",
+                        [NSNumber numberWithFloat:distance],@"distance",
+                        [NSNumber numberWithDouble:stop.location.latitude],@"lat",
+                        [NSNumber numberWithDouble:stop.location.longitude],@"long",nil]];
+    }
+    
+    NSArray *sortDesc = [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"distance" ascending:YES]];
+    NSArray *sortedArr = [res sortedArrayUsingDescriptors:sortDesc];
+    
+    return [sortedArr objectAtIndex:0];
+
+//    NSArray *sortedArr = [res sortedArrayUsingSelector:@selector(compare:)];
+
+//    [res sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+//        NSString *a = (NSString *)obj1;
+//        NSString *b = (NSString *)obj2;
+//        
+//        int aNum = [[a substringFromIndex:1] intValue];
+//        int bNum = [[b substringFromIndex:1] intValue];
+//        
+//        if (aNum > bNum) {
+//            return NSOrderedDescending;
+//        }
+//        else if (aNum < bNum){
+//            return NSOrderedAscending;
+//        }
+//        else {
+//            return NSOrderedSame;
+//        }
+//    }];
 }
 
 @end

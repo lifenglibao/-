@@ -11,6 +11,7 @@
 #import "LoginViewController.h"
 #import "Util.h"
 #import "BusLineDetailViewController.h"
+#import "BusStopDetailTableViewCell.h"
 
 @interface BusStopDetailViewController ()
 
@@ -23,6 +24,17 @@
 @synthesize tableView = _tableView;
 
 
+- (id)init
+{
+    if (self = [super init])
+    {
+        self.currentIndex = 0;
+        self.lineArray = [NSMutableArray array];
+    }
+    
+    return self;
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [self initNavBar];
@@ -30,19 +42,55 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self showProgressHUDWithStatus:@""];
     self.busStop = self.busStopArray.firstObject;
+    [self.busStopArray removeAllObjects];
     self.title = self.busStop.name;
-    [self initTableView];
     [self initSearch];
-    
+    [self initUserLocation];
+    [self getMoreInfoMationForBus:self.busStop.buslines];
+    [self initTableView];
+    [self performSelector:@selector(checkCllocationSerStatus) withObject:nil afterDelay:1.0];
     // Do any additional setup after loading the view.
+}
+
+- (void)checkCllocationSerStatus
+{
+    if ([CLLocationManager authorizationStatus] != kCLAuthorizationStatusDenied) {
+        // tableview releload;
+        
+    }else{
+    }
+}
+
+- (void)initUserLocation
+{
+    if ([CLLocationManager locationServicesEnabled]) {
+        
+        self.locationManager = [[CLLocationManager alloc] init];
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation;
+        self.locationManager.delegate = self;
+        
+        if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0) {
+            
+            [self.locationManager requestAlwaysAuthorization];
+        }
+        [self.locationManager startUpdatingLocation];
+        [self.locationManager startUpdatingHeading];
+    }else{
+        [self locationServiceUnEnabled];
+    }
+}
+
+- (void)locationServiceUnEnabled
+{
+    [self showHudTipStr:@"抱歉\n定位失败,或者您还未开启定位服务,您无法获取站点的距离信息"];
 }
 
 - (void)initSearch
 {
     self.search = [[AMapSearchAPI alloc] init];
     self.search.delegate = self;
-    [AMapSearchServices sharedServices].apiKey = [NSString returnStringWithPlist:MAPKEY];
 }
 
 - (void)initNavBar
@@ -63,15 +111,40 @@
 
 - (void)initTableView {
     
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(10, 10, ScreenWidth - 20, ScreenHeight - self.navigationController.navigationBar.height - 30) style:UITableViewStyleGrouped];
+    self.tableView = [[BaseTableView alloc] initWithFrame:CGRectMake(10, 10, ScreenWidth - 20, ScreenHeight - 84) style:UITableViewStyleGrouped];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.backgroundColor = [UIColor clearColor];
-    
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:_tableView];
 }
 
+- (void) getMoreInfoMationForBus:(NSArray*)pois
+{
+    [self.lineArray removeAllObjects];
+    [self filterData:pois];
+    
+    for (NSString *name in self.lineArray) {
+        
+        AMapBusLineNameSearchRequest *line = [[AMapBusLineNameSearchRequest alloc] init];
+        line.city               = CURRENT_AREA_CODE;
+        line.requireExtension   = YES;
+        line.keywords           = name;
+        [self.search AMapBusLineNameSearch:line];
+    }
 
+}
+
+- (void)filterData:(NSArray *)array {
+    
+    [self.lineArray removeAllObjects];
+
+    for (AMapBusLine *line in array) {
+        [line setName:[CustomBusMode handleStringWithCharRoad:line.name]];
+        [self.lineArray addObject:line.name];
+    }
+    self.lineArray =[self.lineArray valueForKeyPath:@"@distinctUnionOfObjects.self"];
+}
 - (void)favAction:(UIButton *)sender{
     
     if (![UserModel currentUserInfo].logined || ![[NSUserDefaults standardUserDefaults]objectForKey:Code_CookieData]) {
@@ -116,11 +189,15 @@
 //}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return 0;
+    return 5;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 0.1;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return [self.busStop.buslines count];
+    return [self.busStopArray count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -130,52 +207,69 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 100;
+    return 145;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *busCellIdentifier = @"busCell";
+    static NSString *busCellIdentifier = @"busStopDetailCell";
     
-    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:busCellIdentifier];
+    BusStopDetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:busCellIdentifier];
     
-    cell.contentView.backgroundColor = [UIColor whiteColor];
-    UILabel *busNumLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 80, 80)];
-    busNumLabel.textColor = [UIColor returnColorWithPlist:YZSegMentColor];
-    busNumLabel.font = [UIFont boldSystemFontOfSize:20];
-    busNumLabel.textAlignment = NSTextAlignmentCenter;
-    
-    NSRange range = [[self.busStop.buslines[indexPath.section] valueForKey:@"name"] rangeOfString:@"路"];
-    NSString *str = [[self.busStop.buslines[indexPath.section] valueForKey:@"name"]substringToIndex:range.location+1];
-    busNumLabel.text = str;
-    
-    UILabel *busStopLabel = [[UILabel alloc] initWithFrame:CGRectMake(busNumLabel.right + 20, 5, tableView.width - busNumLabel.right - 20, 50)];
-    busStopLabel.numberOfLines = 0;
-    busStopLabel.lineBreakMode = NSLineBreakByCharWrapping;
-    busStopLabel.font = [UIFont boldSystemFontOfSize:16];
-    busStopLabel.textColor = [UIColor grayColor];
-    busStopLabel.text = [NSString stringWithFormat:@"%@ - %@",[self.busStop.buslines[indexPath.section] valueForKey:@"startStop"],[self.busStop.buslines[indexPath.section] valueForKey:@"endStop"]];
-    
-    UILabel *busTimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(busNumLabel.right + 20, busStopLabel.bottom , tableView.width - busNumLabel.right - 20, 30)];
-    busTimeLabel.textColor = [UIColor lightGrayColor];
-    busTimeLabel.font = [UIFont systemFontOfSize:12];
-    busTimeLabel.text = [NSString stringWithFormat:@"首末班车 %@-%@",[self.busStop.buslines[indexPath.section] valueForKey:@"startTime"],[self.busStop.buslines[indexPath.section]valueForKey:@"endTime"]];
-    
-    [cell.contentView addSubview:busNumLabel];
-    [cell.contentView addSubview:busStopLabel];
-    [cell.contentView addSubview:busTimeLabel];
+    if (!cell) {
+        [tableView registerNib:[UINib nibWithNibName:@"BusStopDetailTableViewCell" bundle:nil] forCellReuseIdentifier:busCellIdentifier];
+        cell = [tableView dequeueReusableCellWithIdentifier:busCellIdentifier];
+    }
     
     return cell;
 }
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(BusStopDetailTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if ([self.busStopArray count] != 0) {
+        
+        cell.lbl_busNumber.text = [CustomBusMode handleStringWithCharRoad:[(AMapBusLine *)self.busStopArray[indexPath.section][self.currentIndex] name]];
+//        cell.lbl_busNumberSub.text = [CustomBusMode handleStringGetBrackets:[(AMapPOI *)self.nearByArray[indexPath.section] address]];
+        cell.lbl_busGoto.text = [CustomBusMode replaceStringWithBusModel:[self.busStopArray[indexPath.section][self.currentIndex] endStop]];
+        
+        cell.lbl_busFirstTime.text = [CustomBusMode replaceStringWithBusModel:[CustomBusMode getBusTimeFromString:[self.busStopArray[indexPath.section][self.currentIndex] startTime]]];
+        cell.lbl_busEndTime.text = [CustomBusMode replaceStringWithBusModel:[CustomBusMode getBusTimeFromString:[self.busStopArray[indexPath.section][self.currentIndex] endTime]]];
+        
+        if ([CLLocationManager authorizationStatus] != kCLAuthorizationStatusDenied) {
+            
+            NSDictionary *dic = [CustomBusMode calculateNearestStopWithUserLocation:MACoordinateConvert(self.locationManager.location.coordinate, MACoordinateTypeGPS) data:self.busStopArray[indexPath.section][self.currentIndex]];
+            
+            cell.lbl_busDistance.text   = [NSString stringWithFormat:@"%.0f米",[[dic objectForKey:@"distance"] floatValue]];
+            cell.lbl_busNearbyStop.text = [dic objectForKey:@"name"];
+
+            cell.arrImg.autoresizesSubviews = NO;
+            CLLocationCoordinate2D target;
+            target.latitude = [[dic objectForKey:@"lat"] floatValue];
+            target.longitude = [[dic objectForKey:@"long"] floatValue];
+            cell.arrImg.target = target;
+            
+        }else{
+            cell.lbl_busNearbyStop.text = @"无法获取";
+            cell.lbl_busDistance.text   = @"无法获取";
+        }
+        
+        if ([self.busStopArray[indexPath.section][self.currentIndex] basicPrice] == [self.busStopArray[indexPath.section][self.currentIndex] totalPrice] ) {
+            NSString *temp = [CustomBusMode replaceStringWithBusModel:[NSString stringWithFormat:@"%.1f",[self.busStopArray[indexPath.section][self.currentIndex] basicPrice]]];
+            cell.lbl_busPrice.text = [NSString stringWithFormat:@"%@",temp];
+        }else{
+            cell.lbl_busPrice.text = [NSString stringWithFormat:@"%@-%@",[CustomBusMode replaceStringWithBusModel:[NSString stringWithFormat:@"%.1f",[self.busStopArray[indexPath.section][self.currentIndex] basicPrice]]],[CustomBusMode replaceStringWithBusModel:[NSString stringWithFormat:@"%.1f",[self.busStopArray[indexPath.section][self.currentIndex] totalPrice]]]];
+        }
+        
+        cell.lbl_busFullDistance.text = [NSString stringWithFormat:@"%@公里",[CustomBusMode replaceStringWithBusModel:[NSString stringWithFormat:@"%.2f",[(AMapBusLine *)self.busStopArray[indexPath.section][self.currentIndex] distance]]]];
+    }
+}
+
 
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
-    NSRange range = [[self.busStop.buslines[indexPath.section] valueForKey:@"name"] rangeOfString:@"路"];
-    NSString *str = [[self.busStop.buslines[indexPath.section] valueForKey:@"name"]substringToIndex:range.location+1];
     [self clearAndShowAnnotationWithTip:str];
 
 }
@@ -184,7 +278,7 @@
 {
     AMapBusLineNameSearchRequest *line = [[AMapBusLineNameSearchRequest alloc] init];
     line.keywords           = tip;
-    line.city               = @"0395";
+    line.city               = CURRENT_AREA_CODE;
     line.requireExtension = YES;
     [self.search AMapBusLineNameSearch:line];
 }
@@ -192,15 +286,19 @@
 /* 公交路线搜索回调. */
 - (void)onBusLineSearchDone:(AMapBusLineBaseSearchRequest *)request response:(AMapBusLineSearchResponse *)response
 {
+    [self hideProgressHUD];
+
     if (response.buslines.count != 0)
     {
-        [self.view endEditing:YES];
-        BusLineDetailViewController *vc = [[BusLineDetailViewController alloc] init];
-        vc.busLineArray = [NSMutableArray arrayWithArray:response.buslines];
-        NSRange range = [[self.busStop.buslines[self.tableView.indexPathForSelectedRow.section] valueForKey:@"name"] rangeOfString:@"路"];
-        NSString *str = [[self.busStop.buslines[self.tableView.indexPathForSelectedRow.section] valueForKey:@"name"]substringToIndex:range.location+1];
-        vc.title = str;
-        [self.navigationController pushViewController:vc animated:YES];
+        [self.busStopArray addObject:response.buslines];
+        [self.tableView reloadData];
     }
 }
+
+- (void)AMapSearchRequest:(id)request didFailWithError:(NSError *)error
+{
+    [self hideProgressHUD];
+    [self showHudTipStr:@"抱歉,未找到该线路信息或者网络出了点问题😢"];
+}
+
 @end

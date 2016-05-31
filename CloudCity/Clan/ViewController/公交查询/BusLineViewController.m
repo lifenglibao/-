@@ -19,14 +19,22 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [[NSNotificationCenter defaultCenter] addObserverForName:@"BusSearchNotiFication" object:nil queue:NSOperationQueuePriorityNormal usingBlock:^(NSNotification * _Nonnull note) {
+        self.busLineSearchFiled.text = (NSString *)note.userInfo;
+    }];
+    
     self.tips = [NSMutableArray array];
     [self initBusLineSearchField];
+    [self initSearchBtn];
     [self initSearch];
     [self initSearchDisplay];
+    [self addSearchHistory];
     // Do any additional setup after loading the view.
 }
 
@@ -34,7 +42,6 @@
 {
     self.search = [[AMapSearchAPI alloc] init];
     self.search.delegate = self;
-    [AMapSearchServices sharedServices].apiKey = [NSString returnStringWithPlist:MAPKEY];
 }
 
 - (void)initSearchDisplay
@@ -57,6 +64,26 @@
     [self.view addSubview:self.busLineSearchFiled];
 }
 
+- (void)initSearchBtn
+{
+    self.searchBtn = [UIButton buttonWithTitle:@"查询" andImage:@"" andFrame:CGRectMake(self.busLineSearchFiled.frame.origin.x, self.busLineSearchFiled.bottom + 20, self.busLineSearchFiled.width, 44) target:self action:@selector(searchBtnClicked:)];
+    self.searchBtn.backgroundColor = kColourWithRGB(72, 185, 132);
+    [self.view addSubview:self.searchBtn];
+}
+
+- (void)addSearchHistory
+{
+    _historyTableView = [[BusSearchHistoryViewController alloc] initWithFrame:CGRectMake(self.tableView.frame.origin.x, self.searchBtn.bottom + 50, self.busLineSearchFiled.width, 300) style:UITableViewStylePlain];
+    [_historyTableView setHistoryType:BusSearchHistoryTypeLine];
+    [self.view addSubview:_historyTableView];
+}
+
+- (void)searchBtnClicked:(UIButton *)sender
+{
+    [self showProgressHUDWithStatus:@""];
+    [self clearAndShowAnnotationWithTip:self.busLineSearchFiled.text];
+    [self.historyTableView writeHistoryPlist:self.busLineSearchFiled.text];
+}
 
 - (void) textFieldDidBeginEditing:(UITextField *)textField
 {
@@ -64,6 +91,7 @@
         self.tableView.frame = CGRectMake(self.busLineSearchFiled.frame.origin.x, self.busLineSearchFiled.bottom + 5, self.busLineSearchFiled.width, self.view.height - self.busLineSearchFiled.bottom);
     }
     self.tableView.hidden = NO;
+    [self.view bringSubviewToFront:self.tableView];
 }
 
 - (void) isEditing:(UITextField *)textField
@@ -71,8 +99,9 @@
     [self searchTipsWithKey:textField.text];
     [self.tableView reloadData];
     self.tableView.hidden = NO;
-    
+    [self.view bringSubviewToFront:self.tableView];
     if ([textField.text isEqualToString:@""]) {
+        [self.view sendSubviewToBack:self.tableView];
         self.tableView.hidden = YES;
     }
 }
@@ -86,14 +115,15 @@
     
     AMapInputTipsSearchRequest *tips = [[AMapInputTipsSearchRequest alloc] init];
     tips.keywords = key;
-    tips.city     = @"0395";
+    tips.city     = CURRENT_AREA_CODE;
     tips.types    = @"交通设施服务";
-    tips.cityLimit = YES; //是否限制城市
+    tips.cityLimit = YES;
     
     [self.search AMapInputTipsSearch:tips];
 }
 
 #pragma mark - UITableViewDataSource
+
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -132,16 +162,23 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    AMapTip *tip = self.tips[indexPath.row];
-    
-    [self clearAndShowAnnotationWithTip:tip];
+    if (tableView == self.tableView) {
+        [self.view endEditing:YES];
+        [self.tableView setHidden:YES];
+        [self.view sendSubviewToBack:self.tableView];
+        AMapTip *tip = self.tips[indexPath.row];
+        self.busLineSearchFiled.text = tip.name;
+        
+    }else if (tableView == _historyTableView) {
+        self.busLineSearchFiled.text = _historyTableView.historyArray[indexPath.row];
+    }
 }
 
-- (void)clearAndShowAnnotationWithTip:(AMapTip *)tip
+- (void)clearAndShowAnnotationWithTip:(NSString *)tip
 {
     AMapBusLineNameSearchRequest *line = [[AMapBusLineNameSearchRequest alloc] init];
-    line.keywords           = tip.name;
-    line.city               = @"0395";
+    line.keywords           = tip;
+    line.city               = CURRENT_AREA_CODE;
     line.requireExtension = YES;
     [self.search AMapBusLineNameSearch:line];
 }
@@ -164,15 +201,21 @@
 /* 公交路线搜索回调. */
 - (void)onBusLineSearchDone:(AMapBusLineBaseSearchRequest *)request response:(AMapBusLineSearchResponse *)response
 {
+    [self hideProgressHUD];
+    
     if (response.buslines.count != 0)
     {
-        [self.view endEditing:YES];
-        AMapTip *tip = self.tips[self.tableView.indexPathForSelectedRow.row];
         BusLineDetailViewController *vc = [[BusLineDetailViewController alloc] init];
         vc.busLineArray = [NSMutableArray arrayWithArray:response.buslines];
-        vc.title = tip.name;
+        vc.title = self.busLineSearchFiled.text;
         [self.parentViewController.navigationController pushViewController:vc animated:YES];
     }
+}
+
+- (void)AMapSearchRequest:(id)request didFailWithError:(NSError *)error
+{
+    [self hideProgressHUD];
+    [self showHudTipStr:@"抱歉,未找到该线路信息或者网络出了点问题😢"];
 }
 
 - (void)didReceiveMemoryWarning {

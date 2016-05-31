@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import <AMapSearchKit/AMapSearchKit.h>
+#import <MAMapKit/MAMapKit.h>
+#import <MapKit/MapKit.h>
 
 @interface CustomBusMode : NSObject
 {
@@ -26,4 +28,10 @@
 + (NSString *)getRoutePlanningBusStartStop:(NSArray *)array;
 + (NSString *)getRoutePlanningBusNumber:(NSArray*)array;
 + (NSString *)getRoutePlanningBusInfo:(AMapTransit *)transit;
++ (NSString *)handleStringWithHalfBrackets:(NSString *)str;
++ (NSMutableArray *)getRoutePlanningBusDetailLine:(AMapTransit *)transit;
++ (UIView *)locationServiceUnEnabled:(CGRect) frame;
++ (NSString *)handleStringIncludeBrackets:(NSString *)str;
++ (NSMutableAttributedString *) changeTextColorToRed :(NSString *)string withRange:(NSString *)subString;
++ (NSDictionary *)calculateNearestStopWithUserLocation:(CLLocationCoordinate2D )userLocation data:(NSArray *)array;
 @end

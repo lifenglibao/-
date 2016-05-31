@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <AMapSearchKit/AMapSearchKit.h>
+#import "BusSearchHistoryViewController.h"
 
 @interface BusLineViewController : BaseViewController <UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate,AMapSearchDelegate,UISearchDisplayDelegate,UISearchBarDelegate>
 
@@ -15,4 +16,7 @@
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *tips;
 @property (nonatomic, strong) AMapSearchAPI *search;
+@property (nonatomic, strong) BusSearchHistoryViewController * historyTableView;
+@property (nonatomic, strong) UIButton * searchBtn;
+
 @end

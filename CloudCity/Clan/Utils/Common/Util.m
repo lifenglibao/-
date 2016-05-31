@@ -769,7 +769,7 @@
     
     size = CGSizeMake(ceil(boundingBox.width), ceil(boundingBox.height));
     
-    return size.width + 10;
+    return size.width;
 }
 
 @end

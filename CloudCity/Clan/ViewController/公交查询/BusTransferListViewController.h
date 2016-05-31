@@ -14,4 +14,7 @@
 @property (nonatomic, strong) AMapRoute *busRoute;
 @property (nonatomic, strong) BaseTableView *tableView;
 
+@property (nonatomic) NSString *routeStartLocation;
+@property (nonatomic) NSString *routeDestinationLocation;
+
 @end

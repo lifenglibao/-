@@ -39,7 +39,6 @@
 {
     self.search = [[AMapSearchAPI alloc] init];
     self.search.delegate = self;
-    [AMapSearchServices sharedServices].apiKey = [NSString returnStringWithPlist:MAPKEY];
 }
 
 - (void)initSearchDisplay
@@ -95,11 +94,13 @@
     [self hideProgressHUD];
     if (response.route == nil)
     {
-        [self showHudTipStr:@"抱歉,未找到该路径."];
+        [self showHudTipStr:@"抱歉,未找到该路线,换个路线试试"];
         return;
     }
     BusTransferListViewController *vc = [[BusTransferListViewController alloc] init];
     vc.busRoute = response.route;
+    vc.routeStartLocation = self.busTransferStartSearchFiled.text;
+    vc.routeDestinationLocation = self.busTransferEndSearchFiled.text;
     [self.parentViewController.navigationController pushViewController:vc animated:YES];
 }
 
@@ -111,7 +112,7 @@
     AMapTransitRouteSearchRequest *navi = [[AMapTransitRouteSearchRequest alloc] init];
     
     navi.requireExtension = YES;
-    navi.city             = @"0395";
+    navi.city             = CURRENT_AREA_CODE;
     
     /* 出发点. */
     navi.origin = [AMapGeoPoint locationWithLatitude:self.startCoordinate.latitude
@@ -123,6 +124,12 @@
     [self.search AMapTransitRouteSearch:navi];
 }
 
+- (void)AMapSearchRequest:(id)request didFailWithError:(NSError *)error
+{
+    [self.view endEditing:YES];
+    [self hideProgressHUD];
+    [self showHudTipStr:@"抱歉,未找到该路线,换个路线试试"];
+}
 
 - (void) textFieldDidEndEditing:(UITextField *)textField
 {
@@ -160,7 +167,7 @@
     
     AMapInputTipsSearchRequest *tips = [[AMapInputTipsSearchRequest alloc] init];
     tips.keywords  = key;
-    tips.city      = @"0395";
+    tips.city      = CURRENT_AREA_CODE;
     tips.cityLimit = YES; //是否限制城市
     
     [self.search AMapInputTipsSearch:tips];
@@ -202,6 +209,7 @@
     AMapTip *tip = self.tips[indexPath.row];
     
     if ([self.busTransferStartSearchFiled isFirstResponder]) {
+
         self.startCoordinate = CLLocationCoordinate2DMake(tip.location.latitude, tip.location.longitude);
         self.busTransferStartSearchFiled.text = tip.name;
     }else if ([self.busTransferEndSearchFiled isFirstResponder]) {

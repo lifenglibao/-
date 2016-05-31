@@ -16,15 +16,12 @@
 		0D0C3A801CF2A169007C7F94 /* icon_map_transfer@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D0C3A7E1CF2A169007C7F94 /* icon_map_transfer@2x.png */; };
 		0D0C3A811CF2A169007C7F94 /* icon_map_transfer@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D0C3A7F1CF2A169007C7F94 /* icon_map_transfer@3x.png */; };
 		0D0C3A851CF2B82A007C7F94 /* BusTransferListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D0C3A831CF2B82A007C7F94 /* BusTransferListViewController.m */; };
-		0D0C3A8A1CF2BB3B007C7F94 /* BusTransferListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D0C3A881CF2BB3B007C7F94 /* BusTransferListTableViewCell.m */; };
-		0D0C3A8B1CF2BB3B007C7F94 /* BusTransferListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D0C3A891CF2BB3B007C7F94 /* BusTransferListTableViewCell.xib */; };
 		0D19422C1CCE345C0034D6FF /* BusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D19422B1CCE345C0034D6FF /* BusViewController.m */; };
 		0D1942331CCE3B2A0034D6FF /* AMapSearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D1942321CCE3B2A0034D6FF /* AMapSearchKit.framework */; };
 		0D1942371CCE3C3F0034D6FF /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D1942361CCE3C3F0034D6FF /* CoreLocation.framework */; };
 		0D1942391CCE3C720034D6FF /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D1942381CCE3C720034D6FF /* libz.tbd */; };
 		0D19423B1CCE3C8C0034D6FF /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D19423A1CCE3C8C0034D6FF /* libstdc++.6.0.9.tbd */; };
 		0D19423D1CCE3C9C0034D6FF /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D19423C1CCE3C9C0034D6FF /* libc++.tbd */; };
-		0D1942401CCE3ED40034D6FF /* BaseMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D19423F1CCE3ED40034D6FF /* BaseMapViewController.m */; };
 		0D1963BE1CD0A58D007B3CDB /* CustomeTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D1963BD1CD0A58D007B3CDB /* CustomeTextField.m */; };
 		0D1B06AC1CDAD6710020A5B0 /* BusNearbyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D1B06AB1CDAD6710020A5B0 /* BusNearbyViewController.m */; };
 		0D1B06B21CE088CD0020A5B0 /* BusLineDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D1B06B11CE088CD0020A5B0 /* BusLineDetailViewController.m */; };
@@ -35,6 +32,11 @@
 		0D1B06C31CE18BA10020A5B0 /* BusTransferDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D1B06C21CE18BA10020A5B0 /* BusTransferDetailViewController.m */; };
 		0D1B06CB1CE2BE400020A5B0 /* BusTransferViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D1B06C91CE2BE400020A5B0 /* BusTransferViewController.m */; };
 		0D1B06CC1CE2BE400020A5B0 /* BusTransferViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D1B06CA1CE2BE400020A5B0 /* BusTransferViewController.xib */; };
+		0D309F9D1CF8542500802263 /* BusSearchHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D309F9C1CF8542500802263 /* BusSearchHistoryViewController.m */; };
+		0D309FA61CF96E0F00802263 /* BusTransferListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D309FA41CF96E0F00802263 /* BusTransferListTableViewCell.m */; };
+		0D309FA71CF96E0F00802263 /* BusTransferListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D309FA51CF96E0F00802263 /* BusTransferListTableViewCell.xib */; };
+		0D309FAB1CF96E2D00802263 /* BusStopDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D309FA91CF96E2D00802263 /* BusStopDetailTableViewCell.m */; };
+		0D309FAC1CF96E2D00802263 /* BusStopDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D309FAA1CF96E2D00802263 /* BusStopDetailTableViewCell.xib */; };
 		0D465E191CC869BD009F502D /* post_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D465E181CC869BD009F502D /* post_normal@2x.png */; };
 		0D465E1B1CC88DE6009F502D /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D3DF9951AEE31EE00090760 /* CoreTelephony.framework */; };
 		0D465E1C1CC88DE6009F502D /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DB7DB441BE3A44E00389A8E /* TencentOpenAPI.framework */; };
@@ -1187,9 +1189,6 @@
 		0D0C3A7F1CF2A169007C7F94 /* icon_map_transfer@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon_map_transfer@3x.png"; path = "Map/icon_map_transfer@3x.png"; sourceTree = "<group>"; };
 		0D0C3A821CF2B82A007C7F94 /* BusTransferListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BusTransferListViewController.h; path = "公交查询/BusTransferListViewController.h"; sourceTree = "<group>"; };
 		0D0C3A831CF2B82A007C7F94 /* BusTransferListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BusTransferListViewController.m; path = "公交查询/BusTransferListViewController.m"; sourceTree = "<group>"; };
-		0D0C3A871CF2BB3B007C7F94 /* BusTransferListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusTransferListTableViewCell.h; sourceTree = "<group>"; };
-		0D0C3A881CF2BB3B007C7F94 /* BusTransferListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusTransferListTableViewCell.m; sourceTree = "<group>"; };
-		0D0C3A891CF2BB3B007C7F94 /* BusTransferListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BusTransferListTableViewCell.xib; sourceTree = "<group>"; };
 		0D19422A1CCE345C0034D6FF /* BusViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BusViewController.h; path = "公交查询/BusViewController.h"; sourceTree = "<group>"; };
 		0D19422B1CCE345C0034D6FF /* BusViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BusViewController.m; path = "公交查询/BusViewController.m"; sourceTree = "<group>"; };
 		0D1942321CCE3B2A0034D6FF /* AMapSearchKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AMapSearchKit.framework; sourceTree = "<group>"; };
@@ -1197,8 +1196,6 @@
 		0D1942381CCE3C720034D6FF /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		0D19423A1CCE3C8C0034D6FF /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "usr/lib/libstdc++.6.0.9.tbd"; sourceTree = SDKROOT; };
 		0D19423C1CCE3C9C0034D6FF /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
-		0D19423E1CCE3ED40034D6FF /* BaseMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseMapViewController.h; path = "公交查询/BaseMapViewController.h"; sourceTree = "<group>"; };
-		0D19423F1CCE3ED40034D6FF /* BaseMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaseMapViewController.m; path = "公交查询/BaseMapViewController.m"; sourceTree = "<group>"; };
 		0D1963BC1CD0A58D007B3CDB /* CustomeTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomeTextField.h; path = "Clan/Model/公交/CustomeTextField.h"; sourceTree = SOURCE_ROOT; };
 		0D1963BD1CD0A58D007B3CDB /* CustomeTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomeTextField.m; path = "Clan/Model/公交/CustomeTextField.m"; sourceTree = SOURCE_ROOT; };
 		0D1B06AA1CDAD6710020A5B0 /* BusNearbyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BusNearbyViewController.h; path = "公交查询/BusNearbyViewController.h"; sourceTree = "<group>"; };
@@ -1216,6 +1213,14 @@
 		0D1B06C81CE2BE400020A5B0 /* BusTransferViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BusTransferViewController.h; path = "公交查询/BusTransferViewController.h"; sourceTree = "<group>"; };
 		0D1B06C91CE2BE400020A5B0 /* BusTransferViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BusTransferViewController.m; path = "公交查询/BusTransferViewController.m"; sourceTree = "<group>"; };
 		0D1B06CA1CE2BE400020A5B0 /* BusTransferViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = BusTransferViewController.xib; path = "公交查询/BusTransferViewController.xib"; sourceTree = "<group>"; };
+		0D309F9B1CF8542400802263 /* BusSearchHistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BusSearchHistoryViewController.h; path = "公交查询/BusSearchHistoryViewController.h"; sourceTree = "<group>"; };
+		0D309F9C1CF8542500802263 /* BusSearchHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BusSearchHistoryViewController.m; path = "公交查询/BusSearchHistoryViewController.m"; sourceTree = "<group>"; };
+		0D309FA31CF96E0F00802263 /* BusTransferListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BusTransferListTableViewCell.h; path = "公交查询/BusTransferListTableViewCell.h"; sourceTree = "<group>"; };
+		0D309FA41CF96E0F00802263 /* BusTransferListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BusTransferListTableViewCell.m; path = "公交查询/BusTransferListTableViewCell.m"; sourceTree = "<group>"; };
+		0D309FA51CF96E0F00802263 /* BusTransferListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = BusTransferListTableViewCell.xib; path = "公交查询/BusTransferListTableViewCell.xib"; sourceTree = "<group>"; };
+		0D309FA81CF96E2D00802263 /* BusStopDetailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BusStopDetailTableViewCell.h; path = "公交查询/BusStopDetailTableViewCell.h"; sourceTree = "<group>"; };
+		0D309FA91CF96E2D00802263 /* BusStopDetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BusStopDetailTableViewCell.m; path = "公交查询/BusStopDetailTableViewCell.m"; sourceTree = "<group>"; };
+		0D309FAA1CF96E2D00802263 /* BusStopDetailTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = BusStopDetailTableViewCell.xib; path = "公交查询/BusStopDetailTableViewCell.xib"; sourceTree = "<group>"; };
 		0D465E181CC869BD009F502D /* post_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "post_normal@2x.png"; sourceTree = "<group>"; };
 		0D5B22021CD4514600EFBB44 /* MAMapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MAMapKit.framework; sourceTree = "<group>"; };
 		0D5B22041CD451CA00EFBB44 /* AMap.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = AMap.bundle; path = MAMapKit.framework/AMap.bundle; sourceTree = "<group>"; };
@@ -2920,12 +2925,12 @@
 				0D1B06AF1CE086B70020A5B0 /* BusNearby */,
 				0D1B06AE1CE086AF0020A5B0 /* BusStop */,
 				0D1B06AD1CE086A70020A5B0 /* BusLine */,
-				0D19423E1CCE3ED40034D6FF /* BaseMapViewController.h */,
-				0D19423F1CCE3ED40034D6FF /* BaseMapViewController.m */,
 				0D19422A1CCE345C0034D6FF /* BusViewController.h */,
 				0D19422B1CCE345C0034D6FF /* BusViewController.m */,
 				0DE441A71CD3051400F62097 /* BusMapViewController.h */,
 				0DE441A81CD3051400F62097 /* BusMapViewController.m */,
+				0D309F9B1CF8542400802263 /* BusSearchHistoryViewController.h */,
+				0D309F9C1CF8542500802263 /* BusSearchHistoryViewController.m */,
 			);
 			name = "公交查询";
 			sourceTree = "<group>";
@@ -2958,6 +2963,9 @@
 				0D0880461CD983DE00DE33E7 /* BusStopViewController.m */,
 				0D1B06B31CE08D9D0020A5B0 /* BusStopDetailViewController.h */,
 				0D1B06B41CE08D9D0020A5B0 /* BusStopDetailViewController.m */,
+				0D309FA81CF96E2D00802263 /* BusStopDetailTableViewCell.h */,
+				0D309FA91CF96E2D00802263 /* BusStopDetailTableViewCell.m */,
+				0D309FAA1CF96E2D00802263 /* BusStopDetailTableViewCell.xib */,
 			);
 			name = BusStop;
 			sourceTree = "<group>";
@@ -2977,6 +2985,9 @@
 		0D1B06BD1CE18B240020A5B0 /* BusTransfer */ = {
 			isa = PBXGroup;
 			children = (
+				0D309FA31CF96E0F00802263 /* BusTransferListTableViewCell.h */,
+				0D309FA41CF96E0F00802263 /* BusTransferListTableViewCell.m */,
+				0D309FA51CF96E0F00802263 /* BusTransferListTableViewCell.xib */,
 				0D1B06C81CE2BE400020A5B0 /* BusTransferViewController.h */,
 				0D1B06C91CE2BE400020A5B0 /* BusTransferViewController.m */,
 				0D1B06CA1CE2BE400020A5B0 /* BusTransferViewController.xib */,
@@ -2984,9 +2995,6 @@
 				0D0C3A831CF2B82A007C7F94 /* BusTransferListViewController.m */,
 				0D1B06C11CE18BA10020A5B0 /* BusTransferDetailViewController.h */,
 				0D1B06C21CE18BA10020A5B0 /* BusTransferDetailViewController.m */,
-				0D0C3A871CF2BB3B007C7F94 /* BusTransferListTableViewCell.h */,
-				0D0C3A881CF2BB3B007C7F94 /* BusTransferListTableViewCell.m */,
-				0D0C3A891CF2BB3B007C7F94 /* BusTransferListTableViewCell.xib */,
 			);
 			name = BusTransfer;
 			sourceTree = "<group>";
@@ -5925,7 +5933,6 @@
 			files = (
 				6D65F0BA1C0ECCD70032B5DD /* keyboard_emotion@3x.png in Resources */,
 				6D65EF521C0ECCD70032B5DD /* 3_22@2x.png in Resources */,
-				0D0C3A8B1CF2BB3B007C7F94 /* BusTransferListTableViewCell.xib in Resources */,
 				0D5B22381CD452FE00EFBB44 /* compass@3x.png in Resources */,
 				6D65F0B41C0ECCD70032B5DD /* keyboard_add@2x.png in Resources */,
 				6D65F0B21C0ECCD70032B5DD /* share_N@2x.png in Resources */,
@@ -6046,6 +6053,7 @@
 				6D65F0631C0ECCD70032B5DD /* act_agree@3x.png in Resources */,
 				6D65F0321C0ECCD70032B5DD /* 1@2x.png in Resources */,
 				6D7859C71ADE061A002B4707 /* chat_send_message.png in Resources */,
+				0D309FA71CF96E0F00802263 /* BusTransferListTableViewCell.xib in Resources */,
 				6D65EF1A1C0ECCD70032B5DD /* 2_5@2x.png in Resources */,
 				6D65F0091C0ECCD70032B5DD /* forumBg@3x.png in Resources */,
 				6D65EF361C0ECCD70032B5DD /* 3_16@2x.png in Resources */,
@@ -6244,6 +6252,7 @@
 				6D65EFAF1C0ECCD70032B5DD /* uncheckin@3x.png in Resources */,
 				6D65F0281C0ECCD70032B5DD /* 15@2x.png in Resources */,
 				6D65F0201C0ECCD70032B5DD /* 11@2x.png in Resources */,
+				0D309FAC1CF96E2D00802263 /* BusStopDetailTableViewCell.xib in Resources */,
 				0D5B223E1CD452FE00EFBB44 /* endPoint.png in Resources */,
 				6D65F0B01C0ECCD70032B5DD /* select_n@2x.png in Resources */,
 				6D65F01A1C0ECCD70032B5DD /* view_img@2x.png in Resources */,
@@ -6634,7 +6643,6 @@
 				8AB793861BE0CE4F002A9BFE /* PostActivityInfoVC.m in Sources */,
 				8A8637F41B43FDDB00BDF7B3 /* SDCollectionViewCell.m in Sources */,
 				6D80C8961B4BB55300959E52 /* FMDatabaseQueue.m in Sources */,
-				0D1942401CCE3ED40034D6FF /* BaseMapViewController.m in Sources */,
 				6D1163AF1AE8CA2C00705FAC /* POPBasicAnimation.mm in Sources */,
 				8AB7CD1F1AA6FD0F007A17E8 /* NSObject+Common.m in Sources */,
 				8A1FE0331AC3DC6C008F10F0 /* MJPhotoView.m in Sources */,
@@ -6652,6 +6660,7 @@
 				8ABC17421AB7C3EB00F4F9AB /* MyPostCollectionCell.m in Sources */,
 				6D1163B41AE8CA2C00705FAC /* POPLayerExtras.mm in Sources */,
 				6D8ED87A1AE4F29D00D023EC /* MGTemplateEngine.m in Sources */,
+				0D309F9D1CF8542500802263 /* BusSearchHistoryViewController.m in Sources */,
 				6D7CC18F1B04731B004F61D4 /* LewPopupViewAnimationSlide.m in Sources */,
 				8A1FDFE31AC3A289008F10F0 /* AGEmojiPageView.m in Sources */,
 				6D421ACE1B9D4772009B5F5F /* XLBarView.m in Sources */,
@@ -6697,6 +6706,7 @@
 				6D1163A81AE8CA2C00705FAC /* POPAnimatableProperty.mm in Sources */,
 				6DFAF1FC1B254B4800B179D5 /* MJRefreshGifFooter.m in Sources */,
 				8ABECE811BFE0666006F3854 /* PostActivityImageCell.m in Sources */,
+				0D309FAB1CF96E2D00802263 /* BusStopDetailTableViewCell.m in Sources */,
 				6D7859DA1ADE0CD5002B4707 /* ChatModel.m in Sources */,
 				6D80C8A61B4BD64900959E52 /* CacheManager.m in Sources */,
 				8ABC17301AB6BA0200F4F9AB /* CollectionViewController.m in Sources */,
@@ -7038,7 +7048,7 @@
 				6DD8696D1B2AFD57004C02F1 /* AutoScrollView.m in Sources */,
 				8A73D8E81B9C65BA00B6B02B /* ArticleCell.m in Sources */,
 				0DE441A31CD300F100F62097 /* CommonUtility.m in Sources */,
-				0D0C3A8A1CF2BB3B007C7F94 /* BusTransferListTableViewCell.m in Sources */,
+				0D309FA61CF96E0F00802263 /* BusTransferListTableViewCell.m in Sources */,
 				8A4F6B561BE24C1D00C05F9D /* PMEDatePicker.m in Sources */,
 				6D421ACC1B9D4772009B5F5F /* XLTwitterPagerTabStripViewController.m in Sources */,
 				6DDB235C1BA1647D00B1D7A9 /* A2DynamicDelegate.m in Sources */,

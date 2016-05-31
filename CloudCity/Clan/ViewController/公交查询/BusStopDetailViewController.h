@@ -7,16 +7,21 @@
 //
 
 #import "BaseViewController.h"
-#import "BaseMapViewController.h"
 #import "BusViewController.h"
+#import <AMapSearchKit/AMapSearchKit.h>
 
-@interface BusStopDetailViewController : BaseViewController<UITableViewDataSource,UITableViewDelegate,AMapSearchDelegate>
+@interface BusStopDetailViewController : BaseViewController<UITableViewDataSource,UITableViewDelegate,AMapSearchDelegate,CLLocationManagerDelegate>
 
-@property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) CLLocationManager *locationManager;
+
+@property (nonatomic, strong) BaseTableView *tableView;
 @property (nonatomic, strong) NSMutableArray *busStopArray;
+@property (nonatomic, strong) NSMutableArray *lineArray;
+
 @property (nonatomic) BOOL isFav;
 @property (nonatomic, strong) UIButton *favBtn;
 @property (nonatomic, strong) AMapBusStop *busStop;
 @property (nonatomic, strong) AMapSearchAPI *search;
 
+@property (nonatomic) NSInteger currentIndex;
 @end

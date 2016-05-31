@@ -7,7 +7,21 @@
 //
 
 #import "BaseViewController.h"
+#import <AMapSearchKit/AMapSearchKit.h>
 
-@interface BusTransferDetailViewController : BaseViewController
+@interface BusTransferDetailViewController : BaseViewController<UITableViewDataSource,UITableViewDelegate>
+
+
+/* 当前路线方案索引值. */
+@property (nonatomic) NSInteger currentCourse;
+@property (nonatomic, strong) AMapRoute *busRoute;
+@property (nonatomic, strong) BaseTableView *tableView;
+
+@property (nonatomic) NSString *routeStartLocation;
+@property (nonatomic) NSString *routeDestinationLocation;
+
+@property (nonatomic) NSMutableArray *routeData;
+@property (strong, nonatomic) UIButton *viewMoreBtn;
+@property (nonatomic) BOOL isFav;
 
 @end

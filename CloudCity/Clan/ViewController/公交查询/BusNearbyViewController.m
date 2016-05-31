@@ -47,7 +47,6 @@
 #pragma mark -
 - (void)initSearch
 {
-    [AMapSearchServices sharedServices].apiKey = [NSString returnStringWithPlist:MAPKEY];
     self.search = [[AMapSearchAPI alloc] init];
     self.search.delegate = self;
 }
@@ -71,20 +70,7 @@
 
 - (void)locationServiceUnEnabled
 {
-    self.maskView = [[UIView alloc] initWithFrame:self.view.frame];
-    UIImageView *img = [[UIImageView alloc] initWithFrame:CGRectMake(0, 50, self.view.width, 150)];
-    img.image = kIMG(@"dataNothing");
-    img.contentMode = UIViewContentModeScaleAspectFit;
-    
-    UILabel *lbl = [[UILabel alloc] initWithFrame:CGRectMake(0, img.bottom + 20, self.view.width, 50)];
-    lbl.textAlignment = NSTextAlignmentCenter;
-    lbl.font = [UIFont boldSystemFontOfSize:20];
-    lbl.textColor = [UIColor lightGrayColor];
-    lbl.numberOfLines = 0;
-    lbl.text = @"抱歉\n定位失败,或者您还未开启定位服务";
-
-    [self.maskView addSubview:img];
-    [self.maskView addSubview:lbl];
+    self.maskView = [CustomBusMode locationServiceUnEnabled:self.view.frame];
     [self.view addSubview:self.maskView];
     [self.view bringSubviewToFront:self.maskView];
 }
@@ -96,6 +82,7 @@
     }else{
     }
 }
+
 - (void)initUserLocation
 {
     if ([CLLocationManager locationServicesEnabled]) {
@@ -126,7 +113,7 @@
     request.location            = [AMapGeoPoint locationWithLatitude: gaodeGPS.latitude longitude:gaodeGPS.longitude];
     request.keywords            = @"公交站";
     request.radius              = 1000;
-    /* 按照距离排序. */
+    request.types               = BUS_STOP_SEARCH_STYPE;
     request.sortrule            = 0;
     request.requireExtension    = YES;
     request.page                = self.page;
@@ -148,53 +135,89 @@
 }
 
 /* 公交路线搜索回调. */
+
 - (void)onBusLineSearchDone:(AMapBusLineBaseSearchRequest *)request response:(AMapBusLineSearchResponse *)response
 {
-    if (response.buslines.count != 0)
-    {
-        [self.lineArray addObject:response.buslines];
-    }else{
-        NSArray *arr = [NSArray arrayWithObjects:[[AMapBusLine alloc] init],[[AMapBusLine alloc] init], nil];
-        [self.lineArray addObject:arr];
+    
+    for (int i = 0; i<self.nearByArray.count; i++) {
+        
+        if (response.buslines.count != 0)
+        {
+            if ([[CustomBusMode handleStringWithCharRoad:[self.nearByArray[i] address]] isEqualToString:[CustomBusMode handleStringWithHalfBrackets:[(AMapBusLine*)response.buslines.firstObject name]]] && [self.nearByArray[i] subPOIs].count == 0) {
+                
+                NSLog(@"%@---%@",[self.nearByArray[i] address],[CustomBusMode handleStringWithHalfBrackets:[(AMapBusLine*)response.buslines.firstObject name]]);
+                [self.nearByArray[i] setSubPOIs:response.buslines];
+                break;
+            }else{
+
+            }
+        }
     }
     
-    [self.tableView reloadData];
-    [self hideProgressHUD];
-    [self.view endLoading];
-    [self.tableView endHeaderRefreshing];
-    [self.tableView.footer endRefreshing];
+//    if (response.buslines.count != 0)
+//    {
+//        [self.lineArray addObject:response.buslines];
+//    }else{
+//        NSArray *arr = [NSArray arrayWithObjects:[[AMapBusLine alloc] init],[[AMapBusLine alloc] init], nil];
+//        [self.lineArray addObject:arr];
+//    }
+//    
+//    
+//    if (self.lineArray.count == self.nearByArray.count) {
+//        
+//        NSMutableArray *discardedItems = [NSMutableArray array];
+//        
+//        for (AMapPOI *item in self.nearByArray) {
+//            if (item.subPOIs.count == 0) {
+//                [discardedItems addObject:item];
+//            }
+//        }
+//        
+//        [self.nearByArray removeObjectsInArray:discardedItems];
     
-    if (self.page != 1) {
-        if (_isNoMore) {
-            [self.tableView.footer noticeNoMoreData];
-        }
-    } else {
-        if (_isNoMore) {
-            [self.tableView removeFooter];
+        [self.tableView reloadData];
+        [self hideProgressHUD];
+        [self.view endLoading];
+        [self.tableView endHeaderRefreshing];
+        [self.tableView.footer endRefreshing];
+        
+        if (self.page != 1) {
+            if (_isNoMore) {
+                [self.tableView.footer noticeNoMoreData];
+            }
         } else {
-            [self addPullRefreshActionWithUp];
+            if (_isNoMore) {
+                [self.tableView removeFooter];
+            } else {
+                [self addPullRefreshActionWithUp];
+            }
         }
-    }
+//    }
 }
 
 - (void) getMoreInfoMationForBus:(NSArray*)pois
 {
     if (self.page == 1) {
         [self.nearByArray removeAllObjects];
+        [self.lineArray removeAllObjects];
         [self.nearByArray addObjectsFromArray:pois];
     }else{
         [self.nearByArray addObjectsFromArray:pois];
     }
     [self sortingData];
     
-    for (NSArray *row in self.nearByArray) {
+    for (int i = 0; i<self.nearByArray.count; i++) {
+        
+        [self.nearByArray[i] setSubPOIs:[NSArray array]];
         AMapBusLineNameSearchRequest *line = [[AMapBusLineNameSearchRequest alloc] init];
-        line.city               = @"0395";
+        line.city               = CURRENT_AREA_CODE;
         line.requireExtension   = YES;
-        line.keywords = [row valueForKey:@"address"];
+        line.keywords = [self.nearByArray[i] address];
         [self.search AMapBusLineNameSearch:line];
     }
 }
+
+
 
 - (void) sortingData {
     NSMutableArray *data = [NSMutableArray array];
@@ -254,38 +277,39 @@
         [tableView registerNib:[UINib nibWithNibName:@"BusNearbyCellTableViewCell" bundle:nil] forCellReuseIdentifier:busCellIdentifier];
         cell = [tableView dequeueReusableCellWithIdentifier:busCellIdentifier];
     }
-    
-//    UIImageView *contentV = [[UIImageView alloc] initWithFrame:cell.contentView.frame];
-//    contentV.image = kIMG(@"send_msg");
-//    [cell.contentView addSubview:contentV];
-//    [cell.contentView sendSubviewToBack:contentV];
+
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(BusNearbyCellTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    cell.lbl_busNumber.text = [CustomBusMode handleStringWithBrackets:[(AMapPOI *)self.nearByArray[indexPath.section] address]];
-    cell.lbl_busNumberSub.text = [CustomBusMode handleStringGetBrackets:[(AMapPOI *)self.nearByArray[indexPath.section] address]];
-    cell.lbl_busGoto.text = [CustomBusMode replaceStringWithBusModel:[self.lineArray [indexPath.section][self.currentIndex] endStop]];
-    
-    cell.lbl_busFirstTime.text = [CustomBusMode replaceStringWithBusModel:[CustomBusMode getBusTimeFromString:[self.lineArray [indexPath.section][self.currentIndex] startTime]]];
-    cell.lbl_busEndTime.text = [CustomBusMode replaceStringWithBusModel:[CustomBusMode getBusTimeFromString:[self.lineArray [indexPath.section][self.currentIndex] endTime]]];
-    cell.lbl_busNearbyStop.text = [CustomBusMode handleStringWithBrackets:[(AMapPOI *)self.nearByArray[indexPath.section] name]];
-    cell.lbl_busDistance.text = [NSString stringWithFormat:@"%ld米",(long)[(AMapPOI *)self.nearByArray[indexPath.section] distance]];
-    
-    if ([self.lineArray [indexPath.section][self.currentIndex] basicPrice] == [self.lineArray [indexPath.section][self.currentIndex] totalPrice] ) {
-        NSString *temp = [CustomBusMode replaceStringWithBusModel:[NSString stringWithFormat:@"%.1f",[self.lineArray [indexPath.section][self.currentIndex] basicPrice]]];
-        cell.lbl_busPrice.text = [NSString stringWithFormat:@"%@",temp];
+    if ([self.nearByArray[indexPath.section] subPOIs].count == 0) {
+        
     }else{
-        cell.lbl_busPrice.text = [NSString stringWithFormat:@"%@-%@",[CustomBusMode replaceStringWithBusModel:[NSString stringWithFormat:@"%.1f",[self.lineArray [indexPath.section][self.currentIndex] basicPrice]]],[CustomBusMode replaceStringWithBusModel:[NSString stringWithFormat:@"%.1f",[self.lineArray [indexPath.section][self.currentIndex] totalPrice]]]];
+        cell.lbl_busNumber.text = [CustomBusMode handleStringWithBrackets:[(AMapPOI *)self.nearByArray[indexPath.section] address]];
+        cell.lbl_busNumberSub.text = [CustomBusMode handleStringGetBrackets:[(AMapPOI *)self.nearByArray[indexPath.section] address]];
+        cell.lbl_busGoto.text = [CustomBusMode replaceStringWithBusModel:[[self.nearByArray[indexPath.section] subPOIs][self.currentIndex] endStop]];
+        
+        cell.lbl_busFirstTime.text = [CustomBusMode replaceStringWithBusModel:[CustomBusMode getBusTimeFromString:[[self.nearByArray[indexPath.section] subPOIs][self.currentIndex] startTime]]];
+        cell.lbl_busEndTime.text = [CustomBusMode replaceStringWithBusModel:[CustomBusMode getBusTimeFromString:[[self.nearByArray[indexPath.section] subPOIs][self.currentIndex] endTime]]];
+        cell.lbl_busNearbyStop.text = [CustomBusMode handleStringWithBrackets:[(AMapPOI *)self.nearByArray[indexPath.section] name]];
+        cell.lbl_busDistance.text = [NSString stringWithFormat:@"%ld米",(long)[(AMapPOI *)self.nearByArray[indexPath.section] distance]];
+        
+        if ([[self.nearByArray[indexPath.section] subPOIs][self.currentIndex] basicPrice] == [[self.nearByArray[indexPath.section] subPOIs][self.currentIndex] totalPrice] ) {
+            NSString *temp = [CustomBusMode replaceStringWithBusModel:[NSString stringWithFormat:@"%.1f",[[self.nearByArray [indexPath.section] subPOIs][self.currentIndex] basicPrice]]];
+            cell.lbl_busPrice.text = [NSString stringWithFormat:@"%@",temp];
+        }else{
+            cell.lbl_busPrice.text = [NSString stringWithFormat:@"%@-%@",[CustomBusMode replaceStringWithBusModel:[NSString stringWithFormat:@"%.1f",[[self.nearByArray[indexPath.section] subPOIs][self.currentIndex] basicPrice]]],[CustomBusMode replaceStringWithBusModel:[NSString stringWithFormat:@"%.1f",[[self.nearByArray[indexPath.section] subPOIs][self.currentIndex] totalPrice]]]];
+        }
+        
+        cell.lbl_busFullDistance.text = [NSString stringWithFormat:@"%@公里",[CustomBusMode replaceStringWithBusModel:[NSString stringWithFormat:@"%.2f",[(AMapBusLine *)[self.nearByArray[indexPath.section] subPOIs][self.currentIndex] distance]]]];
+        cell.arrImg.autoresizesSubviews = NO;
+        CLLocationCoordinate2D target;
+        target.latitude = [[(AMapPOI *)self.nearByArray[indexPath.section] valueForKey:@"location"] latitude];
+        target.longitude = [[(AMapPOI *)self.nearByArray[indexPath.section] valueForKey:@"location"] longitude];
+        cell.arrImg.target = target;
     }
     
-    cell.lbl_busFullDistance.text = [NSString stringWithFormat:@"%@公里",[CustomBusMode replaceStringWithBusModel:[NSString stringWithFormat:@"%.2f",[(AMapBusLine*)self.lineArray [indexPath.section][self.currentIndex] distance]]]];
-    cell.arrImg.autoresizesSubviews = NO;
-    CLLocationCoordinate2D target;
-    target.latitude = [[(AMapPOI *)self.nearByArray[indexPath.section] valueForKey:@"location"] latitude];
-    target.longitude = [[(AMapPOI *)self.nearByArray[indexPath.section] valueForKey:@"location"] longitude];
-    cell.arrImg.target = target;
 }
 
 #pragma mark - UITableViewDelegate
@@ -294,14 +318,13 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    if ([Util isBlankString:[(AMapBusLine*)self.lineArray[indexPath.section][self.currentIndex] uid]]) {
+    if ([Util isBlankString:[(AMapBusLine*)[self.nearByArray[indexPath.section] subPOIs][self.currentIndex] uid]]) {
         [self showHudTipStr:@"当前车辆信息可能出错了"];
         return;
     }
     BusLineDetailViewController *vc = [[BusLineDetailViewController alloc] init];
     vc.title = [self.nearByArray[indexPath.section] valueForKey:@"address"];
-//    vc.nearByStop = [self.nearByArray[self.tableView.indexPathForSelectedRow.section] valueForKey:@"name"];
-    vc.busLineArray = [NSMutableArray arrayWithArray:self.lineArray[indexPath.section]];
+    vc.busLineArray = [NSMutableArray arrayWithArray:[self.nearByArray[indexPath.section] subPOIs]];
     [self.parentViewController.navigationController pushViewController:vc animated:YES];
 }
 
@@ -372,6 +395,12 @@
 
             break;
     }
+}
+
+- (void)AMapSearchRequest:(id)request didFailWithError:(NSError *)error
+{
+    [self hideProgressHUD];
+    [self showHudTipStr:@"抱歉,未找到附近的信息或者网络出了点问题😢"];
 }
 
 /*
