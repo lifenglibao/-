@@ -12,6 +12,7 @@
 #import "ForumsModel.h"
 #import "BoardModel.h"
 #import <objc/runtime.h>
+#import "CustomBusMode.h"
 
 @implementation Util
 + (void)copyFile2Documents:(NSString*)fileName
@@ -202,15 +203,6 @@
         case myArticle:
             fileKey = kKEY_FAVO_ARTICLES;
             break;
-        case myBusLine:
-            fileKey = kKEY_FAVO_BUSLINE;
-            break;
-        case myBusStop:
-            fileKey = kKEY_FAVO_BUSSTOP;
-            break;
-        case myBusTransfer:
-            fileKey = kKEY_FAVO_BUSTRANSFER;
-            break;
         default:
             fileKey = kKEY_FAVO_THREADS;
             break;
@@ -235,15 +227,6 @@
             break;
         case myArticle:
             fileKey = kKEY_FAVO_ARTICLES;
-            break;
-        case myBusLine:
-            fileKey = kKEY_FAVO_BUSLINE;
-            break;
-        case myBusStop:
-            fileKey = kKEY_FAVO_BUSSTOP;
-            break;
-        case myBusTransfer:
-            fileKey = kKEY_FAVO_BUSTRANSFER;
             break;
         default:
             fileKey = kKEY_FAVO_THREADS;
@@ -279,15 +262,6 @@
         case myArticle:
             fileKey = kKEY_FAVO_ARTICLES;
             break;
-        case myBusLine:
-            fileKey = kKEY_FAVO_BUSLINE;
-            break;
-        case myBusStop:
-            fileKey = kKEY_FAVO_BUSSTOP;
-            break;
-        case myBusTransfer:
-            fileKey = kKEY_FAVO_BUSTRANSFER;
-            break;
         default:
             fileKey = kKEY_FAVO_THREADS;
             break;
@@ -310,12 +284,10 @@
 //清除收藏
 + (void)cleanUpLocalFavoArray
 {
+    [CustomBusMode cleanUpLocalFavoArray];
     [[NSUserDefaults standardUserDefaults]setObject:nil forKey:kKEY_FAVO_THREADS];
     [[NSUserDefaults standardUserDefaults]setObject:nil forKey:kKEY_FAVO_FORUMS];
     [[NSUserDefaults standardUserDefaults]setObject:nil forKey:kKEY_FAVO_ARTICLES];
-    [[NSUserDefaults standardUserDefaults]setObject:nil forKey:kKEY_FAVO_BUSLINE];
-    [[NSUserDefaults standardUserDefaults]setObject:nil forKey:kKEY_FAVO_BUSSTOP];
-    [[NSUserDefaults standardUserDefaults]setObject:nil forKey:kKEY_FAVO_BUSTRANSFER];
 }
 
 //通过帖子或者版块ID 得到收藏ID

@@ -13,8 +13,6 @@
 
 @property (nonatomic, strong) BaseTableView *tableView;
 @property (nonatomic, strong) NSMutableArray *nearByArray;
-@property (nonatomic, strong) CLLocationManager *locationManager;
-//@property (nonatomic, retain) CLLocation *currentLocation;
 @property (nonatomic, strong) AMapSearchAPI *search;
 @property (nonatomic, strong) NSMutableArray *lineArray;
 @property (nonatomic) NSInteger currentIndex;

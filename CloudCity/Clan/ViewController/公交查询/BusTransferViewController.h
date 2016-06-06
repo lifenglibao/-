@@ -8,6 +8,8 @@
 
 #import "BaseViewController.h"
 #import <AMapSearchKit/AMapSearchKit.h>
+#import "BusSearchHistoryViewController.h"
+#import <MAMapKit/MAMapKit.h>
 
 @interface BusTransferViewController : BaseViewController<UISearchBarDelegate, UISearchDisplayDelegate, UITableViewDataSource, UITableViewDelegate,UITextFieldDelegate,AMapSearchDelegate,CLLocationManagerDelegate>
 
@@ -21,6 +23,7 @@
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *tips;
 @property (nonatomic, strong) AMapSearchAPI *search;
+@property (nonatomic, strong) BusSearchHistoryViewController * historyTableView;
 
 typedef NS_ENUM(NSInteger, AMapRoutePlanningType)
 {

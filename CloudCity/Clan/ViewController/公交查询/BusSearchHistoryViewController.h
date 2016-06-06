@@ -14,6 +14,7 @@
 @property (strong, nonatomic) UIView *headerView;
 
 - (void)writeHistoryPlist :(NSString *)str;
+- (void)writeHistoryPlist :(NSString *)str withlat:(CGFloat )lat lon:(CGFloat) lon;
 
 typedef NS_ENUM(NSInteger, BusSearchHistoryType)
 {

@@ -11,6 +11,7 @@
 #import "BusLineDetailViewController.h"
 #import "BusNearbyCellTableViewCell.h"
 #import "CustomBusMode.h"
+#import "Locator.h"
 
 @interface BusNearbyViewController ()
 
@@ -39,9 +40,8 @@
     [super viewDidLoad];
     [self showHudTipStr:@"附近站点默认显示距离您1000米内的车站"];
     [self initSearch];
-    [self initUserLocation];
     [self initTableView];
-    [self performSelector:@selector(checkCllocationSerStatus) withObject:nil afterDelay:1.0];
+    [self performSelector:@selector(initUserLocation) withObject:nil afterDelay:1.0];
 }
 
 #pragma mark -
@@ -75,45 +75,26 @@
     [self.view bringSubviewToFront:self.maskView];
 }
 
-- (void)checkCllocationSerStatus
-{
-    if ([CLLocationManager authorizationStatus] != kCLAuthorizationStatusDenied) {
-        [self searchPoiByCenterCoordinate];
-    }else{
-    }
-}
-
 - (void)initUserLocation
 {
-    if ([CLLocationManager locationServicesEnabled]) {
-        
-        self.locationManager = [[CLLocationManager alloc] init];
-        self.locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation;
-        self.locationManager.delegate = self;
-        
-        if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0) {
-            
-            [self.locationManager requestAlwaysAuthorization];
-        }
-        [self.locationManager startUpdatingLocation];
-        [self.locationManager startUpdatingHeading];
+    if ([[Locator sharedLocator] IsLocationServiceEnabled]) {
+        [self searchPoiByCenterCoordinate];
     }else{
         [self locationServiceUnEnabled];
     }
 }
-
 
 #pragma mark - AMapSearchDelegate
 
 - (void)searchPoiByCenterCoordinate
 {
     [self showProgressHUDWithStatus:@""];
-    CLLocationCoordinate2D  gaodeGPS = MACoordinateConvert(self.locationManager.location.coordinate, MACoordinateTypeGPS);
+    CLLocationCoordinate2D  gaodeGPS = MACoordinateConvert([(Locator*)[Locator sharedLocator] userLocation], MACoordinateTypeGPS);
     AMapPOIAroundSearchRequest *request = [[AMapPOIAroundSearchRequest alloc] init];
     request.location            = [AMapGeoPoint locationWithLatitude: gaodeGPS.latitude longitude:gaodeGPS.longitude];
     request.keywords            = @"公交站";
     request.radius              = 1000;
-    request.types               = BUS_STOP_SEARCH_STYPE;
+    request.types               = BUS_STOP_SEARCH_TYPE;
     request.sortrule            = 0;
     request.requireExtension    = YES;
     request.page                = self.page;
@@ -352,48 +333,6 @@
             strongSelf.page ++;
             [strongSelf searchPoiByCenterCoordinate];
         }];
-    }
-}
-
-#pragma mark  -
-- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
-{
-//    CLLocationCoordinate2D  gaodeGPS = MACoordinateConvert(self.locationManager.location.coordinate, MACoordinateTypeGPS);
-//    newLocation = [[CLLocation alloc] initWithLatitude:gaodeGPS.latitude longitude:gaodeGPS.longitude];
-//    self.currentLocation = newLocation;
-    //NPLog(@"lat: %f, long: %f", currentLocation.coordinate.latitude, currentLocation.coordinate.longitude);
-}
-
-- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations
-{
-    
-}
-
-- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
-{
-    [manager stopUpdatingHeading];
-    [manager stopUpdatingLocation];
-    [self locationServiceUnEnabled];
-    switch([error code]) {
-        case kCLErrorDenied:
-            //Access denied by user
-            // "Access to Location Services denied by user";
-            //Do something...
-
-            break;
-        case kCLErrorLocationUnknown:
-            //Probably temporary...
-            // "Location data unavailable";
-            //Do something else...
-
-            break;
-        case kCLErrorHeadingFailure:
-            // This error indicates that the heading could not be determined, most likely because of strong magnetic interference.
-
-        default:
-            // "An unknown error has occurred";
-
-            break;
     }
 }
 

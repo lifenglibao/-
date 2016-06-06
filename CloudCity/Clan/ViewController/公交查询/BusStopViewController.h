@@ -11,7 +11,7 @@
 #import "BusSearchHistoryViewController.h"
 
 
-@interface BusStopViewController : BaseViewController<UISearchBarDelegate, UISearchDisplayDelegate, UITableViewDataSource, UITableViewDelegate,UITextFieldDelegate,AMapSearchDelegate,CLLocationManagerDelegate>
+@interface BusStopViewController : BaseViewController<UISearchBarDelegate, UISearchDisplayDelegate, UITableViewDataSource, UITableViewDelegate,UITextFieldDelegate,AMapSearchDelegate>
 
 @property (nonatomic, strong) UITextField *busStopSearchFiled;
 @property (nonatomic, strong) UITableView *tableView;

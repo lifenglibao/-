@@ -7,6 +7,7 @@
 //
 
 #import "CustomBusMode.h"
+#import "MJExtension.h"
 
 @implementation CustomBusMode
 
@@ -14,6 +15,11 @@
 +(NSArray *)getGridTitle{
     
     return [NSArray arrayWithObjects:@"附近",@"线路",@"站点",@"换乘",@"收藏", nil];
+}
+
++(NSArray *)getTransferGridTitle{
+    
+    return [NSArray arrayWithObjects:@"查看返程",@"推荐路线", nil];
 }
 
 +(UIView*)setRightViewWithTextField:(UITextField *)textField imageName:(NSString *)imageName{
@@ -235,9 +241,9 @@
 
     NSLog(@"%@",[[NSNumber numberWithDouble:transit.cost] stringValue]);
     if (![[[NSNumber numberWithDouble:transit.cost] stringValue] isEqualToString:@"0"]) {
-        string = [NSString stringWithFormat:@"%@ | %@ | %@ | %.1f元",[self timeformatFromSeconds:transit.duration], [self metresConvertToKM:transit.distance], [self metresConvertToKM:transit.walkingDistance], [[NSNumber numberWithDouble:transit.cost] floatValue]];
+        string = [NSString stringWithFormat:@"%@ | %@ | 步行%@ | %.1f元",[self timeformatFromSeconds:transit.duration], [self metresConvertToKM:transit.distance], [self metresConvertToKM:transit.walkingDistance], [[NSNumber numberWithDouble:transit.cost] floatValue]];
     }else{
-        string = [NSString stringWithFormat:@"%@ | %@ | %@",[self timeformatFromSeconds:transit.duration], [self metresConvertToKM:transit.distance], [self metresConvertToKM:transit.walkingDistance]];
+        string = [NSString stringWithFormat:@"%@ | %@ | 步行%@",[self timeformatFromSeconds:transit.duration], [self metresConvertToKM:transit.distance], [self metresConvertToKM:transit.walkingDistance]];
     }
     return string;
 }
@@ -363,8 +369,6 @@
         MAMapPoint point2 = MAMapPointForCoordinate(CLLocationCoordinate2DMake(stop.location.latitude,stop.location.longitude));
         CLLocationDistance distance = MAMetersBetweenMapPoints(point1,point2);
         
-        NSLog(@"%f",distance);
-        NSLog(@"%@",[NSNumber numberWithDouble:distance]);
         [res addObject:[NSDictionary dictionaryWithObjectsAndKeys:
                         stop.name,@"name",
                         [NSNumber numberWithFloat:distance],@"distance",
@@ -396,6 +400,131 @@
 //            return NSOrderedSame;
 //        }
 //    }];
+}
+
+
+// 公交是否收藏
++ (BOOL)isFavoed_withID:(NSString *)sid withFavoID:(NSString *)favoID forType:(CollcetionType)type
+{
+    NSString *fileKey = nil;
+    switch (type) {
+        case myBusLine:
+            fileKey = kKEY_FAVO_BUSLINE;
+            break;
+        case myBusStop:
+            fileKey = kKEY_FAVO_BUSSTOP;
+            break;
+        case myBusTransfer:
+            fileKey = kKEY_FAVO_BUSTRANSFER;
+            break;
+        default:
+            fileKey = @"";
+            break;
+    }
+    if (!fileKey) {
+        return NO;
+    }
+    NSDictionary *dic = [[NSUserDefaults standardUserDefaults] objectForKey:fileKey];
+    return [dic.allKeys containsObject:sid];
+}
+
+
+//公交 增加本地收藏
++ (BOOL)addFavoed_withID:(NSString *)sid withFavoID:(NSString *)favoID forType:(CollcetionType) type
+{
+    if (!favoID || !sid) {
+        return NO;
+    }
+    NSString *fileKey = nil;
+    switch (type) {
+        case myBusLine:
+            fileKey = kKEY_FAVO_BUSLINE;
+            break;
+        case myBusStop:
+            fileKey = kKEY_FAVO_BUSSTOP;
+            break;
+        case myBusTransfer:
+            fileKey = kKEY_FAVO_BUSTRANSFER;
+            break;
+        default:
+            fileKey = @"";
+            break;
+    }
+    
+    NSDictionary *dic = [[NSUserDefaults standardUserDefaults] objectForKey:fileKey];
+    if (!dic) {
+        dic = [NSDictionary new];
+    }
+    if (dic && ![dic.allKeys containsObject:sid]) {
+        NSMutableDictionary *dic1 = [[NSMutableDictionary alloc]initWithDictionary:dic];
+        if (favoID) {
+            [dic1 setObject:favoID forKey:sid];
+            [[NSUserDefaults standardUserDefaults] setObject:dic1 forKey:fileKey];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+        }
+    }
+    return YES;
+}
+
+//通过帖子或者版块ID 得到收藏ID
++ (NSString *)getFavoIDFromID:(NSString *)fid forType:(CollcetionType)type
+{
+    NSString *fileKey = nil;
+    switch (type) {
+        case myBusLine:
+            fileKey = kKEY_FAVO_BUSLINE;
+            break;
+        case myBusStop:
+            fileKey = kKEY_FAVO_BUSSTOP;
+            break;
+        case myBusTransfer:
+            fileKey = kKEY_FAVO_BUSTRANSFER;
+            break;
+        default:
+            fileKey = @"";
+            break;
+    }
+    NSDictionary *dic = [[NSUserDefaults standardUserDefaults] objectForKey:fileKey];
+    return dic[fid];
+}
+
+
+//删除本地收藏
++ (void)deleteFavoed_withID:(NSString *)sid withFavoID:(NSString *)favoID forType:(CollcetionType)type
+{
+    NSString *fileKey = nil;
+    switch (type) {
+        case myBusLine:
+            fileKey = kKEY_FAVO_BUSLINE;
+            break;
+        case myBusStop:
+            fileKey = kKEY_FAVO_BUSSTOP;
+            break;
+        case myBusTransfer:
+            fileKey = kKEY_FAVO_BUSTRANSFER;
+            break;
+        default:
+            fileKey = @"";
+            break;
+    }
+    NSDictionary *dic = [[NSUserDefaults standardUserDefaults] objectForKey:fileKey];
+    if (!dic) {
+        dic = [NSDictionary new];
+    }
+    if (dic && [dic.allKeys containsObject:sid]) {
+        DLog(@"删除 %@",sid);
+        NSMutableDictionary *dic1 = [NSMutableDictionary dictionaryWithDictionary:dic];
+        [dic1 removeObjectForKey:sid];
+        [[NSUserDefaults standardUserDefaults] setObject:dic1 forKey:fileKey];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+}
+
++ (void)cleanUpLocalFavoArray
+{
+    [[NSUserDefaults standardUserDefaults]setObject:nil forKey:kKEY_FAVO_BUSLINE];
+    [[NSUserDefaults standardUserDefaults]setObject:nil forKey:kKEY_FAVO_BUSSTOP];
+    [[NSUserDefaults standardUserDefaults]setObject:nil forKey:kKEY_FAVO_BUSTRANSFER];
 }
 
 @end

@@ -140,7 +140,11 @@
         UILabel *textLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, self.width, cell.contentView.height)];
         textLabel.font = [UIFont systemFontOfSize:15.0f];
         textLabel.textColor = UIColorFromRGB(0x424242);
-        textLabel.text = _historyArray[indexPath.row];
+        if (_historyType == BusSearchHistoryTypeTransfer) {
+            textLabel.text = [_historyArray[indexPath.row] valueForKey:@"name"];
+        }else{
+            textLabel.text = _historyArray[indexPath.row];
+        }
         [cell.contentView addSubview:textLabel];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         if (indexPath.row != _historyArray.count - 1) {
@@ -155,7 +159,15 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"BusSearchNotiFication" object:nil userInfo:_historyArray[indexPath.row]];
+    if (_historyType == BusSearchHistoryTypeLine) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"BusSearchNotiFicationForBusLine" object:nil userInfo:_historyArray[indexPath.row]];
+    }
+    else if (_historyType == BusSearchHistoryTypeStop) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"BusSearchNotiFicationForStop" object:nil userInfo:_historyArray[indexPath.row]];
+    }
+    else if (_historyType == BusSearchHistoryTypeTransfer) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"BusSearchNotiFicationForTransfer" object:nil userInfo:_historyArray[indexPath.row]];
+    }
 //    _mySearchBar.text = _historyArray[indexPath.row];
 //    [self searchBarSearchButtonClicked:_mySearchBar];
 }
@@ -190,6 +202,45 @@
         }
     }else{
         [_historyArray addObject:str];
+        [_historyArray writeToFile:[self historyWithDocument] atomically:YES];
+    }
+    self.tableHeaderView.hidden = NO;
+    [self reloadData];
+}
+
+- (void)writeHistoryPlist :(NSString *)str withlat:(CGFloat )lat lon:(CGFloat) lon
+{
+
+    NSMutableArray *temp;
+    if (!_historyArray) {
+        _historyArray = [NSMutableArray array];
+    }else{
+        temp = [[NSMutableArray alloc] initWithContentsOfFile:[self historyWithDocument]];
+    }
+    if([_historyArray count]>10)
+    {
+        [temp removeLastObject];
+    }
+    
+    if (_historyArray.count > 0) {
+        _historyArray = (NSMutableArray *)[[temp reverseObjectEnumerator] allObjects];
+        BOOL isExist = NO;
+        for (NSString *name in [_historyArray valueForKey:@"name"]) {
+            if ([name isEqualToString:str]) {
+                isExist = YES;
+                break;
+            }
+        }
+        if (!isExist) {
+            [_historyArray addObject:[NSDictionary dictionaryWithObjectsAndKeys:str,@"name",[NSNumber numberWithFloat:lat],@"lat",[NSNumber numberWithFloat:lon],@"lon",nil]];
+            _historyArray = (NSMutableArray *)[[_historyArray reverseObjectEnumerator] allObjects];
+            [_historyArray writeToFile:[self historyWithDocument] atomically:YES];
+        }else{
+            _historyArray = (NSMutableArray *)[[_historyArray reverseObjectEnumerator] allObjects];
+        }
+    }else{
+        
+        [_historyArray addObject:[NSDictionary dictionaryWithObjectsAndKeys:str,@"name",[NSNumber numberWithFloat:lat],@"lat",[NSNumber numberWithFloat:lon],@"lon",nil]];
         [_historyArray writeToFile:[self historyWithDocument] atomically:YES];
     }
     self.tableHeaderView.hidden = NO;

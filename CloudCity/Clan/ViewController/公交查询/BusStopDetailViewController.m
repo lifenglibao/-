@@ -12,6 +12,7 @@
 #import "Util.h"
 #import "BusLineDetailViewController.h"
 #import "BusStopDetailTableViewCell.h"
+#import "Locator.h"
 
 @interface BusStopDetailViewController ()
 
@@ -48,45 +49,45 @@
     self.title = self.busStop.name;
     [self initSearch];
     [self initUserLocation];
-    [self getMoreInfoMationForBus:self.busStop.buslines];
+    [self performSelector:@selector(getMoreInfoMationForBus:) onThread:[NSThread currentThread] withObject:self.busStop.buslines waitUntilDone:YES];
+    [self addHeaderView];
     [self initTableView];
-    [self performSelector:@selector(checkCllocationSerStatus) withObject:nil afterDelay:1.0];
     // Do any additional setup after loading the view.
-}
-
-- (void)checkCllocationSerStatus
-{
-    if ([CLLocationManager authorizationStatus] != kCLAuthorizationStatusDenied) {
-        // tableview releload;
-        
-    }else{
-    }
 }
 
 - (void)initUserLocation
 {
-    if ([CLLocationManager locationServicesEnabled]) {
+    if ([[Locator sharedLocator] IsLocationServiceEnabled]) {
         
-        self.locationManager = [[CLLocationManager alloc] init];
-        self.locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation;
-        self.locationManager.delegate = self;
-        
-        if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0) {
-            
-            [self.locationManager requestAlwaysAuthorization];
-        }
-        [self.locationManager startUpdatingLocation];
-        [self.locationManager startUpdatingHeading];
     }else{
         [self locationServiceUnEnabled];
     }
 }
 
+
 - (void)locationServiceUnEnabled
 {
-    [self showHudTipStr:@"抱歉\n定位失败,或者您还未开启定位服务,您无法获取站点的距离信息"];
+    [self showHudTipStr:@"抱歉\n定位失败,或者您还未开启定位服务,无法获取站点的距离信息"];
 }
 
+- (void)addHeaderView
+{
+    _headerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.width, 44)];
+    UILabel *nameLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, self.view.width, 44)];
+    nameLabel.font = [UIFont systemFontOfSize:15.0f];
+    nameLabel.textColor = [UIColor blackColor];
+    nameLabel.backgroundColor = [UIColor clearColor];
+    nameLabel.textAlignment = NSTextAlignmentCenter;
+    nameLabel.tag = 10086;
+    [_headerView addSubview:nameLabel];
+    
+    UILabel *line = [[UILabel alloc]initWithFrame:CGRectMake(0, _headerView.bottom-0.5, self.view.width, 0.5)];
+    line.backgroundColor = [UIColor returnColorWithPlist:YZSegMentColor];
+    [_headerView addSubview:line];
+    _headerView.backgroundColor = kCOLOR_BG_GRAY;
+    
+    [self.view addSubview:_headerView];
+}
 - (void)initSearch
 {
     self.search = [[AMapSearchAPI alloc] init];
@@ -111,7 +112,7 @@
 
 - (void)initTableView {
     
-    self.tableView = [[BaseTableView alloc] initWithFrame:CGRectMake(10, 10, ScreenWidth - 20, ScreenHeight - 84) style:UITableViewStyleGrouped];
+    self.tableView = [[BaseTableView alloc] initWithFrame:CGRectMake(10, 10 + _headerView.bottom, ScreenWidth - 20, ScreenHeight - 120) style:UITableViewStyleGrouped];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.backgroundColor = [UIColor clearColor];
@@ -229,15 +230,15 @@
     if ([self.busStopArray count] != 0) {
         
         cell.lbl_busNumber.text = [CustomBusMode handleStringWithCharRoad:[(AMapBusLine *)self.busStopArray[indexPath.section][self.currentIndex] name]];
-//        cell.lbl_busNumberSub.text = [CustomBusMode handleStringGetBrackets:[(AMapPOI *)self.nearByArray[indexPath.section] address]];
+//        cell.lbl_busNumberSub.text = [CustomBusMode handleStringGetBrackets:[(AMapBusLine *)self.busStopArray[indexPath.section][self.currentIndex] name]];
         cell.lbl_busGoto.text = [CustomBusMode replaceStringWithBusModel:[self.busStopArray[indexPath.section][self.currentIndex] endStop]];
         
         cell.lbl_busFirstTime.text = [CustomBusMode replaceStringWithBusModel:[CustomBusMode getBusTimeFromString:[self.busStopArray[indexPath.section][self.currentIndex] startTime]]];
         cell.lbl_busEndTime.text = [CustomBusMode replaceStringWithBusModel:[CustomBusMode getBusTimeFromString:[self.busStopArray[indexPath.section][self.currentIndex] endTime]]];
         
-        if ([CLLocationManager authorizationStatus] != kCLAuthorizationStatusDenied) {
+        if ([[Locator sharedLocator] IsLocationServiceEnabled]) {
             
-            NSDictionary *dic = [CustomBusMode calculateNearestStopWithUserLocation:MACoordinateConvert(self.locationManager.location.coordinate, MACoordinateTypeGPS) data:self.busStopArray[indexPath.section][self.currentIndex]];
+            NSDictionary *dic = [CustomBusMode calculateNearestStopWithUserLocation:MACoordinateConvert([(Locator *)[Locator sharedLocator] userLocation], MACoordinateTypeGPS) data:self.busStopArray[indexPath.section][self.currentIndex]];
             
             cell.lbl_busDistance.text   = [NSString stringWithFormat:@"%.0f米",[[dic objectForKey:@"distance"] floatValue]];
             cell.lbl_busNearbyStop.text = [dic objectForKey:@"name"];
@@ -270,17 +271,11 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    [self clearAndShowAnnotationWithTip:str];
-
-}
-
-- (void)clearAndShowAnnotationWithTip:(NSString *)tip
-{
-    AMapBusLineNameSearchRequest *line = [[AMapBusLineNameSearchRequest alloc] init];
-    line.keywords           = tip;
-    line.city               = CURRENT_AREA_CODE;
-    line.requireExtension = YES;
-    [self.search AMapBusLineNameSearch:line];
+    
+    BusLineDetailViewController *vc = [[BusLineDetailViewController alloc] init];
+    vc.title = [CustomBusMode handleStringWithCharRoad:[(AMapBusLine *)self.busStopArray[indexPath.section][self.currentIndex] name]];
+    vc.busLineArray = [NSMutableArray arrayWithArray:self.busStopArray[indexPath.section]];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 /* 公交路线搜索回调. */
@@ -291,6 +286,9 @@
     if (response.buslines.count != 0)
     {
         [self.busStopArray addObject:response.buslines];
+        UILabel *lbl = (UILabel*)[self.view viewWithTag:10086];
+        lbl.text = [NSString stringWithFormat:@"共有%@辆车次途径该站点",[[NSNumber numberWithUnsignedInteger:self.busStopArray.count] stringValue]];
+        [lbl setNeedsDisplay];
         [self.tableView reloadData];
     }
 }
@@ -299,6 +297,21 @@
 {
     [self hideProgressHUD];
     [self showHudTipStr:@"抱歉,未找到该线路信息或者网络出了点问题😢"];
+}
+
+- (IBAction)btnReverseClicked:(UIButton*)sender {
+    if (self.currentIndex>0) {
+        self.currentIndex = 0;
+    }else{
+        self.currentIndex = 1;
+    }
+    UITableViewCell*cell=(UITableViewCell*)sender.superview.superview;
+    NSIndexPath*indexPath=[self.tableView indexPathForCell:cell];
+    [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
+}
+
+- (IBAction)btnFavClicked:(UIButton*)sender {
+    
 }
 
 @end

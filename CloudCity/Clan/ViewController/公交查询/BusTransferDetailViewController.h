@@ -21,7 +21,5 @@
 @property (nonatomic) NSString *routeDestinationLocation;
 
 @property (nonatomic) NSMutableArray *routeData;
-@property (strong, nonatomic) UIButton *viewMoreBtn;
-@property (nonatomic) BOOL isFav;
 
 @end

@@ -10,9 +10,7 @@
 #import "BusViewController.h"
 #import <AMapSearchKit/AMapSearchKit.h>
 
-@interface BusStopDetailViewController : BaseViewController<UITableViewDataSource,UITableViewDelegate,AMapSearchDelegate,CLLocationManagerDelegate>
-
-@property (nonatomic, strong) CLLocationManager *locationManager;
+@interface BusStopDetailViewController : BaseViewController<UITableViewDataSource,UITableViewDelegate,AMapSearchDelegate>
 
 @property (nonatomic, strong) BaseTableView *tableView;
 @property (nonatomic, strong) NSMutableArray *busStopArray;

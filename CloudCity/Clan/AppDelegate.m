@@ -31,7 +31,7 @@
 #import "IQKeyboardManager.h"
 //#import <Fabric/Fabric.h>
 //#import <Crashlytics/Crashlytics.h>
-
+#import "Locator.h"
 
 /**
  * 　　　　　　　　┏┓　　　┏┓
@@ -96,6 +96,8 @@
     [magngerKeyboard disableToolbarInViewControllerClass:NSClassFromString(@"PostActivityViewController")];
     [magngerKeyboard disableToolbarInViewControllerClass:NSClassFromString(@"PostActivityInfoVC")];
 
+
+    [Locator sharedLocator];
 
     //注册登录 退出登录
     //for test - by ximi 先把请求收藏的接口去掉

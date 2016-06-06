@@ -9,6 +9,8 @@
 #import "BusTransferViewController.h"
 #import "CustomeTextField.h"
 #import "BusTransferListViewController.h"
+#import "Locator.h"
+
 @interface BusTransferViewController ()
 
 @property (nonatomic) AMapRoutePlanningType routePlanningType;
@@ -31,8 +33,32 @@
     [self initSearchFiled];
     [self initSearch];
     [self initSearchDisplay];
+    [self addSearchHistory];
+    [self initUserLocation];
+    [[NSNotificationCenter defaultCenter] addObserverForName:@"BusSearchNotiFicationForTransfer" object:nil queue:NSOperationQueuePriorityNormal usingBlock:^(NSNotification * _Nonnull note) {
+        if ([self.busTransferStartSearchFiled.text isEqualToString:@""]) {
+            self.busTransferStartSearchFiled.text = [note.userInfo objectForKey:@"name"];
+            self.startCoordinate = CLLocationCoordinate2DMake([[note.userInfo objectForKey:@"lat"] floatValue], [[note.userInfo objectForKey:@"lon"] floatValue]);
+        }else{
+            self.busTransferEndSearchFiled.text = [note.userInfo objectForKey:@"name"];
+            self.destinationCoordinate = CLLocationCoordinate2DMake([[note.userInfo objectForKey:@"lat"] floatValue], [[note.userInfo objectForKey:@"lon"] floatValue]);
+        }
+    }];
 
     // Do any additional setup after loading the view from its nib.
+}
+
+
+- (void)initUserLocation
+{
+    if ([[Locator sharedLocator] IsLocationServiceEnabled]) {
+        
+        CLLocationCoordinate2D  gaodeGPS = MACoordinateConvert([(Locator *)[Locator sharedLocator] userLocation], MACoordinateTypeGPS);
+        self.startCoordinate = CLLocationCoordinate2DMake(gaodeGPS.latitude, gaodeGPS.longitude);
+        self.busTransferStartSearchFiled.text = @"我的位置";
+    }else{
+        self.busTransferStartSearchFiled.text = @"";
+    }
 }
 
 - (void)initSearch
@@ -60,6 +86,13 @@
     [self.busTransferEndSearchFiled addTarget:self action:@selector(isEditing:) forControlEvents:UIControlEventAllEditingEvents];
 }
 
+- (void)addSearchHistory
+{
+    _historyTableView = [[BusSearchHistoryViewController alloc] initWithFrame:CGRectMake(self.backGroundView.frame.origin.x, self.searchBtn.bottom + 50, ScreenWidth - 40, 300) style:UITableViewStylePlain];
+    [_historyTableView setHistoryType:BusSearchHistoryTypeTransfer];
+    [self.view addSubview:_historyTableView];
+}
+
 - (IBAction)transferBtnClicked:(UIButton *)sender {
     
     sender.selected = !sender.selected;
@@ -79,9 +112,17 @@
 
 - (IBAction)searchBtnClicked:(UIButton *)sender {
     
-    [self showProgressHUDWithStatus:@""];
-    self.routePlanningType = AMapRoutePlanningTypeBus;
-    [self searchRoutePlanningBus];
+    if (![self.busTransferStartSearchFiled.text isEqualToString:@""] && ![self.busTransferEndSearchFiled.text isEqualToString:@""]) {
+        
+        [self showProgressHUDWithStatus:@""];
+        self.routePlanningType = AMapRoutePlanningTypeBus;
+        [self searchRoutePlanningBus];
+        
+        [self.historyTableView writeHistoryPlist:self.busTransferStartSearchFiled.text withlat:self.startCoordinate.latitude lon:self.startCoordinate.longitude];
+        [self.historyTableView writeHistoryPlist:self.busTransferEndSearchFiled.text withlat:self.destinationCoordinate.latitude lon:self.destinationCoordinate.longitude];
+    }else{
+        [self showHudTipStr:@"请填写正确的路线名称"];
+    }
 }
 
 
@@ -109,8 +150,11 @@
 /* 公交路径规划搜索. */
 - (void)searchRoutePlanningBus
 {
+    /// 公交换乘策略：0-最快捷模式；1-最经济模式；2-最少换乘模式；3-最少步行模式；4-最舒适模式；5-不乘地铁模式
+    
     AMapTransitRouteSearchRequest *navi = [[AMapTransitRouteSearchRequest alloc] init];
     
+//    navi.strategy = 0;
     navi.requireExtension = YES;
     navi.city             = CURRENT_AREA_CODE;
     
@@ -145,6 +189,7 @@
         self.tableView.frame = CGRectMake(self.backGroundView.frame.origin.x, self.busTransferEndSearchFiled.bottom + 10, self.backGroundView.width, 200);
     }
     self.tableView.hidden = NO;
+    [self.view bringSubviewToFront:self.tableView];
 }
 
 - (void) isEditing:(UITextField *)textField
@@ -152,8 +197,9 @@
     [self searchTipsWithKey:textField.text];
     [self.tableView reloadData];
     self.tableView.hidden = NO;
-    
+    [self.view bringSubviewToFront:self.tableView];
     if ([textField.text isEqualToString:@""]) {
+        [self.view sendSubviewToBack:self.tableView];
         self.tableView.hidden = YES;
     }
 }
@@ -231,6 +277,10 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)dealloc {
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"BusSearchNotiFicationForTransfer" object:nil];
+}
 /*
 #pragma mark - Navigation
 

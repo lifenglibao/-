@@ -11,10 +11,14 @@
 
 @interface BusTransferListViewController : BaseViewController<UITableViewDataSource,UITableViewDelegate>
 
+@property (nonatomic) NSInteger currentCourse;
+@property (nonatomic, strong) UIView *headerView;
 @property (nonatomic, strong) AMapRoute *busRoute;
 @property (nonatomic, strong) BaseTableView *tableView;
 
 @property (nonatomic) NSString *routeStartLocation;
 @property (nonatomic) NSString *routeDestinationLocation;
+@property (strong, nonatomic) UIButton *viewMoreBtn;
+@property (nonatomic) BOOL isFav;
 
 @end

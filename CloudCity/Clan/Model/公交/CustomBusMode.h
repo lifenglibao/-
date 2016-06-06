@@ -17,6 +17,8 @@
 }
 
 +(NSArray *)getGridTitle;
++(NSArray *)getTransferGridTitle;
+
 +(UIImageView*)setRightViewWithTextField:(UITextField *)textField imageName:(NSString *)imageName;
 +(UIImageView*)setLeftViewWithTextField:(UITextField *)textField imageName:(NSString *)imageName;
 +(UIButton*)setGPSButtonWithTitle:(NSString *)title imageName:(NSString *)imageName CGRect:(CGRect)frame target:(id)tar action:(SEL)ac;
@@ -34,4 +36,11 @@
 + (NSString *)handleStringIncludeBrackets:(NSString *)str;
 + (NSMutableAttributedString *) changeTextColorToRed :(NSString *)string withRange:(NSString *)subString;
 + (NSDictionary *)calculateNearestStopWithUserLocation:(CLLocationCoordinate2D )userLocation data:(NSArray *)array;
+
++ (void)cleanUpLocalFavoArray;
++ (void)deleteFavoed_withID:(NSString *)sid withFavoID:(NSString *)favoID forType:(CollcetionType)type;
++ (NSString *)getFavoIDFromID:(NSString *)fid forType:(CollcetionType)type;
++ (BOOL)addFavoed_withID:(NSString *)sid withFavoID:(NSString *)favoID forType:(CollcetionType) type;
++ (BOOL)isFavoed_withID:(NSString *)sid withFavoID:(NSString *)favoID forType:(CollcetionType)type;
+
 @end

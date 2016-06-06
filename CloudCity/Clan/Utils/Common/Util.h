@@ -68,7 +68,9 @@ typedef enum {
 
 //增加本地收藏
 + (BOOL)addFavoed_withID:(NSString *)sid withFavoID:(NSString *)favoID forType:(CollcetionType)type;
-
+//公交收藏
++ (BOOL)addFavoed_withID:(NSString *)sid withFavoID:(NSString *)favoID withFavContent:(NSObject*)favContent forType:(CollcetionType) type;
++ (BOOL)isFavoed_withID:(NSString *)sid withFavoID:(NSString *)favoID forType:(CollcetionType)type;
 
 //清除收藏
 + (void)cleanUpLocalFavoArray;

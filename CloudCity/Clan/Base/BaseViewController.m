@@ -21,6 +21,7 @@
 #import <TencentOpenAPI/QQApiInterface.h>
 #import <ShareSDK/NSMutableDictionary+SSDKShare.h>
 #import "UIAlertView+BlocksKit.h"
+#import "Locator.h"
 
 @interface BaseViewController () <UIGestureRecognizerDelegate,UIAlertViewDelegate>
 
@@ -431,5 +432,7 @@
         self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:leftButton];
     }
 }
+
+
 
 @end

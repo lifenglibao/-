@@ -56,8 +56,12 @@
 
 #define MAPKEY @"AMAPKEY"
 #define CURRENT_AREA_CODE @"0395"
-#define BUS_STOP_SEARCH_STYPE @"1507"
+#define BUS_STOP_SEARCH_TYPE @"1507"
 #define LUOHE_MAP_RECT_MAKE_X 219274180.99575466
 #define LUOHE_MAP_RECT_MAKE_Y 107631269.07922892
 #define LUOHE_MAP_RECT_MAKE_WIDTH 0
 #define LUOHE_MAP_RECT_MAKE_HEIGHT 0
+
+#define BUSLINEFAV @"busLineFav_" //公交线路收藏
+#define BUSSTOPFAV @"busStopFav_"    //公交站点收藏
+#define BUSTRANSFERFAV @"busTransferFav_"   //公交换乘收藏

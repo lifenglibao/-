@@ -24,7 +24,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [[NSNotificationCenter defaultCenter] addObserverForName:@"BusSearchNotiFication" object:nil queue:NSOperationQueuePriorityNormal usingBlock:^(NSNotification * _Nonnull note) {
+    [[NSNotificationCenter defaultCenter] addObserverForName:@"BusSearchNotiFicationForStop" object:nil queue:NSOperationQueuePriorityNormal usingBlock:^(NSNotification * _Nonnull note) {
         self.busStopSearchFiled.text = (NSString *)note.userInfo;
     }];
     self.tips = [NSMutableArray array];
@@ -113,7 +113,7 @@
     
     AMapInputTipsSearchRequest *tips = [[AMapInputTipsSearchRequest alloc] init];
     tips.keywords = key;
-    tips.types    = BUS_STOP_SEARCH_STYPE;
+    tips.types    = BUS_STOP_SEARCH_TYPE;
     tips.city     = CURRENT_AREA_CODE;
     tips.cityLimit = YES; //是否限制城市
     
