@@ -20,6 +20,8 @@ typedef enum {
 @interface ClanNetAPI : AFHTTPRequestOperationManager
 
 + (id)sharedJsonClient;
++ (id)sharedCCJsonClient;
+
 - (void)requestDownloadWithPath:(NSString *)apath
                        andBlock:(void (^)(NSURL *filePath,NSString *fileName, NSError *error))block;
 

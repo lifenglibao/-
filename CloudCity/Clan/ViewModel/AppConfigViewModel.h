@@ -22,4 +22,7 @@
 //app tab整体的配置信息
 - (void)getAppHomeIndexcfgWithBlock:(void(^)(BOOL result))block;
 
+//app splash
+- (void)getAppSplashcfgWithBlock:(void(^)(id  result))block;
+
 @end

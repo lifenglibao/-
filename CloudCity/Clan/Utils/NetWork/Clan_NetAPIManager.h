@@ -472,4 +472,7 @@
 - (void)request_payThreadWithTid:(NSString *)tid
                         andBlock:(void(^)(id data, NSError *error))block;
 
+//获取splash ad
+- (void)request_SplashWithBlock:(void(^)(id data, NSError *error))block;
+
 @end

@@ -20,6 +20,7 @@
 {
     if (self = [super init])
     {
+        self.isOpen = false;
         self.routeData = [NSMutableArray array];
     }
     
@@ -42,8 +43,6 @@
 }
 
 
-
-
 - (void)getRoutePlanningData
 {
     self.routeData = [CustomBusMode getRoutePlanningBusDetailLine:self.busRoute.transits[self.currentCourse]];
@@ -51,6 +50,7 @@
         
         [self.routeData insertObject:[NSDictionary dictionaryWithObjectsAndKeys:self.routeStartLocation,@"start", nil] atIndex:0];
         [self.routeData addObject:[NSDictionary dictionaryWithObjectsAndKeys:self.routeDestinationLocation,@"end", nil]];
+        
         [self.tableView reloadData];
     }else{
         
@@ -58,7 +58,7 @@
 }
 - (void)initTableView
 {
-    self.tableView = [[BaseTableView alloc] initWithFrame:CGRectMake(10, 10, ScreenWidth - 20, ScreenHeight - 84) style:UITableViewStylePlain];
+    self.tableView = [[BaseTableView alloc] initWithFrame:CGRectMake(10, 100, ScreenWidth - 20, ScreenBoundsHeight - 150) style:UITableViewStylePlain];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.backgroundColor = [UIColor clearColor];
@@ -77,7 +77,11 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 50;
+    NSDictionary *dic = self.routeData[indexPath.row];
+    if (self.isOpen && [dic.allKeys containsObject:@"endStop"] && self.selectIndex == indexPath.row) {
+        return [Util heightForText:[self.routeData[indexPath.row] objectForKey:@"endStop"] font:[UIFont systemFontOfSize:13] withinWidth:tableView.width];
+    }
+    return 30;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -97,27 +101,69 @@
         [cell.textLabel setNumberOfLines:0];
         [cell.textLabel setLineBreakMode:NSLineBreakByCharWrapping];
     }
+    
+//    if ([self.routeData[indexPath.row] objectForKey:@"start"]) {
+//        cell.textLabel.text  = self.routeStartLocation;
+//        cell.imageView.image = kIMG(@"icon_start_stop");
+//        cell.imageView.layer.cornerRadius = 15;
+//    }else if ([self.routeData[indexPath.row] objectForKey:@"tips"]) {
+//        cell.textLabel.text  = [self.routeData[indexPath.row] objectForKey:@"tips"];
+//        cell.imageView.image = kIMG(@"man");
+//    }else if ([self.routeData[indexPath.row] objectForKey:@"departureStop"]) {
+//        cell.textLabel.attributedText = [CustomBusMode changeTextColorToRed :[NSString stringWithFormat:@"在%@上车",[self.routeData[indexPath.row] objectForKey:@"departureStop"]] withRange:[self.routeData[indexPath.row] objectForKey:@"departureStop"]];
+//        cell.imageView.image = kIMG(@"bus");
+//    }else if ([self.routeData[indexPath.row] objectForKey:@"busName"]) {
+//        cell.textLabel.attributedText = [CustomBusMode changeTextColorToRed :[NSString stringWithFormat:@"乘坐%@",[self.routeData[indexPath.row] objectForKey:@"busName"]] withRange:[self.routeData[indexPath.row] objectForKey:@"busName"]];
+//        cell.imageView.image = kIMG(@"bus");
+//    }else if ([self.routeData[indexPath.row] objectForKey:@"arrivalStop"] || [self.routeData[indexPath.row] objectForKey:@"viaBusStops"]) {
+//        cell.textLabel.attributedText = [CustomBusMode changeTextColorToRed :[NSString stringWithFormat:@"途径%lu站,在%@下车",[[self.routeData[indexPath.row] objectForKey:@"viaBusStops"] count],[self.routeData[indexPath.row] objectForKey:@"arrivalStop"]]withRange:[self.routeData[indexPath.row] objectForKey:@"arrivalStop"]];
+//        cell.imageView.image = kIMG(@"bus");
+//    }else if ([self.routeData[indexPath.row] objectForKey:@"end"]) {
+//        cell.textLabel.text  = self.routeDestinationLocation;
+//        cell.imageView.image = kIMG(@"icon_end_stop");
+//        cell.imageView.layer.cornerRadius = 15;
+//    }
 
+    
     if ([self.routeData[indexPath.row] objectForKey:@"start"]) {
         cell.textLabel.text  = self.routeStartLocation;
-        cell.imageView.image = kIMG(@"icon_start_stop");
-        cell.imageView.layer.cornerRadius = 15;
-    }else if ([self.routeData[indexPath.row] objectForKey:@"tips"]) {
-        cell.textLabel.text  = [self.routeData[indexPath.row] objectForKey:@"tips"];
+        UIImage * img = [UIImage imageWithColor:[UIColor blueColor] withFrame:CGRectMake(0, 0, 5, 5) alpha:0.7];
+        cell.imageView.image = img;
+        cell.imageView.layer.cornerRadius = 2.5;
+        
+    }else if ([self.routeData[indexPath.row] objectForKey:@"walking"]) {
+        cell.textLabel.text  = [self.routeData[indexPath.row] objectForKey:@"walking"];
         cell.imageView.image = kIMG(@"man");
+        cell.imageView.frame = CGRectMake(20, 0, 10, 10);
+
     }else if ([self.routeData[indexPath.row] objectForKey:@"departureStop"]) {
-        cell.textLabel.attributedText = [CustomBusMode changeTextColorToRed :[NSString stringWithFormat:@"在%@上车",[self.routeData[indexPath.row] objectForKey:@"departureStop"]] withRange:[self.routeData[indexPath.row] objectForKey:@"departureStop"]];
+        cell.textLabel.text = [self.routeData[indexPath.row] objectForKey:@"departureStop"];
+        cell.imageView.image = [UIImage imageWithColor:[UIColor clearColor] withFrame:CGRectMake(0, 0, 5, 5) alpha:1];
+        
+    }else if ([self.routeData[indexPath.row] objectForKey:@"endStop"]) {
+        cell.textLabel.textColor = [UIColor grayColor];
+        cell.textLabel.font = [UIFont systemFontOfSize:13];
+        cell.textLabel.text = [self.routeData[indexPath.row] objectForKey:@"endStop"];
         cell.imageView.image = kIMG(@"bus");
-    }else if ([self.routeData[indexPath.row] objectForKey:@"busName"]) {
-        cell.textLabel.attributedText = [CustomBusMode changeTextColorToRed :[NSString stringWithFormat:@"乘坐%@",[self.routeData[indexPath.row] objectForKey:@"busName"]] withRange:[self.routeData[indexPath.row] objectForKey:@"busName"]];
-        cell.imageView.image = kIMG(@"bus");
-    }else if ([self.routeData[indexPath.row] objectForKey:@"arrivalStop"] || [self.routeData[indexPath.row] objectForKey:@"viaBusStops"]) {
-        cell.textLabel.attributedText = [CustomBusMode changeTextColorToRed :[NSString stringWithFormat:@"途径%lu站,在%@下车",[[self.routeData[indexPath.row] objectForKey:@"viaBusStops"] count],[self.routeData[indexPath.row] objectForKey:@"arrivalStop"]]withRange:[self.routeData[indexPath.row] objectForKey:@"arrivalStop"]];
-        cell.imageView.image = kIMG(@"bus");
+        cell.imageView.frame = CGRectMake(20, 0, 10, 10);
+
+        cell.accessoryType  = UITableViewCellAccessoryDisclosureIndicator;
+
+        
+    }else if ([self.routeData[indexPath.row] objectForKey:@"arrivalStop"]){
+        cell.textLabel.text = [self.routeData[indexPath.row] objectForKey:@"arrivalStop"];
+        cell.imageView.image = [UIImage imageWithColor:[UIColor clearColor] withFrame:CGRectMake(0, 0, 5, 5) alpha:1];
+
+    }else if ([self.routeData[indexPath.row] objectForKey:@"walking"]) {
+        cell.textLabel.text  = [self.routeData[indexPath.row] objectForKey:@"walking"];
+        cell.imageView.image = kIMG(@"man");
+        cell.imageView.frame = CGRectMake(20, 0, 10, 10);
+        
     }else if ([self.routeData[indexPath.row] objectForKey:@"end"]) {
         cell.textLabel.text  = self.routeDestinationLocation;
-        cell.imageView.image = kIMG(@"icon_end_stop");
-        cell.imageView.layer.cornerRadius = 15;
+        UIImage * img = [UIImage imageWithColor:[UIColor redColor] withFrame:CGRectMake(0, 0, 5, 5) alpha:0.7];
+        cell.imageView.image = img;
+        cell.imageView.layer.cornerRadius = 2.5;
     }
 
     cell.imageView.layer.masksToBounds = YES;
@@ -128,9 +174,29 @@
 
 #pragma mark - UITableViewDelegate
 
+
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [tableView beginUpdates];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    NSDictionary *dic = self.routeData[indexPath.row];
+    
+    if ([dic.allKeys containsObject:@"endStop"]) {
+        self.isOpen = !self.isOpen;
+        self.selectIndex = indexPath.row;
+        
+        UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+        
+        if (self.isOpen) {
+            cell.accessoryView.transform = CGAffineTransformMakeRotation(0);
+        } else {
+            cell.accessoryView.transform = CGAffineTransformMakeRotation(M_PI);
+        }
+    }
+    
+    [tableView endUpdates];
 }
 
 

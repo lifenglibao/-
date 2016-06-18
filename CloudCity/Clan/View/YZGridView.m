@@ -146,9 +146,7 @@ static const CGFloat itemHeight = 90.f;
     if (!link.type || link.type.length == 0) {
         return;
     }
-    if ([link.type isEqualToString:@"1"]) {
-        //跳webview
-        
+    if ([link.type isEqualToString:@"1"]) {        
         // 判断 gridview 点击时跳到哪个VC
         if ([link.url isEqualToString:@"bus_search"]) {
             BusViewController *bus = [[BusViewController alloc] init];

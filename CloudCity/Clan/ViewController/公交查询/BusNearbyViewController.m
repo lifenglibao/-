@@ -299,14 +299,19 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    if ([Util isBlankString:[(AMapBusLine*)[self.nearByArray[indexPath.section] subPOIs][self.currentIndex] uid]]) {
+    if ([self.nearByArray[indexPath.section] subPOIs].count !=0){
+        if ([Util isBlankString:[(AMapBusLine*)[self.nearByArray[indexPath.section] subPOIs][self.currentIndex] uid]]) {
+            [self showHudTipStr:@"当前车辆信息可能出错了"];
+            return;
+        }
+        BusLineDetailViewController *vc = [[BusLineDetailViewController alloc] init];
+        vc.title = [self.nearByArray[indexPath.section] valueForKey:@"address"];
+        vc.busLineArray = [NSMutableArray arrayWithArray:[self.nearByArray[indexPath.section] subPOIs]];
+        [self.parentViewController.navigationController pushViewController:vc animated:YES];
+    }else{
         [self showHudTipStr:@"当前车辆信息可能出错了"];
         return;
     }
-    BusLineDetailViewController *vc = [[BusLineDetailViewController alloc] init];
-    vc.title = [self.nearByArray[indexPath.section] valueForKey:@"address"];
-    vc.busLineArray = [NSMutableArray arrayWithArray:[self.nearByArray[indexPath.section] subPOIs]];
-    [self.parentViewController.navigationController pushViewController:vc animated:YES];
 }
 
 - (IBAction)btnReverseClicked:(UIButton*)sender {

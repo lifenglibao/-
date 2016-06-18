@@ -7,7 +7,6 @@
 //
 
 #import "BusTransferViewController.h"
-#import "CustomeTextField.h"
 #import "BusTransferListViewController.h"
 #import "Locator.h"
 
@@ -26,6 +25,17 @@
 
 @synthesize startCoordinate         = _startCoordinate;
 @synthesize destinationCoordinate   = _destinationCoordinate;
+
+
+- (id)init
+{
+    if (self = [super init])
+    {
+        self.routeResultArr = [NSMutableArray array];
+    }
+    
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -132,17 +142,42 @@
 - (void)onRouteSearchDone:(AMapRouteSearchBaseRequest *)request response:(AMapRouteSearchResponse *)response
 {
     [self.view endEditing:YES];
-    [self hideProgressHUD];
     if (response.route == nil)
     {
         [self showHudTipStr:@"抱歉,未找到该路线,换个路线试试"];
         return;
     }
-    BusTransferListViewController *vc = [[BusTransferListViewController alloc] init];
-    vc.busRoute = response.route;
-    vc.routeStartLocation = self.busTransferStartSearchFiled.text;
-    vc.routeDestinationLocation = self.busTransferEndSearchFiled.text;
-    [self.parentViewController.navigationController pushViewController:vc animated:YES];
+    
+    //  返程
+    
+    AMapTransitRouteSearchRequest *naviBack = [[AMapTransitRouteSearchRequest alloc] init];
+    
+    naviBack.requireExtension = YES;
+    naviBack.city             = CURRENT_AREA_CODE;
+    
+    /* 出发点. */
+    naviBack.origin = [AMapGeoPoint locationWithLatitude:self.destinationCoordinate.latitude
+                                               longitude:self.destinationCoordinate.longitude];
+    
+    /* 目的地. */
+    naviBack.destination = [AMapGeoPoint locationWithLatitude:self.startCoordinate.latitude
+                                                    longitude:self.startCoordinate.longitude];
+    
+    [self.search AMapTransitRouteSearch:naviBack];
+    
+    
+    [self.routeResultArr addObject:response.route];
+    
+    if (self.routeResultArr.count == 2) {
+        
+        [self hideProgressHUD];
+
+        BusTransferListViewController *vc = [[BusTransferListViewController alloc] init];
+        vc.totalBusRoute = self.routeResultArr;
+        vc.routeStartLocation = self.busTransferStartSearchFiled.text;
+        vc.routeDestinationLocation = self.busTransferEndSearchFiled.text;
+        [self.parentViewController.navigationController pushViewController:vc animated:YES];
+    }
 }
 
 #pragma mark - RoutePlanning Search
@@ -152,9 +187,9 @@
 {
     /// 公交换乘策略：0-最快捷模式；1-最经济模式；2-最少换乘模式；3-最少步行模式；4-最舒适模式；5-不乘地铁模式
     
+    //  启程
     AMapTransitRouteSearchRequest *navi = [[AMapTransitRouteSearchRequest alloc] init];
     
-//    navi.strategy = 0;
     navi.requireExtension = YES;
     navi.city             = CURRENT_AREA_CODE;
     

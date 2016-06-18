@@ -15,6 +15,7 @@
 //#define kNetPath_Code_Base        @"http://120.24.233.197:8080"
 //#define  kNetPath_Code_Base [NSString returnPlistWithKeyValue:YZBaseURL]
 #define  kNetPath_Code_Base [NSString returnPlistWithKeyValue:YZBaseURL]
+#define  kCCNetPath_Code_Base [NSString returnPlistWithKeyValue:CCBaseURL]
 
 //#define  kNetPath_Code_Base [NSString returnStringWithPlist:YZBaseURL]
 
@@ -23,6 +24,17 @@
 @end
 
 @implementation ClanNetAPI
+
++ (ClanNetAPI *)sharedCCJsonClient
+{
+    static ClanNetAPI *_sharedClient = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _sharedClient = [[ClanNetAPI alloc] initWithBaseURL:[NSURL URLWithString:kCCNetPath_Code_Base]];
+    });
+    return _sharedClient;
+}
+
 + (ClanNetAPI *)sharedJsonClient
 {
     static ClanNetAPI *_sharedClient = nil;

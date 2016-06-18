@@ -18,9 +18,9 @@
 
 +(NSArray *)getGridTitle;
 +(NSArray *)getTransferGridTitle;
++(NSArray *)getTransferFilterTitle;
 
-+(UIImageView*)setRightViewWithTextField:(UITextField *)textField imageName:(NSString *)imageName;
-+(UIImageView*)setLeftViewWithTextField:(UITextField *)textField imageName:(NSString *)imageName;
++(UITextField*)setSearchTextFieldWithFrame:(CGRect)frame;
 +(UIButton*)setGPSButtonWithTitle:(NSString *)title imageName:(NSString *)imageName CGRect:(CGRect)frame target:(id)tar action:(SEL)ac;
 + (NSString *)handleStringWithBrackets:(NSString *)str;
 + (NSString *)handleStringGetBrackets:(NSString *)str;
@@ -43,4 +43,5 @@
 + (BOOL)addFavoed_withID:(NSString *)sid withFavoID:(NSString *)favoID forType:(CollcetionType) type;
 + (BOOL)isFavoed_withID:(NSString *)sid withFavoID:(NSString *)favoID forType:(CollcetionType)type;
 
++ (NSArray *)getFilterRoutePlanning:(NSArray*)array withParameter:(NSString*)par;
 @end

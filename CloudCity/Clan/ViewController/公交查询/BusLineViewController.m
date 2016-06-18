@@ -7,7 +7,6 @@
 //
 
 #import "BusLineViewController.h"
-#import "CustomeTextField.h"
 #import "BusLineDetailViewController.h"
 #import "AMapTipAnnotation.h"
 
@@ -57,7 +56,7 @@
 
 - (void)initBusLineSearchField
 {
-    self.busLineSearchFiled = [[CustomeTextField alloc] initWithFrame:CGRectMake(20, 20, ScreenWidth - 40, 50)];
+    self.busLineSearchFiled = [CustomBusMode setSearchTextFieldWithFrame:CGRectMake(20, 20, ScreenWidth - 40, 50)];
     self.busLineSearchFiled.delegate = self;
     self.busLineSearchFiled.placeholder = @"输入线路名";
     [self.busLineSearchFiled addTarget:self action:@selector(isEditing:) forControlEvents:UIControlEventAllEditingEvents];

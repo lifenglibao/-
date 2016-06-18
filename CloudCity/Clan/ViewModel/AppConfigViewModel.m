@@ -231,6 +231,18 @@
 }
 
 #pragma mark - public方法
+
+//app splash
+- (void)getAppSplashcfgWithBlock:(void(^)(id result))block
+{
+    [[Clan_NetAPIManager sharedManager]request_SplashWithBlock:^(id data, NSError *error) {
+        if (!error && data) {
+            block(data);
+        }else{
+            block(nil);
+        }
+    }];
+}
 //获取app的基础配置信息 来自站长中心
 - (void)getAppBaseConfigWithBlock:(void(^)(BOOL result))block
 {

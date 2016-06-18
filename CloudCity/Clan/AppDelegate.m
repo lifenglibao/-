@@ -32,7 +32,15 @@
 //#import <Fabric/Fabric.h>
 //#import <Crashlytics/Crashlytics.h>
 #import "Locator.h"
-
+#import "AdLaunchView.h"
+#import "PostDetailVC.h"
+#import "ArticleDetailViewController.h"
+#import "ArticleCustomViewController.h"
+#import "BusViewController.h"
+#import "TOWebViewController.h"
+#import "ArticleModel.h"
+#import "ArticleListModel.h"
+#import "ForumsModel.h"
 /**
  * 　　　　　　　　┏┓　　　┏┓
  * 　　　　　　　┏┛┻━━━┛┻┓
@@ -59,10 +67,12 @@
  */
 #import "NSString+Emojize.h"
 
-@interface AppDelegate () <RESideMenuDelegate>
+@interface AppDelegate () <RESideMenuDelegate,AdLaunchViewDelegate>
 @property (strong, nonatomic) CollectionViewModel *collViewModel;
 @property (strong, nonatomic) FaceImageViewModel *faceViewModel;
 @property (strong, nonatomic) AppConfigViewModel *configViewModel;
+@property(nonatomic, strong)  AdLaunchView *adLaunchView;
+@property(nonatomic, strong)  UINavigationController *navigationController;
 
 @end
 
@@ -119,7 +129,7 @@
     [self initNav];
     [self.window makeKeyAndVisible];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificationCome:) name:@"KDZ_ColsingLoadingPage" object:nil];
-    [self showLoadingPage];
+    [self getSplashVC];
     return YES;
 }
 
@@ -198,8 +208,8 @@
     /*首页视图*/
     MainViewController *main = [[MainViewController alloc]init];
 //    HomeViewController *homeVC = [[HomeViewController alloc]init];
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:main];
-    RESideMenu *sideMenuViewController = [[RESideMenu alloc]initWithContentViewController:navigationController leftMenuViewController:leftMenu rightMenuViewController:nil];
+    self.navigationController = [[UINavigationController alloc] initWithRootViewController:main];
+    RESideMenu *sideMenuViewController = [[RESideMenu alloc]initWithContentViewController:self.navigationController leftMenuViewController:leftMenu rightMenuViewController:nil];
     sideMenuViewController.menuPreferredStatusBarStyle = 1; // UIStatusBarStyleLightContent
     sideMenuViewController.delegate = leftMenu;
     sideMenuViewController.contentViewShadowColor = [UIColor blackColor];
@@ -210,12 +220,15 @@
     self.window.rootViewController = sideMenuViewController;
 }
 
-//请求闪屏页
-- (void)showLoadingPage
+//请求广告页面
+
+- (void)getSplashVC
 {
-    LoadingVC *loading = [[LoadingVC alloc]init];
-    self.window.rootViewController = loading;
+    self.adLaunchView = [[AdLaunchView alloc] init];
+    self.adLaunchView._delegate = self;
+    self.window.rootViewController = self.adLaunchView;
 }
+
 
 //配置统计SDK
 - (void)configShareSDK
@@ -366,6 +379,81 @@
         [self getUserAllFavos];
         //关闭loading页面 加载主页面 并打开闪屏广告页
         [self initWithRootStyle];
+    }
+}
+
+- (void) adLaunch:(AdLaunchView *)launchView withAdData:(NSMutableArray *)array
+{
+    
+    if (![array valueForKey:@"type"] || [[array valueForKey:@"type"] length] == 0) {
+        return;
+    }
+    if ([[array valueForKey:@"type"] isEqualToString:@"1"]) {
+        
+        // 判断 gridview 点击时跳到哪个VC
+        if ([[array valueForKey:@"url"] isEqualToString:@"bus_search"]) {
+            BusViewController *bus = [[BusViewController alloc] init];
+            bus.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:bus animated:YES];
+
+            // go to bus search function
+        }else if ([[array valueForKey:@"url"] isEqualToString:@"car_fine_search"]){
+            
+            TOWebViewController *web = [[TOWebViewController alloc]initWithURLString:@"http://0395.weizhangwang.com"]; //hard code
+            web.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:web animated:YES];
+            
+        }else if ([[array valueForKey:@"url"] isEqualToString:@"weather"]){
+            
+            TOWebViewController *web = [[TOWebViewController alloc]initWithURLString:@"http://henan.weather.com.cn/luohe/index.shtml"]; //hard code
+            web.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:web animated:YES];
+            
+        }else if ([[array valueForKey:@"url"] isEqualToString:@"post_news"]){
+//            [self sendNormalPost];
+        }
+        
+        
+    }else if ([[array valueForKey:@"type"] isEqualToString:@"2"]){
+        //跳帖子详情
+        //        PostDetailViewController *detail = [[PostDetailViewController alloc]init];
+        PostDetailVC *detail = [[PostDetailVC alloc]init];
+        PostModel *postModel = [PostModel new];
+        postModel.tid = [array valueForKey:@"pid"];
+        detail.postModel =  postModel;
+        detail.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:detail animated:YES];
+
+    }else if ([[array valueForKey:@"type"] isEqualToString:@"3"]){
+        //跳版块链接
+        PostViewController *postVc = [[PostViewController alloc]init];
+        ForumsModel *forumModel = [Util boardFormCache:[array valueForKey:@"pid"]];
+        if (!forumModel) {
+            forumModel = [ForumsModel new];
+        }
+        forumModel.fid = [array valueForKey:@"pid"];
+        postVc.hidesBottomBarWhenPushed = YES;
+        postVc.forumsModel = forumModel;
+        [self.navigationController pushViewController:postVc animated:YES];
+
+    }else if ([[array valueForKey:@"type"] isEqualToString:@"4"]){
+
+        ArticleDetailViewController *articleDetailVc = [[ArticleDetailViewController alloc]init];
+        ArticleListModel *listModel = [ArticleListModel new];
+        listModel.aid = [array valueForKey:@"pid"];
+        articleDetailVc.articleModel = listModel;
+        articleDetailVc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:articleDetailVc animated:YES];
+
+        
+    }else if ([[array valueForKey:@"type"] isEqualToString:@"5"]){
+        ArticleCustomViewController *customVc = [[ArticleCustomViewController alloc]init];
+        ArticleModel *articleModel = [ArticleModel new];
+        articleModel.articleId = [array valueForKey:@"pid"];
+        customVc.articleModel = articleModel;
+        customVc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:customVc animated:YES];
+
     }
 }
 

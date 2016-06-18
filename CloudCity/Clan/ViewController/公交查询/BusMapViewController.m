@@ -11,6 +11,7 @@
 #import "CommonUtility.h"
 #import "CustomBusMode.h"
 #import "MANaviRoute.h"
+#import "BusTransferDetailViewController.h"
 
 const NSString *RoutePlanningViewControllerStartTitle       = @"起点";
 const NSString *RoutePlanningViewControllerDestinationTitle = @"终点";
@@ -54,14 +55,62 @@ const NSInteger RoutePlanningPaddingEdge                    = 20;
 
 - (void)initMapAssistFunction
 {
+    if (_needShowDetailView) {
+        [self addDetailView];
+    }
     [self addUserGPS];
     [self addTraffic];
+}
+
+- (void)addDetailView
+{
+    [self.mapView setFrame:CGRectMake(0, 0, self.view.width, ScreenHeight - 80)];
     
+    self.detailView = [[UIView alloc] initWithFrame:CGRectMake(0, ScreenBoundsHeight - 80, self.mapView.width, 80)];
+    self.detailView.backgroundColor = [UIColor whiteColor];
+    
+    self.detailView.layer.shadowOffset = CGSizeMake(0, 0);
+    self.detailView.layer.shadowColor = [UIColor darkGrayColor].CGColor;
+    self.detailView.layer.shadowRadius = 1;
+    self.detailView.layer.shadowOpacity = .5f;
+    CGRect shadowFrame = self.detailView.layer.bounds;
+    CGPathRef shadowPath = [UIBezierPath
+                            bezierPathWithRect:shadowFrame].CGPath;
+    self.detailView.layer.shadowPath = shadowPath;
+    
+    UILabel *busNumber = [[UILabel alloc] initWithFrame:CGRectMake(20, 15, self.detailView.width/1.5, 20)];
+    busNumber.font = [UIFont boldSystemFontOfSize:15];
+    busNumber.text = [CustomBusMode getRoutePlanningBusNumber:[self.busRoute.transits[self.currentCourse] segments]];
+    busNumber.textColor = [UIColor blackColor];
+    
+    UILabel *busDetail = [[UILabel alloc] initWithFrame:CGRectMake(20, busNumber.bottom + 5, self.detailView.width/1.5, 30)];
+    busDetail.font = [UIFont systemFontOfSize:12];
+    busDetail.text = [CustomBusMode getRoutePlanningBusInfo:self.busRoute.transits[self.currentCourse]];
+    busDetail.textColor = [UIColor grayColor];
+    
+    UIButton *accessory = [UIButton buttonWithType:UIButtonTypeCustom];
+    accessory.frame = CGRectMake(busNumber.right + 50, self.detailView.height/2-15, 80, 30);
+    [accessory setTitle:@"详情" forState:UIControlStateNormal];
+    [accessory setImage:kIMG(@"jiantou_me") forState:UIControlStateNormal];
+    [accessory setImageEdgeInsets:UIEdgeInsetsMake(10, 5, 5, 15)];
+    [accessory setTitleEdgeInsets:UIEdgeInsetsMake(5, -100.0, 0.0, 0.0)];
+    [accessory setTitleColor:[UIColor returnColorWithPlist:YZSegMentColor] forState:UIControlStateNormal];
+    [accessory setFont:[UIFont systemFontOfSize:15]];
+
+    [self.view addSubview:self.detailView];
+    [self.detailView addSubview:busNumber];
+    [self.detailView addSubview:busDetail];
+    [self.detailView addSubview:accessory];
+    
+    [accessory addTarget:self action:@selector(gotoListView) forControlEvents:UIControlEventTouchUpInside];
+    [self.detailView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(gotoListView)]];
+
 }
 
 - (void)addUserGPS
 {
-    self.gpsBtn = [CustomBusMode setGPSButtonWithTitle:@"" imageName:@"write_upload_del" CGRect:CGRectMake(10, self.mapView.bottom - 100, 30, 30) target:self action:@selector(findUserLocation)];
+    self.gpsBtn = [CustomBusMode setGPSButtonWithTitle:@"" imageName:@"write_upload_del" CGRect:CGRectMake(10, self.mapView.bottom - 150, 30, 30) target:self action:@selector(findUserLocation)];
+ 
     [self.mapView addSubview:self.gpsBtn];
 }
 
@@ -100,6 +149,17 @@ const NSInteger RoutePlanningPaddingEdge                    = 20;
     [self.naviRoute removeFromMapView];
 }
 
+/* 跳转到换乘详细列表页面*/
+
+- (void)gotoListView
+{
+    BusTransferDetailViewController *vc = [[BusTransferDetailViewController alloc] init];
+    vc.currentCourse = self.currentCourse;
+    vc.busRoute  = self.busRoute;
+    vc.routeStartLocation = self.startLocationName;
+    vc.routeDestinationLocation = self.destinationLocationName;
+    [self.parentViewController.navigationController pushViewController:vc animated:YES];
+}
 
 /* 展示公交线路 */
 
@@ -168,12 +228,12 @@ const NSInteger RoutePlanningPaddingEdge                    = 20;
     MAPointAnnotation *startAnnotation = [[MAPointAnnotation alloc] init];
     startAnnotation.coordinate = self.startCoordinate;
     startAnnotation.title      = (NSString*)RoutePlanningViewControllerStartTitle;
-    startAnnotation.subtitle   = [NSString stringWithFormat:@"{%f, %f}", self.startCoordinate.latitude, self.startCoordinate.longitude];
+    startAnnotation.subtitle   = self.startLocationName;
     
     MAPointAnnotation *destinationAnnotation = [[MAPointAnnotation alloc] init];
     destinationAnnotation.coordinate = self.destinationCoordinate;
     destinationAnnotation.title      = (NSString*)RoutePlanningViewControllerDestinationTitle;
-    destinationAnnotation.subtitle   = [NSString stringWithFormat:@"{%f, %f}", self.destinationCoordinate.latitude, self.destinationCoordinate.longitude];
+    destinationAnnotation.subtitle   = self.destinationLocationName;
     
     [self.mapView addAnnotation:startAnnotation];
     [self.mapView addAnnotation:destinationAnnotation];

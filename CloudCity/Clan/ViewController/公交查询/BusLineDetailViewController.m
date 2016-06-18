@@ -42,6 +42,8 @@
     NSRange range = [self.line.name rangeOfString:@"("];
     NSString *str = [self.line.name substringToIndex:range.location];
     
+//    NSString *favoImgName = [CustomBusMode isFavoed_withID:[NSString stringWithFormat:@"%@%@-%@",BUSTRANSFERFAV,self.routeStartLocation,self.routeDestinationLocation] withFavoID:[NSString stringWithFormat:@"%@-%@",self.routeStartLocation,self.routeDestinationLocation] forType:myBusTransfer] ? @"detail_favo_H" : @"favo_N";
+    
     _isFav = [Util isFavoed_withID:[NSString stringWithFormat:@"bus_line_%@",str] forType:myBusLine];
     _favBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
     [_favBtn addTarget:self action:@selector(favAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -183,14 +185,14 @@
 
 - (void)favAction:(UIButton *)sender{
     
-    if (![UserModel currentUserInfo].logined || ![[NSUserDefaults standardUserDefaults]objectForKey:Code_CookieData]) {
-        //没有登录 跳出登录页面
-        LoginViewController *login = [[LoginViewController alloc]init];
-        UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:login];
-        nav.modalPresentationStyle = UIModalPresentationFullScreen;
-        [self presentViewController:nav animated:YES completion:nil];
-        return;
-    }
+//    if (![UserModel currentUserInfo].logined || ![[NSUserDefaults standardUserDefaults]objectForKey:Code_CookieData]) {
+//        //没有登录 跳出登录页面
+//        LoginViewController *login = [[LoginViewController alloc]init];
+//        UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:login];
+//        nav.modalPresentationStyle = UIModalPresentationFullScreen;
+//        [self presentViewController:nav animated:YES completion:nil];
+//        return;
+//    }
     sender.selected = !sender.selected;
     NSRange range = [self.line.name rangeOfString:@"("];
     NSString *str = [self.line.name substringToIndex:range.location];

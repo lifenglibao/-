@@ -34,7 +34,6 @@
 		0D1942391CCE3C720034D6FF /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D1942381CCE3C720034D6FF /* libz.tbd */; };
 		0D19423B1CCE3C8C0034D6FF /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D19423A1CCE3C8C0034D6FF /* libstdc++.6.0.9.tbd */; };
 		0D19423D1CCE3C9C0034D6FF /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D19423C1CCE3C9C0034D6FF /* libc++.tbd */; };
-		0D1963BE1CD0A58D007B3CDB /* CustomeTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D1963BD1CD0A58D007B3CDB /* CustomeTextField.m */; };
 		0D1B06AC1CDAD6710020A5B0 /* BusNearbyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D1B06AB1CDAD6710020A5B0 /* BusNearbyViewController.m */; };
 		0D1B06B21CE088CD0020A5B0 /* BusLineDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D1B06B11CE088CD0020A5B0 /* BusLineDetailViewController.m */; };
 		0D1B06B51CE08D9D0020A5B0 /* BusStopDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D1B06B41CE08D9D0020A5B0 /* BusStopDetailViewController.m */; };
@@ -52,6 +51,8 @@
 		0D465E191CC869BD009F502D /* post_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D465E181CC869BD009F502D /* post_normal@2x.png */; };
 		0D465E1B1CC88DE6009F502D /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D3DF9951AEE31EE00090760 /* CoreTelephony.framework */; };
 		0D465E1C1CC88DE6009F502D /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DB7DB441BE3A44E00389A8E /* TencentOpenAPI.framework */; };
+		0D509FC21D14FC7F00574BA6 /* MZTimerLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D509FC01D14FC7F00574BA6 /* MZTimerLabel.m */; };
+		0D509FC61D14FCB500574BA6 /* AdLaunchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D509FC51D14FCB500574BA6 /* AdLaunchView.m */; };
 		0D5B22031CD4514600EFBB44 /* MAMapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D5B22021CD4514600EFBB44 /* MAMapKit.framework */; };
 		0D5B22051CD451CA00EFBB44 /* AMap.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0D5B22041CD451CA00EFBB44 /* AMap.bundle */; };
 		0D5B22071CD451DB00EFBB44 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D5B22061CD451DB00EFBB44 /* OpenGLES.framework */; };
@@ -1225,8 +1226,6 @@
 		0D1942381CCE3C720034D6FF /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		0D19423A1CCE3C8C0034D6FF /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "usr/lib/libstdc++.6.0.9.tbd"; sourceTree = SDKROOT; };
 		0D19423C1CCE3C9C0034D6FF /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
-		0D1963BC1CD0A58D007B3CDB /* CustomeTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomeTextField.h; path = "Clan/Model/公交/CustomeTextField.h"; sourceTree = SOURCE_ROOT; };
-		0D1963BD1CD0A58D007B3CDB /* CustomeTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomeTextField.m; path = "Clan/Model/公交/CustomeTextField.m"; sourceTree = SOURCE_ROOT; };
 		0D1B06AA1CDAD6710020A5B0 /* BusNearbyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BusNearbyViewController.h; path = "公交查询/BusNearbyViewController.h"; sourceTree = "<group>"; };
 		0D1B06AB1CDAD6710020A5B0 /* BusNearbyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BusNearbyViewController.m; path = "公交查询/BusNearbyViewController.m"; sourceTree = "<group>"; };
 		0D1B06B01CE088CD0020A5B0 /* BusLineDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BusLineDetailViewController.h; path = "公交查询/BusLineDetailViewController.h"; sourceTree = "<group>"; };
@@ -1251,6 +1250,10 @@
 		0D309FA91CF96E2D00802263 /* BusStopDetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BusStopDetailTableViewCell.m; path = "公交查询/BusStopDetailTableViewCell.m"; sourceTree = "<group>"; };
 		0D309FAA1CF96E2D00802263 /* BusStopDetailTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = BusStopDetailTableViewCell.xib; path = "公交查询/BusStopDetailTableViewCell.xib"; sourceTree = "<group>"; };
 		0D465E181CC869BD009F502D /* post_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "post_normal@2x.png"; sourceTree = "<group>"; };
+		0D509FBF1D14FC7F00574BA6 /* MZTimerLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZTimerLabel.h; sourceTree = "<group>"; };
+		0D509FC01D14FC7F00574BA6 /* MZTimerLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZTimerLabel.m; sourceTree = "<group>"; };
+		0D509FC41D14FCB500574BA6 /* AdLaunchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdLaunchView.h; sourceTree = "<group>"; };
+		0D509FC51D14FCB500574BA6 /* AdLaunchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdLaunchView.m; sourceTree = "<group>"; };
 		0D5B22021CD4514600EFBB44 /* MAMapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MAMapKit.framework; sourceTree = "<group>"; };
 		0D5B22041CD451CA00EFBB44 /* AMap.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = AMap.bundle; path = MAMapKit.framework/AMap.bundle; sourceTree = "<group>"; };
 		0D5B22061CD451DB00EFBB44 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -3042,6 +3045,24 @@
 			name = BusTransfer;
 			sourceTree = "<group>";
 		};
+		0D509FBD1D14FC7F00574BA6 /* MZTimerLabel */ = {
+			isa = PBXGroup;
+			children = (
+				0D509FBF1D14FC7F00574BA6 /* MZTimerLabel.h */,
+				0D509FC01D14FC7F00574BA6 /* MZTimerLabel.m */,
+			);
+			path = MZTimerLabel;
+			sourceTree = "<group>";
+		};
+		0D509FC31D14FCB500574BA6 /* SplashAD */ = {
+			isa = PBXGroup;
+			children = (
+				0D509FC41D14FCB500574BA6 /* AdLaunchView.h */,
+				0D509FC51D14FCB500574BA6 /* AdLaunchView.m */,
+			);
+			path = SplashAD;
+			sourceTree = "<group>";
+		};
 		0D5B22081CD4522C00EFBB44 /* Map */ = {
 			isa = PBXGroup;
 			children = (
@@ -3107,8 +3128,6 @@
 				0DE441A51CD3025000F62097 /* LineDashPolyline.m */,
 				0DE441A11CD300F100F62097 /* CommonUtility.h */,
 				0DE441A21CD300F100F62097 /* CommonUtility.m */,
-				0D1963BC1CD0A58D007B3CDB /* CustomeTextField.h */,
-				0D1963BD1CD0A58D007B3CDB /* CustomeTextField.m */,
 				0DE4B77D1CCF803900AE4C63 /* BusStopAnnotation.h */,
 				0DE4B77E1CCF803900AE4C63 /* BusStopAnnotation.m */,
 				0DE4B77A1CCF7FE400AE4C63 /* AMapTipAnnotation.h */,
@@ -5470,6 +5489,7 @@
 		8AB7CC7D1AA04E96007A17E8 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				0D509FC31D14FCB500574BA6 /* SplashAD */,
 				0D1942291CCDFFE60034D6FF /* 公交查询 */,
 				6DFF6A6F1C18384700310161 /* 购买主题 */,
 				6DE372121C04726900BD73B0 /* 点评 */,
@@ -5538,6 +5558,7 @@
 		8AB7CCF91AA6F584007A17E8 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				0D509FBD1D14FC7F00574BA6 /* MZTimerLabel */,
 				0D0D046A1D02B33100ACA542 /* MJExtension */,
 				0D19422F1CCE3AC20034D6FF /* Map */,
 				8ABECE931C0340DE006F3854 /* IQKeyBoardManager */,
@@ -6719,6 +6740,7 @@
 				0D1B06CB1CE2BE400020A5B0 /* BusTransferViewController.m in Sources */,
 				8A8637F01B43FDDB00BDF7B3 /* TAAbstractDotView.m in Sources */,
 				6D7859D21ADE08C7002B4707 /* NSDate+Utils.m in Sources */,
+				0D509FC61D14FCB500574BA6 /* AdLaunchView.m in Sources */,
 				6DCBECD01AD420E200496C78 /* MyPostViewController.m in Sources */,
 				0D0D04821D02B33200ACA542 /* MJExtensionConst.m in Sources */,
 				8A9E34361ABFE18A0058F279 /* PostCell.m in Sources */,
@@ -6954,6 +6976,7 @@
 				8A7A4CCD1BFAC64D00426183 /* CustomTransferViewController.m in Sources */,
 				6DFAF2C21B255C3500B179D5 /* UIImageView+WebCache.m in Sources */,
 				8A4E39761AD67A820002941E /* TopListCell.m in Sources */,
+				0D509FC21D14FC7F00574BA6 /* MZTimerLabel.m in Sources */,
 				6D7078C31B56739600374836 /* SearchBar.m in Sources */,
 				6D725B791ADBB64D00EDABFB /* UserInfoModel.m in Sources */,
 				8A9E342D1ABC281E0058F279 /* PostViewModel.m in Sources */,
@@ -7059,7 +7082,6 @@
 				0D0D04831D02B33200ACA542 /* MJFoundation.m in Sources */,
 				6D421ACB1B9D4772009B5F5F /* XLSegmentedPagerTabStripViewController.m in Sources */,
 				8A1FDFE21AC3A289008F10F0 /* AGEmojiKeyBoardView.m in Sources */,
-				0D1963BE1CD0A58D007B3CDB /* CustomeTextField.m in Sources */,
 				8A2B683D1AB82CC200794565 /* HotPostViewController.m in Sources */,
 				6D017A5A1BCE588500F6FC1A /* TMCache.m in Sources */,
 				6DFAF2B81B255C3500B179D5 /* SDWebImageCompat.m in Sources */,

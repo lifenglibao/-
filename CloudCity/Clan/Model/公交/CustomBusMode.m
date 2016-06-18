@@ -22,15 +22,20 @@
     return [NSArray arrayWithObjects:@"查看返程",@"推荐路线", nil];
 }
 
-+(UIView*)setRightViewWithTextField:(UITextField *)textField imageName:(NSString *)imageName{
++(NSArray *)getTransferFilterTitle{
     
-    UIImageView *rightView = [[UIImageView alloc]init];
-    rightView.image = [UIImage imageNamed:imageName];
-    rightView.size = CGSizeMake(40, 40);
-    rightView.contentMode = UIViewContentModeCenter;
-    textField.rightView = rightView;
-    textField.rightViewMode = UITextFieldViewModeAlways;
-    return rightView;
+    return [NSArray arrayWithObjects:@"推荐路线",@"步行少",@"换乘少",@"时间短", nil];
+}
+
++(UITextField*)setSearchTextFieldWithFrame:(CGRect)frame {
+    
+    UITextField *field = [[UITextField alloc] initWithFrame:frame];
+    field.backgroundColor = [UIColor whiteColor];
+    field.borderStyle = UITextBorderStyleNone;
+    field.clearButtonMode = UITextFieldViewModeWhileEditing;
+    field.leftView = [self setLeftViewWithTextField:field imageName:@"sousuo_gray"];
+    
+    return field;
 }
 
 +(UIView*)setLeftViewWithTextField:(UITextField *)textField imageName:(NSString *)imageName{
@@ -177,6 +182,25 @@
     return muStr;
 }
 
++ (NSString *)handleStringGetBusEndStop:(NSString *)str{
+    
+    NSString *substring = @"";
+    while (1) {
+        NSRange range = [str rangeOfString:@"--"];
+        NSRange range1 = [str rangeOfString:@")"];
+        if (range.location != NSNotFound && range1.location != NSNotFound) {
+            NSCharacterSet *delimiters = [NSCharacterSet characterSetWithCharactersInString:@"-- )"];
+            NSArray *splitString = [str componentsSeparatedByCharactersInSet:delimiters];
+            substring = [splitString objectAtIndex:2];
+            return substring;
+        }else{
+            break;
+        }
+    }
+    
+    return substring;
+}
+
 + (NSString *)replaceStringWithBusModel:(NSString *)str{
     
     NSString *string = str;
@@ -217,6 +241,45 @@
     return str;
 }
 
++ (NSArray *)getFilterRoutePlanning:(NSArray*)array withParameter:(NSString*)par {
+    
+    NSString *sortKey = @"";
+    
+    if ([par isEqualToString:@"步行少"]) {
+        
+        sortKey = @"walkingDistance";
+        
+    }else if ([par isEqualToString:@"换乘少"]) {
+        
+        //segments
+        //sortKey = @"@count";
+        NSArray* sortedArray= [array sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2)
+        {
+            if([[obj1 segments] count] > [[obj2 segments]count])
+                return NSOrderedDescending;
+            if([[obj1 segments]count] < [[obj2 segments]count])
+                return NSOrderedAscending;
+            return NSOrderedSame;
+        }];
+        
+        return sortedArray;
+        
+    }else if ([par isEqualToString:@"时间短"]) {
+        
+        sortKey = @"duration";
+
+    }else{
+        sortKey = @"distance";
+        //推荐路线
+    }
+    
+    NSArray *sortDesc = [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:sortKey ascending:YES]];
+    NSArray *sortedArr = [array sortedArrayUsingDescriptors:sortDesc];
+    
+    return sortedArr;
+}
+
+
 + (NSString *)getRoutePlanningBusNumber:(NSArray*)array {
     NSString *string = @"";
     AMapBusLine *tempBusLine;
@@ -226,6 +289,7 @@
             tempBusLine = _seg.buslines.firstObject;
             if ([string isEqualToString:@""]) {
                 string = [self handleStringWithCharRoad:tempBusLine.name];
+                string = [self handleStringWithHalfBrackets:string];
             }else{
                 string = [string stringByAppendingString:@" > "];
                 string = [string stringByAppendingString:[self handleStringWithBrackets:tempBusLine.name]];
@@ -239,7 +303,6 @@
     //min distance walking price
     NSString *string = @"";
 
-    NSLog(@"%@",[[NSNumber numberWithDouble:transit.cost] stringValue]);
     if (![[[NSNumber numberWithDouble:transit.cost] stringValue] isEqualToString:@"0"]) {
         string = [NSString stringWithFormat:@"%@ | %@ | 步行%@ | %.1f元",[self timeformatFromSeconds:transit.duration], [self metresConvertToKM:transit.distance], [self metresConvertToKM:transit.walkingDistance], [[NSNumber numberWithDouble:transit.cost] floatValue]];
     }else{
@@ -271,7 +334,6 @@
     
     [transit.segments enumerateObjectsUsingBlock:^(AMapSegment *segment, NSUInteger idx, BOOL *stop) {
         
-//         [result addObjectsFromArray:[self naviRouteForSegment:segment segmentIdx:idx]];
         [result addObjectsFromArray:[self naviRouteForWalking:segment.walking]];
         [result addObjectsFromArray:[self naviRouteForBusLine:segment.buslines]];
     }];
@@ -280,39 +342,43 @@
     return result;
 }
 
-//+ (NSMutableArray *)naviRouteForSegment:(AMapSegment *)segment segmentIdx:(NSUInteger)idx
-//{
-//    NSMutableArray * temp = [NSMutableArray array];
-//
-//    if (segment == nil)
-//    {
-//        return nil;
-//    }
-//    
-//    [temp addObjectsFromArray:[self naviRouteForWalking:segment.walking]];
-//    [temp addObjectsFromArray:[self naviRouteForBusLine:segment.buslines]];
-//
-//    return temp;
-//}
-
-
 + (NSMutableArray *)naviRouteForBusLine:(NSArray *)busLine
 {
     NSMutableArray * temp = [NSMutableArray array];
-    
+    NSString * str = [NSString string];
     if (busLine == nil || busLine.count == 0)
     {
         return nil;
     }
     
-    [busLine enumerateObjectsUsingBlock:^(AMapBusLine *line, NSUInteger idx, BOOL *stop) {
+    for (AMapBusLine *line in busLine) {
+        [temp addObject:[NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"%@上车",line.departureStop.name] forKey:@"departureStop"]];
         
-        [temp addObject:[NSDictionary dictionaryWithObject:line.departureStop.name forKey:@"departureStop"]];
-        [temp addObject:[NSDictionary dictionaryWithObject:line.name forKey:@"busName"]];
-        [temp addObject:[NSDictionary dictionaryWithObjectsAndKeys:line.viaBusStops,@"viaBusStops",line.arrivalStop.name,@"arrivalStop", nil]];
+        for (int i = 0; i < line.viaBusStops.count; i++) {
+            str = [str stringByAppendingString:[NSString stringWithFormat:@"%@",[(AMapBusStop*)line.viaBusStops[i] name]]];
+            if (i != line.viaBusStops.count) {
+                str = [str stringByAppendingString:@"\n\n"];
+            }
+        }
+        [temp addObject:[NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"开往%@\n\n%@",[self handleStringGetBusEndStop:line.name],str] forKey:@"endStop"]];
+        
+        [temp addObject:[NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"%@下车",line.arrivalStop.name] forKey:@"arrivalStop"]];
+    }
+//    [busLine enumerateObjectsUsingBlock:^(AMapBusLine *line, NSUInteger idx, BOOL *stop) {
+//        
+//        
+//        [temp addObject:[NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"%@上车",line.departureStop.name] forKey:@"departureStop"]];
+//        
+//        for (int i = 0; i < line.viaBusStops.count; i++) {
+//            [str stringByAppendingString:[NSString stringWithFormat:@"%@",[(AMapBusStop*)line.viaBusStops[i] name]]];
+//            [str stringByAppendingString:@"\n"];
+//        }
+//        [temp addObject:[NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"开往%@\n%@",[self handleStringGetBusEndStop:line.name],str] forKey:@"endStop"]];
+//
+//        [temp addObject:[NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"%@下车",line.arrivalStop.name] forKey:@"arrivalStop"]];
+//
+//    }];
 
-    }];
-    
     return temp;
 }
 
@@ -325,12 +391,50 @@
         return nil;
     }
     
-    [walking.steps enumerateObjectsUsingBlock:^(AMapStep *step, NSUInteger idx, BOOL *stop) {
-        [temp addObject:[NSDictionary dictionaryWithObjectsAndKeys:step.instruction,@"tips", nil]];
-    }];
+    if (walking.distance && walking.duration) {
+        [temp addObject:[NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"步行%@ 约%@",[self metresConvertToKM:walking.distance],[self timeformatFromSeconds:walking.duration]] forKey:@"walking"]];
+        return temp;
+    }
     
-    return temp;
+    return nil;
 }
+
+
+//+ (NSMutableArray *)naviRouteForBusLine:(NSArray *)busLine
+//{
+//    NSMutableArray * temp = [NSMutableArray array];
+//    
+//    if (busLine == nil || busLine.count == 0)
+//    {
+//        return nil;
+//    }
+//    
+//    [busLine enumerateObjectsUsingBlock:^(AMapBusLine *line, NSUInteger idx, BOOL *stop) {
+//        
+//        [temp addObject:[NSDictionary dictionaryWithObject:line.departureStop.name forKey:@"departureStop"]];
+//        [temp addObject:[NSDictionary dictionaryWithObject:line.name forKey:@"busName"]];
+//        [temp addObject:[NSDictionary dictionaryWithObjectsAndKeys:line.viaBusStops,@"viaBusStops",line.arrivalStop.name,@"arrivalStop", nil]];
+//
+//    }];
+//    
+//    return temp;
+//}
+//
+//+ (NSMutableArray *)naviRouteForWalking:(AMapWalking *)walking
+//{
+//    NSMutableArray * temp = [NSMutableArray array];
+//
+//    if (walking == nil || walking.steps.count == 0)
+//    {
+//        return nil;
+//    }
+//    
+//    [walking.steps enumerateObjectsUsingBlock:^(AMapStep *step, NSUInteger idx, BOOL *stop) {
+//        [temp addObject:[NSDictionary dictionaryWithObjectsAndKeys:step.instruction,@"tips", nil]];
+//    }];
+//    
+//    return temp;
+//}
 
 + (UIView *)locationServiceUnEnabled:(CGRect) frame
 {

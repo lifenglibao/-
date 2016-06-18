@@ -12,9 +12,12 @@
 @interface BusTransferListViewController : BaseViewController<UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic) NSInteger currentCourse;
+@property (nonatomic) NSInteger selectedFilterIndex;
 @property (nonatomic, strong) UIView *headerView;
+@property (nonatomic, strong) NSMutableArray *totalBusRoute;
 @property (nonatomic, strong) AMapRoute *busRoute;
 @property (nonatomic, strong) BaseTableView *tableView;
+@property (nonatomic, strong) UITableView *filterTableView;
 
 @property (nonatomic) NSString *routeStartLocation;
 @property (nonatomic) NSString *routeDestinationLocation;

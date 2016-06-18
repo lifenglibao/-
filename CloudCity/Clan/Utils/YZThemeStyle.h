@@ -13,6 +13,7 @@
 #define YZBBSName @"YZBBSName" //论坛名
 #define YZBaseURL @"YZBaseURL"
 #define YZBasePath @"YZBasePath"
+#define CCBaseURL @"CCBaseURL"
 #define kAPP_DOWNLOAD_URL @"kAPP_DOWNLOAD_URL" //app下载地址
 #define kShareAppkeySina @"ShareAppkeySina"
 #define kShareAppkeyTecent @"ShareAppkeyTecent"
@@ -65,3 +66,5 @@
 #define BUSLINEFAV @"busLineFav_" //公交线路收藏
 #define BUSSTOPFAV @"busStopFav_"    //公交站点收藏
 #define BUSTRANSFERFAV @"busTransferFav_"   //公交换乘收藏
+
+#define API_STATUS_CODE @"code"   //公交换乘收藏

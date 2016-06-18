@@ -22,6 +22,7 @@
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *tips;
+@property (nonatomic, strong) NSMutableArray *routeResultArr;
 @property (nonatomic, strong) AMapSearchAPI *search;
 @property (nonatomic, strong) BusSearchHistoryViewController * historyTableView;
 

@@ -25,7 +25,7 @@
 {
     if (self = [super init])
     {
-        self.currentCourse = 0;
+        self.selectedFilterIndex = 0;
     }
     
     return self;
@@ -34,17 +34,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"换乘方案";
+    self.busRoute = self.totalBusRoute[self.currentCourse];
     [self addGridView];
     [self initTableView];
     [self initNavBar];
+    [self initfilterTableView];
     // Do any additional setup after loading the view from its nib.
 }
 
 - (void)initNavBar
 {
     
-//    
-//    
+
 //    UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, <#CGFloat width#>, <#CGFloat height#>)];
 //    statFilter.layer.cornerRadius = 13.f;
 //    statFilter.layer.borderColor = [UIColor whiteColor].CGColor;
@@ -69,7 +70,15 @@
 - (void)addGridView
 {
     _headerView = [[SegmentView alloc] initWithFrameRect:CGRectMake(0, 0, ScreenWidth, 44) andTitleArray:[CustomBusMode getTransferGridTitle] andIconArray:nil clickBlock:^(NSInteger index) {
-        NSLog(@"123");
+        if (index == 0) {
+            
+            self.currentCourse = (self.currentCourse == 0) ? (self.currentCourse = 1) : (self.currentCourse = 0);
+            self.busRoute = self.totalBusRoute[self.currentCourse];
+            [self.tableView reloadData];
+
+        }else{
+            [self animateFilterTable];
+        }
     }];
     
     _headerView.backgroundColor = [UIColor whiteColor];
@@ -95,6 +104,17 @@
     [self.view addSubview:_tableView];
 }
 
+- (void)initfilterTableView
+{
+    self.filterTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, -200, ScreenWidth, 200) style:UITableViewStylePlain];
+    self.filterTableView.delegate = self;
+    self.filterTableView.dataSource = self;
+    self.filterTableView.backgroundColor = [UIColor whiteColor];
+    self.filterTableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    [self.view addSubview:_filterTableView];
+    [self.filterTableView setHidden:YES];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -104,6 +124,9 @@
 #pragma mark - UITableViewDataSource
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    if (tableView == self.filterTableView) {
+        return 0.1;
+    }
     return 10;
 }
 
@@ -112,45 +135,89 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    if (tableView == self.filterTableView) {
+        return 1;
+    }
     return self.busRoute.transits.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    if (tableView == self.filterTableView) {
+        return [[CustomBusMode getTransferFilterTitle] count];
+    }
     return 1;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (tableView == self.filterTableView) {
+        return 50;
+    }
     return 105;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    static NSString *busCellIdentifier = @"busTransferCell";
-    
-    BusTransferListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:busCellIdentifier];
-    
-    if (!cell) {
-        [tableView registerNib:[UINib nibWithNibName:@"BusTransferListTableViewCell" bundle:nil] forCellReuseIdentifier:busCellIdentifier];
-        cell = [tableView dequeueReusableCellWithIdentifier:busCellIdentifier];
+    if (tableView == self.filterTableView) {
+        
+        static NSString *busCellIdentifier = @"busTransitsCell";
+        
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:busCellIdentifier];
+        
+        if (cell == nil)
+        {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                          reuseIdentifier:busCellIdentifier];
+        }
+        
+        cell.textLabel.text = [CustomBusMode getTransferFilterTitle][indexPath.row];
+        cell.textLabel.font = [UIFont systemFontOfSize:13];
+        cell.textLabel.textColor = [UIColor darkGrayColor];
+        
+        if (indexPath.row == self.selectedFilterIndex) {
+            cell.accessoryType  = UITableViewCellAccessoryCheckmark;
+        }else{
+            cell.accessoryType  = UITableViewCellAccessoryNone;
+        }
+        return cell;
+        
+    }else if (tableView == self.tableView) {
+        static NSString *busCellIdentifier = @"busTransferCell";
+        
+        BusTransferListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:busCellIdentifier];
+        
+        if (!cell) {
+            [tableView registerNib:[UINib nibWithNibName:@"BusTransferListTableViewCell" bundle:nil] forCellReuseIdentifier:busCellIdentifier];
+            cell = [tableView dequeueReusableCellWithIdentifier:busCellIdentifier];
+        }
+        
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        return cell;
     }
     
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    return cell;
+    return nil;
+
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(BusTransferListTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    cell.lbl_routePlanningBusNumber.text    = [CustomBusMode getRoutePlanningBusNumber:[self.busRoute.transits[indexPath.section] segments]];
-    cell.lbl_routePlanningBusNumber.height  = [Util heightForText:cell.lbl_routePlanningBusNumber.text font:cell.lbl_routePlanningBusNumber.font withinWidth:cell.lbl_routePlanningBusNumber.width];
-    cell.lbl_routePlanningBusInfo.text      = [CustomBusMode getRoutePlanningBusInfo:self.busRoute.transits[indexPath.section]];
-    cell.lbl_routePlanningBusStartStop.text = [CustomBusMode getRoutePlanningBusStartStop:[self.busRoute.transits[indexPath.section] segments]];
-    
-    cell.lbl_routePlanningBusStartStop.width = [Util widthForText:cell.lbl_routePlanningBusStartStop.text font:cell.lbl_routePlanningBusStartStop.font withinHeight:cell.lbl_routePlanningBusStartStop.height];
-    
-    [cell.contentView needsUpdateConstraints];
+    if (tableView == self.tableView) {
+        cell.lbl_routePlanningBusNumber.text    = [CustomBusMode getRoutePlanningBusNumber:[self.busRoute.transits[indexPath.section] segments]];
+        cell.lbl_routePlanningBusNumber.height  = [Util heightForText:cell.lbl_routePlanningBusNumber.text font:cell.lbl_routePlanningBusNumber.font withinWidth:cell.lbl_routePlanningBusNumber.width];
+        cell.lbl_routePlanningBusInfo.text      = [CustomBusMode getRoutePlanningBusInfo:self.busRoute.transits[indexPath.section]];
+        cell.lbl_routePlanningBusStartStop.text = [CustomBusMode getRoutePlanningBusStartStop:[self.busRoute.transits[indexPath.section] segments]];
+        
+        cell.lbl_routePlanningBusStartStop.width = [Util widthForText:cell.lbl_routePlanningBusStartStop.text font:cell.lbl_routePlanningBusStartStop.font withinHeight:cell.lbl_routePlanningBusStartStop.height];
+        
+        [cell.contentView needsUpdateConstraints];
+    }
+}
+
+- (void)presentCurrentRouteModel
+{
+    self.busRoute.transits = [NSArray arrayWithArray:[CustomBusMode getFilterRoutePlanning:self.busRoute.transits withParameter:[CustomBusMode getTransferFilterTitle][self.selectedFilterIndex]]];
+    [self.tableView reloadData];
 }
 
 #pragma mark - UITableViewDelegate
@@ -159,17 +226,21 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-//    BusTransferDetailViewController *vc = [[BusTransferDetailViewController alloc] init];
-//    vc.currentCourse = indexPath.section;
-//    vc.busRoute  = self.busRoute;
-//    vc.routeStartLocation = self.routeStartLocation;
-//    vc.routeDestinationLocation = self.routeDestinationLocation;
-//    [self.parentViewController.navigationController pushViewController:vc animated:YES];
-    
-//    BusMapViewController *subViewController = [[BusMapViewController alloc] init];
-//    subViewController.busRoute = self.busRoute;
-//    subViewController.currentCourse = self.currentCourse;
-//    [self.navigationController pushViewController:subViewController animated:YES];
+    if (tableView == self.filterTableView) {
+        self.selectedFilterIndex = indexPath.row;
+        [self.filterTableView reloadData];
+        [self animateFilterTable];
+        [self presentCurrentRouteModel];
+    }else{
+        
+        BusMapViewController *subViewController = [[BusMapViewController alloc] init];
+        subViewController.needShowDetailView = YES;
+        subViewController.busRoute = self.busRoute;
+        subViewController.currentCourse = indexPath.section;
+        subViewController.startLocationName = self.routeStartLocation;
+        subViewController.destinationLocationName = self.routeDestinationLocation;
+        [self.navigationController pushViewController:subViewController animated:YES];
+    }
 }
 
 //更多按钮
@@ -195,10 +266,7 @@
 
 - (void)gotoMap
 {
-//    BusMapViewController *subViewController = [[BusMapViewController alloc] init];
-//    subViewController.busRoute = self.busRoute;
-//    subViewController.currentCourse = self.currentCourse;
-//    [self.navigationController pushViewController:subViewController animated:YES];
+
 }
 
 //收藏取消收藏
@@ -221,6 +289,25 @@
     
 }
 
+
+- (void) animateFilterTable {
+    
+    [UIView beginAnimations:@"filterTable" context:NULL];
+    [UIView setAnimationDuration:0.5];
+    CGPoint pos = self.filterTableView.center;
+
+    if ([self.filterTableView isHidden]) {
+        
+        pos.y = 150;
+        [self.filterTableView setHidden:NO];
+    }
+    else {
+        pos.y = -200;
+        [self.filterTableView setHidden:YES];
+    }
+    self.filterTableView.center = pos;
+    [UIView commitAnimations];
+}
 
 /*
 #pragma mark - Navigation

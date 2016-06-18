@@ -1172,6 +1172,19 @@ static NSString *product_kurl_base_path_test = @"http://10.2.29.10/product/ui/ht
     }];
 }
 
+//获取splash ad
+- (void)request_SplashWithBlock:(void(^)(id data, NSError *error))block
+{
+    [[ClanNetAPI sharedCCJsonClient] requestJsonDataWithPath:@"ad/ad/getSplashScreenAD" withParams:nil withMethodType:Post andBlock:^(id data, NSError *error) {
+        if (error) {
+            block(nil,error);
+        }else{
+            block(data,nil);
+        }
+    }];
+    
+}
+
 //请求版块儿的UI样式
 - (void)request_AppInfoWithBlock:(void(^)(id data, NSError *error))block
 {

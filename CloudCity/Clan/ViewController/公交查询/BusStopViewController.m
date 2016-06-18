@@ -7,7 +7,6 @@
 //
 
 #import "BusStopViewController.h"
-#import "CustomeTextField.h"
 #import "BusStopDetailViewController.h"
 
 @interface BusStopViewController ()
@@ -55,7 +54,7 @@
 
 - (void)initBusStopSearchField
 {
-    self.busStopSearchFiled = [[CustomeTextField alloc] initWithFrame:CGRectMake(20, 20, ScreenWidth - 40, 50)];
+    self.busStopSearchFiled = [CustomBusMode setSearchTextFieldWithFrame:CGRectMake(20, 20, ScreenWidth - 40, 50)];
     self.busStopSearchFiled.delegate = self;
     self.busStopSearchFiled.placeholder = @"输入站点名";
     [self.busStopSearchFiled addTarget:self action:@selector(isEditing:) forControlEvents:UIControlEventAllEditingEvents];

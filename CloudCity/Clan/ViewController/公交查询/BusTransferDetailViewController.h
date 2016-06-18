@@ -21,5 +21,7 @@
 @property (nonatomic) NSString *routeDestinationLocation;
 
 @property (nonatomic) NSMutableArray *routeData;
+@property (nonatomic) BOOL isOpen;
+@property (nonatomic) NSInteger selectIndex;
 
 @end
