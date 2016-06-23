@@ -64,7 +64,7 @@
             NSString *needMore = [resultData valueForKey:@"need_more"];
             BOOL need_more = [@"1" isEqualToString:needMore] ? YES : NO;
             if (!isAll) {
-                CollectionModel *collectionListModel = [CollectionModel objectWithKeyValues:resultData];
+                CollectionModel *collectionListModel = [CollectionModel mj_objectWithKeyValues:resultData];
                 strongSelf.tempBlock(collectionListModel, need_more);
                 strongSelf.favoThreadsRequestLoading = NO;
                 return;
@@ -127,7 +127,7 @@
             if(!isAll) {
                 NSMutableArray *dataArray = [NSMutableArray array];
                 for (NSDictionary *dic in array) {
-                    ForumsModel *forumsModel = [ForumsModel objectWithKeyValues:dic];
+                    ForumsModel *forumsModel = [ForumsModel mj_objectWithKeyValues:dic];
                     forumsModel.fid = dic[@"id"];
                     [dataArray addObject:forumsModel];
                 }
@@ -191,7 +191,7 @@
             NSString *needMore = [resultData valueForKey:@"need_more"];
             BOOL need_more = [@"1" isEqualToString:needMore] ? YES : NO;
             if (!isAll) {
-                CollectionModel *collectionListModel = [CollectionModel objectWithKeyValues:resultData];
+                CollectionModel *collectionListModel = [CollectionModel mj_objectWithKeyValues:resultData];
                 strongSelf.tempBlock(collectionListModel, need_more);
                 strongSelf.favoArticlesRequestLoading = NO;
                 return;

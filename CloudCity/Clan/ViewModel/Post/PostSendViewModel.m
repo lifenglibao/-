@@ -18,7 +18,7 @@
     [[Clan_NetAPIManager sharedManager] request_checkSendPostWithFid:fid withBlock:^(id data, NSError *error) {
         if (data) {
             id resultData = [data valueForKeyPath:@"Variables"];
-            CheckPostModel *checkModel = [CheckPostModel objectWithKeyValues:resultData];
+            CheckPostModel *checkModel = [CheckPostModel mj_objectWithKeyValues:resultData];
             block(checkModel);
         }
         [SVProgressHUD dismiss];
@@ -36,7 +36,7 @@
             NSString *error_code = [data valueForKeyPath:@"error_code"];
             if (error_code && error_code.intValue == 0) {
                 NSDictionary *dic = [data valueForKeyPath:@"threadtypes"];
-                threadtypesModel *threadTypeModel = [threadtypesModel objectWithKeyValues:dic];
+                threadtypesModel *threadTypeModel = [threadtypesModel mj_objectWithKeyValues:dic];
                 block(threadTypeModel, YES);
             } else {
                 block(nil, NO);

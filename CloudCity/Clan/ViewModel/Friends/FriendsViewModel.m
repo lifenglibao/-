@@ -27,7 +27,7 @@
                 NSArray *flist = [resultsData objectForKey:@"list"];
                 if (flist && flist.count > 0) {
                     for (NSDictionary *dic in flist) {
-                        UserInfoModel *aFriends = [UserInfoModel objectWithKeyValues:dic];
+                        UserInfoModel *aFriends = [UserInfoModel mj_objectWithKeyValues:dic];
                         [fArr addObject:aFriends];
                     }
                 }
@@ -91,7 +91,7 @@
                 NSArray *flist = [resultsData objectForKey:@"list"];
                 if (flist && flist.count > 0) {
                     for (NSDictionary *dic in flist) {
-                        UserInfoModel *aFriends = [UserInfoModel objectWithKeyValues:dic];
+                        UserInfoModel *aFriends = [UserInfoModel mj_objectWithKeyValues:dic];
                         [fArr addObject:aFriends];
                     }
                 }
@@ -173,7 +173,7 @@
                 NSArray *flist = [resultsData objectForKey:@"list"];
                 if (flist && flist.count > 0) {
                     for (NSDictionary *dic in flist) {
-                        UserInfoModel *aFriends = [UserInfoModel objectWithKeyValues:dic];
+                        UserInfoModel *aFriends = [UserInfoModel mj_objectWithKeyValues:dic];
                         [fArr addObject:aFriends];
                     }
                 }

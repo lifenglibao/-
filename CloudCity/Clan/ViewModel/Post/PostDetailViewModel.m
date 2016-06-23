@@ -26,7 +26,7 @@
                 return ;
             }
             id resultData = [data valueForKeyPath:@"Variables"];
-            PostDetailModel *detailModel = [PostDetailModel objectWithKeyValues:resultData];
+            PostDetailModel *detailModel = [PostDetailModel mj_objectWithKeyValues:resultData];
             block(detailModel);
         }else{
             block(nil);
@@ -121,7 +121,7 @@
             BOOL isImageType = YES;
             NSDictionary *dic = resultData[@"allowperm"];
             if (dic && dic[@"allowreply"] && [dic[@"allowreply"] intValue] == 1) {
-                CheckPostModel *checkModel = [CheckPostModel objectWithKeyValues:resultData];
+                CheckPostModel *checkModel = [CheckPostModel mj_objectWithKeyValues:resultData];
                 if ([checkModel.allowperm.allowupload[@"jpg"] isEqualToString:@"0"] && [checkModel.allowperm.allowupload[@"jpeg"] isEqualToString:@"0"]) {
                     //如果不支持这2种格式的话 默认为不支持上传图片
                     isImageType = NO;

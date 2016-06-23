@@ -38,7 +38,7 @@
             NSMutableArray *arr = [NSMutableArray new];
             NSArray *arra = [data valueForKey:@"list"];
             for (NSDictionary *dic in arra) {
-                DialogListModel *dialog = [DialogListModel objectWithKeyValues:dic];
+                DialogListModel *dialog = [DialogListModel mj_objectWithKeyValues:dic];
                 [arr addObject:dialog];
             }
             block(YES,arr);

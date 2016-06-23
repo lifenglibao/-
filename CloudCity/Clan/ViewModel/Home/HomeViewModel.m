@@ -35,7 +35,7 @@ static NSString *const customRecommendType = @"2";
             NSMutableArray *dataArray = [NSMutableArray array];
             if (!isNull([resultData objectForKey:@"data"])) {
                 for (NSDictionary *dic in [resultData objectForKey:@"data"]) {
-                    PostModel *postModel = [PostModel objectWithKeyValues:dic];
+                    PostModel *postModel = [PostModel mj_objectWithKeyValues:dic];
                     postModel.modelType = @"1";
                     [postModel frameWithModel];
                     [dataArray addObject:postModel];
@@ -60,7 +60,7 @@ static NSString *const customRecommendType = @"2";
             id resultData = [data valueForKeyPath:@"Variables"];
             NSMutableArray *dataArray = [NSMutableArray array];
             for (NSDictionary *dic in [resultData objectForKey:@"forums"]) {
-                BoardModel *boardModel = [BoardModel objectWithKeyValues:dic];
+                BoardModel *boardModel = [BoardModel mj_objectWithKeyValues:dic];
                 [dataArray addObject:boardModel];
             }
             //存储forums
@@ -96,7 +96,7 @@ static NSString *const customRecommendType = @"2";
                     }
                     if (!isNull([resultData objectForKey:@"data"])) {
                         for (NSDictionary *dic in [resultData objectForKey:@"data"]) {
-                            PostModel *postModel = [PostModel objectWithKeyValues:dic];
+                            PostModel *postModel = [PostModel mj_objectWithKeyValues:dic];
                             postModel.modelType = @"1";
                             [postModel frameWithModel];
                             [dataArray addObject:postModel];
@@ -126,7 +126,7 @@ static NSString *const customRecommendType = @"2";
             //首页头部视图数据解析
             [[CacheManager sharedCacheManager] saveCache:data forCacheModule:kCacheModule_Home_Functions];
             id resultData = [data valueForKeyPath:@"Variables"];
-            customHomeModel = [CustomHomeMode objectWithKeyValues:[resultData objectForKey:@"myhome"]];
+            customHomeModel = [CustomHomeMode mj_objectWithKeyValues:[resultData objectForKey:@"myhome"]];
             
         }
     }];
@@ -151,7 +151,7 @@ static NSString *const customRecommendType = @"2";
                     [dataArray removeAllObjects];
                     if (![resultData[@"data"] isEqual:[NSNull null]]) {
                         for (NSDictionary *dic in resultData[@"data"]) {
-                            ArticleListModel *articleModel = [ArticleListModel objectWithKeyValues:dic];
+                            ArticleListModel *articleModel = [ArticleListModel mj_objectWithKeyValues:dic];
                             [dataArray addObject:articleModel];
                         }
                     }
@@ -181,7 +181,7 @@ static NSString *const customRecommendType = @"2";
                         }
                         if (!isNull([resultData objectForKey:@"data"])) {
                             for (NSDictionary *dic in [resultData objectForKey:@"data"]) {
-                                PostModel *postModel = [PostModel objectWithKeyValues:dic];
+                                PostModel *postModel = [PostModel mj_objectWithKeyValues:dic];
                                 postModel.modelType = @"1";
                                 [postModel frameWithModel];
                                 [dataArray addObject:postModel];
@@ -212,16 +212,16 @@ static NSString *const customRecommendType = @"2";
                     if ([type.type isEqualToString:customContentType]) {
                         if (dic[@"tid"]) {
                             //有tid是帖子 否则是文章
-                            PostModel *postModel = [PostModel objectWithKeyValues:dic];
+                            PostModel *postModel = [PostModel mj_objectWithKeyValues:dic];
                             postModel.modelType = @"1";
                             [postModel frameWithModel];
                             [dataArray addObject:postModel];
                         }else{
-                            ArticleListModel *articleModel = [ArticleListModel objectWithKeyValues:dic];
+                            ArticleListModel *articleModel = [ArticleListModel mj_objectWithKeyValues:dic];
                             [dataArray addObject:articleModel];
                         }
                     }else if ([type.type isEqualToString:customRecommendType]){
-                        PostModel *postModel = [PostModel objectWithKeyValues:dic];
+                        PostModel *postModel = [PostModel mj_objectWithKeyValues:dic];
                         postModel.modelType = @"1";
                         [postModel frameWithModel];
                         [dataArray addObject:postModel];
@@ -262,16 +262,16 @@ static NSString *const customRecommendType = @"2";
                         if ([type.type isEqualToString:customContentType]) {
                             if (dic[@"tid"]) {
                                 //有tid是帖子 否则是文章
-                                PostModel *postModel = [PostModel objectWithKeyValues:dic];
+                                PostModel *postModel = [PostModel mj_objectWithKeyValues:dic];
                                 postModel.modelType = @"1";
                                 [postModel frameWithModel];
                                 [dataArray addObject:postModel];
                             }else{
-                                ArticleListModel *articleModel = [ArticleListModel objectWithKeyValues:dic];
+                                ArticleListModel *articleModel = [ArticleListModel mj_objectWithKeyValues:dic];
                                 [dataArray addObject:articleModel];
                             }
                         }else if ([type.type isEqualToString:customRecommendType]){
-                            PostModel *postModel = [PostModel objectWithKeyValues:dic];
+                            PostModel *postModel = [PostModel mj_objectWithKeyValues:dic];
                             postModel.modelType = @"1";
                             [postModel frameWithModel];
                             [dataArray addObject:postModel];
@@ -293,7 +293,7 @@ static NSString *const customRecommendType = @"2";
     id cacheData = [[CacheManager sharedCacheManager] cacheForModule:kCacheModule_Home_Functions];
     if (cacheData) {
         id resultData = [cacheData valueForKeyPath:@"Variables"];
-        model = [CustomHomeMode objectWithKeyValues:[resultData objectForKey:@"myhome"]];
+        model = [CustomHomeMode mj_objectWithKeyValues:[resultData objectForKey:@"myhome"]];
     }
     if (type) {
         CacheDBDao *cache = [CacheManager sharedCacheManager];
@@ -303,7 +303,7 @@ static NSString *const customRecommendType = @"2";
             id resultData = [cacheData_posts valueForKeyPath:@"Variables"];
             if (!isNull([resultData objectForKey:@"data"])) {
                 for (NSDictionary *dic in [resultData objectForKey:@"data"]) {
-                    ArticleListModel *postModel = [ArticleListModel objectWithKeyValues:dic];
+                    ArticleListModel *postModel = [ArticleListModel mj_objectWithKeyValues:dic];
                     [arr addObject:postModel];
                 }
             }
@@ -313,7 +313,7 @@ static NSString *const customRecommendType = @"2";
                 id resultData = [cacheData_posts valueForKeyPath:@"Variables"];
                 if (!isNull([resultData objectForKey:@"data"])) {
                     for (NSDictionary *dic in [resultData objectForKey:@"data"]) {
-                        PostModel *postModel = [PostModel objectWithKeyValues:dic];
+                        PostModel *postModel = [PostModel mj_objectWithKeyValues:dic];
                         postModel.modelType = @"1";
                         [postModel frameWithModel];
                         [arr addObject:postModel];
@@ -334,7 +334,7 @@ static NSString *const customRecommendType = @"2";
             id resultData = [cacheData_posts valueForKeyPath:@"Variables"];
             if (!isNull([resultData objectForKey:@"data"])) {
                 for (NSDictionary *dic in [resultData objectForKey:@"data"]) {
-                    ArticleListModel *postModel = [ArticleListModel objectWithKeyValues:dic];
+                    ArticleListModel *postModel = [ArticleListModel mj_objectWithKeyValues:dic];
                     [arr addObject:postModel];
                 }
             }
@@ -350,7 +350,7 @@ static NSString *const customRecommendType = @"2";
     NSMutableArray *dataArray = [NSMutableArray new];
     id resultData = [cacheData valueForKeyPath:@"Variables"];
     for (NSDictionary *dic in [resultData objectForKey:@"forums"]) {
-        BoardModel *boardModel = [BoardModel objectWithKeyValues:dic];
+        BoardModel *boardModel = [BoardModel mj_objectWithKeyValues:dic];
         [dataArray addObject:boardModel];
     }
     block(dataArray);
@@ -373,7 +373,7 @@ static NSString *const customRecommendType = @"2";
             NSMutableArray *array = [NSMutableArray array];
             if (![resultData[@"data"] isEqual:[NSNull null]]) {
                 for (NSDictionary *dic in resultData[@"data"]) {
-                    ArticleListModel *articleModel = [ArticleListModel objectWithKeyValues:dic];
+                    ArticleListModel *articleModel = [ArticleListModel mj_objectWithKeyValues:dic];
                     [array addObject:articleModel];
                 }
             }
@@ -397,7 +397,7 @@ static NSString *const customRecommendType = @"2";
         }else{
             if (data) {
                 id resultData = [data valueForKeyPath:@"Variables"];
-                ArticleDetailModel *articleModel = [ArticleDetailModel objectWithKeyValues:resultData[@"data"]];
+                ArticleDetailModel *articleModel = [ArticleDetailModel mj_objectWithKeyValues:resultData[@"data"]];
                 block(articleModel);
             }else{
                 block(nil);
@@ -413,14 +413,14 @@ static NSString *const customRecommendType = @"2";
         if ([dicType[@"type"] isEqualToString:@"banner"]) {
             NSMutableArray *bannerArray = [NSMutableArray array];
             for (NSDictionary *bannerDic in dicType[@"setting"]) {
-                BannerModel *bannerModel = [BannerModel objectWithKeyValues:bannerDic];
+                BannerModel *bannerModel = [BannerModel mj_objectWithKeyValues:bannerDic];
                 [bannerArray addObject:bannerModel];
             }
             customHomeModel.banner = bannerArray;
         }else if ([dicType[@"type"] isEqualToString:@"func"]){
             NSMutableArray *linkArray = [NSMutableArray array];
             for (NSDictionary *linkDic in dicType[@"setting"]) {
-                LinkModel *linkModel = [LinkModel objectWithKeyValues:linkDic];
+                LinkModel *linkModel = [LinkModel mj_objectWithKeyValues:linkDic];
                 [linkArray addObject:linkModel];
             }
             customHomeModel.link = linkArray;
@@ -428,7 +428,7 @@ static NSString *const customRecommendType = @"2";
         else if ([dicType[@"type"] isEqualToString:@"hot"]){
             NSMutableArray *hotArray = [NSMutableArray array];
             for (NSDictionary *hotDic in dicType[@"setting"]) {
-                ForumModel *forumModel = [ForumModel objectWithKeyValues:hotDic];
+                ForumModel *forumModel = [ForumModel mj_objectWithKeyValues:hotDic];
                 [hotArray addObject:forumModel];
             }
             customHomeModel.forum = hotArray;
@@ -436,7 +436,7 @@ static NSString *const customRecommendType = @"2";
         else if ([dicType[@"type"] isEqualToString:@"recomm"]){
             NSMutableArray *recomm = [NSMutableArray array];
             for (NSDictionary *recommDic in dicType[@"recommend"][@"thread_config"]) {
-                CustomHomeListModel *listModel = [CustomHomeListModel objectWithKeyValues:recommDic];
+                CustomHomeListModel *listModel = [CustomHomeListModel mj_objectWithKeyValues:recommDic];
                 listModel.type = dicType[@"recommend"][@"type"];
                 [recomm addObject:listModel];
             }

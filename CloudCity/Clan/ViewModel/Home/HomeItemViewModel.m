@@ -30,7 +30,7 @@
                     NSArray *itemArray = dic[@"tab_cfg"][@"title_cfg"];
                     NSMutableArray *tempCustomItemArray = [NSMutableArray array];
                     for (NSDictionary *dic  in itemArray) {
-                        customRightItemModel = [CustomRightItemModel objectWithKeyValues:dic];
+                        customRightItemModel = [CustomRightItemModel mj_objectWithKeyValues:dic];
                         [tempCustomItemArray addObject:customRightItemModel];
                     }
                     customHomeModel.title_cfg = tempCustomItemArray;
@@ -41,14 +41,14 @@
                 if (dic[@"tab_cfg"][@"navi_page"]) {
                     NSMutableArray *navGetArray = [NSMutableArray array];
                     for (NSDictionary *navDic in dic[@"tab_cfg"][@"navi_page"]) {
-                        CustomNavModel *customNav = [CustomNavModel objectWithKeyValues:navDic];
+                        CustomNavModel *customNav = [CustomNavModel mj_objectWithKeyValues:navDic];
                         customNav.customHomeModel = [homeviewmodel request_homeWithDataArray:navDic[@"navi_setting"][@"home_page"]];
                         //拉取右侧视图配置
                         if (dic[@"tab_cfg"][@"title_cfg"]) {
                             NSArray *itemArray = dic[@"tab_cfg"][@"title_cfg"];
                             NSMutableArray *tempCustomItemArray = [NSMutableArray array];
                             for (NSDictionary *dic  in itemArray) {
-                                customRightItemModel = [CustomRightItemModel objectWithKeyValues:dic];
+                                customRightItemModel = [CustomRightItemModel mj_objectWithKeyValues:dic];
                                 [tempCustomItemArray addObject:customRightItemModel];
                             }
                             customNav.customHomeModel.title_cfg = tempCustomItemArray;
@@ -64,7 +64,7 @@
                     NSArray *itemArray = dic[@"tab_cfg"][@"title_cfg"];
                     NSMutableArray *tempCustomItemArray = [NSMutableArray array];
                     for (NSDictionary *dic  in itemArray) {
-                        customRightItemModel = [CustomRightItemModel objectWithKeyValues:dic];
+                        customRightItemModel = [CustomRightItemModel mj_objectWithKeyValues:dic];
                         [tempCustomItemArray addObject:customRightItemModel];
                     }
                     customHomeModel = [CustomHomeMode new];

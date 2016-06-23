@@ -312,7 +312,7 @@ static float interval = 60.f;
                     NSArray *itemArray = dic[@"tab_cfg"][@"title_cfg"];
                     NSMutableArray *tempCustomItemArray = [NSMutableArray array];
                     for (NSDictionary *dics  in itemArray) {
-                        customRightItemModel = [CustomRightItemModel objectWithKeyValues:dics];
+                        customRightItemModel = [CustomRightItemModel mj_objectWithKeyValues:dics];
                         [tempCustomItemArray addObject:customRightItemModel];
                     }
                     customHomeModel.title_cfg = tempCustomItemArray;
@@ -325,14 +325,14 @@ static float interval = 60.f;
                 typeClassStrValue = @"ArticleViewController";
                 if (dic[@"tab_cfg"][@"navi_page"]) {
                     for (NSDictionary *navDic in dic[@"tab_cfg"][@"navi_page"]) {
-                        CustomNavModel *customNav = [CustomNavModel objectWithKeyValues:navDic];
+                        CustomNavModel *customNav = [CustomNavModel mj_objectWithKeyValues:navDic];
                         customNav.customHomeModel = [_homeviewmodel request_homeWithDataArray:navDic[@"navi_setting"][@"home_page"]];
                         //拉取右侧视图配置
                         if (dic[@"tab_cfg"][@"title_cfg"]) {
                             NSArray *itemArray = dic[@"tab_cfg"][@"title_cfg"];
                             NSMutableArray *tempCustomItemArray = [NSMutableArray array];
                             for (NSDictionary *dics  in itemArray) {
-                                customRightItemModel = [CustomRightItemModel objectWithKeyValues:dics];
+                                customRightItemModel = [CustomRightItemModel mj_objectWithKeyValues:dics];
                                 [tempCustomItemArray addObject:customRightItemModel];
                             }
                             customNav.customHomeModel.title_cfg = tempCustomItemArray;
@@ -350,7 +350,7 @@ static float interval = 60.f;
                     NSArray *itemArray = dic[@"tab_cfg"][@"title_cfg"];
                     NSMutableArray *tempCustomItemArray = [NSMutableArray array];
                     for (NSDictionary *dics  in itemArray) {
-                        customRightItemModel = [CustomRightItemModel objectWithKeyValues:dics];
+                        customRightItemModel = [CustomRightItemModel mj_objectWithKeyValues:dics];
                         [tempCustomItemArray addObject:customRightItemModel];
                     }
                     customHomeModel = [CustomHomeMode new];
@@ -638,7 +638,7 @@ static float interval = 60.f;
                 NSArray *forumsDataArr = (NSArray *)forumsdata;
                 NSMutableArray *forumsArr = [NSMutableArray new];
                 for (NSDictionary *dic in forumsDataArr) {
-                    BoardModel *boardModel = [BoardModel objectWithKeyValues:dic];
+                    BoardModel *boardModel = [BoardModel mj_objectWithKeyValues:dic];
                     [forumsArr addObject:boardModel];
                     //                    if (boardModel.forums && boardModel.forums.count>0) {
                     //                        [forumsArr addObjectsFromArray:boardModel.forums];

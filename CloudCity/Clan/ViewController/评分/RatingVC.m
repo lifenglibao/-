@@ -50,7 +50,7 @@
 //    NSArray *tempChoice = @[@(-4),@(-2),@(-1),@(1),@(2),@(4),@(6),@(8)];
     NSMutableArray *arr = [[NSMutableArray alloc]initWithCapacity:_ratelist.count];
     for (NSDictionary *dic in _ratelist) {
-        RateItem *item = [RateItem objectWithKeyValues:dic];
+        RateItem *item = [RateItem mj_objectWithKeyValues:dic];
         [arr addObject:item];
         int min = item.min.intValue;
         int max = item.max.intValue;

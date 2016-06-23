@@ -130,7 +130,7 @@ static NSString *product_kurl_base_path_test = @"http://10.2.29.10/product/ui/ht
                  [ClanNetAPI saveCookieData];
                  [[NSUserDefaults standardUserDefaults] setObject:username forKey:@"kLASTUSERNAME"];
                  UserModel *user = [UserModel currentUserInfo];
-                 [user setValueWithObject:[UserModel objectWithKeyValues:data[@"data"]]];
+                 [user setValueWithObject:[UserModel mj_objectWithKeyValues:data[@"data"]]];
                  //设置登录成功
                  user.logined = YES;
                  [UserModel saveToLocal];
@@ -168,7 +168,7 @@ static NSString *product_kurl_base_path_test = @"http://10.2.29.10/product/ui/ht
                 [[NSUserDefaults standardUserDefaults] setObject:username forKey:@"kLASTUSERNAME"];
                 
                 UserModel *user = [UserModel currentUserInfo];
-                [user setValueWithObject:[UserModel objectWithKeyValues:data]];
+                [user setValueWithObject:[UserModel mj_objectWithKeyValues:data]];
                 //设置登录成功
                 user.logined = YES;
                 [UserModel saveToLocal];
@@ -625,7 +625,7 @@ static NSString *product_kurl_base_path_test = @"http://10.2.29.10/product/ui/ht
         if (data) {
             NSDictionary *resultData = [data valueForKeyPath:@"Variables"];
             BOOL isImageType = YES;
-            CheckPostModel *checkModel = [CheckPostModel objectWithKeyValues:resultData];
+            CheckPostModel *checkModel = [CheckPostModel mj_objectWithKeyValues:resultData];
             if (resultData[@"allowperm"][@"allowupload"]) {
                 NSString *jpgString = nil;
                 NSString *jpegString = nil;
@@ -1264,7 +1264,7 @@ static NSString *product_kurl_base_path_test = @"http://10.2.29.10/product/ui/ht
                  [ClanNetAPI saveCookieData];
                  [[NSUserDefaults standardUserDefaults] setObject:username forKey:@"kLASTUSERNAME"];
                  UserModel *user = [UserModel currentUserInfo];
-                 [user setValueWithObject:[UserModel objectWithKeyValues:data[@"data"]]];
+                 [user setValueWithObject:[UserModel mj_objectWithKeyValues:data[@"data"]]];
                  //设置登录成功
                  user.logined = YES;
                  [UserModel saveToLocal];
@@ -1356,7 +1356,7 @@ static NSString *product_kurl_base_path_test = @"http://10.2.29.10/product/ui/ht
                 [[NSUserDefaults standardUserDefaults] setObject:username forKey:@"kLASTUSERNAME"];
                 
                 UserModel *user = [UserModel currentUserInfo];
-                [user setValueWithObject:[UserModel objectWithKeyValues:data]];
+                [user setValueWithObject:[UserModel mj_objectWithKeyValues:data]];
                 //设置登录成功
                 user.logined = YES;
                 [UserModel saveToLocal];
@@ -1405,7 +1405,7 @@ static NSString *product_kurl_base_path_test = @"http://10.2.29.10/product/ui/ht
     [[ClanNetAPI sharedJsonClient] requestJsonDataWithPath:_kurl_base_path withParams:checkPostDic withMethodType:Get andBlock:^(id data, NSError *error) {
         NSDictionary *resultData = [data valueForKeyPath:@"Variables"];
         BOOL isImageType = YES;
-        CheckPostModel *checkModel = [CheckPostModel objectWithKeyValues:resultData];
+        CheckPostModel *checkModel = [CheckPostModel mj_objectWithKeyValues:resultData];
         if (resultData[@"allowperm"][@"allowupload"]) {
             NSString *jpgString = nil;
             NSString *jpegString = nil;

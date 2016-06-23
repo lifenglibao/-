@@ -22,7 +22,7 @@
                 id resultData = [data valueForKeyPath:@"Variables"];
                 NSMutableArray *dataArray = [NSMutableArray array];
                 for (NSDictionary *dic in [resultData objectForKey:@"thread_list"]) {
-                    PostModel *forumModel = [PostModel objectWithKeyValues:dic];
+                    PostModel *forumModel = [PostModel mj_objectWithKeyValues:dic];
                     [dataArray addObject:forumModel];
                 }
                 BOOL isMore = NO;
@@ -34,7 +34,7 @@
                 id resultData = [data valueForKeyPath:@"Variables"];
                 NSMutableArray *dataArray = [NSMutableArray array];
                 for (NSDictionary *dic in [resultData objectForKey:@"forum_list"]) {
-                    ForumsModel *forumModel = [ForumsModel objectWithKeyValues:dic];
+                    ForumsModel *forumModel = [ForumsModel mj_objectWithKeyValues:dic];
                     [dataArray addObject:forumModel];
                 }
                 block(dataArray,NO);
@@ -43,13 +43,13 @@
                 NSMutableArray *dataArray = [NSMutableArray array];
                 if ([[resultData objectForKey:@"user_list"] isKindOfClass:[NSDictionary class]]) {
                     for (NSDictionary *dic in [[resultData objectForKey:@"user_list"] allValues]) {
-                        UserInfoModel *forumModel = [UserInfoModel objectWithKeyValues:dic];
+                        UserInfoModel *forumModel = [UserInfoModel mj_objectWithKeyValues:dic];
                         [dataArray addObject:forumModel];
                     }
                 }
                 else if ([[resultData objectForKey:@"user_list"] isKindOfClass:[NSArray class]]){
                     for (NSDictionary *dic in [resultData objectForKey:@"user_list"]) {
-                        UserInfoModel *forumModel = [UserInfoModel objectWithKeyValues:dic];
+                        UserInfoModel *forumModel = [UserInfoModel mj_objectWithKeyValues:dic];
                         [dataArray addObject:forumModel];
                     }
                 }

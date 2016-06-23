@@ -134,7 +134,7 @@
                     articleArray = [NSMutableArray arrayWithCapacity:array.count];
                     [articleArray removeAllObjects];
                     for (NSDictionary *dic in array) {
-                        ArticleModel *articleModel = [ArticleModel objectWithKeyValues:dic];
+                        ArticleModel *articleModel = [ArticleModel mj_objectWithKeyValues:dic];
                         NSData *udObject = [NSKeyedArchiver archivedDataWithRootObject:articleModel];
                         [articleArray addObject:udObject];
                     }
@@ -419,7 +419,7 @@
             articleArray = [NSMutableArray arrayWithCapacity:array.count];
             [articleArray removeAllObjects];
             for (NSDictionary *dic in array) {
-                ArticleModel *articleModel = [ArticleModel objectWithKeyValues:dic];
+                ArticleModel *articleModel = [ArticleModel mj_objectWithKeyValues:dic];
                 NSData *udObject = [NSKeyedArchiver archivedDataWithRootObject:articleModel];
                 [articleArray addObject:udObject];
             }

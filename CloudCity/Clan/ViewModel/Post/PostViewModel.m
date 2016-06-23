@@ -83,13 +83,13 @@
                     preifx = topData[@"threadtypes"][@"prefix"];
                 }
                 for (NSDictionary *dic in [listData objectForKey:@"forum_threadlist"]) {
-                    PostModel *postModel = [PostModel objectWithKeyValues:dic];
+                    PostModel *postModel = [PostModel mj_objectWithKeyValues:dic];
                     postModel.prefix = preifx;
                     [postModel frameWithModel];
                     [strongSelf.listArray addObject:postModel];
                 }
                 for (NSDictionary *dic in [topData objectForKey:@"forum_threadlist"]) {
-                    PostModel *postModel = [PostModel objectWithKeyValues:dic];
+                    PostModel *postModel = [PostModel mj_objectWithKeyValues:dic];
                     postModel.prefix = preifx;
                     [postModel frameWithModel];
                     [topArray addObject:postModel];
@@ -119,12 +119,12 @@
                 BOOL isMore = (moreStr && moreStr.intValue == 1) ? YES : NO;
                 ForumsModel *fmodel = nil;
                 if (listData[@"forum"]) {
-                    fmodel = [ForumsModel objectWithKeyValues:listData[@"forum"]];
+                    fmodel = [ForumsModel mj_objectWithKeyValues:listData[@"forum"]];
                 }
                 if (listData[@"threadtypes"]) {
-                    fmodel.threadtypes = [threadtypesModel objectWithKeyValues:listData[@"threadtypes"]];
+                    fmodel.threadtypes = [threadtypesModel mj_objectWithKeyValues:listData[@"threadtypes"]];
                 }
-                fmodel.postActivityModel = [PostActivityModel objectWithKeyValues:listData[@"activity_config"]];
+                fmodel.postActivityModel = [PostActivityModel mj_objectWithKeyValues:listData[@"activity_config"]];
                 block(topArray,strongSelf.listArray,fmodel,isMore,NO);
             }
         }else{
@@ -178,7 +178,7 @@
                 preifx = topData[@"threadtypes"][@"prefix"];
             }
             for (NSDictionary *dic in [topData objectForKey:@"forum_threadlist"]) {
-                PostModel *postModel = [PostModel objectWithKeyValues:dic];
+                PostModel *postModel = [PostModel mj_objectWithKeyValues:dic];
 
                 postModel.prefix = preifx;
                 [postModel frameWithModel];
@@ -194,17 +194,17 @@
             //                [[listData objectForKey:@"need_more"]isEqualToString:@"1"]
             BOOL isMore = (moreStr && moreStr.intValue == 1) ? YES : NO;
             for (NSDictionary *dic in [listData objectForKey:@"forum_threadlist"]) {
-                PostModel *postModel = [PostModel objectWithKeyValues:dic];
+                PostModel *postModel = [PostModel mj_objectWithKeyValues:dic];
                 postModel.prefix = preifx;
                 [postModel frameWithModel];
                 [listArray addObject:postModel];
             }
             ForumsModel *fmodel = nil;
             if (listData[@"forum"]) {
-                fmodel = [ForumsModel objectWithKeyValues:listData[@"forum"]];
+                fmodel = [ForumsModel mj_objectWithKeyValues:listData[@"forum"]];
             }
             if (listData[@"threadtypes"]) {
-                fmodel.threadtypes = [threadtypesModel objectWithKeyValues:listData[@"threadtypes"]];
+                fmodel.threadtypes = [threadtypesModel mj_objectWithKeyValues:listData[@"threadtypes"]];
             }
             block(topArray,listArray,fmodel,isMore);
         }

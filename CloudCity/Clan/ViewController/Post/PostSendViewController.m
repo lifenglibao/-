@@ -695,7 +695,7 @@
         STRONGSELF
         if (data) {
             id resultData = [data valueForKeyPath:@"Variables"];
-            CheckPostModel *checkModel = [CheckPostModel objectWithKeyValues:resultData];
+            CheckPostModel *checkModel = [CheckPostModel mj_objectWithKeyValues:resultData];
             [strongSelf.permissionDic setObject:checkModel forKey:fid];
             [strongSelf dealwithCheckPermissionResult:checkModel withFid:fid];
         } else {

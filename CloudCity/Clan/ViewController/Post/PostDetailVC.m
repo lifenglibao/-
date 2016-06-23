@@ -1320,7 +1320,7 @@ typedef enum {
                     NSMutableArray *joinFileds_arrM = [NSMutableArray new];
                     if (joinfiled_arr && [joinfiled_arr isKindOfClass:[NSArray class]]) {
                         for (id obj in joinfiled_arr) {
-                            JoinFieldItem *item = [JoinFieldItem objectWithKeyValues:obj];
+                            JoinFieldItem *item = [JoinFieldItem mj_objectWithKeyValues:obj];
                             [joinFileds_arrM addObject:item];
                         }
                         //把joinfield取到

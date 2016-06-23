@@ -654,7 +654,7 @@
     id cacheData = [[CacheManager sharedCacheManager] cacheForModule:kCacheModule_Forum];
     id resultData = [cacheData valueForKeyPath:@"Variables"];
     for (NSDictionary *dic in [resultData objectForKey:@"forums"]) {
-        BoardModel *boardModel = [BoardModel objectWithKeyValues:dic];
+        BoardModel *boardModel = [BoardModel mj_objectWithKeyValues:dic];
         for (ForumsModel *forums in boardModel.forums) {
             if ([forums.fid isEqualToString:fid]) {
                 return forums;

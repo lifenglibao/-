@@ -255,7 +255,7 @@ static const CGFloat itemHeight = 90.f;
                 NSArray *forumsDataArr = (NSArray *)forumsdata;
                 NSMutableArray *forumsArr = [NSMutableArray new];
                 for (NSDictionary *dic in forumsDataArr) {
-                    BoardModel *boardModel = [BoardModel objectWithKeyValues:dic];
+                    BoardModel *boardModel = [BoardModel mj_objectWithKeyValues:dic];
                     [forumsArr addObject:boardModel];
                     //                    if (boardModel.forums && boardModel.forums.count>0) {
                     //                        [forumsArr addObjectsFromArray:boardModel.forums];

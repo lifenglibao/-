@@ -491,7 +491,7 @@ static NSString *aPostCellIdentifer = @"APostCell";
     [_listArray removeAllObjects];
     if (listArray && listArray.count > 0) {
         for (NSDictionary *dic in listArray) {
-            CustomHomeListModel *model = [CustomHomeListModel objectWithKeyValues:dic];
+            CustomHomeListModel *model = [CustomHomeListModel mj_objectWithKeyValues:dic];
             [_listArray addObject:model];
         }
         _listType = _listArray[0];

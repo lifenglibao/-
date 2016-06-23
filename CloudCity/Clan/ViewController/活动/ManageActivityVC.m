@@ -149,7 +149,7 @@
                                                                         NSMutableArray *Arr = [NSMutableArray new];
                                                                         for (id obj in arrData) {
                                                                             if (obj && [obj isKindOfClass:[NSDictionary class]]) {
-                                                                                ApplyActivityItem *applyItem = [ApplyActivityItem objectWithKeyValues:obj];
+                                                                                ApplyActivityItem *applyItem = [ApplyActivityItem mj_objectWithKeyValues:obj];
                                                                                 [Arr addObject:applyItem];
                                                                             }
                                                                         }

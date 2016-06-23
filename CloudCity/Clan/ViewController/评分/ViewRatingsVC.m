@@ -75,7 +75,7 @@
                                                                       NSArray *listArr = dataDic[@"list"];
                                                                       NSMutableArray *tempArr = [[NSMutableArray alloc]initWithCapacity:listArr.count];
                                                                       for (NSDictionary *itemdic in listArr) {
-                                                                          ViewRatingItem *item = [ViewRatingItem objectWithKeyValues:itemdic];
+                                                                          ViewRatingItem *item = [ViewRatingItem mj_objectWithKeyValues:itemdic];
                                                                           [tempArr addObject:item];
                                                                       }
                                                                       weakSelf.sourceData = tempArr;

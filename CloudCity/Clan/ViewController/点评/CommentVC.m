@@ -58,7 +58,7 @@
     }
     NSMutableArray *newFeild = [NSMutableArray new];
     for (NSDictionary *itemDic in _commentFeild) {
-        ComtFeildItem *itemfeild = [ComtFeildItem objectWithKeyValues:itemDic];
+        ComtFeildItem *itemfeild = [ComtFeildItem mj_objectWithKeyValues:itemDic];
         [newFeild addObject:itemfeild];
     }
     self.commentFeild = newFeild;

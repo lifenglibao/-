@@ -124,7 +124,7 @@ static NSString * const customType = @"1";
                 NSArray *forumsDataArr = (NSArray *)forumsdata;
                 NSMutableArray *forumsArr = [NSMutableArray new];
                 for (NSDictionary *dic in forumsDataArr) {
-                    BoardModel *boardModel = [BoardModel objectWithKeyValues:dic];
+                    BoardModel *boardModel = [BoardModel mj_objectWithKeyValues:dic];
                     [forumsArr addObject:boardModel];
                 }
                 //存储forums

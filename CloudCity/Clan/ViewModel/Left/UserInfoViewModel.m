@@ -48,7 +48,7 @@
              }
              id resultData = [data valueForKeyPath:@"Variables"];
              NSDictionary *space = [resultData valueForKey:@"space"];
-             UserInfoModel *infomodel = [UserInfoModel objectWithKeyValues:space];
+             UserInfoModel *infomodel = [UserInfoModel mj_objectWithKeyValues:space];
              infomodel.group_title = space[@"group"][@"grouptitle"];
              NSString *hasSelf = space[@"self"];
              if (hasSelf && [hasSelf isEqualToString:@"1"]) {

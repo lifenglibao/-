@@ -66,7 +66,7 @@
                 NSArray *forumsDataArr = (NSArray *)forumsdata;
                 NSMutableArray *forumsArr = [NSMutableArray new];
                 for (NSDictionary *dic in forumsDataArr) {
-                    BoardModel *boardModel = [BoardModel objectWithKeyValues:dic];
+                    BoardModel *boardModel = [BoardModel mj_objectWithKeyValues:dic];
                     if (boardModel.forums && boardModel.forums.count>0) {
                         [forumsArr addObjectsFromArray:boardModel.forums];
                     }

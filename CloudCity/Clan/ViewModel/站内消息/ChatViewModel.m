@@ -49,7 +49,7 @@
             NSMutableDictionary *toBeSortDic = [NSMutableDictionary new];
             NSMutableArray *tempSortArr = [NSMutableArray new];
             for (NSDictionary *dic in [resultData valueForKey:@"list"]) {
-                SessionModel *session = [SessionModel objectWithKeyValues:dic];
+                SessionModel *session = [SessionModel mj_objectWithKeyValues:dic];
                 session.current_member_ID = currentLoginMemberID;
                 session.message = [session.message emojizedString];
                 if (session && session.pmid && session.pmid.length > 0) {
@@ -104,7 +104,7 @@
             NSString *currentLoginMemberID = [resultData valueForKey:@"member_uid"];
             NSString *need_more = [resultData valueForKey:@"need_more"];
             for (NSDictionary *dic in [resultData valueForKey:@"list"]) {
-                SessionModel *session = [SessionModel objectWithKeyValues:dic];
+                SessionModel *session = [SessionModel mj_objectWithKeyValues:dic];
                 session.current_member_ID = currentLoginMemberID;
                 session.message = [session.message emojizedString];
                 if (!session.message) {

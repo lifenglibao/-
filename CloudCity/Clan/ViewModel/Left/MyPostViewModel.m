@@ -39,7 +39,7 @@
             NSArray *arr = [data valueForKey:@"data"];
             for (NSDictionary *dic in arr)
             {
-                PostModel *postModel = [PostModel objectWithKeyValues:dic];
+                PostModel *postModel = [PostModel mj_objectWithKeyValues:dic];
                 postModel.avatar = avatar;
                 [returnarr addObject:postModel];
             }
@@ -79,7 +79,7 @@
                 NSString *replies = [dic objectForKey:@"replies"];
                 NSString *views = [dic objectForKey:@"views"];
                 for (id obj in details) {
-                    ReplyModel *reply = [ReplyModel objectWithKeyValues:obj];
+                    ReplyModel *reply = [ReplyModel mj_objectWithKeyValues:obj];
                     reply.subject = [dic objectForKey:@"subject"];
                     reply.avatar = avatar;
                     reply.forum_name = [dic objectForKey:@"forum_name"];
