@@ -146,73 +146,73 @@ static const CGFloat itemHeight = 90.f;
     if (!link.type || link.type.length == 0) {
         return;
     }
-    if ([link.type isEqualToString:@"1"]) {        
+//    if ([link.type isEqualToString:@"1"]) {        
         // 判断 gridview 点击时跳到哪个VC
-        if ([link.url isEqualToString:@"bus_search"]) {
+//        if ([link.url isEqualToString:@"bus_search"]) {
             BusViewController *bus = [[BusViewController alloc] init];
             bus.hidesBottomBarWhenPushed = YES;
             [self.additionsViewController.navigationController pushViewController:bus animated:YES];
 
             // go to bus search function
-        }else if ([link.url isEqualToString:@"car_fine_search"]){
-            
-            TOWebViewController *web = [[TOWebViewController alloc]initWithURLString:@"http://0395.weizhangwang.com"]; //hard code
-            web.hidesBottomBarWhenPushed = YES;
-            [self.additionsViewController.navigationController pushViewController:web animated:YES];
-            
-        }else if ([link.url isEqualToString:@"weather"]){
-            
-            TOWebViewController *web = [[TOWebViewController alloc]initWithURLString:@"http://henan.weather.com.cn/luohe/index.shtml"]; //hard code
-            web.hidesBottomBarWhenPushed = YES;
-            [self.additionsViewController.navigationController pushViewController:web animated:YES];
-            
-        }else if ([link.url isEqualToString:@"post_news"]){
-            [self sendNormalPost];
-        }
+//        }else if ([link.url isEqualToString:@"car_fine_search"]){
+//            
+//            TOWebViewController *web = [[TOWebViewController alloc]initWithURLString:@"http://0395.weizhangwang.com"]; //hard code
+//            web.hidesBottomBarWhenPushed = YES;
+//            [self.additionsViewController.navigationController pushViewController:web animated:YES];
+//            
+//        }else if ([link.url isEqualToString:@"weather"]){
+//            
+//            TOWebViewController *web = [[TOWebViewController alloc]initWithURLString:@"http://henan.weather.com.cn/luohe/index.shtml"]; //hard code
+//            web.hidesBottomBarWhenPushed = YES;
+//            [self.additionsViewController.navigationController pushViewController:web animated:YES];
+//            
+//        }else if ([link.url isEqualToString:@"post_news"]){
+//            [self sendNormalPost];
+//        }
         
 
-    }else if ([link.type isEqualToString:@"2"]){
-        //跳帖子详情
-//        PostDetailViewController *detail = [[PostDetailViewController alloc]init];
-        PostDetailVC *detail = [[PostDetailVC alloc]init];
-        PostModel *postModel = [PostModel new];
-        postModel.tid = link.pid;
-        detail.postModel =  postModel;
-        detail.hidesBottomBarWhenPushed = YES;
-        [self.additionsViewController.navigationController pushViewController:detail animated:YES];
-    }else if ([link.type isEqualToString:@"3"]){
-        //跳版块链接
-        PostViewController *postVc = [[PostViewController alloc]init];
-        ForumsModel *forumModel = [Util boardFormCache:link.pid];
-        if (!forumModel) {
-            forumModel = [ForumsModel new];
-        }
-        forumModel.fid = link.pid;
-        postVc.hidesBottomBarWhenPushed = YES;
-        postVc.forumsModel = forumModel;
-        [self.additionsViewController.navigationController pushViewController:postVc animated:YES];
-    }else if ([link.type isEqualToString:@"4"]){
+//    }else if ([link.type isEqualToString:@"2"]){
+//        //跳帖子详情
+////        PostDetailViewController *detail = [[PostDetailViewController alloc]init];
 //        PostDetailVC *detail = [[PostDetailVC alloc]init];
-//        detail.isArticle = YES;
 //        PostModel *postModel = [PostModel new];
 //        postModel.tid = link.pid;
 //        detail.postModel =  postModel;
 //        detail.hidesBottomBarWhenPushed = YES;
 //        [self.additionsViewController.navigationController pushViewController:detail animated:YES];
-        ArticleDetailViewController *articleDetailVc = [[ArticleDetailViewController alloc]init];
-        ArticleListModel *listModel = [ArticleListModel new];
-        listModel.aid = link.pid;
-        articleDetailVc.articleModel = listModel;
-        articleDetailVc.hidesBottomBarWhenPushed = YES;
-        [self.additionsViewController.navigationController pushViewController:articleDetailVc animated:YES];
-    }else if ([link.type isEqualToString:@"5"]){
-        ArticleCustomViewController *customVc = [[ArticleCustomViewController alloc]init];
-        ArticleModel *articleModel = [ArticleModel new];
-        articleModel.articleId = link.pid;
-        customVc.articleModel = articleModel;
-        customVc.hidesBottomBarWhenPushed = YES;
-        [self.additionsViewController.navigationController pushViewController:customVc animated:YES];
-    }
+//    }else if ([link.type isEqualToString:@"3"]){
+//        //跳版块链接
+//        PostViewController *postVc = [[PostViewController alloc]init];
+//        ForumsModel *forumModel = [Util boardFormCache:link.pid];
+//        if (!forumModel) {
+//            forumModel = [ForumsModel new];
+//        }
+//        forumModel.fid = link.pid;
+//        postVc.hidesBottomBarWhenPushed = YES;
+//        postVc.forumsModel = forumModel;
+//        [self.additionsViewController.navigationController pushViewController:postVc animated:YES];
+//    }else if ([link.type isEqualToString:@"4"]){
+////        PostDetailVC *detail = [[PostDetailVC alloc]init];
+////        detail.isArticle = YES;
+////        PostModel *postModel = [PostModel new];
+////        postModel.tid = link.pid;
+////        detail.postModel =  postModel;
+////        detail.hidesBottomBarWhenPushed = YES;
+////        [self.additionsViewController.navigationController pushViewController:detail animated:YES];
+//        ArticleDetailViewController *articleDetailVc = [[ArticleDetailViewController alloc]init];
+//        ArticleListModel *listModel = [ArticleListModel new];
+//        listModel.aid = link.pid;
+//        articleDetailVc.articleModel = listModel;
+//        articleDetailVc.hidesBottomBarWhenPushed = YES;
+//        [self.additionsViewController.navigationController pushViewController:articleDetailVc animated:YES];
+//    }else if ([link.type isEqualToString:@"5"]){
+//        ArticleCustomViewController *customVc = [[ArticleCustomViewController alloc]init];
+//        ArticleModel *articleModel = [ArticleModel new];
+//        articleModel.articleId = link.pid;
+//        customVc.articleModel = articleModel;
+//        customVc.hidesBottomBarWhenPushed = YES;
+//        [self.additionsViewController.navigationController pushViewController:customVc animated:YES];
+//    }
 
 }
 

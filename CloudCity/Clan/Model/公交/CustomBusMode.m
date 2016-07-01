@@ -227,6 +227,10 @@
         string = @"未知";
         return string;
     }
+    if ([str isEqualToString:@"0.0"]) {
+        string = @"未知";
+        return string;
+    }
     return string;
 }
 

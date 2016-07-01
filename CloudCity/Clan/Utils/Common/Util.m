@@ -26,7 +26,7 @@
     if(![fileManager fileExistsAtPath:destPath]){
         NSString* sourcePath =[[NSBundle mainBundle] pathForResource:ThemeStyle ofType:@"plist"];
         [fileManager copyItemAtPath:sourcePath toPath:destPath error:&error];
-        NSLog(@"appkey 沙盒 = %@",[NSString returnStringWithPlist:YZBaseURL]);
+        NSLog(@"appkey 沙盒 = %@",YZBaseURL);
 
     }
 }
@@ -42,7 +42,7 @@
     if(![fileManager fileExistsAtPath:destPath]){
         NSString* sourcePath =[[NSBundle mainBundle] pathForResource:ThemeStyle ofType:@"plist"];
         [fileManager copyItemAtPath:sourcePath toPath:destPath error:&error];
-        NSLog(@"appkey 沙盒 = %@",[NSString returnStringWithPlist:YZBaseURL]);
+        NSLog(@"appkey 沙盒 = %@",YZBaseURL);
     } else {
         NSString *pathVisible = [[NSBundle mainBundle] pathForResource:ThemeStyle ofType:@"plist"];
         NSMutableDictionary *applistVisble = [[[NSMutableDictionary alloc]initWithContentsOfFile:pathVisible]mutableCopy];
@@ -742,6 +742,36 @@
     size = CGSizeMake(ceil(boundingBox.width), ceil(boundingBox.height));
     
     return size.width;
+}
+
++ (BOOL)oneDayPast {
+    
+    NSDate *lastDate = [[NSUserDefaults standardUserDefaults] objectForKey:@"time_interval"] ? [[NSUserDefaults standardUserDefaults] objectForKey:@"time_interval"] : [NSDate date];
+    
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *components = [gregorian components:NSDayCalendarUnit fromDate:lastDate toDate:[NSDate date] options:0];
+    NSInteger days = [components day];
+    if (days >= DEFAULT_INTERVAL) {
+        [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:@"time_interval"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        return true;
+    }else{
+        [[NSUserDefaults standardUserDefaults] setObject:lastDate forKey:@"time_interval"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        return false;
+    }
+}
+
++ (BOOL)version:(NSString *)_oldver lessthan:(NSString *)_newver
+{
+    NSLog(@"%@",_oldver);
+    NSLog(@"%@",_newver);
+    
+    if ([_oldver compare:_newver options:NSNumericSearch] == NSOrderedAscending)
+    {
+        return YES;
+    }
+    return NO;
 }
 
 @end

@@ -37,4 +37,9 @@
  *  描述
  */
 @property (copy, nonatomic) NSString *desc;
+/**
+ *  时间
+ */
+@property (nonatomic) NSInteger duration;
+
 @end

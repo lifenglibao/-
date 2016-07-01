@@ -233,6 +233,19 @@ static NSString *const customRecommendType = @"2";
     }
 }
 
+- (void)request_CCHomePageInfoAndBlock:(void(^)(BOOL isError, id result))block
+{
+    [[Clan_NetAPIManager sharedManager]request_CCHomePageInfoWithBlock:^(id data, NSError *error) {
+        
+        if (!error && data && [[data objectForKey:API_STATUS_CODE] integerValue] == 200) {
+            block(NO,data);
+        } else {
+            block(YES,nil);
+        }
+        
+    }];
+}
+
 - (void)request_customHomeWithType:(CustomHomeListModel *)type page:(NSString *)page andBlock:(void(^)(BOOL isMore,NSArray *hotArray,BOOL isError))block{
     WEAKSELF
     [[Clan_NetAPIManager sharedManager]request_customHomeWithNewList:type ?type.data_link:@"" page:page andBlock:^(id data, NSError *error) {
@@ -409,7 +422,36 @@ static NSString *const customRecommendType = @"2";
 //首页数据Model
 - (CustomHomeMode *)request_homeWithDataArray:(NSArray *)array{
     CustomHomeMode *customHomeModel = [CustomHomeMode new];
+    
+    if ([[TMCache sharedCache]objectForKey:@"CCHomePageInfo"]) {
+        
+        NSArray *ccHomePageBannerArr = [[[TMCache sharedCache]objectForKey:@"CCHomePageInfo"] objectForKey:@"banners"];
+        NSArray *ccHomePageLinkArr = [[[TMCache sharedCache]objectForKey:@"CCHomePageInfo"] objectForKey:@"links"];
+        
+        if (ccHomePageBannerArr) {
+            NSMutableArray *bannerArray = [NSMutableArray array];
+            for (NSDictionary *dicBanner in ccHomePageBannerArr) {
+                
+                BannerModel *bannerModel = [BannerModel mj_objectWithKeyValues:dicBanner];
+                [bannerArray addObject:bannerModel];
+            }
+            customHomeModel.banner = bannerArray;
+        }
+        if (ccHomePageLinkArr) {
+            NSMutableArray *linkArray = [NSMutableArray array];
+            for (NSDictionary *dicLink in ccHomePageLinkArr) {
+                LinkModel *linkModel = [LinkModel mj_objectWithKeyValues:dicLink];
+                [linkArray addObject:linkModel];
+            }
+            customHomeModel.link = linkArray;
+        }
+    }
+    
     for (NSDictionary *dicType in array) {
+        
+        // this banner and link model will not use for our. we are using our own APIs for banner and link model.
+        //not using now.
+        /*
         if ([dicType[@"type"] isEqualToString:@"banner"]) {
             NSMutableArray *bannerArray = [NSMutableArray array];
             for (NSDictionary *bannerDic in dicType[@"setting"]) {
@@ -425,15 +467,18 @@ static NSString *const customRecommendType = @"2";
             }
             customHomeModel.link = linkArray;
         }
-        else if ([dicType[@"type"] isEqualToString:@"hot"]){
+        
+        if ([dicType[@"type"] isEqualToString:@"hot"]){
             NSMutableArray *hotArray = [NSMutableArray array];
             for (NSDictionary *hotDic in dicType[@"setting"]) {
                 ForumModel *forumModel = [ForumModel mj_objectWithKeyValues:hotDic];
                 [hotArray addObject:forumModel];
             }
             customHomeModel.forum = hotArray;
-        }// not using now
-        else if ([dicType[@"type"] isEqualToString:@"recomm"]){
+        }
+        */
+        
+         if ([dicType[@"type"] isEqualToString:@"recomm"]){
             NSMutableArray *recomm = [NSMutableArray array];
             for (NSDictionary *recommDic in dicType[@"recommend"][@"thread_config"]) {
                 CustomHomeListModel *listModel = [CustomHomeListModel mj_objectWithKeyValues:recommDic];
@@ -443,6 +488,7 @@ static NSString *const customRecommendType = @"2";
             customHomeModel.recommend = recomm;
             customHomeModel.recommendType = dicType[@"recommend"][@"type"];
         }
+        
     }
     return customHomeModel;
 }

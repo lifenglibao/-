@@ -8,16 +8,9 @@
 
 #import "ClanNetAPI.h"
 #import "AFHTTPRequestOperationManager+Synchronous.h"
-//Remove:
-//#define kNetPath_Code_Base        @"http://192.168.180.23:8080/"
-//#define kNetPath_Code_Base @"http://qawww.3body.com/"
 
-//#define kNetPath_Code_Base        @"http://120.24.233.197:8080"
 //#define  kNetPath_Code_Base [NSString returnPlistWithKeyValue:YZBaseURL]
-#define  kNetPath_Code_Base [NSString returnPlistWithKeyValue:YZBaseURL]
-#define  kCCNetPath_Code_Base [NSString returnPlistWithKeyValue:CCBaseURL]
 
-//#define  kNetPath_Code_Base [NSString returnStringWithPlist:YZBaseURL]
 
 @interface ClanNetAPI()
 
@@ -30,7 +23,7 @@
     static ClanNetAPI *_sharedClient = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        _sharedClient = [[ClanNetAPI alloc] initWithBaseURL:[NSURL URLWithString:kCCNetPath_Code_Base]];
+        _sharedClient = [[ClanNetAPI alloc] initWithBaseURL:[NSURL URLWithString:CCBaseURL]];
     });
     return _sharedClient;
 }
@@ -40,7 +33,7 @@
     static ClanNetAPI *_sharedClient = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        _sharedClient = [[ClanNetAPI alloc] initWithBaseURL:[NSURL URLWithString:kNetPath_Code_Base]];
+        _sharedClient = [[ClanNetAPI alloc] initWithBaseURL:[NSURL URLWithString:YZBaseURL]];
     });
     return _sharedClient;
 }
@@ -82,7 +75,7 @@
 
 + (void)removeCookieData
 {
-    NSURL *url = [NSURL URLWithString:[NSString returnPlistWithKeyValue:YZBaseURL]];
+    NSURL *url = [NSURL URLWithString:YZBaseURL];
     if (url) {
         NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:url];
         for (int i = 0; i < [cookies count]; i++) {
@@ -91,7 +84,7 @@
 //            DebugLog(@"\nDelete cookie: \n====================\n%@", cookie);
         }
     }
-    NSURL *url1 = [NSURL URLWithString:kNetPath_Code_Base];
+    NSURL *url1 = [NSURL URLWithString:YZBaseURL];
     if (url1) {
         NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:url1];
         for (int i = 0; i < [cookies count]; i++) {

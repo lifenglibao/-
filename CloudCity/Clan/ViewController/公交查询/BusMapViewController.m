@@ -350,19 +350,17 @@ const NSInteger RoutePlanningPaddingEdge                    = 20;
         if ([overlay isKindOfClass:[LineDashPolyline class]])
         {
             MAPolylineRenderer *polylineRenderer = [[MAPolylineRenderer alloc] initWithPolyline:((LineDashPolyline *)overlay).polyline];
-            
+            polylineRenderer.lineDash    = YES;
             polylineRenderer.lineWidth   = 7;
-            polylineRenderer.strokeColor = [UIColor blueColor];
+            polylineRenderer.strokeColor = [UIColor blackColor];
             
             return polylineRenderer;
-        }
-        if ([overlay isKindOfClass:[MANaviPolyline class]])
+            
+        }else if ([overlay isKindOfClass:[MANaviPolyline class]])
         {
             MANaviPolyline *naviPolyline = (MANaviPolyline *)overlay;
             MAPolylineRenderer *polylineRenderer = [[MAPolylineRenderer alloc] initWithPolyline:naviPolyline.polyline];
-            
             polylineRenderer.lineWidth = 8;
-            
             [polylineRenderer loadStrokeTextureImage:[UIImage imageNamed:@"arrowTexture"]];
 
             return polylineRenderer;
@@ -371,6 +369,7 @@ const NSInteger RoutePlanningPaddingEdge                    = 20;
 
     return nil;
 }
+
 
 - (void)dealloc
 {

@@ -8,6 +8,7 @@
 
 #import "BusTransferDetailViewController.h"
 #import "CustomBusMode.h"
+#import "BusTransferDetailTableViewCell.h"
 
 @interface BusTransferDetailViewController ()
 
@@ -31,6 +32,7 @@
     [super viewDidLoad];
     
     self.title = @"换乘方案";
+    self.view.backgroundColor = [UIColor whiteColor];
     [self initTableView];
     [self getRoutePlanningData];
 
@@ -58,11 +60,12 @@
 }
 - (void)initTableView
 {
-    self.tableView = [[BaseTableView alloc] initWithFrame:CGRectMake(10, 100, ScreenWidth - 20, ScreenBoundsHeight - 150) style:UITableViewStylePlain];
+    self.tableView = [[BaseTableView alloc] initWithFrame:CGRectMake(10, 20, ScreenWidth - 20, ScreenBoundsHeight - 50) style:UITableViewStylePlain];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.backgroundColor = [UIColor clearColor];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.showsVerticalScrollIndicator = NO;
     [self.view addSubview:_tableView];
 }
 
@@ -78,28 +81,23 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSDictionary *dic = self.routeData[indexPath.row];
-    if (self.isOpen && [dic.allKeys containsObject:@"endStop"] && self.selectIndex == indexPath.row) {
+    if (self.isOpen && [dic.allKeys containsObject:@"endStop"]) {
         return [Util heightForText:[self.routeData[indexPath.row] objectForKey:@"endStop"] font:[UIFont systemFontOfSize:13] withinWidth:tableView.width];
     }
     return 30;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (BusTransferDetailTableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *busCellIdentifier = @"busRouteCell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:busCellIdentifier];
+    BusTransferDetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:busCellIdentifier];
     
     if (cell == nil)
     {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+        cell = [[BusTransferDetailTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                       reuseIdentifier:busCellIdentifier];
         
-        cell.selectedBackgroundView = [[UIView alloc] init];
-        cell.backgroundColor = [UIColor clearColor];
-        [cell.textLabel sizeToFit];
-        [cell.textLabel setNumberOfLines:0];
-        [cell.textLabel setLineBreakMode:NSLineBreakByCharWrapping];
     }
     
 //    if ([self.routeData[indexPath.row] objectForKey:@"start"]) {
@@ -146,8 +144,11 @@
         cell.textLabel.text = [self.routeData[indexPath.row] objectForKey:@"endStop"];
         cell.imageView.image = kIMG(@"bus");
         cell.imageView.frame = CGRectMake(20, 0, 10, 10);
-
-        cell.accessoryType  = UITableViewCellAccessoryDisclosureIndicator;
+        
+        cell.accessoryView = [[ UIImageView alloc ] initWithImage:kIMG(@"rate_down")];
+        [cell.accessoryView setFrame:CGRectMake(0, 0, 15, 15)];
+        
+//        cell.accessoryType  = UITableViewCellAccessoryDisclosureIndicator;
 
         
     }else if ([self.routeData[indexPath.row] objectForKey:@"arrivalStop"]){
@@ -166,6 +167,12 @@
         cell.imageView.layer.cornerRadius = 2.5;
     }
 
+    
+    cell.selectedBackgroundView = [[UIView alloc] init];
+    cell.backgroundColor = [UIColor clearColor];
+    [cell.textLabel sizeToFit];
+    [cell.textLabel setNumberOfLines:0];
+    [cell.textLabel setLineBreakMode:NSLineBreakByCharWrapping];
     cell.imageView.layer.masksToBounds = YES;
     return cell;
 }
@@ -185,14 +192,14 @@
     
     if ([dic.allKeys containsObject:@"endStop"]) {
         self.isOpen = !self.isOpen;
-        self.selectIndex = indexPath.row;
+//        self.selectIndex = indexPath.row;
         
         UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
         
         if (self.isOpen) {
-            cell.accessoryView.transform = CGAffineTransformMakeRotation(0);
-        } else {
             cell.accessoryView.transform = CGAffineTransformMakeRotation(M_PI);
+        } else {
+            cell.accessoryView.transform = CGAffineTransformMakeRotation(0);
         }
     }
     

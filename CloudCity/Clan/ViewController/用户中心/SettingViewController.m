@@ -248,7 +248,7 @@ static NSString *noImgKey = @"NoImgMode";
     }
     else if ([_titleArr[indexPath.row] isEqualToString:@"给我们好评"])
     {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString returnStringWithPlist:kAPP_DOWNLOAD_URL]]];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:kAPP_DOWNLOAD_URL]];
     }
     else if ([_titleArr[indexPath.row] isEqualToString:@"关于我们"])
     {

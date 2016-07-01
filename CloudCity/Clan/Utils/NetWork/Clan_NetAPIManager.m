@@ -22,8 +22,6 @@
 #import  <CoreTelephony/CTCarrier.h>
 #import  <CoreTelephony/CTTelephonyNetworkInfo.h>
 #import "ClanNetAPI.h"
-static NSString *product_kurl_base_path = @"http://192.168.180.93:8080/product/ui/http/index.php";
-static NSString *product_kurl_base_path_test = @"http://10.2.29.10/product/ui/http/index.php";
 
 
 @interface NSString (EncodingUTF8Additions)
@@ -64,7 +62,7 @@ static NSString *product_kurl_base_path_test = @"http://10.2.29.10/product/ui/ht
     dispatch_once(&pred, ^{
         shared_manager = [[self alloc] init];
     });
-    shared_manager.kurl_base_path = [NSString returnPlistWithKeyValue:YZBasePath];
+    shared_manager.kurl_base_path = YZBasePath;
     return shared_manager;
 }
 //获取自定义首页数据
@@ -1182,7 +1180,33 @@ static NSString *product_kurl_base_path_test = @"http://10.2.29.10/product/ui/ht
             block(data,nil);
         }
     }];
-    
+}
+
+//check app version
+- (void)request_checkAppVersionWithBlock:(void(^)(id data, NSError *error))block
+{
+    NSDictionary *dic = @{
+                          @"platform" : @"1"
+                          };
+    [[ClanNetAPI sharedCCJsonClient] requestJsonDataWithPath:@"app/AppConfig/getAppConfig" withParams:dic withMethodType:Post andBlock:^(id data, NSError *error) {
+        if (error) {
+            block(nil,error);
+        }else{
+            block(data,nil);
+        }
+    }];
+}
+
+//get CC home page info
+- (void)request_CCHomePageInfoWithBlock:(void(^)(id data, NSError *error))block
+{
+    [[ClanNetAPI sharedCCJsonClient] requestJsonDataWithPath:@"app/HomePage/getIndexPageInfo" withParams:nil withMethodType:Post andBlock:^(id data, NSError *error) {
+        if (error) {
+            block(nil,error);
+        }else{
+            block(data,nil);
+        }
+    }];
 }
 
 //请求版块儿的UI样式

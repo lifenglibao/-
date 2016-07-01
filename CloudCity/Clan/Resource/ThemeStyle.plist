@@ -2,24 +2,16 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>CCBaseURL</key>
-	<string>http://192.168.1.171/cc_api/index.php/</string>
 	<key>AMAPKEY</key>
 	<string>538bfdad39cc324e9cacf1a7d11154b3</string>
 	<key>YZSegMent</key>
 	<string>35,174,230</string>
 	<key>YZBBSName</key>
 	<string>云漯河</string>
-	<key>YZBaseURL</key>
-	<string>http://192.168.1.171/community/</string>
-	<key>YZBasePath</key>
-	<string>upload/api/mobile/iyz_index.php</string>
 	<key>CLOUDCITYAPPVERSION</key>
 	<string>9003</string>
 	<key>APPSTYLE</key>
 	<string>2</string>
-	<key>kAPP_DOWNLOAD_URL</key>
-	<string>https://itunes.apple.com/us/app/san-ti-she-qu/id997795570?l=zh&amp;ls=1&amp;mt=8</string>
 	<key>OFFLINE</key>
 	<string>0</string>
 	<key>YouZuLogin</key>

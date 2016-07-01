@@ -35,5 +35,5 @@
  */
 - (void)request_cacheWithCustomType:(CustomHomeListModel *)type andBlock:(void(^)(NSArray *hotArray,BOOL isError))block;
 - (void)request_customHomeWithType:(CustomHomeListModel *)type page:(NSString *)page andBlock:(void(^)(BOOL isMore,NSArray *hotArray,BOOL isError))block;
-
+- (void)request_CCHomePageInfoAndBlock:(void(^)(BOOL isError, id result))block;
 @end

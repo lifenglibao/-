@@ -25,4 +25,10 @@
 //app splash
 - (void)getAppSplashcfgWithBlock:(void(^)(id  result))block;
 
+//CC HomePage Info
+- (void)getCCHomePagecfgWithBlock:(void(^)(BOOL result))block;
+
+//check app version
+- (void)checkAppVersionWithBlock:(void(^)(id result))block;
+
 @end

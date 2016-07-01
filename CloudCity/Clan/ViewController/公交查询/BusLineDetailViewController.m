@@ -39,19 +39,12 @@
 
 - (void)initNavBar
 {
-    NSRange range = [self.line.name rangeOfString:@"("];
-    NSString *str = [self.line.name substringToIndex:range.location];
-    
-//    NSString *favoImgName = [CustomBusMode isFavoed_withID:[NSString stringWithFormat:@"%@%@-%@",BUSTRANSFERFAV,self.routeStartLocation,self.routeDestinationLocation] withFavoID:[NSString stringWithFormat:@"%@-%@",self.routeStartLocation,self.routeDestinationLocation] forType:myBusTransfer] ? @"detail_favo_H" : @"favo_N";
-    
-    _isFav = [Util isFavoed_withID:[NSString stringWithFormat:@"bus_line_%@",str] forType:myBusLine];
+    _isFav = [CustomBusMode isFavoed_withID:[NSString stringWithFormat:@"%@%@",BUSLINEFAV,self.title] withFavoID:[NSString stringWithFormat:@"%@",self.title] forType:myBusLine];
+    NSString *favoImgName = _isFav ? @"detail_favo_H" : @"favo_N";
+
     _favBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
     [_favBtn addTarget:self action:@selector(favAction:) forControlEvents:UIControlEventTouchUpInside];
-    if (_isFav) {
-        [_favBtn setImage:[UIImage imageNamed:@"detail_favo_H"] forState:UIControlStateNormal];
-    }else{
-        [_favBtn setImage:[UIImage imageNamed:@"favo_N"] forState:UIControlStateNormal];
-    }
+    [_favBtn setImage:kIMG(favoImgName) forState:UIControlStateNormal];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_favBtn];
 }
 
@@ -158,13 +151,31 @@
 }
 
 - (void)updateHeaderViewInfomation {
-    firstBus.text = [NSString stringWithFormat:@"%@",![[CustomBusMode getBusTimeFromString:self.line.startTime] isEqual: @"00:00"] ? [CustomBusMode getBusTimeFromString:self.line.startTime] : @"未知" ];
-    endBus.text = [NSString stringWithFormat:@"%@",![[CustomBusMode getBusTimeFromString:self.line.endTime] isEqual: @"00:00"] ? [CustomBusMode getBusTimeFromString:self.line.endTime] : @"未知"];
+    
+
+    firstBus.text = [CustomBusMode replaceStringWithBusModel:[CustomBusMode getBusTimeFromString:self.line.startTime]];
+    endBus.text = [CustomBusMode replaceStringWithBusModel:[CustomBusMode getBusTimeFromString:self.line.endTime]];
+    
     busDistance.text = [NSString stringWithFormat:@"全程: %.2f公里", self.line.distance];
+    
     if (self.line.basicPrice == self.line.totalPrice ) {
-        busPrice.text = [NSString stringWithFormat:@"票价: %.1f元",self.line.basicPrice];
+        
+        NSString *temp = [CustomBusMode replaceStringWithBusModel:[NSString stringWithFormat:@"%.1f",self.line.basicPrice]];
+        if ([temp isEqualToString:@"未知"]) {
+            busPrice.text = [NSString stringWithFormat:@"票价: %@",temp];
+        }else{
+            busPrice.text = [NSString stringWithFormat:@"票价: %@元",temp];
+        }
     }else{
-        busPrice.text = [NSString stringWithFormat:@"票价: %.1f-%.1f元",self.line.basicPrice,self.line.totalPrice];
+        NSString *temp = [CustomBusMode replaceStringWithBusModel:[NSString stringWithFormat:@"%.1f",self.line.basicPrice]];
+        NSString *temp2 = [CustomBusMode replaceStringWithBusModel:[NSString stringWithFormat:@"%.1f",self.line.totalPrice]];
+
+        if ([temp isEqualToString:@"未知"] || [temp2 isEqualToString:@"未知"]) {
+            busPrice.text = [NSString stringWithFormat:@"票价: %@-%@",temp,temp2];
+        }else{
+            busPrice.text = [NSString stringWithFormat:@"票价: %@-%@元",temp,temp2];
+        }
+        
     }
 }
 - (void)headerViewAction:(id)sender {
@@ -194,23 +205,20 @@
 //        return;
 //    }
     sender.selected = !sender.selected;
-    NSRange range = [self.line.name rangeOfString:@"("];
-    NSString *str = [self.line.name substringToIndex:range.location];
-    _isFav = [Util isFavoed_withID:[NSString stringWithFormat:@"bus_line_%@",str] forType:myBusLine];
+    _isFav = [CustomBusMode isFavoed_withID:[NSString stringWithFormat:@"%@%@",BUSLINEFAV,self.title] withFavoID:[NSString stringWithFormat:@"%@",self.title] forType:myBusLine];
     
     if (_isFav) {
-        //已收藏 删除收藏
-        [_favBtn setImage:[UIImage imageNamed:@"favo_N"] forState:UIControlStateNormal];
-        [Util deleteFavoed_withID:[NSString stringWithFormat:@"bus_line_%@",str] forType:myBusLine];
+        [CustomBusMode deleteFavoed_withID:[NSString stringWithFormat:@"%@%@",BUSLINEFAV,self.title] withFavoID:[NSString stringWithFormat:@"%@",self.title] forType:myBusLine];
         [self showHudTipStr:@"取消收藏成功"];
     }else{
-        [_favBtn setImage:[UIImage imageNamed:@"detail_favo_H"] forState:UIControlStateNormal];
-        [Util addFavoed_withID:[NSString stringWithFormat:@"bus_line_%@",str] withFavoID:str forType:myBusLine];
+        [CustomBusMode addFavoed_withID:[NSString stringWithFormat:@"%@%@",BUSLINEFAV,self.title] withFavoID:[NSString stringWithFormat:@"%@",self.title] forType:myBusLine];
         [self showHudTipStr:@"收藏成功"];
-        
     }
     
+    NSString *favoImgName = [CustomBusMode isFavoed_withID:[NSString stringWithFormat:@"%@%@",BUSLINEFAV,self.title] withFavoID:[NSString stringWithFormat:@"%@",self.title] forType:myBusLine] ? @"detail_favo_H" : @"favo_N";
+    [_favBtn setImage:kIMG(favoImgName) forState:UIControlStateNormal];
 }
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

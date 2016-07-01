@@ -30,7 +30,10 @@
 #import "BoardModel.h"
 #import "MeViewController.h"
 #import "CustomRightItemView.h"
-@interface CustomModuleViewController ()<SDCycleScrollViewDelegate,CustomRightItemDelegate>
+#import "LinkModel.h"
+#import "SFDraggableDialogView.h"
+
+@interface CustomModuleViewController ()<SDCycleScrollViewDelegate,CustomRightItemDelegate,SFDraggableDialogViewDelegate>
 
 
 @property (strong, nonatomic)BaseTableView *tableView;
@@ -58,6 +61,65 @@ static NSString *const customContentType = @"1";
 //推荐型
 static NSString *const customRecommendType = @"2";
 @implementation CustomModuleViewController
+
+
+- (void)showUpdateDialog {
+    
+    if ([Util version:[Util currentAppVersion] lessthan:[[TMCache sharedCache] objectForKey:APP_IOS_CURRENT_VERSION]]) {
+        
+        SFDraggableDialogView *dialogView = [[[NSBundle mainBundle] loadNibNamed:@"SFDraggableDialogView" owner:self options:nil] firstObject];
+        dialogView.frame = CGRectMake(0, -100, self.view.width, ScreenBoundsHeight);
+        dialogView.photo = [UIImage imageNamed:@"face"];
+        dialogView.delegate = self;
+        dialogView.titleText = [[NSMutableAttributedString alloc] initWithString:@"更新内容:"];
+        dialogView.messageText = [self exampleAttributeString];
+        dialogView.firstBtnText = [@"立即更新" uppercaseString];
+        dialogView.dialogBackgroundColor = [UIColor whiteColor];
+        dialogView.cornerRadius = 8.0;
+        dialogView.backgroundShadowOpacity = 0.2;
+        dialogView.hideCloseButton = YES;
+        dialogView.contentViewType = SFContentViewTypeDefault;
+        dialogView.firstBtnBackgroundColor = [UIColor colorWithRed:0.230 green:0.777 blue:0.316 alpha:1.000];
+        [dialogView createBlurBackgroundWithImage:[self jt_imageWithView:self.view] tintColor:[[UIColor blackColor] colorWithAlphaComponent:0.35] blurRadius:60.0];
+        [self.view addSubview:dialogView];
+        
+        if ([Util version:[Util currentAppVersion] lessthan:[[TMCache sharedCache] objectForKey:APP_IOS_MIN_VERSION]]) {
+            dialogView.backgroundImageBtn.userInteractionEnabled = NO;
+            dialogView.draggable = NO;
+        }else{
+            dialogView.backgroundImageBtn.userInteractionEnabled = YES;
+            dialogView.draggable = YES;
+        }
+    }
+}
+
+- (void)draggableDialogView:(SFDraggableDialogView *)dialogView didPressFirstButton:(UIButton *)firstButton
+{
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[[TMCache sharedCache] objectForKey:APP_IOS_DOWNLOAD_URL]]];
+
+}
+
+- (void)draggableDialogViewDismissed:(SFDraggableDialogView *)dialogView
+{
+    
+}
+
+- (NSMutableAttributedString *)exampleAttributeString {
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:[[TMCache sharedCache] objectForKey:APP_IOS_NEW_VERSION_UPDATE_INFO]];
+    [attributedString addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:15.0] range:NSMakeRange(0, attributedString.length)];
+    [attributedString addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:0.230 green:0.777 blue:0.316 alpha:1.000] range:NSMakeRange(0, attributedString.length)];
+    return attributedString;
+}
+
+- (UIImage *)jt_imageWithView:(UIView *)view {
+    CGFloat scale = [[UIScreen mainScreen] scale];
+    UIGraphicsBeginImageContextWithOptions(view.bounds.size, NO, scale);
+    [view drawViewHierarchyInRect:view.bounds afterScreenUpdates:true];
+    UIImage * image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return image;
+}
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -168,6 +230,8 @@ static NSString *const customRecommendType = @"2";
     [self initWithTable];
     
     self.automaticallyAdjustsScrollViewInsets = NO;
+    [self showUpdateDialog];
+    
 }
 
 - (void)navback:(id)sender
@@ -310,6 +374,39 @@ static NSString *const customRecommendType = @"2";
         }
         [strongSelf.tableView reloadData];
     }];
+    
+    [_homeViewModel request_CCHomePageInfoAndBlock:^(BOOL isError, id result) {
+        __strong __typeof(weakSelf)strongSelf = weakSelf;
+
+        if (!isError) {
+            
+            NSArray *ccHomePageBannerArr = [[result objectForKey:@"result"] objectForKey:@"banners"];
+            NSArray *ccHomePageLinkArr   = [[result objectForKey:@"result"] objectForKey:@"links"];
+            
+            if (ccHomePageBannerArr) {
+                NSMutableArray *bannerArray = [NSMutableArray array];
+                for (NSDictionary *dicBanner in ccHomePageBannerArr) {
+                    
+                    BannerModel *bannerModel = [BannerModel mj_objectWithKeyValues:dicBanner];
+                    [bannerArray addObject:bannerModel];
+                }
+                _customHomeModel.banner = bannerArray;
+            }
+            if (ccHomePageLinkArr) {
+                NSMutableArray *linkArray = [NSMutableArray array];
+                for (NSDictionary *dicLink in ccHomePageLinkArr) {
+                    LinkModel *linkModel = [LinkModel mj_objectWithKeyValues:dicLink];
+                    [linkArray addObject:linkModel];
+                }
+                _customHomeModel.link = linkArray;
+            }
+            
+            [strongSelf resetGridView];
+            [strongSelf.tableView reloadData];
+        }
+        
+    }];
+
 }
 - (void)initForums{
     //创建forum数组 一个CELL显示两个

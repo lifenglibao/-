@@ -96,17 +96,12 @@
 
 - (void)initNavBar
 {
-    NSRange range = [self.busStop.name rangeOfString:@"("];
-    NSString *str = [self.busStop.name substringToIndex:range.location];
+    _isFav = [CustomBusMode isFavoed_withID:[NSString stringWithFormat:@"%@%@",BUSSTOPFAV,self.title] withFavoID:[NSString stringWithFormat:@"%@",self.title] forType:myBusStop];
+    NSString *favoImgName = _isFav ? @"detail_favo_H" : @"favo_N";
     
-    _isFav = [Util isFavoed_withID:[NSString stringWithFormat:@"bus_stop_%@",str] forType:myBusLine];
     _favBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
     [_favBtn addTarget:self action:@selector(favAction:) forControlEvents:UIControlEventTouchUpInside];
-    if (_isFav) {
-        [_favBtn setImage:[UIImage imageNamed:@"detail_favo_H"] forState:UIControlStateNormal];
-    }else{
-        [_favBtn setImage:[UIImage imageNamed:@"favo_N"] forState:UIControlStateNormal];
-    }
+    [_favBtn setImage:kIMG(favoImgName) forState:UIControlStateNormal];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_favBtn];
 }
 
@@ -148,30 +143,28 @@
 }
 - (void)favAction:(UIButton *)sender{
     
-    if (![UserModel currentUserInfo].logined || ![[NSUserDefaults standardUserDefaults]objectForKey:Code_CookieData]) {
-        //没有登录 跳出登录页面
-        LoginViewController *login = [[LoginViewController alloc]init];
-        UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:login];
-        nav.modalPresentationStyle = UIModalPresentationFullScreen;
-        [self presentViewController:nav animated:YES completion:nil];
-        return;
-    }
+//    if (![UserModel currentUserInfo].logined || ![[NSUserDefaults standardUserDefaults]objectForKey:Code_CookieData]) {
+//        //没有登录 跳出登录页面
+//        LoginViewController *login = [[LoginViewController alloc]init];
+//        UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:login];
+//        nav.modalPresentationStyle = UIModalPresentationFullScreen;
+//        [self presentViewController:nav animated:YES completion:nil];
+//        return;
+//    }
+    
     sender.selected = !sender.selected;
-    NSRange range = [self.busStop.name rangeOfString:@"("];
-    NSString *str = [self.busStop.name substringToIndex:range.location];
-    _isFav = [Util isFavoed_withID:[NSString stringWithFormat:@"bus_stop_%@",str] forType:myBusLine];
+    _isFav = [CustomBusMode isFavoed_withID:[NSString stringWithFormat:@"%@%@",BUSSTOPFAV,self.title] withFavoID:[NSString stringWithFormat:@"%@",self.title] forType:myBusStop];
     
     if (_isFav) {
-        //已收藏 删除收藏
-        [_favBtn setImage:[UIImage imageNamed:@"favo_N"] forState:UIControlStateNormal];
-        [Util deleteFavoed_withID:[NSString stringWithFormat:@"bus_stop_%@",str] forType:myBusLine];
+        [CustomBusMode deleteFavoed_withID:[NSString stringWithFormat:@"%@%@",BUSSTOPFAV,self.title] withFavoID:[NSString stringWithFormat:@"%@",self.title] forType:myBusStop];
         [self showHudTipStr:@"取消收藏成功"];
     }else{
-        [_favBtn setImage:[UIImage imageNamed:@"detail_favo_H"] forState:UIControlStateNormal];
-        [Util addFavoed_withID:[NSString stringWithFormat:@"bus_stop_%@",str] withFavoID:str forType:myBusLine];
+        [CustomBusMode addFavoed_withID:[NSString stringWithFormat:@"%@%@",BUSSTOPFAV,self.title] withFavoID:[NSString stringWithFormat:@"%@",self.title] forType:myBusStop];
         [self showHudTipStr:@"收藏成功"];
-        
     }
+    
+    NSString *favoImgName = [CustomBusMode isFavoed_withID:[NSString stringWithFormat:@"%@%@",BUSSTOPFAV,self.title] withFavoID:[NSString stringWithFormat:@"%@",self.title] forType:myBusStop] ? @"detail_favo_H" : @"favo_N";
+    [_favBtn setImage:kIMG(favoImgName) forState:UIControlStateNormal];
     
 }
 - (void)didReceiveMemoryWarning {

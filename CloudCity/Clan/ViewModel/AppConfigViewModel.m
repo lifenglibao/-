@@ -232,6 +232,19 @@
 
 #pragma mark - public方法
 
+// check app version
+
+- (void)checkAppVersionWithBlock:(void(^)(id result))block
+{
+    [[Clan_NetAPIManager sharedManager]request_checkAppVersionWithBlock:^(id data, NSError *error) {
+        if (!error && data) {
+            block(data);
+        }else{
+            block(nil);
+        }
+    }];
+}
+
 //app splash
 - (void)getAppSplashcfgWithBlock:(void(^)(id result))block
 {
@@ -243,6 +256,23 @@
         }
     }];
 }
+
+//CC HomePage Info
+- (void)getCCHomePagecfgWithBlock:(void(^)(BOOL result))block
+{
+    [[Clan_NetAPIManager sharedManager]request_CCHomePageInfoWithBlock:^(id data, NSError *error) {
+        
+        if (!error && data && [[data objectForKey:API_STATUS_CODE] integerValue] == 200) {
+            [[TMCache sharedCache] setObject:[data objectForKey:@"result"] forKey:@"CCHomePageInfo"];
+            block(YES);
+        } else {
+            block(NO);
+        }
+        
+    }];
+}
+
+
 //获取app的基础配置信息 来自站长中心
 - (void)getAppBaseConfigWithBlock:(void(^)(BOOL result))block
 {

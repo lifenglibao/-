@@ -475,4 +475,10 @@
 //获取splash ad
 - (void)request_SplashWithBlock:(void(^)(id data, NSError *error))block;
 
+//get CC home page info
+- (void)request_CCHomePageInfoWithBlock:(void(^)(id data, NSError *error))block;
+
+//check app version
+- (void)request_checkAppVersionWithBlock:(void(^)(id data, NSError *error))block;
+
 @end

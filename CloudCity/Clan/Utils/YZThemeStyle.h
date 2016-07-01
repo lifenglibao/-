@@ -11,10 +11,10 @@
 #define ThemeStyle @"ThemeStyle" //plist文件名
 #define YZSegMentColor @"YZSegMent" //分割栏
 #define YZBBSName @"YZBBSName" //论坛名
-#define YZBaseURL @"YZBaseURL"
-#define YZBasePath @"YZBasePath"
-#define CCBaseURL @"CCBaseURL"
-#define kAPP_DOWNLOAD_URL @"kAPP_DOWNLOAD_URL" //app下载地址
+#define YZBaseURL @"http://192.168.1.171/CloudCity/community/"
+#define YZBasePath @"upload/api/mobile/iyz_index.php"
+#define CCBaseURL @"http://192.168.1.171/CloudCity/cc_api/index.php/"
+#define kAPP_DOWNLOAD_URL @"" //app下载地址
 #define kShareAppkeySina @"ShareAppkeySina"
 #define kShareAppkeyTecent @"ShareAppkeyTecent"
 #define kShareAppkeyWechat @"ShareAppkeyWechat"
@@ -68,3 +68,11 @@
 #define BUSTRANSFERFAV @"busTransferFav_"   //公交换乘收藏
 
 #define API_STATUS_CODE @"code"   //公交换乘收藏
+#define DEFAULT_INTERVAL 1   //多少天执行一次某些方法
+#define IOS_APP 1
+#define APP_IOS_CURRENT_VERSION @"APP_IOS_CURRENT_VERSION"
+#define APP_IOS_MIN_VERSION @"APP_IOS_MIN_VERSION"
+#define APP_IOS_NEW_VERSION_UPDATE_INFO @"APP_IOS_NEW_VERSION_UPDATE_INFO"
+#define APP_IOS_DOWNLOAD_URL @"APP_IOS_DOWNLOAD_URL" // appstore
+#define APP_DOWNLOAD_URL @"APP_DOWNLOAD_URL" // webpage
+

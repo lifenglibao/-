@@ -324,14 +324,14 @@
     LineDashPolyline *dashPolyline = nil;
     
     // 过滤一下，距离比较近就不加虚线了
-    if (distance > kMANaviRouteReplenishPolylineFilter)
-    {
+//    if (distance > kMANaviRouteReplenishPolylineFilter)
+//    {
         CLLocationCoordinate2D points[2];
         points[0] = startCoor;
         points[1] = endCoor;
         MAPolyline *polyline = [MAPolyline polylineWithCoordinates:points count:2];
         dashPolyline = [[LineDashPolyline alloc] initWithPolyline:polyline];
-    }
+//    }
     
     return dashPolyline;
 }

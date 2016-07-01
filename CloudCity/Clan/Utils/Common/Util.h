@@ -68,9 +68,6 @@ typedef enum {
 
 //增加本地收藏
 + (BOOL)addFavoed_withID:(NSString *)sid withFavoID:(NSString *)favoID forType:(CollcetionType)type;
-//公交收藏
-+ (BOOL)addFavoed_withID:(NSString *)sid withFavoID:(NSString *)favoID withFavContent:(NSObject*)favContent forType:(CollcetionType) type;
-+ (BOOL)isFavoed_withID:(NSString *)sid withFavoID:(NSString *)favoID forType:(CollcetionType)type;
 
 //清除收藏
 + (void)cleanUpLocalFavoArray;
@@ -146,4 +143,11 @@ typedef enum {
 
 //自适应宽度
 + (CGFloat)widthForText:(NSString*)text font:(UIFont*)font withinHeight:(CGFloat)height;
+
+//让某些function过一段时间才会执行一次.
++ (BOOL)oneDayPast;
+
+//比较APP VERSION
+
++ (BOOL)version:(NSString *)_oldver lessthan:(NSString *)_newver;
 @end

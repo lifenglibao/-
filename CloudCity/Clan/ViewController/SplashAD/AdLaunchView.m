@@ -69,6 +69,7 @@ AdLaunchType state = AdLaunchProgressType;
     [UIView commitAnimations];
 }
 
+
 - (void)viewDidLoad {
     
     self.splashData = [NSMutableArray array];
@@ -76,31 +77,49 @@ AdLaunchType state = AdLaunchProgressType;
     [self loadmodel];
     [self buildUI];
     
-    WEAKSELF
-    [_configViewModel getAppSplashcfgWithBlock:^(id result) {
-        
-        if ([[result objectForKey:API_STATUS_CODE] integerValue] == 200) {
-            weakSelf.splashData = [result objectForKey:@"result"][0];
-            weakSelf.imgUrl = [[result objectForKey:@"result"][0] objectForKey:@"pic"];
-            weakSelf.duration = [[[result objectForKey:@"result"][0] objectForKey:@"duration"] integerValue];
-        }else {
-            weakSelf.splashData = nil;
-            weakSelf.imgUrl = nil;
-            weakSelf.duration = 5;
-        }
-        
-        [self hiddenAnimation];
-        [self initADBackGroundView];
-        [self showImage];
-        [self requestBanner];
-        [self showProgressView];
-        
-        dispatch_time_t show = dispatch_time(DISPATCH_TIME_NOW, self.duration * NSEC_PER_SEC);
-        dispatch_after(show, dispatch_get_main_queue(), ^(void){
-            [self toHidenState];
-        });
-    }];
     
+//    if([Util oneDayPast])
+//    {
+        WEAKSELF
+        [_configViewModel getAppSplashcfgWithBlock:^(id result) {
+            
+            if ([[result objectForKey:API_STATUS_CODE] integerValue] == 200) {
+                weakSelf.splashData = [result objectForKey:@"result"][0];
+                weakSelf.imgUrl = [[result objectForKey:@"result"][0] objectForKey:@"pic"];
+                weakSelf.duration = [[[result objectForKey:@"result"][0] objectForKey:@"duration"] integerValue];
+            }else {
+                weakSelf.splashData = nil;
+                weakSelf.imgUrl = nil;
+                weakSelf.duration = 5;
+            }
+            
+            [self hiddenAnimation];
+            [self initADBackGroundView];
+            [self showImage];
+            [self requestBanner];
+            [self showProgressView];
+            
+            dispatch_time_t show = dispatch_time(DISPATCH_TIME_NOW, self.duration * NSEC_PER_SEC);
+            dispatch_after(show, dispatch_get_main_queue(), ^(void){
+                [self toHidenState];
+            });
+        }];
+        
+        [_configViewModel checkAppVersionWithBlock:^(id result) {
+            if ([[result objectForKey:API_STATUS_CODE] integerValue] == 200) {
+                
+                [[TMCache sharedCache] setObject:[[result objectForKey:@"result"] objectForKey:APP_IOS_CURRENT_VERSION] forKey:APP_IOS_CURRENT_VERSION];
+                [[TMCache sharedCache] setObject:[[result objectForKey:@"result"] objectForKey:APP_IOS_MIN_VERSION] forKey:APP_IOS_MIN_VERSION];
+                [[TMCache sharedCache] setObject:[[result objectForKey:@"result"] objectForKey:APP_DOWNLOAD_URL] forKey:APP_DOWNLOAD_URL];
+                [[TMCache sharedCache] setObject:[[result objectForKey:@"result"] objectForKey:APP_IOS_NEW_VERSION_UPDATE_INFO] forKey:APP_IOS_NEW_VERSION_UPDATE_INFO];
+                [[TMCache sharedCache] setObject:[[result objectForKey:@"result"] objectForKey:APP_IOS_DOWNLOAD_URL] forKey:APP_IOS_DOWNLOAD_URL];
+            }
+        }];
+        
+//    }else{
+//        [self toHidenState];
+//    }
+
     [self requestAppBaseDatas];
 }
 
@@ -256,6 +275,7 @@ AdLaunchType state = AdLaunchProgressType;
         [weakSelf requestAppPlugcfg];
         [weakSelf requestHomeIndexcfg];
         [weakSelf requestForumsDatas];
+        [weakSelf requestCCHomePageInfo];
     }];
 }
 
@@ -289,6 +309,12 @@ AdLaunchType state = AdLaunchProgressType;
     }];
 }
 
+- (void)requestCCHomePageInfo
+{
+    [_configViewModel getCCHomePagecfgWithBlock:^(BOOL result) {
+        NSLog(@"\nCC API ------ 获取主页面banner,link成功.");
+    }];
+}
 //检查并关掉loading页面
 - (void)checkAndCloseLoadingPage
 {

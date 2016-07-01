@@ -19,61 +19,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Clan/ViewModel/AppConfigViewModel.m"
-            timestampString = "488081485.546509"
+            filePath = "Clan/Model/&#x516c;&#x4ea4;/MANaviRoute.m"
+            timestampString = "488518917.295337"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "157"
-            endingLineNumber = "157"
-            landmarkName = "-requestHomeConfig:"
-            landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[AppConfigViewModel requestHomeConfig:]"
-                  moduleName = "CloudCity"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/iappspteltd/Documents/Feng-WorkSpace/%E6%BC%AF%E6%B2%B3/CloudCity/CloudCity/Clan/ViewModel/AppConfigViewModel.m"
-                  timestampString = "488347112.101782"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "157"
-                  endingLineNumber = "157"
-                  offsetFromSymbolStart = "64">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__40-[AppConfigViewModel requestHomeConfig:]_block_invoke"
-                  moduleName = "CloudCity"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/iappspteltd/Documents/Feng-WorkSpace/%E6%BC%AF%E6%B2%B3/CloudCity/CloudCity/Clan/ViewModel/AppConfigViewModel.m"
-                  timestampString = "488347112.101943"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "157"
-                  endingLineNumber = "157"
-                  offsetFromSymbolStart = "24">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Clan/Base/BaseViewController.m"
-            timestampString = "488345845.813223"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "51"
-            endingLineNumber = "51"
-            landmarkName = "-viewWillDisappear:"
+            startingLineNumber = "312"
+            endingLineNumber = "312"
+            landmarkName = "+replenishPolylinesForPathWith:lastPolyline:Polylines:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
