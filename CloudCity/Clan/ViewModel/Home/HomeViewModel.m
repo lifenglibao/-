@@ -18,6 +18,8 @@
 #import "BannerModel.h"
 #import "LinkModel.h"
 #import "ForumModel.h"
+#import "DiscoverModel.h"
+#import "DiscoverGroupModel.h"
 //内容型
 static NSString *const customContentType = @"1";
 //推荐型
@@ -419,6 +421,31 @@ static NSString *const customRecommendType = @"2";
         }
     }];
 }
+
+
+- (CustomHomeMode *)request_discoverDataArray{
+    CustomHomeMode *customHomeModel = [CustomHomeMode new];
+
+    if ([[TMCache sharedCache]objectForKey:@"CCDiscoverPageInfo"]) {
+        
+        NSArray *ccDiscoverPageArr = [[TMCache sharedCache] objectForKey:@"CCDiscoverPageInfo"];
+        
+        if (ccDiscoverPageArr) {
+            NSMutableArray *discoverArray = [NSMutableArray array];
+            for (NSDictionary *dic in ccDiscoverPageArr) {
+                
+                DiscoverGroupModel *discoverGroupModel = [DiscoverGroupModel mj_objectWithKeyValues:dic];
+                //                DiscoverModel *discoverModel = [DiscoverModel mj_objectWithKeyValues:[dic objectForKey:@"items"]];
+                //                discoverGroupModel.items = discoverModel;
+                [discoverArray addObject:discoverGroupModel];
+            }
+            customHomeModel.discover = discoverArray;
+        }
+    }
+    
+    return customHomeModel;
+}
+
 //首页数据Model
 - (CustomHomeMode *)request_homeWithDataArray:(NSArray *)array{
     CustomHomeMode *customHomeModel = [CustomHomeMode new];
@@ -449,7 +476,7 @@ static NSString *const customRecommendType = @"2";
     
     for (NSDictionary *dicType in array) {
         
-        // this banner and link model will not use for our. we are using our own APIs for banner and link model.
+        // this banner and link model will not using anymore. we are using our own APIs for banner and link model.
         //not using now.
         /*
         if ([dicType[@"type"] isEqualToString:@"banner"]) {

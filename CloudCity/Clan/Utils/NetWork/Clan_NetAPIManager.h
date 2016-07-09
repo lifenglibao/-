@@ -481,4 +481,6 @@
 //check app version
 - (void)request_checkAppVersionWithBlock:(void(^)(id data, NSError *error))block;
 
+//get CC Discover page info
+- (void)request_CCDiscoverPageInfoWithBlock:(void(^)(id data, NSError *error))block;
 @end

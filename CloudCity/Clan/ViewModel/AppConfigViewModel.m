@@ -272,6 +272,21 @@
     }];
 }
 
+//CC Discover Info
+- (void)getCCDiscoverWithBlock:(void(^)(BOOL result))block
+{
+    [[Clan_NetAPIManager sharedManager]request_CCDiscoverPageInfoWithBlock:^(id data, NSError *error) {
+        
+        if (!error && data && [[data objectForKey:API_STATUS_CODE] integerValue] == 200) {
+            [[TMCache sharedCache] setObject:[data objectForKey:@"result"] forKey:@"CCDiscoverPageInfo"];
+            block(YES);
+        } else {
+            block(NO);
+        }
+        
+    }];
+    
+}
 
 //获取app的基础配置信息 来自站长中心
 - (void)getAppBaseConfigWithBlock:(void(^)(BOOL result))block

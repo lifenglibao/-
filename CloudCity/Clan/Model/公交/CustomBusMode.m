@@ -574,7 +574,6 @@
     return YES;
 }
 
-//通过帖子或者版块ID 得到收藏ID
 + (NSString *)getFavoIDFromID:(NSString *)fid forType:(CollcetionType)type
 {
     NSString *fileKey = nil;

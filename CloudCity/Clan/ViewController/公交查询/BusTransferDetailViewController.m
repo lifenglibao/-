@@ -127,11 +127,11 @@
         cell.textLabel.text  = self.routeStartLocation;
         UIImage * img = [UIImage imageWithColor:[UIColor blueColor] withFrame:CGRectMake(0, 0, 5, 5) alpha:0.7];
         cell.imageView.image = img;
-        cell.imageView.layer.cornerRadius = 2.5;
+        cell.imageView.layer.cornerRadius = 15;
         
     }else if ([self.routeData[indexPath.row] objectForKey:@"walking"]) {
         cell.textLabel.text  = [self.routeData[indexPath.row] objectForKey:@"walking"];
-        cell.imageView.image = kIMG(@"man");
+        cell.imageView.image = kIMG(@"walking_man");
         cell.imageView.frame = CGRectMake(20, 0, 10, 10);
 
     }else if ([self.routeData[indexPath.row] objectForKey:@"departureStop"]) {
@@ -148,23 +148,20 @@
         cell.accessoryView = [[ UIImageView alloc ] initWithImage:kIMG(@"rate_down")];
         [cell.accessoryView setFrame:CGRectMake(0, 0, 15, 15)];
         
-//        cell.accessoryType  = UITableViewCellAccessoryDisclosureIndicator;
-
-        
     }else if ([self.routeData[indexPath.row] objectForKey:@"arrivalStop"]){
         cell.textLabel.text = [self.routeData[indexPath.row] objectForKey:@"arrivalStop"];
         cell.imageView.image = [UIImage imageWithColor:[UIColor clearColor] withFrame:CGRectMake(0, 0, 5, 5) alpha:1];
 
     }else if ([self.routeData[indexPath.row] objectForKey:@"walking"]) {
         cell.textLabel.text  = [self.routeData[indexPath.row] objectForKey:@"walking"];
-        cell.imageView.image = kIMG(@"man");
+        cell.imageView.image = kIMG(@"walking_man");
         cell.imageView.frame = CGRectMake(20, 0, 10, 10);
         
     }else if ([self.routeData[indexPath.row] objectForKey:@"end"]) {
         cell.textLabel.text  = self.routeDestinationLocation;
         UIImage * img = [UIImage imageWithColor:[UIColor redColor] withFrame:CGRectMake(0, 0, 5, 5) alpha:0.7];
         cell.imageView.image = img;
-        cell.imageView.layer.cornerRadius = 2.5;
+        cell.imageView.layer.cornerRadius = 15;
     }
 
     

@@ -146,14 +146,38 @@ static const CGFloat itemHeight = 90.f;
     if (!link.type || link.type.length == 0) {
         return;
     }
-//    if ([link.type isEqualToString:@"1"]) {        
-        // 判断 gridview 点击时跳到哪个VC
+    
+    
+    if ([link.url isEqualToString:@"func_bus_search"]) {
+        BusViewController *bus = [[BusViewController alloc] init];
+        bus.hidesBottomBarWhenPushed = YES;
+        [self.additionsViewController.navigationController pushViewController:bus animated:YES];
+    }else if ([link.url isEqualToString:@"http://app2.henanga.gov.cn/jmt2/wzcx.html"]) {
+        TOWebViewController *web = [[TOWebViewController alloc]initWithURLString:@"http://app2.henanga.gov.cn/jmt2/wzcx.html"]; //hard code
+        web.hidesBottomBarWhenPushed = YES;
+        [self.additionsViewController.navigationController pushViewController:web animated:YES];
+    }else if ([link.url isEqualToString:@"http://tianqi.2345.com/luohe/57186.htm"]) {
+        TOWebViewController *web = [[TOWebViewController alloc]initWithURLString:@"http://tianqi.2345.com/luohe/57186.htm"]; //hard code
+        web.hidesBottomBarWhenPushed = YES;
+        [self.additionsViewController.navigationController pushViewController:web animated:YES];
+    }else if ([link.url isEqualToString:@"func_post_news"]) {
+        [self sendNormalPost];
+    }else{
+        // the app version is too old, need update.
+        
+        TOWebViewController *web = [[TOWebViewController alloc]initWithURLString:CC_FUNCTION_NOT_FOUND]; //hard code
+        web.hidesBottomBarWhenPushed = YES;
+        [self.additionsViewController.navigationController pushViewController:web animated:YES];
+    }
+    
+//    if ([link.type isEqualToString:@"1"]) {
+//        // 判断 gridview 点击时跳到哪个VC
 //        if ([link.url isEqualToString:@"bus_search"]) {
-            BusViewController *bus = [[BusViewController alloc] init];
-            bus.hidesBottomBarWhenPushed = YES;
-            [self.additionsViewController.navigationController pushViewController:bus animated:YES];
-
-            // go to bus search function
+//            BusViewController *bus = [[BusViewController alloc] init];
+//            bus.hidesBottomBarWhenPushed = YES;
+//            [self.additionsViewController.navigationController pushViewController:bus animated:YES];
+//
+//            // go to bus search function
 //        }else if ([link.url isEqualToString:@"car_fine_search"]){
 //            
 //            TOWebViewController *web = [[TOWebViewController alloc]initWithURLString:@"http://0395.weizhangwang.com"]; //hard code
@@ -168,9 +192,15 @@ static const CGFloat itemHeight = 90.f;
 //            
 //        }else if ([link.url isEqualToString:@"post_news"]){
 //            [self sendNormalPost];
+//        }else{
+//            // the app version is too old, need update.
+//            
+//            TOWebViewController *web = [[TOWebViewController alloc]initWithURLString:CC_FUNCTION_NOT_FOUND]; //hard code
+//            web.hidesBottomBarWhenPushed = YES;
+//            [self.additionsViewController.navigationController pushViewController:web animated:YES];
 //        }
-        
-
+//        
+//
 //    }else if ([link.type isEqualToString:@"2"]){
 //        //跳帖子详情
 ////        PostDetailViewController *detail = [[PostDetailViewController alloc]init];
@@ -212,6 +242,12 @@ static const CGFloat itemHeight = 90.f;
 //        customVc.articleModel = articleModel;
 //        customVc.hidesBottomBarWhenPushed = YES;
 //        [self.additionsViewController.navigationController pushViewController:customVc animated:YES];
+//    }else{
+//        // the app version is too old, need update.
+//        
+//        TOWebViewController *web = [[TOWebViewController alloc]initWithURLString:CC_FUNCTION_NOT_FOUND]; //hard code
+//        web.hidesBottomBarWhenPushed = YES;
+//        [self.additionsViewController.navigationController pushViewController:web animated:YES];
 //    }
 
 }

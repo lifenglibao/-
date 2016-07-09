@@ -31,4 +31,7 @@
 //check app version
 - (void)checkAppVersionWithBlock:(void(^)(id result))block;
 
+//CC Discover Info
+- (void)getCCDiscoverWithBlock:(void(^)(BOOL result))block;
+
 @end

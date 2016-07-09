@@ -14,6 +14,7 @@
 @property (strong, nonatomic) NSArray *forum;
 @property (strong, nonatomic) NSArray *recommend;
 @property (strong, nonatomic) NSArray *title_cfg;
+@property (strong, nonatomic) NSArray *discover;
 @property (copy, nonatomic) NSString *wap_page;
 @property (copy, nonatomic) NSString *use_wap_name;
 @property (copy, nonatomic) NSString *navTitle;

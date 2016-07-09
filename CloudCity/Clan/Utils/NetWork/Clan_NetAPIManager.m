@@ -1209,6 +1209,18 @@
     }];
 }
 
+//get CC Discover page info
+- (void)request_CCDiscoverPageInfoWithBlock:(void(^)(id data, NSError *error))block
+{
+    [[ClanNetAPI sharedCCJsonClient] requestJsonDataWithPath:@"discover/Discover/getDiscover" withParams:nil withMethodType:Post andBlock:^(id data, NSError *error) {
+        if (error) {
+            block(nil,error);
+        }else{
+            block(data,nil);
+        }
+    }];
+}
+
 //请求版块儿的UI样式
 - (void)request_AppInfoWithBlock:(void(^)(id data, NSError *error))block
 {

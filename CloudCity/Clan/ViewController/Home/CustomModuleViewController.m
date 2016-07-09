@@ -65,30 +65,33 @@ static NSString *const customRecommendType = @"2";
 
 - (void)showUpdateDialog {
     
-    if ([Util version:[Util currentAppVersion] lessthan:[[TMCache sharedCache] objectForKey:APP_IOS_CURRENT_VERSION]]) {
-        
-        SFDraggableDialogView *dialogView = [[[NSBundle mainBundle] loadNibNamed:@"SFDraggableDialogView" owner:self options:nil] firstObject];
-        dialogView.frame = CGRectMake(0, -100, self.view.width, ScreenBoundsHeight);
-        dialogView.photo = [UIImage imageNamed:@"face"];
-        dialogView.delegate = self;
-        dialogView.titleText = [[NSMutableAttributedString alloc] initWithString:@"更新内容:"];
-        dialogView.messageText = [self exampleAttributeString];
-        dialogView.firstBtnText = [@"立即更新" uppercaseString];
-        dialogView.dialogBackgroundColor = [UIColor whiteColor];
-        dialogView.cornerRadius = 8.0;
-        dialogView.backgroundShadowOpacity = 0.2;
-        dialogView.hideCloseButton = YES;
-        dialogView.contentViewType = SFContentViewTypeDefault;
-        dialogView.firstBtnBackgroundColor = [UIColor colorWithRed:0.230 green:0.777 blue:0.316 alpha:1.000];
-        [dialogView createBlurBackgroundWithImage:[self jt_imageWithView:self.view] tintColor:[[UIColor blackColor] colorWithAlphaComponent:0.35] blurRadius:60.0];
-        [self.view addSubview:dialogView];
-        
-        if ([Util version:[Util currentAppVersion] lessthan:[[TMCache sharedCache] objectForKey:APP_IOS_MIN_VERSION]]) {
-            dialogView.backgroundImageBtn.userInteractionEnabled = NO;
-            dialogView.draggable = NO;
-        }else{
-            dialogView.backgroundImageBtn.userInteractionEnabled = YES;
+    if([Util oneDayPast])
+    {
+        if ([Util version:[Util currentAppVersion] lessthan:[[TMCache sharedCache] objectForKey:APP_IOS_CURRENT_VERSION]]) {
+            
+            SFDraggableDialogView *dialogView = [[[NSBundle mainBundle] loadNibNamed:@"SFDraggableDialogView" owner:self options:nil] firstObject];
+            dialogView.frame = kScreen_Bounds;
+            dialogView.photo = [UIImage imageNamed:@"face"];
+            dialogView.delegate = self;
+            dialogView.titleText = [[NSMutableAttributedString alloc] initWithString:@"更新内容:"];
+            dialogView.messageText = [self exampleAttributeString];
+            dialogView.firstBtnText = [@"立即更新" uppercaseString];
+            dialogView.secondBtnText = [@"稍后再说" uppercaseString];
+            dialogView.dialogBackgroundColor = [UIColor whiteColor];
+            dialogView.cornerRadius = 8.0;
+            dialogView.backgroundShadowOpacity = 0.2;
+            dialogView.hideCloseButton = YES;
+            dialogView.contentViewType = SFContentViewTypeDefault;
             dialogView.draggable = YES;
+            dialogView.backgroundImageBtn.userInteractionEnabled = NO;
+            //        [dialogView createBlurBackgroundWithImage:[self jt_imageWithView:[AppDelegate appDelegate].window] tintColor:[[UIColor lightGrayColor] colorWithAlphaComponent:0.35] blurRadius:60.0];
+            [[AppDelegate appDelegate].window addSubview:dialogView];
+            
+            if ([Util version:[Util currentAppVersion] lessthan:[[TMCache sharedCache] objectForKey:APP_IOS_MIN_VERSION]]) {
+                dialogView.showSecondBtn = NO;
+            }else{
+                dialogView.showSecondBtn = YES;
+            }
         }
     }
 }
@@ -99,10 +102,11 @@ static NSString *const customRecommendType = @"2";
 
 }
 
-- (void)draggableDialogViewDismissed:(SFDraggableDialogView *)dialogView
+- (void)draggableDialogView:(SFDraggableDialogView *)dialogView didPressSecondButton:(UIButton *)secondButton
 {
-    
+    [dialogView dismissWithDrop:true];
 }
+
 
 - (NSMutableAttributedString *)exampleAttributeString {
     NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:[[TMCache sharedCache] objectForKey:APP_IOS_NEW_VERSION_UPDATE_INFO]];

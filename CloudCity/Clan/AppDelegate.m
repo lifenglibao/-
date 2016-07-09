@@ -411,6 +411,11 @@
             
         }else if ([[array valueForKey:@"url"] isEqualToString:@"post_news"]){
 //            [self sendNormalPost];
+        }else{
+            // the app version is too old, need update.
+            TOWebViewController *web = [[TOWebViewController alloc]initWithURLString:CC_FUNCTION_NOT_FOUND]; //hard code
+            web.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:web animated:YES];
         }
         
         
@@ -454,6 +459,10 @@
         customVc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:customVc animated:YES];
 
+    }else{
+        TOWebViewController *web = [[TOWebViewController alloc]initWithURLString:CC_FUNCTION_NOT_FOUND]; //hard code
+        web.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:web animated:YES];
     }
 }
 

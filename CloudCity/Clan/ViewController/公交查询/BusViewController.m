@@ -13,6 +13,7 @@
 #import "BusStopViewController.h"
 #import "BusNearbyViewController.h"
 #import "BusTransferViewController.h"
+#import "BusCollectViewController.h"
 
 @interface BusViewController ()
 
@@ -72,13 +73,15 @@
     BusLineViewController *vc2 = [[BusLineViewController alloc] init];
     BusStopViewController *vc3 = [[BusStopViewController alloc] init];
     BusTransferViewController * vc4 = [[BusTransferViewController alloc] init];
+    BusCollectViewController *vc5 = [[BusCollectViewController alloc] init];
     
     UINavigationController *navi = [[UINavigationController alloc] initWithRootViewController:vc];
     UINavigationController *navi2 = [[UINavigationController alloc] initWithRootViewController:vc2];
     UINavigationController *navi3 = [[UINavigationController alloc] initWithRootViewController:vc3];
     UINavigationController *navi4 = [[UINavigationController alloc] initWithRootViewController:vc4];
+    UINavigationController *navi5 = [[UINavigationController alloc] initWithRootViewController:vc5];
 
-    self.viewControllers = @[navi,navi2,navi3,navi4];
+    self.viewControllers = @[navi,navi2,navi3,navi4,navi5];
 }
 
 - (void)dealloc {

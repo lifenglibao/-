@@ -45,17 +45,6 @@
 - (void)initNavBar
 {
     
-
-//    UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, <#CGFloat width#>, <#CGFloat height#>)];
-//    statFilter.layer.cornerRadius = 13.f;
-//    statFilter.layer.borderColor = [UIColor whiteColor].CGColor;
-//    statFilter.layer.borderWidth = 1.0f;
-//    statFilter.layer.masksToBounds = YES;
-//    statFilter.bounds = CGRectMake(0, 0, 138.f, 30.f);
-//    [statFilter setSelectedSegmentIndex:0];
-//    [statFilter addTarget:self action:@selector(segmentAction:)forControlEvents:UIControlEventValueChanged];  //添加委托方法
-//    self.navigationItem.titleView = statFilter;
-    
     UIView *rightView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 90, 44)];
     UIButton *viewmore = [UIButton buttonWithTitle:nil andImage:@"more_N" andFrame:CGRectMake(rightView.right - 37, (44-30)/2, 37, 30) target:self action:@selector(viewMoreAction:)];
     viewmore.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 10);

@@ -14,6 +14,7 @@
 #define YZBaseURL @"http://192.168.1.171/CloudCity/community/"
 #define YZBasePath @"upload/api/mobile/iyz_index.php"
 #define CCBaseURL @"http://192.168.1.171/CloudCity/cc_api/index.php/"
+#define CC_FUNCTION_NOT_FOUND  [NSString stringWithFormat:@"%@app/AppConfig/funcNotFound",CCBaseURL]
 #define kAPP_DOWNLOAD_URL @"" //app下载地址
 #define kShareAppkeySina @"ShareAppkeySina"
 #define kShareAppkeyTecent @"ShareAppkeyTecent"

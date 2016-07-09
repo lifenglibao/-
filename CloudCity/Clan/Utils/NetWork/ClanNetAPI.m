@@ -255,7 +255,7 @@
     [_cuser logout];
     [ClanNetAPI removeCookieData];
     //清除收藏的数组
-    [Util cleanUpLocalFavoArray];
+//    [Util cleanUpLocalFavoArray];
 }
 
 - (void)requestJsonDataWithFullURL:(NSString *)urlStr

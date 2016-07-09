@@ -90,8 +90,18 @@
 		0D5B224E1CD452FE00EFBB44 /* userlocation@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D5B222A1CD452FE00EFBB44 /* userlocation@3x.png */; };
 		0D5B224F1CD452FE00EFBB44 /* userPosition.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D5B222B1CD452FE00EFBB44 /* userPosition.png */; };
 		0D5B22501CD452FE00EFBB44 /* userPosition@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D5B222C1CD452FE00EFBB44 /* userPosition@2x.png */; };
-		0D5DCAA61D2269CC00515D3B /* SFDraggableDialogView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D5DCAA31D2269CC00515D3B /* SFDraggableDialogView.xib */; };
-		0D5DCAA71D2269CC00515D3B /* SFDraggableDialogView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D5DCAA41D2269CC00515D3B /* SFDraggableDialogView.m */; };
+		0D5DCAAE1D266C5200515D3B /* face@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D5DCAAD1D266C5200515D3B /* face@2x.png */; };
+		0D5DCAB21D26752A00515D3B /* SFDraggableDialogView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D5DCAB01D26752A00515D3B /* SFDraggableDialogView.m */; };
+		0D5DCAB31D26752A00515D3B /* SFDraggableDialogView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D5DCAB11D26752A00515D3B /* SFDraggableDialogView.xib */; };
+		0D5DCABD1D27A47D00515D3B /* walking_man.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D5DCABC1D27A47D00515D3B /* walking_man.png */; };
+		0D5DCAC11D2A3FE700515D3B /* BusCollectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D5DCAC01D2A3FE700515D3B /* BusCollectViewController.m */; };
+		0D5DCAC81D2BB27300515D3B /* DiscoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D5DCAC71D2BB27200515D3B /* DiscoverViewController.m */; };
+		0D5DCACF1D2BB36600515D3B /* DiscoverModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D5DCACE1D2BB36600515D3B /* DiscoverModel.m */; };
+		0D5DCAD81D30D67D00515D3B /* DiscoverGroupModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D5DCAD71D30D67D00515D3B /* DiscoverGroupModel.m */; };
+		0D5DCAE01D30E8B700515D3B /* LxGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D5DCADB1D30E8B500515D3B /* LxGridView.m */; };
+		0D5DCAE11D30E8B800515D3B /* LxGridViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D5DCADD1D30E8B500515D3B /* LxGridViewCell.m */; };
+		0D5DCAE21D30E8B800515D3B /* LxGridViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D5DCADF1D30E8B500515D3B /* LxGridViewFlowLayout.m */; };
+		0D5DCAE51D31006600515D3B /* DiscoverHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D5DCAE41D31006500515D3B /* DiscoverHeaderView.m */; };
 		0D9B2A971D1E6ACE0054B87D /* BusTransferDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D9B2A961D1E6ACE0054B87D /* BusTransferDetailTableViewCell.m */; };
 		0D9B2AAA1D1E90970054B87D /* icArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D9B2A9E1D1E90970054B87D /* icArrow.png */; };
 		0D9B2AAB1D1E90970054B87D /* icArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D9B2A9F1D1E90970054B87D /* icArrow@2x.png */; };
@@ -1302,9 +1312,27 @@
 		0D5B222A1CD452FE00EFBB44 /* userlocation@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "userlocation@3x.png"; path = "Map/userlocation@3x.png"; sourceTree = "<group>"; };
 		0D5B222B1CD452FE00EFBB44 /* userPosition.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = userPosition.png; path = Map/userPosition.png; sourceTree = "<group>"; };
 		0D5B222C1CD452FE00EFBB44 /* userPosition@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "userPosition@2x.png"; path = "Map/userPosition@2x.png"; sourceTree = "<group>"; };
-		0D5DCAA31D2269CC00515D3B /* SFDraggableDialogView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SFDraggableDialogView.xib; sourceTree = "<group>"; };
-		0D5DCAA41D2269CC00515D3B /* SFDraggableDialogView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFDraggableDialogView.m; sourceTree = "<group>"; };
-		0D5DCAA51D2269CC00515D3B /* SFDraggableDialogView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFDraggableDialogView.h; sourceTree = "<group>"; };
+		0D5DCAAD1D266C5200515D3B /* face@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "face@2x.png"; sourceTree = "<group>"; };
+		0D5DCAAF1D26752A00515D3B /* SFDraggableDialogView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFDraggableDialogView.h; sourceTree = "<group>"; };
+		0D5DCAB01D26752A00515D3B /* SFDraggableDialogView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFDraggableDialogView.m; sourceTree = "<group>"; };
+		0D5DCAB11D26752A00515D3B /* SFDraggableDialogView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SFDraggableDialogView.xib; sourceTree = "<group>"; };
+		0D5DCABC1D27A47D00515D3B /* walking_man.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = walking_man.png; path = Map/walking_man.png; sourceTree = "<group>"; };
+		0D5DCABF1D2A3FE700515D3B /* BusCollectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BusCollectViewController.h; path = "公交查询/BusCollectViewController.h"; sourceTree = "<group>"; };
+		0D5DCAC01D2A3FE700515D3B /* BusCollectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BusCollectViewController.m; path = "公交查询/BusCollectViewController.m"; sourceTree = "<group>"; };
+		0D5DCAC61D2BB27200515D3B /* DiscoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DiscoverViewController.h; path = Discover/DiscoverViewController.h; sourceTree = "<group>"; };
+		0D5DCAC71D2BB27200515D3B /* DiscoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DiscoverViewController.m; path = Discover/DiscoverViewController.m; sourceTree = "<group>"; };
+		0D5DCACD1D2BB36600515D3B /* DiscoverModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DiscoverModel.h; path = Discover/DiscoverModel.h; sourceTree = "<group>"; };
+		0D5DCACE1D2BB36600515D3B /* DiscoverModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DiscoverModel.m; path = Discover/DiscoverModel.m; sourceTree = "<group>"; };
+		0D5DCAD61D30D67D00515D3B /* DiscoverGroupModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DiscoverGroupModel.h; path = Discover/DiscoverGroupModel.h; sourceTree = "<group>"; };
+		0D5DCAD71D30D67D00515D3B /* DiscoverGroupModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DiscoverGroupModel.m; path = Discover/DiscoverGroupModel.m; sourceTree = "<group>"; };
+		0D5DCADA1D30E8B400515D3B /* LxGridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LxGridView.h; sourceTree = "<group>"; };
+		0D5DCADB1D30E8B500515D3B /* LxGridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LxGridView.m; sourceTree = "<group>"; };
+		0D5DCADC1D30E8B500515D3B /* LxGridViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LxGridViewCell.h; sourceTree = "<group>"; };
+		0D5DCADD1D30E8B500515D3B /* LxGridViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LxGridViewCell.m; sourceTree = "<group>"; };
+		0D5DCADE1D30E8B500515D3B /* LxGridViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LxGridViewFlowLayout.h; sourceTree = "<group>"; };
+		0D5DCADF1D30E8B500515D3B /* LxGridViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LxGridViewFlowLayout.m; sourceTree = "<group>"; };
+		0D5DCAE31D31006500515D3B /* DiscoverHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DiscoverHeaderView.h; path = Discover/DiscoverHeaderView.h; sourceTree = "<group>"; };
+		0D5DCAE41D31006500515D3B /* DiscoverHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DiscoverHeaderView.m; path = Discover/DiscoverHeaderView.m; sourceTree = "<group>"; };
 		0D9B2A951D1E6ACE0054B87D /* BusTransferDetailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BusTransferDetailTableViewCell.h; path = "公交查询/BusTransferDetailTableViewCell.h"; sourceTree = "<group>"; };
 		0D9B2A961D1E6ACE0054B87D /* BusTransferDetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BusTransferDetailTableViewCell.m; path = "公交查询/BusTransferDetailTableViewCell.m"; sourceTree = "<group>"; };
 		0D9B2A9E1D1E90970054B87D /* icArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icArrow.png; sourceTree = "<group>"; };
@@ -2992,6 +3020,7 @@
 		0D1942291CCDFFE60034D6FF /* 公交查询 */ = {
 			isa = PBXGroup;
 			children = (
+				0D5DCABE1D2A3E5000515D3B /* BusFav */,
 				0D1B06BD1CE18B240020A5B0 /* BusTransfer */,
 				0D1B06AF1CE086B70020A5B0 /* BusNearby */,
 				0D1B06AE1CE086AF0020A5B0 /* BusStop */,
@@ -3093,6 +3122,7 @@
 		0D5B22081CD4522C00EFBB44 /* Map */ = {
 			isa = PBXGroup;
 			children = (
+				0D5DCABC1D27A47D00515D3B /* walking_man.png */,
 				0D0C3A7E1CF2A169007C7F94 /* icon_map_transfer@2x.png */,
 				0D0C3A7F1CF2A169007C7F94 /* icon_map_transfer@3x.png */,
 				0D0C3A781CF0336D007C7F94 /* icon_end_stop.png */,
@@ -3142,12 +3172,56 @@
 			name = Map;
 			sourceTree = "<group>";
 		};
+		0D5DCABE1D2A3E5000515D3B /* BusFav */ = {
+			isa = PBXGroup;
+			children = (
+				0D5DCABF1D2A3FE700515D3B /* BusCollectViewController.h */,
+				0D5DCAC01D2A3FE700515D3B /* BusCollectViewController.m */,
+			);
+			name = BusFav;
+			sourceTree = "<group>";
+		};
+		0D5DCAC51D2BB21600515D3B /* Discover */ = {
+			isa = PBXGroup;
+			children = (
+				0D5DCAC61D2BB27200515D3B /* DiscoverViewController.h */,
+				0D5DCAC71D2BB27200515D3B /* DiscoverViewController.m */,
+				0D5DCAE31D31006500515D3B /* DiscoverHeaderView.h */,
+				0D5DCAE41D31006500515D3B /* DiscoverHeaderView.m */,
+			);
+			name = Discover;
+			sourceTree = "<group>";
+		};
+		0D5DCAC91D2BB2BA00515D3B /* Discover */ = {
+			isa = PBXGroup;
+			children = (
+				0D5DCAD61D30D67D00515D3B /* DiscoverGroupModel.h */,
+				0D5DCAD71D30D67D00515D3B /* DiscoverGroupModel.m */,
+				0D5DCACD1D2BB36600515D3B /* DiscoverModel.h */,
+				0D5DCACE1D2BB36600515D3B /* DiscoverModel.m */,
+			);
+			name = Discover;
+			sourceTree = "<group>";
+		};
+		0D5DCAD91D30E8B400515D3B /* LxGridView */ = {
+			isa = PBXGroup;
+			children = (
+				0D5DCADA1D30E8B400515D3B /* LxGridView.h */,
+				0D5DCADB1D30E8B500515D3B /* LxGridView.m */,
+				0D5DCADC1D30E8B500515D3B /* LxGridViewCell.h */,
+				0D5DCADD1D30E8B500515D3B /* LxGridViewCell.m */,
+				0D5DCADE1D30E8B500515D3B /* LxGridViewFlowLayout.h */,
+				0D5DCADF1D30E8B500515D3B /* LxGridViewFlowLayout.m */,
+			);
+			path = LxGridView;
+			sourceTree = "<group>";
+		};
 		0D9B2A9C1D1E90970054B87D /* SFDraggableDialogView */ = {
 			isa = PBXGroup;
 			children = (
-				0D5DCAA31D2269CC00515D3B /* SFDraggableDialogView.xib */,
-				0D5DCAA41D2269CC00515D3B /* SFDraggableDialogView.m */,
-				0D5DCAA51D2269CC00515D3B /* SFDraggableDialogView.h */,
+				0D5DCAAF1D26752A00515D3B /* SFDraggableDialogView.h */,
+				0D5DCAB01D26752A00515D3B /* SFDraggableDialogView.m */,
+				0D5DCAB11D26752A00515D3B /* SFDraggableDialogView.xib */,
 				0D9B2A9D1D1E90970054B87D /* Resources */,
 				0D9B2AA81D1E90970054B87D /* UIImage+ImageEffects.h */,
 				0D9B2AA91D1E90970054B87D /* UIImage+ImageEffects.m */,
@@ -3158,6 +3232,7 @@
 		0D9B2A9D1D1E90970054B87D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				0D5DCAAD1D266C5200515D3B /* face@2x.png */,
 				0D9B2A9E1D1E90970054B87D /* icArrow.png */,
 				0D9B2A9F1D1E90970054B87D /* icArrow@2x.png */,
 				0D9B2AA01D1E90970054B87D /* icArrow@3x.png */,
@@ -5484,6 +5559,7 @@
 		8AB7CC781AA04E96007A17E8 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				0D5DCAC91D2BB2BA00515D3B /* Discover */,
 				0DE4B7731CCF47C200AE4C63 /* 公交 */,
 				6D2F38B31C049F1D006429D9 /* 点评 */,
 				6DE371EE1C03081900BD73B0 /* 评分 */,
@@ -5543,6 +5619,7 @@
 		8AB7CC7D1AA04E96007A17E8 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				0D5DCAC51D2BB21600515D3B /* Discover */,
 				0D509FC31D14FCB500574BA6 /* SplashAD */,
 				0D1942291CCDFFE60034D6FF /* 公交查询 */,
 				6DFF6A6F1C18384700310161 /* 购买主题 */,
@@ -5612,6 +5689,7 @@
 		8AB7CCF91AA6F584007A17E8 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				0D5DCAD91D30E8B400515D3B /* LxGridView */,
 				0D9B2A9C1D1E90970054B87D /* SFDraggableDialogView */,
 				0D509FBD1D14FC7F00574BA6 /* MZTimerLabel */,
 				0D0D046A1D02B33100ACA542 /* MJExtension */,
@@ -5983,6 +6061,7 @@
 				TargetAttributes = {
 					8AB7CC481AA00D7D007A17E8 = {
 						CreatedOnToolsVersion = 6.1;
+						DevelopmentTeam = 8CMF227875;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -6168,6 +6247,7 @@
 				6D65EEDD1C0ECCD70032B5DD /* nav_1_7@3x.png in Resources */,
 				6D65EFEF1C0ECCD70032B5DD /* share_moments@3x.png in Resources */,
 				6D65EF251C0ECCD70032B5DD /* 3_11_H@3x.png in Resources */,
+				0D5DCABD1D27A47D00515D3B /* walking_man.png in Resources */,
 				6D65EFF61C0ECCD70032B5DD /* share_wechat@2x.png in Resources */,
 				6D2701A51BCE53130064A8EA /* TOWebViewControllerLocalizable.strings in Resources */,
 				6D65F07E1C0ECCD70032B5DD /* icon_mima@2x.png in Resources */,
@@ -6510,8 +6590,8 @@
 				6D65EF911C0ECCD70032B5DD /* 3_9_H@3x.png in Resources */,
 				6D65F0651C0ECCD70032B5DD /* act_down@3x.png in Resources */,
 				6D65F0B61C0ECCD70032B5DD /* keyboard_add_photo@2x.png in Resources */,
-				0D5DCAA61D2269CC00515D3B /* SFDraggableDialogView.xib in Resources */,
 				6D65F0521C0ECCD70032B5DD /* tuiguang@2x.png in Resources */,
+				0D5DCAB31D26752A00515D3B /* SFDraggableDialogView.xib in Resources */,
 				6D65F04C1C0ECCD70032B5DD /* t_10@2x.png in Resources */,
 				6D65F01C1C0ECCD70032B5DD /* 0@2x.png in Resources */,
 				8A9789C81AB13FDF00022F47 /* LeftMenuViewController.xib in Resources */,
@@ -6597,6 +6677,7 @@
 				6D65EF121C0ECCD70032B5DD /* 2_3@2x.png in Resources */,
 				6D65EFB41C0ECCD70032B5DD /* fatie_big@2x.png in Resources */,
 				0D0D04811D02B33200ACA542 /* Info.plist in Resources */,
+				0D5DCAAE1D266C5200515D3B /* face@2x.png in Resources */,
 				6D65EF751C0ECCD70032B5DD /* 3_2_H@3x.png in Resources */,
 				6D65EEEE1C0ECCD70032B5DD /* 1_3@2x.png in Resources */,
 				6D65F0061C0ECCD70032B5DD /* fav_unAction@2x.png in Resources */,
@@ -6727,6 +6808,7 @@
 			files = (
 				6D5FC8FD1BD0FDB0006A564C /* WebNaviViewController.m in Sources */,
 				6D34669E1B9D6E1500E76B8C /* ArticleDetailViewController.m in Sources */,
+				0D5DCAE51D31006600515D3B /* DiscoverHeaderView.m in Sources */,
 				8ABECEC61C0340DE006F3854 /* IQBarButtonItem.m in Sources */,
 				6D34669D1B9D6E0900E76B8C /* ArticleListModel.m in Sources */,
 				6D34669C1B9D6DFF00E76B8C /* ArticleDetailModel.m in Sources */,
@@ -6768,7 +6850,7 @@
 				8ABC17421AB7C3EB00F4F9AB /* MyPostCollectionCell.m in Sources */,
 				6D1163B41AE8CA2C00705FAC /* POPLayerExtras.mm in Sources */,
 				6D8ED87A1AE4F29D00D023EC /* MGTemplateEngine.m in Sources */,
-				0D5DCAA71D2269CC00515D3B /* SFDraggableDialogView.m in Sources */,
+				0D5DCAB21D26752A00515D3B /* SFDraggableDialogView.m in Sources */,
 				0D309F9D1CF8542500802263 /* BusSearchHistoryViewController.m in Sources */,
 				6D7CC18F1B04731B004F61D4 /* LewPopupViewAnimationSlide.m in Sources */,
 				8A1FDFE31AC3A289008F10F0 /* AGEmojiPageView.m in Sources */,
@@ -6918,6 +7000,7 @@
 				6D5CCF411ADB9B9B00A156CA /* YZButton.m in Sources */,
 				8A1FDFE81AC3A2C4008F10F0 /* UIPlaceHolderTextView.m in Sources */,
 				6D2701A81BCE53130064A8EA /* TOWebViewController.m in Sources */,
+				0D5DCACF1D2BB36600515D3B /* DiscoverModel.m in Sources */,
 				6DFAF2BE1B255C3500B179D5 /* UIButton+WebCache.m in Sources */,
 				6D421AC81B9D4772009B5F5F /* XLBarPagerTabStripViewController.m in Sources */,
 				8A46172C1BCF47C300B0337B /* EMMarkupProperty.m in Sources */,
@@ -6930,6 +7013,7 @@
 				6D0F5EBC1B2A874E0062A50B /* RECommonFunctions.m in Sources */,
 				6DBE3FC41AD3C0630067C4EC /* UserInfoViewModel.m in Sources */,
 				8ABC173B1AB6CCEB00F4F9AB /* CollectionListModel.m in Sources */,
+				0D5DCAC81D2BB27300515D3B /* DiscoverViewController.m in Sources */,
 				6D0F5EBE1B2A874E0062A50B /* UIViewController+RESideMenu.m in Sources */,
 				0D0D04681D00185000ACA542 /* Locator.m in Sources */,
 				6D017A5B1BCE588500F6FC1A /* TMDiskCache.m in Sources */,
@@ -6974,6 +7058,7 @@
 				8A8637F51B43FDDB00BDF7B3 /* SDCycleScrollView.m in Sources */,
 				6DCBED3D1AD5334E00496C78 /* MyReplyCell.m in Sources */,
 				6DFAF1DE1B254AC900B179D5 /* SVProgressHUD.m in Sources */,
+				0D5DCAE21D30E8B800515D3B /* LxGridViewFlowLayout.m in Sources */,
 				8A40F9F11BFB6CAD00E087AD /* CustomRightItemView.m in Sources */,
 				6D8ED87C1AE4F29D00D023EC /* MGTemplateStandardMarkers.m in Sources */,
 				8AB835FA1AC2999A00C6404D /* QBAssetsCollectionViewCell.m in Sources */,
@@ -7037,6 +7122,7 @@
 				0DE4B77C1CCF7FE400AE4C63 /* AMapTipAnnotation.m in Sources */,
 				8A1FE02D1AC3DC6C008F10F0 /* MJPhoto.m in Sources */,
 				0DF11D6A1CE342E600FD6D28 /* MANaviRoute.m in Sources */,
+				0D5DCAE01D30E8B700515D3B /* LxGridView.m in Sources */,
 				6DFAF2C01B255C3500B179D5 /* UIImage+MultiFormat.m in Sources */,
 				8AE4D2A01B4E693B00E55969 /* UserSearchCell.m in Sources */,
 				8A7A4CCD1BFAC64D00426183 /* CustomTransferViewController.m in Sources */,
@@ -7114,6 +7200,7 @@
 				6D2701A61BCE53130064A8EA /* TOActivityChrome.m in Sources */,
 				6DFAF2B61B255C3500B179D5 /* NSData+ImageContentType.m in Sources */,
 				8A15720D1AF761800042CA62 /* PostNoImageCell.m in Sources */,
+				0D5DCAE11D30E8B800515D3B /* LxGridViewCell.m in Sources */,
 				6D1163B91AE8CA2C00705FAC /* TransformationMatrix.cpp in Sources */,
 				8A9E34201AB9A49B0058F279 /* PostModel.m in Sources */,
 				6D3BB1251B035FD10015D2C9 /* ClassifiedViewController.m in Sources */,
@@ -7135,6 +7222,7 @@
 				6DFAF34F1B25601300B179D5 /* AFHTTPRequestOperation.m in Sources */,
 				8A9DB1681B8EE72200ED09E0 /* TicklingPostCell.m in Sources */,
 				6DA10EBF1BA012260077158B /* MessageController.m in Sources */,
+				0D5DCAD81D30D67D00515D3B /* DiscoverGroupModel.m in Sources */,
 				6DF718341B5F964A0092CC2B /* BoardView.m in Sources */,
 				6D80C89D1B4BB58D00959E52 /* DBDao.m in Sources */,
 				8A8637FC1B440EEF00BDF7B3 /* LinkCell.m in Sources */,
@@ -7183,6 +7271,7 @@
 				6DD74A5C1B5A53DD00826067 /* SearchFriendsController.m in Sources */,
 				6DD843241BF9B88000AAF791 /* JoinFieldItem.m in Sources */,
 				8ABECEC51C0340DE006F3854 /* IQTextView.m in Sources */,
+				0D5DCAC11D2A3FE700515D3B /* BusCollectViewController.m in Sources */,
 				6DDB235F1BA1649F00B1D7A9 /* NSObject+A2BlockDelegate.m in Sources */,
 				6D1163B01AE8CA2C00705FAC /* POPCGUtils.mm in Sources */,
 			);
@@ -7309,8 +7398,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Feng Li (868V29RLT4)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Feng Li (868V29RLT4)";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -7354,9 +7443,9 @@
 					"$(inherited)",
 				);
 				PODS_ROOT = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = com.cloudcity;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ideal.agent;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "b58218c1-0ee9-4cf3-bf68-761be321aa30";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "${SRCROOT}";
 			};
@@ -7367,8 +7456,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Feng Li (868V29RLT4)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Feng Li (868V29RLT4)";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -7412,9 +7501,9 @@
 					"$(inherited)",
 				);
 				PODS_ROOT = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = com.cloudcity;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ideal.agent;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "b58218c1-0ee9-4cf3-bf68-761be321aa30";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "${SRCROOT}";
 			};

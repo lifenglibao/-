@@ -1,3 +1,4 @@
+
 //
 //  MainViewController.m
 //  Clan
@@ -32,7 +33,7 @@
 #import "ShareItem.h"
 #import "ShareMenu.h"
 #import "MessageVC.h"
-
+#import "DiscoverViewController.h"
 static float interval = 60.f;
 
 @interface MainViewController ()
@@ -386,10 +387,14 @@ static float interval = 60.f;
             }
         }
         else if (button_type && button_type.intValue == 5) {
-            //我的页面
-            self.meVCExist = YES;
-            tabType = DZTabType_MePage;
-            typeClassStrValue = @"MeViewController";
+            
+            //discover
+            tabType = DZTabType_DiscoverPage;
+            typeClassStrValue = @"DiscoverViewController";
+//            //我的页面
+//            self.meVCExist = YES;
+//            tabType = DZTabType_MePage;
+//            typeClassStrValue = @"MeViewController";
         }
         else {
             //默认设置为 单页面
@@ -445,9 +450,11 @@ static float interval = 60.f;
                 //自定义首页
                 CustomModuleViewController *customVc = (CustomModuleViewController *)vc;
                 customVc.customHomeModel = customHomeModel;
-            }else if (typeClass == NSClassFromString(@"MeViewController")){
-                MeViewController *meVc = (MeViewController *)vc;
-                meVc.isSelf = YES;
+            }else if (typeClass == NSClassFromString(@"DiscoverViewController")){
+                //发现页面
+                DiscoverViewController *disVC = (DiscoverViewController *)vc;
+                disVC.customHomeModel = [_homeviewmodel request_discoverDataArray];
+
             }else if (typeClass == NSClassFromString(@"ArticleViewController")){
                 //导航型
                 ArticleViewController *articleVc = (ArticleViewController *)vc;
@@ -521,7 +528,7 @@ static float interval = 60.f;
 //                [[NSNotificationCenter defaultCenter] postNotificationName:@"AUTO_REFRESH_XINXI" object:nil];
             }
         }
-        else if (button.tabtype == DZTabType_MePage) {
+        else if (button.tabtype == DZTabType_DiscoverPage) {
             if ([UserModel currentUserInfo].logined) {
                 //我的页面更新
 //                [[NSNotificationCenter defaultCenter] postNotificationName:@"AUTO_REFRESH_ME" object:nil];

@@ -44,6 +44,7 @@ typedef NS_ENUM(NSInteger, DZTabType) {
     DZTabType_PostingPage, //发帖页面
     DZTabType_MessagePage, //消息页面
     DZTabType_MePage, //我的页面
+    DZTabType_DiscoverPage, //发现页面
     DZTabType_NonePage=100, //空页面
 };
 

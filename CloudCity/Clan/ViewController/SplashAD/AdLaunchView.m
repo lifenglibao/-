@@ -75,11 +75,11 @@ AdLaunchType state = AdLaunchProgressType;
     self.splashData = [NSMutableArray array];
     state = AdLaunchProgressType;
     [self loadmodel];
-    [self buildUI];
+//    [self buildUI];
     
     
-//    if([Util oneDayPast])
-//    {
+    if([Util oneDayPast])
+    {
         WEAKSELF
         [_configViewModel getAppSplashcfgWithBlock:^(id result) {
             
@@ -93,7 +93,7 @@ AdLaunchType state = AdLaunchProgressType;
                 weakSelf.duration = 5;
             }
             
-            [self hiddenAnimation];
+//            [self hiddenAnimation];
             [self initADBackGroundView];
             [self showImage];
             [self requestBanner];
@@ -116,9 +116,9 @@ AdLaunchType state = AdLaunchProgressType;
             }
         }];
         
-//    }else{
-//        [self toHidenState];
-//    }
+    }else{
+        [self toHidenState];
+    }
 
     [self requestAppBaseDatas];
 }
@@ -271,11 +271,23 @@ AdLaunchType state = AdLaunchProgressType;
          * 1、请求插件后面的配置信息
          * 2、请求首页的indexcfg配置信息
          * 3、请求所有的版块儿信息
+         * 4、请求主页面banner和link配置
+         * 5、请求发现模块数据
          */
         [weakSelf requestAppPlugcfg];
         [weakSelf requestHomeIndexcfg];
         [weakSelf requestForumsDatas];
         [weakSelf requestCCHomePageInfo];
+        [weakSelf requestCCDiscoverInfo];
+    }];
+}
+
+//发现模块
+- (void)requestCCDiscoverInfo
+{
+    WEAKSELF
+    [_configViewModel getCCDiscoverWithBlock:^(BOOL result) {
+        
     }];
 }
 
