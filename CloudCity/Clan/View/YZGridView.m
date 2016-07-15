@@ -148,7 +148,7 @@ static const CGFloat itemHeight = 90.f;
     }
     
     
-    if ([link.url isEqualToString:@"func_bus_search"]) {
+    if ([link.url isEqualToString:@"func_bus_search111"]) {
         BusViewController *bus = [[BusViewController alloc] init];
         bus.hidesBottomBarWhenPushed = YES;
         [self.additionsViewController.navigationController pushViewController:bus animated:YES];

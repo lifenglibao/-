@@ -85,6 +85,8 @@ static float interval = 60.f;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificationCome:) name:@"KNEWS_MESSAGE_COME" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificationCome:) name:@"KNEWS_FRIEND_MESSAGE" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificationCome:) name:@"GET_kBOARDSTYLE" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificationCome:) name:@"GET_LATEST_DISCOVER" object:nil];
+
 
     UserModel *cUser = [UserModel currentUserInfo];
     [cUser addObserver:self forKeyPath:@"logined" options:NSKeyValueObservingOptionNew context:NULL];
@@ -751,11 +753,11 @@ static float interval = 60.f;
         
         [customVc initNav];
         
-//        if (_lastButton.tabtype == DZTabType_MessagePage) {
-//            //当前的视图要刷新
-//            [[NSNotificationCenter defaultCenter] postNotificationName:@"DO_DIALOG_UPDATE" object:nil];
-//        }
-//        [self newMessTip];
+        if (_lastButton.tabtype == DZTabType_MessagePage) {
+            //当前的视图要刷新
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"DO_DIALOG_UPDATE" object:nil];
+        }
+        [self newMessTip];
     }
     else if ([noti.name isEqualToString:@"KNEWS_FRIEND_MESSAGE"]) {
         [customVc initNav];
@@ -767,8 +769,52 @@ static float interval = 60.f;
     else if ([noti.name isEqualToString:@"GET_kBOARDSTYLE"]) {
         [self loadBoardStyleVC:[NSString returnPlistWithKeyValue:kBOARDSTYLE]];
     }
+    else if ([noti.name isEqualToString:@"GET_LATEST_DISCOVER"]) {
+        [self newDiscover];
+    }
 }
 
+
+- (void)newDiscover
+{
+    if ([[TMCache sharedCache] objectForKey:@"CCDiscoverLatestInfo"]) {
+        
+        NSDictionary *dic = [[TMCache sharedCache] objectForKey:@"CCDiscoverLatestInfo"];
+        
+        for (UIViewController *subvc in self.viewControllers) {
+            if ([subvc isKindOfClass:[UINavigationController class]]) {
+                DZNavigationController *subnavi = (DZNavigationController *)subvc;
+                if (subnavi.tabType == DZTabType_DiscoverPage) {
+                    //遍历出所有信息页面 并找到信息页面对应的tabbar button所在的位置 进而找到button 添加小角标
+                    NSInteger btnindex = subnavi.tabBarButtonIndex;
+                    NSInteger btnTag = btnindex+1000;
+                    UIButton *discoverBtn = (UIButton *)[_tabBarBG viewWithTag:btnTag];
+                    //新消息到达
+                    UIView *newmess = [discoverBtn viewWithTag:9877];
+                    [newmess removeFromSuperview];
+                    newmess = nil;
+                    
+                    if ([dic objectForKey:@"is_selected"] && [[dic objectForKey:@"is_selected"] isEqualToString:@"0"]) {
+                        UIImageView *redPod = nil;
+                        redPod = [[UIImageView alloc]initWithImage:[Util imageWithColor:[UIColor redColor]]];
+                        redPod.backgroundColor = [UIColor redColor];
+                        redPod.layer.cornerRadius = 4;
+                        redPod.clipsToBounds = YES;
+                        redPod.tag = 9877;
+                        [discoverBtn addSubview:redPod];
+                        
+                        [redPod mas_makeConstraints:^(MASConstraintMaker *make) {
+                            make.centerX.equalTo(discoverBtn.mas_centerX).offset(20);
+                            make.centerY.equalTo(discoverBtn.mas_centerY).offset(-15);
+                            make.width.equalTo(@8);
+                            make.height.equalTo(@8);
+                        }];
+                    }
+                }
+            }
+        }
+    }
+}
 //新消息提示
 - (void)newMessTip
 {

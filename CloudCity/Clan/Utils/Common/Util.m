@@ -751,7 +751,7 @@
     NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     NSDateComponents *components = [gregorian components:NSDayCalendarUnit fromDate:lastDate toDate:[NSDate date] options:0];
     NSInteger days = [components day];
-    if (days >= DEFAULT_INTERVAL) {
+    if (days >= DEFAULT_INTERVAL || ![[NSUserDefaults standardUserDefaults] objectForKey:@"time_interval"]) {
         [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:@"time_interval"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         return true;

@@ -32,10 +32,12 @@
 #import "CustomRightItemView.h"
 #import "LinkModel.h"
 #import "SFDraggableDialogView.h"
+#import "AppConfigViewModel.h"
 
 @interface CustomModuleViewController ()<SDCycleScrollViewDelegate,CustomRightItemDelegate,SFDraggableDialogViewDelegate>
 
 
+@property (strong, nonatomic) AppConfigViewModel *configViewModel;
 @property (strong, nonatomic)BaseTableView *tableView;
 @property (strong, nonatomic)HomeViewModel *homeViewModel;
 @property (strong, nonatomic)NSMutableArray *hotArray;
@@ -410,7 +412,12 @@ static NSString *const customRecommendType = @"2";
         }
         
     }];
+    
+    self.configViewModel = [AppConfigViewModel new];
 
+    [_configViewModel getCCLatestDiscoverWithBlock:^(BOOL result) {
+        
+    }];
 }
 - (void)initForums{
     //创建forum数组 一个CELL显示两个

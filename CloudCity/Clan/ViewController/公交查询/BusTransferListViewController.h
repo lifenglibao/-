@@ -23,5 +23,10 @@
 @property (nonatomic) NSString *routeDestinationLocation;
 @property (strong, nonatomic) UIButton *viewMoreBtn;
 @property (nonatomic) BOOL isFav;
+@property (nonatomic, strong) UIButton *favBtn;
 
+/* 起始点经纬度. */
+@property (nonatomic) CLLocationCoordinate2D startCoordinate;
+/* 终点经纬度. */
+@property (nonatomic) CLLocationCoordinate2D destinationCoordinate;
 @end

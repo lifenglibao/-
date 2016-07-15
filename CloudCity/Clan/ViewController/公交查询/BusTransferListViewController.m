@@ -45,6 +45,16 @@
 - (void)initNavBar
 {
     
+    _isFav = [CustomBusMode isFavoed_withID:[NSString stringWithFormat:@"%@%@-%@",BUSTRANSFERFAV,self.routeStartLocation,self.routeDestinationLocation] withFavoID:[NSString stringWithFormat:@"%@-%@",self.routeStartLocation,self.routeDestinationLocation] forType:myBusTransfer];
+
+    NSString *favoImgName = _isFav ? @"detail_favo_H" : @"favo_N";
+    
+    _favBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
+    [_favBtn addTarget:self action:@selector(favAction:) forControlEvents:UIControlEventTouchUpInside];
+    [_favBtn setImage:kIMG(favoImgName) forState:UIControlStateNormal];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_favBtn];
+    
+    /*
     UIView *rightView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 90, 44)];
     UIButton *viewmore = [UIButton buttonWithTitle:nil andImage:@"more_N" andFrame:CGRectMake(rightView.right - 37, (44-30)/2, 37, 30) target:self action:@selector(viewMoreAction:)];
     viewmore.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 10);
@@ -54,6 +64,7 @@
     UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
     negativeSpacer.width = -15;
     [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:negativeSpacer, rightItem, nil]];
+     */
 }
 
 - (void)addGridView
@@ -232,6 +243,7 @@
     }
 }
 
+/*
 //更多按钮
 - (void)viewMoreAction:(id)sender
 {
@@ -275,6 +287,28 @@
         
     }
     //    }
+    
+}
+
+*/
+
+- (void)favAction:(UIButton *)sender{
+    
+    sender.selected = !sender.selected;
+    _isFav = [CustomBusMode isFavoed_withID:[NSString stringWithFormat:@"%@%@-%@",BUSTRANSFERFAV,self.routeStartLocation,self.routeDestinationLocation] withFavoID:[NSString stringWithFormat:@"%@-%@",self.routeStartLocation,self.routeDestinationLocation] forType:myBusTransfer];
+    
+    if (_isFav) {
+        //已收藏 删除收藏
+        [CustomBusMode deleteFavoed_withID:[NSString stringWithFormat:@"%@%@-%@",BUSTRANSFERFAV,self.routeStartLocation,self.routeDestinationLocation] withFavoID:[NSString stringWithFormat:@"%@-%@",self.routeStartLocation,self.routeDestinationLocation] forType:myBusTransfer];
+        [self showHudTipStr:@"取消收藏成功"];
+    }else{
+        [CustomBusMode addFavoed_withID:[NSString stringWithFormat:@"%@%@-%@",BUSTRANSFERFAV,self.routeStartLocation,self.routeDestinationLocation] withFavoID:[NSString stringWithFormat:@"%@-%@",self.routeStartLocation,self.routeDestinationLocation] forType:myBusTransfer];
+        [self showHudTipStr:@"收藏成功"];
+        
+    }
+    
+    NSString *favoImgName = [CustomBusMode isFavoed_withID:[NSString stringWithFormat:@"%@%@-%@",BUSTRANSFERFAV,self.routeStartLocation,self.routeDestinationLocation] withFavoID:[NSString stringWithFormat:@"%@-%@",self.routeStartLocation,self.routeDestinationLocation] forType:myBusTransfer] ? @"detail_favo_H" : @"favo_N";
+    [_favBtn setImage:kIMG(favoImgName) forState:UIControlStateNormal];
     
 }
 

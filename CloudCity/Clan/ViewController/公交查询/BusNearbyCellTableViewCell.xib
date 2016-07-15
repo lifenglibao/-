@@ -99,6 +99,7 @@
                         <state key="normal" title="收藏" image="detail_favo.png">
                             <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
+                        <state key="selected" image="detail_favo_H.png"/>
                         <connections>
                             <action selector="btnFavClicked:" destination="-2" eventType="touchUpInside" id="cN6-0M-Q4G"/>
                         </connections>
@@ -251,6 +252,7 @@
     </objects>
     <resources>
         <image name="detail_favo.png" width="20" height="19"/>
+        <image name="detail_favo_H.png" width="20" height="19"/>
         <image name="icon_arrow.png" width="25" height="25"/>
         <image name="icon_map_transfer" width="25" height="25"/>
     </resources>

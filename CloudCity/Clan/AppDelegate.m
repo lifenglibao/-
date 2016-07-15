@@ -364,7 +364,7 @@
                 _collViewModel.favoThreadsRequestCompleted = NO;
                 _collViewModel.favoFormsRequestCompleted = NO;
             }
-            [Util cleanUpLocalFavoArray];
+//            [Util cleanUpLocalFavoArray];
         }
     }
 }

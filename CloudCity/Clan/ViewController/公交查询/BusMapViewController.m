@@ -59,7 +59,7 @@ const NSInteger RoutePlanningPaddingEdge                    = 20;
         [self addDetailView];
     }
     [self addUserGPS];
-    [self addTraffic];
+//    [self addTraffic];
 }
 
 - (void)addDetailView

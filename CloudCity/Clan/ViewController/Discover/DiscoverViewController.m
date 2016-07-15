@@ -89,17 +89,24 @@ static NSString * const LxGridViewCellReuseIdentifier = @stringify(LxGridViewCel
     LxGridViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:LxGridViewCellReuseIdentifier forIndexPath:indexPath];
     
     cell.delegate = self;
-    cell.editing = _gridView.editing;
+//    cell.editing = _gridView.editing;
     
     self.discoverGroupModel = [DiscoverGroupModel mj_objectWithKeyValues:self.dataArray[indexPath.section]];
     self.discoverModel = [DiscoverModel mj_objectWithKeyValues:self.discoverGroupModel.items[indexPath.item]];
-
+    
     cell.title = self.discoverModel.title;
     [cell.iconImageView sd_setImageWithURL:[NSURL URLWithString:self.discoverModel.pic] placeholderImage:nil options:SDWebImageRefreshCached];
-    cell.badge.hidden = NO;
+
+    NSDictionary *latestDiscover = [[TMCache sharedCache] objectForKey:@"CCDiscoverLatestInfo"];
+    
+    if ([self.discoverGroupModel.group_id isEqualToString:[latestDiscover objectForKey:@"group_id"]] && [self.discoverModel.discover_id isEqualToString:[latestDiscover objectForKey:@"id"]] && [[latestDiscover objectForKey:@"is_selected"]isEqualToString:@"0"]) {
+        cell.badge.hidden = NO;
+    }else{
+        cell.badge.hidden = YES;
+    }
     return cell;
 }
-
+//CCDiscoverLatestInfo
 - (void)collectionView:(UICollectionView *)collectionView itemAtIndexPath:(NSIndexPath *)sourceIndexPath willMoveToIndexPath:(NSIndexPath *)destinationIndexPath
 {
 //    self.discoverGroupModel = [DiscoverGroupModel mj_objectWithKeyValues:self.dataArray[indexPath.section]];
@@ -133,6 +140,16 @@ static NSString * const LxGridViewCellReuseIdentifier = @stringify(LxGridViewCel
 {
     self.discoverGroupModel = [DiscoverGroupModel mj_objectWithKeyValues:self.dataArray[indexPath.section]];
     self.discoverModel = [DiscoverModel mj_objectWithKeyValues:self.discoverGroupModel.items[indexPath.item]];
+    
+    NSDictionary *latestDiscover = [[TMCache sharedCache] objectForKey:@"CCDiscoverLatestInfo"];
+    
+    if ([self.discoverGroupModel.group_id isEqualToString:[latestDiscover objectForKey:@"group_id"]] && [self.discoverModel.discover_id isEqualToString:[latestDiscover objectForKey:@"id"]]) {
+        [latestDiscover setValue:@"1" forKey:@"is_selected"];
+        [[TMCache sharedCache] removeObjectForKey:@"CCDiscoverLatestInfo"];
+        [[TMCache sharedCache] setObject:latestDiscover forKey:@"CCDiscoverLatestInfo"];
+        [_gridView reloadData];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"GET_LATEST_DISCOVER" object:nil];
+    }
     
     TOWebViewController *web = [[TOWebViewController alloc]initWithURLString:self.discoverModel.url];
     web.hidesBottomBarWhenPushed = YES;

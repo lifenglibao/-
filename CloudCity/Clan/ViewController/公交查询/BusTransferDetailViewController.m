@@ -84,7 +84,7 @@
     if (self.isOpen && [dic.allKeys containsObject:@"endStop"]) {
         return [Util heightForText:[self.routeData[indexPath.row] objectForKey:@"endStop"] font:[UIFont systemFontOfSize:13] withinWidth:tableView.width];
     }
-    return 30;
+    return 50;
 }
 
 - (BusTransferDetailTableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -122,11 +122,12 @@
 //        cell.imageView.layer.cornerRadius = 15;
 //    }
 
+
+
     
     if ([self.routeData[indexPath.row] objectForKey:@"start"]) {
         cell.textLabel.text  = self.routeStartLocation;
-        UIImage * img = [UIImage imageWithColor:[UIColor blueColor] withFrame:CGRectMake(0, 0, 5, 5) alpha:0.7];
-        cell.imageView.image = img;
+        cell.imageView.image = kIMG(@"icon_start_stop");
         cell.imageView.layer.cornerRadius = 15;
         
     }else if ([self.routeData[indexPath.row] objectForKey:@"walking"]) {
@@ -159,9 +160,9 @@
         
     }else if ([self.routeData[indexPath.row] objectForKey:@"end"]) {
         cell.textLabel.text  = self.routeDestinationLocation;
-        UIImage * img = [UIImage imageWithColor:[UIColor redColor] withFrame:CGRectMake(0, 0, 5, 5) alpha:0.7];
-        cell.imageView.image = img;
+        cell.imageView.image = kIMG(@"icon_end_stop");
         cell.imageView.layer.cornerRadius = 15;
+
     }
 
     

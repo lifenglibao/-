@@ -39,13 +39,13 @@
 
 - (void)initNavBar
 {
-    _isFav = [CustomBusMode isFavoed_withID:[NSString stringWithFormat:@"%@%@",BUSLINEFAV,self.title] withFavoID:[NSString stringWithFormat:@"%@",self.title] forType:myBusLine];
-    NSString *favoImgName = _isFav ? @"detail_favo_H" : @"favo_N";
-
-    _favBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
-    [_favBtn addTarget:self action:@selector(favAction:) forControlEvents:UIControlEventTouchUpInside];
-    [_favBtn setImage:kIMG(favoImgName) forState:UIControlStateNormal];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_favBtn];
+//    _isFav = [CustomBusMode isFavoed_withID:[NSString stringWithFormat:@"%@%@",BUSLINEFAV,self.title] withFavoID:[NSString stringWithFormat:@"%@",self.title] forType:myBusLine];
+//    NSString *favoImgName = _isFav ? @"detail_favo_H" : @"favo_N";
+//
+//    _favBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
+//    [_favBtn addTarget:self action:@selector(favAction:) forControlEvents:UIControlEventTouchUpInside];
+//    [_favBtn setImage:kIMG(favoImgName) forState:UIControlStateNormal];
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_favBtn];
 }
 
 - (void)addHeaderView {
@@ -114,13 +114,21 @@
 }
 
 - (void)addFooterView {
+
+    _isFav = [CustomBusMode isFavoed_withID:[NSString stringWithFormat:@"%@%@",BUSLINEFAV,self.title] withFavoID:[NSString stringWithFormat:@"%@",self.title] forType:myBusLine];
+    NSString *favoImgName = _isFav ? @"detail_favo_H" : @"detail_favo";
     
-    NSArray * title = [NSArray arrayWithObjects:@"刷新",@"地图", nil];
-    NSArray * icon = [NSArray arrayWithObjects: [UIImage imageNamed:@"1_10"],[UIImage imageNamed:@"1_2"],nil];
+    NSArray * title = [NSArray arrayWithObjects:@"收藏",@"地图", nil];
+    NSArray * icon = [NSArray arrayWithObjects: kIMG(favoImgName) , kIMG(@"1_2"),nil];
+    
+    if (_footerView) {
+        [_footerView removeFromSuperview];
+        _footerView = nil;
+    }
     
     _footerView = [[SegmentView alloc] initWithFrameRect:CGRectMake(0, ScreenHeight - 120, ScreenWidth, 60) andTitleArray:title andIconArray:icon clickBlock:^(NSInteger index) {
         if (index == 0) {
-            [self.tableView reloadData];
+            [self favAction];
         }else if (index == 1) {
             [self go2Map];
         }
@@ -194,7 +202,7 @@
     
 }
 
-- (void)favAction:(UIButton *)sender{
+- (void)favAction{
     
 //    if (![UserModel currentUserInfo].logined || ![[NSUserDefaults standardUserDefaults]objectForKey:Code_CookieData]) {
 //        //没有登录 跳出登录页面
@@ -204,7 +212,6 @@
 //        [self presentViewController:nav animated:YES completion:nil];
 //        return;
 //    }
-    sender.selected = !sender.selected;
     _isFav = [CustomBusMode isFavoed_withID:[NSString stringWithFormat:@"%@%@",BUSLINEFAV,self.title] withFavoID:[NSString stringWithFormat:@"%@",self.title] forType:myBusLine];
     
     if (_isFav) {
@@ -215,8 +222,10 @@
         [self showHudTipStr:@"收藏成功"];
     }
     
-    NSString *favoImgName = [CustomBusMode isFavoed_withID:[NSString stringWithFormat:@"%@%@",BUSLINEFAV,self.title] withFavoID:[NSString stringWithFormat:@"%@",self.title] forType:myBusLine] ? @"detail_favo_H" : @"favo_N";
-    [_favBtn setImage:kIMG(favoImgName) forState:UIControlStateNormal];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        [self addFooterView];
+    });
 }
 
 - (void)didReceiveMemoryWarning {

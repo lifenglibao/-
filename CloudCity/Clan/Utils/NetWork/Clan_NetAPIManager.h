@@ -483,4 +483,6 @@
 
 //get CC Discover page info
 - (void)request_CCDiscoverPageInfoWithBlock:(void(^)(id data, NSError *error))block;
+- (void)request_CCLatestDiscoverPageInfoWithBlock:(void(^)(id data, NSError *error))block;
+
 @end

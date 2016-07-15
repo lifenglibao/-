@@ -543,7 +543,7 @@
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:@"userLogout" object:nil];
     //清除本地收藏
-    [Util cleanUpLocalFavoArray];
+//    [Util cleanUpLocalFavoArray];
     _nickLabel.text = @"点击头像登录";
     [_nickLabel sizeToFit];
     _nickLabel.center = CGPointMake(kVIEW_CENTERX(_portraitIV), kVIEW_BY(_portraitIV)+10+6);

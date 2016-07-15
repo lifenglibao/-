@@ -33,5 +33,6 @@
 
 //CC Discover Info
 - (void)getCCDiscoverWithBlock:(void(^)(BOOL result))block;
+- (void)getCCLatestDiscoverWithBlock:(void(^)(BOOL result))block;
 
 @end

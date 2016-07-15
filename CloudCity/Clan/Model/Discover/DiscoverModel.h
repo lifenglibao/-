@@ -42,5 +42,11 @@
  */
 @property (copy, nonatomic) NSString *is_require_login;
 
+@property (copy, nonatomic) NSString *group_id;
+
+@property (copy, nonatomic) NSString *group_name;
+
+@property (copy, nonatomic) NSString *is_selected;
+
 @end
 

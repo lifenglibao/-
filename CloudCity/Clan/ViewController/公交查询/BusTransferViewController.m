@@ -45,6 +45,7 @@
     [self initSearchDisplay];
     [self addSearchHistory];
     [self initUserLocation];
+    
     [[NSNotificationCenter defaultCenter] addObserverForName:@"BusSearchNotiFicationForTransfer" object:nil queue:NSOperationQueuePriorityNormal usingBlock:^(NSNotification * _Nonnull note) {
         if ([self.busTransferStartSearchFiled.text isEqualToString:@""]) {
             self.busTransferStartSearchFiled.text = [note.userInfo objectForKey:@"name"];
@@ -130,6 +131,7 @@
         
         [self.historyTableView writeHistoryPlist:self.busTransferStartSearchFiled.text withlat:self.startCoordinate.latitude lon:self.startCoordinate.longitude];
         [self.historyTableView writeHistoryPlist:self.busTransferEndSearchFiled.text withlat:self.destinationCoordinate.latitude lon:self.destinationCoordinate.longitude];
+        [self invertGeo];
     }else{
         [self showHudTipStr:@"请填写正确的路线名称"];
     }
@@ -137,6 +139,35 @@
 
 
 #pragma mark - AMapSearchDelegate
+
+/* 逆地理*/
+
+- (void) invertGeo {
+    
+    if (![self.busTransferStartSearchFiled.text isEqualToString:@"我的位置"] && ![self.busTransferEndSearchFiled.text isEqualToString:@"我的位置"]) {
+        return;
+    }
+    AMapReGeocodeSearchRequest *regeo = [[AMapReGeocodeSearchRequest alloc] init];
+    
+    if ([self.busTransferStartSearchFiled.text isEqualToString:@"我的位置"]) {
+        regeo.location                    = [AMapGeoPoint locationWithLatitude:self.startCoordinate.latitude longitude:self.startCoordinate.longitude];
+    }else if ([self.busTransferEndSearchFiled.text isEqualToString:@"我的位置"]){
+        regeo.location                    = [AMapGeoPoint locationWithLatitude:self.destinationCoordinate.latitude longitude:self.destinationCoordinate.longitude];
+    }
+    
+    regeo.requireExtension            = YES;
+    
+    [self.search AMapReGoecodeSearch:regeo];
+}
+
+/* 逆地理编码回调. */
+- (void)onReGeocodeSearchDone:(AMapReGeocodeSearchRequest *)request response:(AMapReGeocodeSearchResponse *)response
+{
+    if (response.regeocode != nil)
+    {
+        self.invertGeoResult = response.regeocode.formattedAddress;
+    }
+}
 
 /* 路径规划搜索回调. */
 - (void)onRouteSearchDone:(AMapRouteSearchBaseRequest *)request response:(AMapRouteSearchResponse *)response
@@ -174,8 +205,22 @@
 
         BusTransferListViewController *vc = [[BusTransferListViewController alloc] init];
         vc.totalBusRoute = self.routeResultArr;
-        vc.routeStartLocation = self.busTransferStartSearchFiled.text;
-        vc.routeDestinationLocation = self.busTransferEndSearchFiled.text;
+        
+        if (![Util isBlankString:self.invertGeoResult]) {
+            if ([self.busTransferStartSearchFiled.text isEqualToString:@"我的位置"]) {
+                vc.routeStartLocation = self.invertGeoResult;
+                vc.routeDestinationLocation = self.busTransferEndSearchFiled.text;
+            }else if ([self.busTransferEndSearchFiled.text isEqualToString:@"我的位置"]){
+                vc.routeStartLocation = self.busTransferStartSearchFiled.text;
+                vc.routeDestinationLocation = self.invertGeoResult;
+            }
+        }else{
+            vc.routeStartLocation = self.busTransferStartSearchFiled.text;
+            vc.routeDestinationLocation = self.busTransferEndSearchFiled.text;
+        }
+        
+        vc.startCoordinate = self.startCoordinate;
+        vc.destinationCoordinate = self.destinationCoordinate;
         [self.parentViewController.navigationController pushViewController:vc animated:YES];
     }
 }

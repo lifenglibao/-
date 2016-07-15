@@ -10,6 +10,7 @@
 #import "FaceImageViewModel.h"
 #import "HomeViewModel.h"
 #import "ArticleModel.h"
+#import "DiscoverModel.h"
 
 @interface AppConfigViewModel()
 @property (nonatomic, strong) FaceImageViewModel *faceViewModel;
@@ -273,6 +274,43 @@
 }
 
 //CC Discover Info
+
+- (void)getCCLatestDiscoverWithBlock:(void(^)(BOOL result))block
+{
+    [[Clan_NetAPIManager sharedManager]request_CCLatestDiscoverPageInfoWithBlock:^(id data, NSError *error) {
+        
+        if (!error && data && [[data objectForKey:API_STATUS_CODE] integerValue] == 200) {
+            
+            NSMutableArray *array = [NSMutableArray array];
+            if ([[TMCache sharedCache] objectForKey:@"CCDiscoverLatestInfo"]) {
+
+                DiscoverModel *_discoverModel = [DiscoverModel mj_objectWithKeyValues:[[TMCache sharedCache] objectForKey:@"CCDiscoverLatestInfo"]];
+                DiscoverModel *discoverModel = [DiscoverModel mj_objectWithKeyValues:[data objectForKey:@"result"]];
+
+                if (![_discoverModel.discover_id isEqualToString:discoverModel.discover_id] && ![_discoverModel.group_id isEqualToString:discoverModel.group_id]) {
+                    [discoverModel setIs_selected:@"0"];
+                    [array addObject:discoverModel];
+                    [[TMCache sharedCache] removeObjectForKey:@"CCDiscoverLatestInfo"];
+                    [[TMCache sharedCache] setObject:array forKey:@"CCDiscoverLatestInfo"];
+                }
+                
+            }else{
+                DiscoverModel *discoverModel = [DiscoverModel mj_objectWithKeyValues:[data objectForKey:@"result"]];
+                [discoverModel setIs_selected:@"0"];
+                NSDictionary *dic = [discoverModel mj_keyValues];
+                [[TMCache sharedCache] setObject:dic forKey:@"CCDiscoverLatestInfo"];
+            }
+
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"GET_LATEST_DISCOVER" object:nil];
+
+            block(YES);
+        } else {
+            block(NO);
+        }
+        
+    }];
+}
+
 - (void)getCCDiscoverWithBlock:(void(^)(BOOL result))block
 {
     [[Clan_NetAPIManager sharedManager]request_CCDiscoverPageInfoWithBlock:^(id data, NSError *error) {
@@ -285,7 +323,6 @@
         }
         
     }];
-    
 }
 
 //获取app的基础配置信息 来自站长中心

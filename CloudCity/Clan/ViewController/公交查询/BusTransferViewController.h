@@ -25,6 +25,7 @@
 @property (nonatomic, strong) NSMutableArray *routeResultArr;
 @property (nonatomic, strong) AMapSearchAPI *search;
 @property (nonatomic, strong) BusSearchHistoryViewController * historyTableView;
+@property (nonatomic, strong) NSString *invertGeoResult;
 
 typedef NS_ENUM(NSInteger, AMapRoutePlanningType)
 {

@@ -30,11 +30,12 @@
 - (void)request_articleDetailWithId:(NSString *)aid andBlock:(void(^)(id data))block;
 //首页数据model
 - (CustomHomeMode *)request_homeWithDataArray:(NSArray *)array;
+- (CustomHomeMode *)request_discoverDataArray;
 /**
  *  关于组件化首页新增接口
  */
 - (void)request_cacheWithCustomType:(CustomHomeListModel *)type andBlock:(void(^)(NSArray *hotArray,BOOL isError))block;
 - (void)request_customHomeWithType:(CustomHomeListModel *)type page:(NSString *)page andBlock:(void(^)(BOOL isMore,NSArray *hotArray,BOOL isError))block;
 - (void)request_CCHomePageInfoAndBlock:(void(^)(BOOL isError, id result))block;
-- (CustomHomeMode *)request_discoverDataArray;
+
 @end

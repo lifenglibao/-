@@ -1209,6 +1209,17 @@
     }];
 }
 
+- (void)request_CCLatestDiscoverPageInfoWithBlock:(void(^)(id data, NSError *error))block
+{
+    [[ClanNetAPI sharedCCJsonClient] requestJsonDataWithPath:@"discover/Discover/getLatestDiscover" withParams:nil withMethodType:Post andBlock:^(id data, NSError *error) {
+        if (error) {
+            block(nil,error);
+        }else{
+            block(data,nil);
+        }
+    }];
+}
+
 //get CC Discover page info
 - (void)request_CCDiscoverPageInfoWithBlock:(void(^)(id data, NSError *error))block
 {

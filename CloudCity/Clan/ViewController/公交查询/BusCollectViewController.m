@@ -147,7 +147,6 @@
         [self busStopSearch:[self.collectData[indexPath.row] valueForKey:kKEY_FAVO_BUSSTOP]];
         
     }else {
-        
     }
 
 }
@@ -202,6 +201,28 @@
         vc.busStopArray = [NSMutableArray arrayWithArray:response.busstops];
         [self.parentViewController.navigationController pushViewController:vc animated:YES];
     }
+}
+
+
+/* 公交路径规划搜索. */
+- (void)searchRoutePlanningBus
+{
+    /// 公交换乘策略：0-最快捷模式；1-最经济模式；2-最少换乘模式；3-最少步行模式；4-最舒适模式；5-不乘地铁模式
+    
+    //  启程
+    AMapTransitRouteSearchRequest *navi = [[AMapTransitRouteSearchRequest alloc] init];
+    
+    navi.requireExtension = YES;
+    navi.city             = CURRENT_AREA_CODE;
+    
+    /* 出发点. */
+    navi.origin = [AMapGeoPoint locationWithLatitude:self.startCoordinate.latitude
+                                           longitude:self.startCoordinate.longitude];
+    /* 目的地. */
+    navi.destination = [AMapGeoPoint locationWithLatitude:self.destinationCoordinate.latitude
+                                                longitude:self.destinationCoordinate.longitude];
+    
+    [self.search AMapTransitRouteSearch:navi];
 }
 
 

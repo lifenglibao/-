@@ -872,7 +872,7 @@ static float kStayHeight = 64.f;
         [[NSUserDefaults standardUserDefaults] synchronize];
         [ClanNetAPI removeCookieData];
         //清除收藏的数组
-        [Util cleanUpLocalFavoArray];
+//        [Util cleanUpLocalFavoArray];
         //清除信息
         [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:0] forKey:@"KNEWS_MESSAGE"];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"KNEWS_MESSAGE_COME" object:nil];

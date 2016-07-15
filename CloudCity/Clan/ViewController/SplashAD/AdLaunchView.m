@@ -279,9 +279,17 @@ AdLaunchType state = AdLaunchProgressType;
         [weakSelf requestForumsDatas];
         [weakSelf requestCCHomePageInfo];
         [weakSelf requestCCDiscoverInfo];
+        [weakSelf requestCCDiscoverLatestInfo];
     }];
 }
 
+
+- (void)requestCCDiscoverLatestInfo
+{
+    [_configViewModel getCCLatestDiscoverWithBlock:^(BOOL result) {
+        
+    }];
+}
 //发现模块
 - (void)requestCCDiscoverInfo
 {

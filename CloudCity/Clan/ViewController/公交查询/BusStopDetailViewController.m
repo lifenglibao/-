@@ -139,7 +139,7 @@
         [line setName:[CustomBusMode handleStringWithCharRoad:line.name]];
         [self.lineArray addObject:line.name];
     }
-    self.lineArray =[self.lineArray valueForKeyPath:@"@distinctUnionOfObjects.self"];
+    self.lineArray = [self.lineArray valueForKeyPath:@"@distinctUnionOfObjects.self"];
 }
 - (void)favAction:(UIButton *)sender{
     
@@ -255,6 +255,12 @@
         }
         
         cell.lbl_busFullDistance.text = [NSString stringWithFormat:@"%@公里",[CustomBusMode replaceStringWithBusModel:[NSString stringWithFormat:@"%.2f",[(AMapBusLine *)self.busStopArray[indexPath.section][self.currentIndex] distance]]]];
+        
+        if ([CustomBusMode isFavoed_withID:[NSString stringWithFormat:@"%@%@",BUSLINEFAV,cell.lbl_busNumber.text] withFavoID:cell.lbl_busNumber.text forType:myBusLine]) {
+            cell.btn_fav.selected = true;
+        }else{
+            cell.btn_fav.selected = false;
+        }
     }
 }
 
@@ -298,13 +304,29 @@
     }else{
         self.currentIndex = 1;
     }
-    UITableViewCell*cell=(UITableViewCell*)sender.superview.superview;
-    NSIndexPath*indexPath=[self.tableView indexPathForCell:cell];
+    UITableViewCell *cell = (UITableViewCell*)sender.superview.superview;
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
     [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
 }
 
 - (IBAction)btnFavClicked:(UIButton*)sender {
     
+    BusStopDetailTableViewCell *cell = (BusStopDetailTableViewCell*)sender.superview.superview;
+    
+    sender.selected = [CustomBusMode isFavoed_withID:[NSString stringWithFormat:@"%@%@",BUSLINEFAV,cell.lbl_busNumber.text] withFavoID:cell.lbl_busNumber.text forType:myBusLine];
+    
+    if (sender.selected) {
+        [CustomBusMode deleteFavoed_withID:[NSString stringWithFormat:@"%@%@",BUSLINEFAV,cell.lbl_busNumber.text] withFavoID:cell.lbl_busNumber.text forType:myBusLine];
+        [self showHudTipStr:@"取消收藏成功"];
+        sender.selected = false;
+    }else{
+        [CustomBusMode addFavoed_withID:[NSString stringWithFormat:@"%@%@",BUSLINEFAV,cell.lbl_busNumber.text] withFavoID:cell.lbl_busNumber.text forType:myBusLine];
+        [self showHudTipStr:@"收藏成功"];
+        sender.selected = true;
+    }
+    
+    NSIndexPath*indexPath = [self.tableView indexPathForCell:cell];
+    [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
 }
 
 @end
