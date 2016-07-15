@@ -39,10 +39,10 @@ const NSInteger RoutePlanningPaddingEdge                    = 20;
 - (void)initMapView
 {    
     [MAMapServices sharedServices].apiKey = [NSString returnStringWithPlist:MAPKEY];
-    self.mapView = [[MAMapView alloc] initWithFrame:self.view.bounds];
-    self.mapView.visibleMapRect = MAMapRectMake(LUOHE_MAP_RECT_MAKE_X,LUOHE_MAP_RECT_MAKE_Y,LUOHE_MAP_RECT_MAKE_WIDTH,LUOHE_MAP_RECT_MAKE_HEIGHT);
-    self.mapView.showsUserLocation = YES;
-    self.mapView.delegate = self;
+    self.mapView                          = [[MAMapView alloc] initWithFrame:self.view.bounds];
+    self.mapView.visibleMapRect           = MAMapRectMake(LUOHE_MAP_RECT_MAKE_X,LUOHE_MAP_RECT_MAKE_Y,LUOHE_MAP_RECT_MAKE_WIDTH,LUOHE_MAP_RECT_MAKE_HEIGHT);
+    self.mapView.showsUserLocation        = YES;
+    self.mapView.delegate                 = self;
     [self.view addSubview:self.mapView];
 
 }
@@ -65,31 +65,31 @@ const NSInteger RoutePlanningPaddingEdge                    = 20;
 - (void)addDetailView
 {
     [self.mapView setFrame:CGRectMake(0, 0, self.view.width, ScreenHeight - 80)];
-    
-    self.detailView = [[UIView alloc] initWithFrame:CGRectMake(0, ScreenBoundsHeight - 80, self.mapView.width, 80)];
-    self.detailView.backgroundColor = [UIColor whiteColor];
-    
-    self.detailView.layer.shadowOffset = CGSizeMake(0, 0);
-    self.detailView.layer.shadowColor = [UIColor darkGrayColor].CGColor;
-    self.detailView.layer.shadowRadius = 1;
+
+    self.detailView                     = [[UIView alloc] initWithFrame:CGRectMake(0, ScreenBoundsHeight - 80, self.mapView.width, 80)];
+    self.detailView.backgroundColor     = [UIColor whiteColor];
+
+    self.detailView.layer.shadowOffset  = CGSizeMake(0, 0);
+    self.detailView.layer.shadowColor   = [UIColor darkGrayColor].CGColor;
+    self.detailView.layer.shadowRadius  = 1;
     self.detailView.layer.shadowOpacity = .5f;
-    CGRect shadowFrame = self.detailView.layer.bounds;
-    CGPathRef shadowPath = [UIBezierPath
+    CGRect shadowFrame                  = self.detailView.layer.bounds;
+    CGPathRef shadowPath                = [UIBezierPath
                             bezierPathWithRect:shadowFrame].CGPath;
-    self.detailView.layer.shadowPath = shadowPath;
-    
-    UILabel *busNumber = [[UILabel alloc] initWithFrame:CGRectMake(20, 15, self.detailView.width/1.5, 20)];
-    busNumber.font = [UIFont boldSystemFontOfSize:15];
-    busNumber.text = [CustomBusMode getRoutePlanningBusNumber:[self.busRoute.transits[self.currentCourse] segments]];
-    busNumber.textColor = [UIColor blackColor];
-    
-    UILabel *busDetail = [[UILabel alloc] initWithFrame:CGRectMake(20, busNumber.bottom + 5, self.detailView.width/1.5, 30)];
-    busDetail.font = [UIFont systemFontOfSize:12];
-    busDetail.text = [CustomBusMode getRoutePlanningBusInfo:self.busRoute.transits[self.currentCourse]];
-    busDetail.textColor = [UIColor grayColor];
-    
-    UIButton *accessory = [UIButton buttonWithType:UIButtonTypeCustom];
-    accessory.frame = CGRectMake(busNumber.right + 50, self.detailView.height/2-15, 80, 30);
+    self.detailView.layer.shadowPath    = shadowPath;
+
+    UILabel *busNumber                  = [[UILabel alloc] initWithFrame:CGRectMake(20, 15, self.detailView.width/1.5, 20)];
+    busNumber.font                      = [UIFont boldSystemFontOfSize:15];
+    busNumber.text                      = [CustomBusMode getRoutePlanningBusNumber:[self.busRoute.transits[self.currentCourse] segments]];
+    busNumber.textColor                 = [UIColor blackColor];
+
+    UILabel *busDetail                  = [[UILabel alloc] initWithFrame:CGRectMake(20, busNumber.bottom + 5, self.detailView.width/1.5, 30)];
+    busDetail.font                      = [UIFont systemFontOfSize:12];
+    busDetail.text                      = [CustomBusMode getRoutePlanningBusInfo:self.busRoute.transits[self.currentCourse]];
+    busDetail.textColor                 = [UIColor grayColor];
+
+    UIButton *accessory                 = [UIButton buttonWithType:UIButtonTypeCustom];
+    accessory.frame                     = CGRectMake(busNumber.right + 50, self.detailView.height/2-15, 80, 30);
     [accessory setTitle:@"详情" forState:UIControlStateNormal];
     [accessory setImage:kIMG(@"jiantou_me") forState:UIControlStateNormal];
     [accessory setImageEdgeInsets:UIEdgeInsetsMake(10, 5, 5, 15)];
@@ -101,7 +101,7 @@ const NSInteger RoutePlanningPaddingEdge                    = 20;
     [self.detailView addSubview:busNumber];
     [self.detailView addSubview:busDetail];
     [self.detailView addSubview:accessory];
-    
+
     [accessory addTarget:self action:@selector(gotoListView) forControlEvents:UIControlEventTouchUpInside];
     [self.detailView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(gotoListView)]];
 
@@ -176,9 +176,9 @@ const NSInteger RoutePlanningPaddingEdge                    = 20;
 - (void)presentCurrentBusStop
 {
     NSMutableArray *busStopAnnotations = [NSMutableArray array];
-    
-    BusStopAnnotation *annotation = [[BusStopAnnotation alloc] initWithBusStop:self.busStop];
-    
+
+    BusStopAnnotation *annotation      = [[BusStopAnnotation alloc] initWithBusStop:self.busStop];
+
     [busStopAnnotations addObject:annotation];
     [busStopAnnotations addObject:self.mapView.userLocation];
     [self.mapView addAnnotations:busStopAnnotations];

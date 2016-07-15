@@ -455,8 +455,7 @@ static float interval = 60.f;
             }else if (typeClass == NSClassFromString(@"DiscoverViewController")){
                 //发现页面
                 DiscoverViewController *disVC = (DiscoverViewController *)vc;
-                disVC.customHomeModel = [_homeviewmodel request_discoverDataArray];
-
+                
             }else if (typeClass == NSClassFromString(@"ArticleViewController")){
                 //导航型
                 ArticleViewController *articleVc = (ArticleViewController *)vc;

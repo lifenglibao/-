@@ -45,10 +45,10 @@
 
 - (void)initSearchDisplay
 {
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(self.busLineSearchFiled.frame.origin.x, self.busLineSearchFiled.bottom + 5, self.busLineSearchFiled.width, self.view.height - self.busLineSearchFiled.bottom) style:UITableViewStylePlain];
-    self.tableView.dataSource = self;
-    self.tableView.delegate = self;
-    self.tableView.hidden = YES;
+    self.tableView                     = [[UITableView alloc] initWithFrame:CGRectMake(self.busLineSearchFiled.frame.origin.x, self.busLineSearchFiled.bottom + 5, self.busLineSearchFiled.width, self.view.height - self.busLineSearchFiled.bottom) style:UITableViewStylePlain];
+    self.tableView.dataSource          = self;
+    self.tableView.delegate            = self;
+    self.tableView.hidden              = YES;
     self.tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
     [self.view addSubview:self.tableView];
     
@@ -56,8 +56,8 @@
 
 - (void)initBusLineSearchField
 {
-    self.busLineSearchFiled = [CustomBusMode setSearchTextFieldWithFrame:CGRectMake(20, 20, ScreenWidth - 40, 50)];
-    self.busLineSearchFiled.delegate = self;
+    self.busLineSearchFiled             = [CustomBusMode setSearchTextFieldWithFrame:CGRectMake(20, 20, ScreenWidth - 40, 50)];
+    self.busLineSearchFiled.delegate    = self;
     self.busLineSearchFiled.placeholder = @"输入线路名";
     [self.busLineSearchFiled addTarget:self action:@selector(isEditing:) forControlEvents:UIControlEventAllEditingEvents];
     [self.view addSubview:self.busLineSearchFiled];

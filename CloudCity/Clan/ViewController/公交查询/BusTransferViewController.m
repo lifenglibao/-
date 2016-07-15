@@ -49,10 +49,10 @@
     [[NSNotificationCenter defaultCenter] addObserverForName:@"BusSearchNotiFicationForTransfer" object:nil queue:NSOperationQueuePriorityNormal usingBlock:^(NSNotification * _Nonnull note) {
         if ([self.busTransferStartSearchFiled.text isEqualToString:@""]) {
             self.busTransferStartSearchFiled.text = [note.userInfo objectForKey:@"name"];
-            self.startCoordinate = CLLocationCoordinate2DMake([[note.userInfo objectForKey:@"lat"] floatValue], [[note.userInfo objectForKey:@"lon"] floatValue]);
+            self.startCoordinate                  = CLLocationCoordinate2DMake([[note.userInfo objectForKey:@"lat"] floatValue], [[note.userInfo objectForKey:@"lon"] floatValue]);
         }else{
-            self.busTransferEndSearchFiled.text = [note.userInfo objectForKey:@"name"];
-            self.destinationCoordinate = CLLocationCoordinate2DMake([[note.userInfo objectForKey:@"lat"] floatValue], [[note.userInfo objectForKey:@"lon"] floatValue]);
+            self.busTransferEndSearchFiled.text   = [note.userInfo objectForKey:@"name"];
+            self.destinationCoordinate            = CLLocationCoordinate2DMake([[note.userInfo objectForKey:@"lat"] floatValue], [[note.userInfo objectForKey:@"lon"] floatValue]);
         }
     }];
 
@@ -63,9 +63,9 @@
 - (void)initUserLocation
 {
     if ([[Locator sharedLocator] IsLocationServiceEnabled]) {
-        
-        CLLocationCoordinate2D  gaodeGPS = MACoordinateConvert([(Locator *)[Locator sharedLocator] userLocation], MACoordinateTypeGPS);
-        self.startCoordinate = CLLocationCoordinate2DMake(gaodeGPS.latitude, gaodeGPS.longitude);
+
+        CLLocationCoordinate2D  gaodeGPS      = MACoordinateConvert([(Locator *)[Locator sharedLocator] userLocation], MACoordinateTypeGPS);
+        self.startCoordinate                  = CLLocationCoordinate2DMake(gaodeGPS.latitude, gaodeGPS.longitude);
         self.busTransferStartSearchFiled.text = @"我的位置";
     }else{
         self.busTransferStartSearchFiled.text = @"";
@@ -74,26 +74,25 @@
 
 - (void)initSearch
 {
-    self.search = [[AMapSearchAPI alloc] init];
+    self.search          = [[AMapSearchAPI alloc] init];
     self.search.delegate = self;
 }
 
 - (void)initSearchDisplay
 {
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(self.backGroundView.frame.origin.x, self.busTransferStartSearchFiled.bottom + 5, self.backGroundView.width, 200) style:UITableViewStylePlain];
+    self.tableView            = [[UITableView alloc] initWithFrame:CGRectMake(self.backGroundView.frame.origin.x, self.busTransferStartSearchFiled.bottom + 5, self.backGroundView.width, 200) style:UITableViewStylePlain];
     self.tableView.dataSource = self;
-    self.tableView.delegate = self;
-    self.tableView.hidden = YES;
+    self.tableView.delegate   = self;
+    self.tableView.hidden     = YES;
     [self.view addSubview:self.tableView];
-    
 }
 
 - (void)initSearchFiled
 {
     self.busTransferStartSearchFiled.delegate = self;
     [self.busTransferStartSearchFiled addTarget:self action:@selector(isEditing:) forControlEvents:UIControlEventAllEditingEvents];
-    
-    self.busTransferEndSearchFiled.delegate = self;
+
+    self.busTransferEndSearchFiled.delegate   = self;
     [self.busTransferEndSearchFiled addTarget:self action:@selector(isEditing:) forControlEvents:UIControlEventAllEditingEvents];
 }
 
@@ -106,18 +105,18 @@
 
 - (IBAction)transferBtnClicked:(UIButton *)sender {
     
-    sender.selected = !sender.selected;
-    NSString *tempStarTetx = self.busTransferStartSearchFiled.text;
-    NSString *tempEndTetx  = self.busTransferEndSearchFiled.text;
-    
+    sender.selected                       = !sender.selected;
+    NSString *tempStarTetx                = self.busTransferStartSearchFiled.text;
+    NSString *tempEndTetx                 = self.busTransferEndSearchFiled.text;
+
     CLLocationCoordinate2D tempStartCoor  = self.startCoordinate;
     CLLocationCoordinate2D tempEndCorr    = self.destinationCoordinate;
 
     self.busTransferStartSearchFiled.text = tempEndTetx;
-    self.busTransferEndSearchFiled.text = tempStarTetx;
-    
-    self.startCoordinate = tempEndCorr;
-    self.destinationCoordinate = tempStartCoor;
+    self.busTransferEndSearchFiled.text   = tempStarTetx;
+
+    self.startCoordinate                  = tempEndCorr;
+    self.destinationCoordinate            = tempStartCoor;
     
 }
 
@@ -126,12 +125,12 @@
     if (![self.busTransferStartSearchFiled.text isEqualToString:@""] && ![self.busTransferEndSearchFiled.text isEqualToString:@""]) {
         
         [self showProgressHUDWithStatus:@""];
+        [self invertGeo];
         self.routePlanningType = AMapRoutePlanningTypeBus;
         [self searchRoutePlanningBus];
         
         [self.historyTableView writeHistoryPlist:self.busTransferStartSearchFiled.text withlat:self.startCoordinate.latitude lon:self.startCoordinate.longitude];
         [self.historyTableView writeHistoryPlist:self.busTransferEndSearchFiled.text withlat:self.destinationCoordinate.latitude lon:self.destinationCoordinate.longitude];
-        [self invertGeo];
     }else{
         [self showHudTipStr:@"请填写正确的路线名称"];
     }
@@ -148,13 +147,13 @@
         return;
     }
     AMapReGeocodeSearchRequest *regeo = [[AMapReGeocodeSearchRequest alloc] init];
-    
+
     if ([self.busTransferStartSearchFiled.text isEqualToString:@"我的位置"]) {
-        regeo.location                    = [AMapGeoPoint locationWithLatitude:self.startCoordinate.latitude longitude:self.startCoordinate.longitude];
+    regeo.location                    = [AMapGeoPoint locationWithLatitude:self.startCoordinate.latitude longitude:self.startCoordinate.longitude];
     }else if ([self.busTransferEndSearchFiled.text isEqualToString:@"我的位置"]){
-        regeo.location                    = [AMapGeoPoint locationWithLatitude:self.destinationCoordinate.latitude longitude:self.destinationCoordinate.longitude];
+    regeo.location                    = [AMapGeoPoint locationWithLatitude:self.destinationCoordinate.latitude longitude:self.destinationCoordinate.longitude];
     }
-    
+
     regeo.requireExtension            = YES;
     
     [self.search AMapReGoecodeSearch:regeo];
@@ -165,7 +164,7 @@
 {
     if (response.regeocode != nil)
     {
-        self.invertGeoResult = response.regeocode.formattedAddress;
+        self.invertGeoResult = [NSString stringWithFormat:@"%@",response.regeocode.formattedAddress];
     }
 }
 
@@ -182,46 +181,45 @@
     //  返程
     
     AMapTransitRouteSearchRequest *naviBack = [[AMapTransitRouteSearchRequest alloc] init];
-    
-    naviBack.requireExtension = YES;
-    naviBack.city             = CURRENT_AREA_CODE;
-    
+
+    naviBack.requireExtension               = YES;
+    naviBack.city                           = CURRENT_AREA_CODE;
+
     /* 出发点. */
-    naviBack.origin = [AMapGeoPoint locationWithLatitude:self.destinationCoordinate.latitude
+    naviBack.origin                         = [AMapGeoPoint locationWithLatitude:self.destinationCoordinate.latitude
                                                longitude:self.destinationCoordinate.longitude];
-    
+
     /* 目的地. */
-    naviBack.destination = [AMapGeoPoint locationWithLatitude:self.startCoordinate.latitude
+    naviBack.destination                    = [AMapGeoPoint locationWithLatitude:self.startCoordinate.latitude
                                                     longitude:self.startCoordinate.longitude];
-    
-    [self.search AMapTransitRouteSearch:naviBack];
-    
-    
+
     [self.routeResultArr addObject:response.route];
-    
+
     if (self.routeResultArr.count == 2) {
-        
+
         [self hideProgressHUD];
 
-        BusTransferListViewController *vc = [[BusTransferListViewController alloc] init];
-        vc.totalBusRoute = self.routeResultArr;
-        
+    BusTransferListViewController *vc       = [[BusTransferListViewController alloc] init];
+    vc.totalBusRoute                        = self.routeResultArr;
+
         if (![Util isBlankString:self.invertGeoResult]) {
             if ([self.busTransferStartSearchFiled.text isEqualToString:@"我的位置"]) {
-                vc.routeStartLocation = self.invertGeoResult;
-                vc.routeDestinationLocation = self.busTransferEndSearchFiled.text;
+    vc.routeStartLocation                   = self.invertGeoResult;
+    vc.routeDestinationLocation             = self.busTransferEndSearchFiled.text;
             }else if ([self.busTransferEndSearchFiled.text isEqualToString:@"我的位置"]){
-                vc.routeStartLocation = self.busTransferStartSearchFiled.text;
-                vc.routeDestinationLocation = self.invertGeoResult;
+    vc.routeStartLocation                   = self.busTransferStartSearchFiled.text;
+    vc.routeDestinationLocation             = self.invertGeoResult;
             }
         }else{
-            vc.routeStartLocation = self.busTransferStartSearchFiled.text;
-            vc.routeDestinationLocation = self.busTransferEndSearchFiled.text;
+    vc.routeStartLocation                   = self.busTransferStartSearchFiled.text;
+    vc.routeDestinationLocation             = self.busTransferEndSearchFiled.text;
         }
-        
-        vc.startCoordinate = self.startCoordinate;
-        vc.destinationCoordinate = self.destinationCoordinate;
+
+    vc.startCoordinate                      = self.startCoordinate;
+    vc.destinationCoordinate                = self.destinationCoordinate;
         [self.parentViewController.navigationController pushViewController:vc animated:YES];
+    }else{
+        [self.search AMapTransitRouteSearch:naviBack];
     }
 }
 
@@ -234,15 +232,15 @@
     
     //  启程
     AMapTransitRouteSearchRequest *navi = [[AMapTransitRouteSearchRequest alloc] init];
-    
-    navi.requireExtension = YES;
-    navi.city             = CURRENT_AREA_CODE;
-    
+
+    navi.requireExtension               = YES;
+    navi.city                           = CURRENT_AREA_CODE;
+
     /* 出发点. */
-    navi.origin = [AMapGeoPoint locationWithLatitude:self.startCoordinate.latitude
+    navi.origin                         = [AMapGeoPoint locationWithLatitude:self.startCoordinate.latitude
                                            longitude:self.startCoordinate.longitude];
     /* 目的地. */
-    navi.destination = [AMapGeoPoint locationWithLatitude:self.destinationCoordinate.latitude
+    navi.destination                    = [AMapGeoPoint locationWithLatitude:self.destinationCoordinate.latitude
                                                 longitude:self.destinationCoordinate.longitude];
     
     [self.search AMapTransitRouteSearch:navi];
@@ -264,9 +262,9 @@
 - (void) textFieldDidBeginEditing:(UITextField *)textField
 {
     if (textField == self.busTransferStartSearchFiled) {
-        self.tableView.frame = CGRectMake(self.backGroundView.frame.origin.x, self.busTransferStartSearchFiled.bottom + 10, self.backGroundView.width, 200);
+        self.tableView.frame  = CGRectMake(self.backGroundView.frame.origin.x, self.busTransferStartSearchFiled.bottom + 10, self.backGroundView.width, 200);
     }else if (textField == self.busTransferEndSearchFiled) {
-        self.tableView.frame = CGRectMake(self.backGroundView.frame.origin.x, self.busTransferEndSearchFiled.bottom + 10, self.backGroundView.width, 200);
+        self.tableView.frame  = CGRectMake(self.backGroundView.frame.origin.x, self.busTransferEndSearchFiled.bottom + 10, self.backGroundView.width, 200);
     }
     self.tableView.hidden = NO;
     [self.view bringSubviewToFront:self.tableView];
@@ -332,17 +330,17 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    AMapTip *tip = self.tips[indexPath.row];
-    
+    AMapTip *tip                          = self.tips[indexPath.row];
+
     if ([self.busTransferStartSearchFiled isFirstResponder]) {
 
-        self.startCoordinate = CLLocationCoordinate2DMake(tip.location.latitude, tip.location.longitude);
+        self.startCoordinate                  = CLLocationCoordinate2DMake(tip.location.latitude, tip.location.longitude);
         self.busTransferStartSearchFiled.text = tip.name;
     }else if ([self.busTransferEndSearchFiled isFirstResponder]) {
-        self.destinationCoordinate = CLLocationCoordinate2DMake(tip.location.latitude, tip.location.longitude);
-        self.busTransferEndSearchFiled.text = tip.name;
+        self.destinationCoordinate            = CLLocationCoordinate2DMake(tip.location.latitude, tip.location.longitude);
+        self.busTransferEndSearchFiled.text   = tip.name;
     }
-    self.tableView.hidden = YES;
+    self.tableView.hidden                 = YES;
 }
 
 /* 输入提示回调. */

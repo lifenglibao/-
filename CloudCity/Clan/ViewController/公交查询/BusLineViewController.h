@@ -12,11 +12,11 @@
 
 @interface BusLineViewController : BaseViewController <UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate,AMapSearchDelegate,UISearchDisplayDelegate,UISearchBarDelegate>
 
-@property (nonatomic, strong) UITextField *busLineSearchFiled;
-@property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic, strong) NSMutableArray *tips;
-@property (nonatomic, strong) AMapSearchAPI *search;
+@property (nonatomic, strong) UITextField                    *busLineSearchFiled;
+@property (nonatomic, strong) UITableView                    *tableView;
+@property (nonatomic, strong) NSMutableArray                 *tips;
+@property (nonatomic, strong) AMapSearchAPI                  *search;
 @property (nonatomic, strong) BusSearchHistoryViewController * historyTableView;
-@property (nonatomic, strong) UIButton * searchBtn;
+@property (nonatomic, strong) UIButton                       * searchBtn;
 
 @end

@@ -115,11 +115,11 @@
 
 - (void)addFooterView {
 
-    _isFav = [CustomBusMode isFavoed_withID:[NSString stringWithFormat:@"%@%@",BUSLINEFAV,self.title] withFavoID:[NSString stringWithFormat:@"%@",self.title] forType:myBusLine];
+    _isFav                = [CustomBusMode isFavoed_withID:[NSString stringWithFormat:@"%@%@",BUSLINEFAV,self.title] withFavoID:[NSString stringWithFormat:@"%@",self.title] forType:myBusLine];
     NSString *favoImgName = _isFav ? @"detail_favo_H" : @"detail_favo";
-    
-    NSArray * title = [NSArray arrayWithObjects:@"收藏",@"地图", nil];
-    NSArray * icon = [NSArray arrayWithObjects: kIMG(favoImgName) , kIMG(@"1_2"),nil];
+
+    NSArray * title       = [NSArray arrayWithObjects:@"收藏",@"地图", nil];
+    NSArray * icon        = [NSArray arrayWithObjects: kIMG(favoImgName) , kIMG(@"1_2"),nil];
     
     if (_footerView) {
         [_footerView removeFromSuperview];
@@ -133,15 +133,15 @@
             [self go2Map];
         }
     }];
-    _footerView.backgroundColor = [UIColor whiteColor];
-    _footerView.layer.shadowOffset = CGSizeMake(0, 0);
-    _footerView.layer.shadowColor = [UIColor darkGrayColor].CGColor;
-    _footerView.layer.shadowRadius = 1;
+    _footerView.backgroundColor     = [UIColor whiteColor];
+    _footerView.layer.shadowOffset  = CGSizeMake(0, 0);
+    _footerView.layer.shadowColor   = [UIColor darkGrayColor].CGColor;
+    _footerView.layer.shadowRadius  = 1;
     _footerView.layer.shadowOpacity = .5f;
-    CGRect shadowFrame = _footerView.layer.bounds;
-    CGPathRef shadowPath = [UIBezierPath
+    CGRect shadowFrame              = _footerView.layer.bounds;
+    CGPathRef shadowPath            = [UIBezierPath
                             bezierPathWithRect:shadowFrame].CGPath;
-    _footerView.layer.shadowPath = shadowPath;
+    _footerView.layer.shadowPath    = shadowPath;
     
     [self.view addSubview:_footerView];
     
@@ -149,21 +149,21 @@
 
 - (void)initTableView {
     
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(10, 10, ScreenWidth - 20, ScreenHeight - 84) style:UITableViewStylePlain];
-    self.tableView.delegate = self;
-    self.tableView.dataSource = self;
-    self.tableView.backgroundColor = [UIColor clearColor];
+    self.tableView                    = [[UITableView alloc] initWithFrame:CGRectMake(10, 10, ScreenWidth - 20, ScreenHeight - 84) style:UITableViewStylePlain];
+    self.tableView.delegate           = self;
+    self.tableView.dataSource         = self;
+    self.tableView.backgroundColor    = [UIColor clearColor];
     self.tableView.layer.shadowOffset = CGSizeMake(2.5, 2.5);
-    self.tableView.layer.shadowColor = [UIColor darkGrayColor].CGColor;
+    self.tableView.layer.shadowColor  = [UIColor darkGrayColor].CGColor;
     [self.view addSubview:_tableView];
 }
 
 - (void)updateHeaderViewInfomation {
     
 
-    firstBus.text = [CustomBusMode replaceStringWithBusModel:[CustomBusMode getBusTimeFromString:self.line.startTime]];
-    endBus.text = [CustomBusMode replaceStringWithBusModel:[CustomBusMode getBusTimeFromString:self.line.endTime]];
-    
+    firstBus.text    = [CustomBusMode replaceStringWithBusModel:[CustomBusMode getBusTimeFromString:self.line.startTime]];
+    endBus.text      = [CustomBusMode replaceStringWithBusModel:[CustomBusMode getBusTimeFromString:self.line.endTime]];
+
     busDistance.text = [NSString stringWithFormat:@"全程: %.2f公里", self.line.distance];
     
     if (self.line.basicPrice == self.line.totalPrice ) {

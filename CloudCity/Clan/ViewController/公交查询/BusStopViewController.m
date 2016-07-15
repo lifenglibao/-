@@ -43,10 +43,10 @@
 
 - (void)initSearchDisplay
 {
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(self.busStopSearchFiled.frame.origin.x, self.busStopSearchFiled.bottom + 5, self.busStopSearchFiled.width, self.view.height - self.busStopSearchFiled.bottom) style:UITableViewStylePlain];
-    self.tableView.dataSource = self;
-    self.tableView.delegate = self;
-    self.tableView.hidden = YES;
+    self.tableView                     = [[UITableView alloc] initWithFrame:CGRectMake(self.busStopSearchFiled.frame.origin.x, self.busStopSearchFiled.bottom + 5, self.busStopSearchFiled.width, self.view.height - self.busStopSearchFiled.bottom) style:UITableViewStylePlain];
+    self.tableView.dataSource          = self;
+    self.tableView.delegate            = self;
+    self.tableView.hidden              = YES;
     self.tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
     [self.view addSubview:self.tableView];
     
@@ -54,8 +54,8 @@
 
 - (void)initBusStopSearchField
 {
-    self.busStopSearchFiled = [CustomBusMode setSearchTextFieldWithFrame:CGRectMake(20, 20, ScreenWidth - 40, 50)];
-    self.busStopSearchFiled.delegate = self;
+    self.busStopSearchFiled             = [CustomBusMode setSearchTextFieldWithFrame:CGRectMake(20, 20, ScreenWidth - 40, 50)];
+    self.busStopSearchFiled.delegate    = self;
     self.busStopSearchFiled.placeholder = @"输入站点名";
     [self.busStopSearchFiled addTarget:self action:@selector(isEditing:) forControlEvents:UIControlEventAllEditingEvents];
     [self.view addSubview:self.busStopSearchFiled];
@@ -63,7 +63,7 @@
 
 - (void)initSearchBtn
 {
-    self.searchBtn = [UIButton buttonWithTitle:@"查询" andImage:@"" andFrame:CGRectMake(self.busStopSearchFiled.frame.origin.x, self.busStopSearchFiled.bottom + 20, self.busStopSearchFiled.width, 44) target:self action:@selector(searchBtnClicked:)];
+    self.searchBtn                 = [UIButton buttonWithTitle:@"查询" andImage:@"" andFrame:CGRectMake(self.busStopSearchFiled.frame.origin.x, self.busStopSearchFiled.bottom + 20, self.busStopSearchFiled.width, 44) target:self action:@selector(searchBtnClicked:)];
     self.searchBtn.backgroundColor = kColourWithRGB(72, 185, 132);
     [self.view addSubview:self.searchBtn];
 }
@@ -174,8 +174,8 @@
 - (void)clearAndShowAnnotationWithTip:(NSString *)tip
 {
     AMapBusStopSearchRequest *stop = [[AMapBusStopSearchRequest alloc] init];
-    stop.keywords = tip;
-    stop.city     = CURRENT_AREA_CODE;
+    stop.keywords                  = tip;
+    stop.city                      = CURRENT_AREA_CODE;
     [self.search AMapBusStopSearch:stop];
 }
 

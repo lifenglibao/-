@@ -45,11 +45,11 @@
 - (void)initNavBar
 {
     
-    _isFav = [CustomBusMode isFavoed_withID:[NSString stringWithFormat:@"%@%@-%@",BUSTRANSFERFAV,self.routeStartLocation,self.routeDestinationLocation] withFavoID:[NSString stringWithFormat:@"%@-%@",self.routeStartLocation,self.routeDestinationLocation] forType:myBusTransfer];
+    _isFav                                 = [CustomBusMode isFavoed_withID:[NSString stringWithFormat:@"%@%@-%@",BUSTRANSFERFAV,self.routeStartLocation,self.routeDestinationLocation] withFavoID:[NSString stringWithFormat:@"%@-%@",self.routeStartLocation,self.routeDestinationLocation] forType:myBusTransfer];
 
-    NSString *favoImgName = _isFav ? @"detail_favo_H" : @"favo_N";
-    
-    _favBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
+    NSString *favoImgName                  = _isFav ? @"detail_favo_H" : @"favo_N";
+
+    _favBtn                                = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
     [_favBtn addTarget:self action:@selector(favAction:) forControlEvents:UIControlEventTouchUpInside];
     [_favBtn setImage:kIMG(favoImgName) forState:UIControlStateNormal];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_favBtn];
@@ -81,36 +81,36 @@
         }
     }];
     
-    _headerView.backgroundColor = [UIColor whiteColor];
-    _headerView.layer.shadowOffset = CGSizeMake(0, 0);
-    _headerView.layer.shadowColor = [UIColor darkGrayColor].CGColor;
-    _headerView.layer.shadowRadius = 1;
+    _headerView.backgroundColor     = [UIColor whiteColor];
+    _headerView.layer.shadowOffset  = CGSizeMake(0, 0);
+    _headerView.layer.shadowColor   = [UIColor darkGrayColor].CGColor;
+    _headerView.layer.shadowRadius  = 1;
     _headerView.layer.shadowOpacity = .5f;
-    CGRect shadowFrame = _headerView.layer.bounds;
-    CGPathRef shadowPath = [UIBezierPath
+    CGRect shadowFrame              = _headerView.layer.bounds;
+    CGPathRef shadowPath            = [UIBezierPath
                             bezierPathWithRect:shadowFrame].CGPath;
-    _headerView.layer.shadowPath = shadowPath;
+    _headerView.layer.shadowPath    = shadowPath;
     
     [self.view addSubview:_headerView];
 }
 
 - (void)initTableView
 {
-    self.tableView = [[BaseTableView alloc] initWithFrame:CGRectMake(0, _headerView.bottom + 10, ScreenWidth, ScreenHeight - 84 - _headerView.height) style:UITableViewStyleGrouped];
-    self.tableView.delegate = self;
-    self.tableView.dataSource = self;
+    self.tableView                 = [[BaseTableView alloc] initWithFrame:CGRectMake(0, _headerView.bottom + 10, ScreenWidth, ScreenHeight - 84 - _headerView.height) style:UITableViewStyleGrouped];
+    self.tableView.delegate        = self;
+    self.tableView.dataSource      = self;
     self.tableView.backgroundColor = [UIColor clearColor];
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.separatorStyle  = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:_tableView];
 }
 
 - (void)initfilterTableView
 {
-    self.filterTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, -200, ScreenWidth, 200) style:UITableViewStylePlain];
-    self.filterTableView.delegate = self;
-    self.filterTableView.dataSource = self;
+    self.filterTableView                 = [[UITableView alloc] initWithFrame:CGRectMake(0, -200, ScreenWidth, 200) style:UITableViewStylePlain];
+    self.filterTableView.delegate        = self;
+    self.filterTableView.dataSource      = self;
     self.filterTableView.backgroundColor = [UIColor whiteColor];
-    self.filterTableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    self.filterTableView.separatorStyle  = UITableViewCellSeparatorStyleSingleLine;
     [self.view addSubview:_filterTableView];
     [self.filterTableView setHidden:YES];
 }
@@ -203,11 +203,11 @@
 - (void)tableView:(UITableView *)tableView willDisplayCell:(BusTransferListTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (tableView == self.tableView) {
-        cell.lbl_routePlanningBusNumber.text    = [CustomBusMode getRoutePlanningBusNumber:[self.busRoute.transits[indexPath.section] segments]];
-        cell.lbl_routePlanningBusNumber.height  = [Util heightForText:cell.lbl_routePlanningBusNumber.text font:cell.lbl_routePlanningBusNumber.font withinWidth:cell.lbl_routePlanningBusNumber.width];
-        cell.lbl_routePlanningBusInfo.text      = [CustomBusMode getRoutePlanningBusInfo:self.busRoute.transits[indexPath.section]];
-        cell.lbl_routePlanningBusStartStop.text = [CustomBusMode getRoutePlanningBusStartStop:[self.busRoute.transits[indexPath.section] segments]];
-        
+        cell.lbl_routePlanningBusNumber.text     = [CustomBusMode getRoutePlanningBusNumber:[self.busRoute.transits[indexPath.section] segments]];
+        cell.lbl_routePlanningBusNumber.height   = [Util heightForText:cell.lbl_routePlanningBusNumber.text font:cell.lbl_routePlanningBusNumber.font withinWidth:cell.lbl_routePlanningBusNumber.width];
+        cell.lbl_routePlanningBusInfo.text       = [CustomBusMode getRoutePlanningBusInfo:self.busRoute.transits[indexPath.section]];
+        cell.lbl_routePlanningBusStartStop.text  = [CustomBusMode getRoutePlanningBusStartStop:[self.busRoute.transits[indexPath.section] segments]];
+
         cell.lbl_routePlanningBusStartStop.width = [Util widthForText:cell.lbl_routePlanningBusStartStop.text font:cell.lbl_routePlanningBusStartStop.font withinHeight:cell.lbl_routePlanningBusStartStop.height];
         
         [cell.contentView needsUpdateConstraints];
@@ -233,11 +233,11 @@
         [self presentCurrentRouteModel];
     }else{
         
-        BusMapViewController *subViewController = [[BusMapViewController alloc] init];
-        subViewController.needShowDetailView = YES;
-        subViewController.busRoute = self.busRoute;
-        subViewController.currentCourse = indexPath.section;
-        subViewController.startLocationName = self.routeStartLocation;
+        BusMapViewController *subViewController   = [[BusMapViewController alloc] init];
+        subViewController.needShowDetailView      = YES;
+        subViewController.busRoute                = self.busRoute;
+        subViewController.currentCourse           = indexPath.section;
+        subViewController.startLocationName       = self.routeStartLocation;
         subViewController.destinationLocationName = self.routeDestinationLocation;
         [self.navigationController pushViewController:subViewController animated:YES];
     }
@@ -295,18 +295,32 @@
 - (void)favAction:(UIButton *)sender{
     
     sender.selected = !sender.selected;
+    
     _isFav = [CustomBusMode isFavoed_withID:[NSString stringWithFormat:@"%@%@-%@",BUSTRANSFERFAV,self.routeStartLocation,self.routeDestinationLocation] withFavoID:[NSString stringWithFormat:@"%@-%@",self.routeStartLocation,self.routeDestinationLocation] forType:myBusTransfer];
     
     if (_isFav) {
         //已收藏 删除收藏
         [CustomBusMode deleteFavoed_withID:[NSString stringWithFormat:@"%@%@-%@",BUSTRANSFERFAV,self.routeStartLocation,self.routeDestinationLocation] withFavoID:[NSString stringWithFormat:@"%@-%@",self.routeStartLocation,self.routeDestinationLocation] forType:myBusTransfer];
+        
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:[NSString stringWithFormat:@"%@-%@",self.routeStartLocation,self.routeDestinationLocation]];
+        
         [self showHudTipStr:@"取消收藏成功"];
     }else{
         [CustomBusMode addFavoed_withID:[NSString stringWithFormat:@"%@%@-%@",BUSTRANSFERFAV,self.routeStartLocation,self.routeDestinationLocation] withFavoID:[NSString stringWithFormat:@"%@-%@",self.routeStartLocation,self.routeDestinationLocation] forType:myBusTransfer];
-        [self showHudTipStr:@"收藏成功"];
         
+        [[NSUserDefaults standardUserDefaults] setObject:
+         [NSDictionary dictionaryWithObjectsAndKeys:
+                                                [NSNumber numberWithDouble:self.startCoordinate.latitude],@"startCoordinateLat",
+                                                [NSNumber numberWithDouble:self.startCoordinate.longitude],@"startCoordinateLon",
+                                                [NSNumber numberWithDouble:self.destinationCoordinate.latitude],@"endCoordinateLat",
+                                                [NSNumber numberWithDouble:self.destinationCoordinate.longitude],@"endCoordinateLon",nil]
+                        forKey:[NSString stringWithFormat:@"%@-%@",self.routeStartLocation,self.routeDestinationLocation]];
+        
+        [self showHudTipStr:@"收藏成功"];
     }
     
+    [[NSUserDefaults standardUserDefaults] synchronize];
+
     NSString *favoImgName = [CustomBusMode isFavoed_withID:[NSString stringWithFormat:@"%@%@-%@",BUSTRANSFERFAV,self.routeStartLocation,self.routeDestinationLocation] withFavoID:[NSString stringWithFormat:@"%@-%@",self.routeStartLocation,self.routeDestinationLocation] forType:myBusTransfer] ? @"detail_favo_H" : @"favo_N";
     [_favBtn setImage:kIMG(favoImgName) forState:UIControlStateNormal];
     

@@ -12,6 +12,7 @@ typedef NS_ENUM(NSInteger, EaseBlankPageType)
 {
     DataIsNothingWithDefault = 0,
     DataIsNothingWithSearch,
+    DataIsNothingWithLocation,
 };
 @interface UIView (Common)
 - (void)addLineUp:(BOOL)hasUp andDown:(BOOL)hasDown;

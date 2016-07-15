@@ -12,7 +12,7 @@
 
 - (void)awakeFromNib {
     // Initialization code
-    _lbl_busNumber.font = [UIFont boldSystemFontOfSize:20];
+    _lbl_busNumber.font    = [UIFont boldSystemFontOfSize:20];
     _lbl_busNumberSub.font = [UIFont boldSystemFontOfSize:15];
 
 }

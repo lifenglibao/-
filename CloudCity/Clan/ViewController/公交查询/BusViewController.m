@@ -48,19 +48,19 @@
 
 - (void)addGridView {
     
-    _headerView = [[SegmentView alloc] initWithFrameRect:CGRectMake(0, 0, ScreenWidth, 44) andTitleArray:[CustomBusMode getGridTitle] clickBlock:^(NSInteger index) {
-        self.selectedIndex = index;
+    _headerView                     = [[SegmentView alloc] initWithFrameRect:CGRectMake(0, 0, ScreenWidth, 44) andTitleArray:[CustomBusMode getGridTitle] clickBlock:^(NSInteger index) {
+    self.selectedIndex              = index;
     }];
-    _headerView.backgroundColor = [UIColor whiteColor];
-    _headerView.layer.shadowOffset = CGSizeMake(0, 0);
-    _headerView.layer.shadowColor = [UIColor darkGrayColor].CGColor;
-    _headerView.layer.shadowRadius = 1;
+    _headerView.backgroundColor     = [UIColor whiteColor];
+    _headerView.layer.shadowOffset  = CGSizeMake(0, 0);
+    _headerView.layer.shadowColor   = [UIColor darkGrayColor].CGColor;
+    _headerView.layer.shadowRadius  = 1;
     _headerView.layer.shadowOpacity = .5f;
-    CGRect shadowFrame = _headerView.layer.bounds;
-    CGPathRef shadowPath = [UIBezierPath
+    CGRect shadowFrame              = _headerView.layer.bounds;
+    CGPathRef shadowPath            = [UIBezierPath
                             bezierPathWithRect:shadowFrame].CGPath;
-    _headerView.layer.shadowPath = shadowPath;
-    
+    _headerView.layer.shadowPath    = shadowPath;
+
     [self.view addSubview:_headerView];
 }
 
@@ -69,19 +69,26 @@
 
 - (void)initTabBar
 {
-    BusNearbyViewController * vc = [[BusNearbyViewController alloc] init];
-    BusLineViewController *vc2 = [[BusLineViewController alloc] init];
-    BusStopViewController *vc3 = [[BusStopViewController alloc] init];
-    BusTransferViewController * vc4 = [[BusTransferViewController alloc] init];
-    BusCollectViewController *vc5 = [[BusCollectViewController alloc] init];
+    BusNearbyViewController * vc   = [[BusNearbyViewController alloc] init];
+    BusLineViewController *vc2     = [[BusLineViewController alloc] init];
+    BusStopViewController *vc3     = [[BusStopViewController alloc] init];
+    BusTransferViewController *vc4 = [[BusTransferViewController alloc] init];
+    BusCollectViewController *vc5  = [[BusCollectViewController alloc] init];
     
-    UINavigationController *navi = [[UINavigationController alloc] initWithRootViewController:vc];
-    UINavigationController *navi2 = [[UINavigationController alloc] initWithRootViewController:vc2];
-    UINavigationController *navi3 = [[UINavigationController alloc] initWithRootViewController:vc3];
-    UINavigationController *navi4 = [[UINavigationController alloc] initWithRootViewController:vc4];
-    UINavigationController *navi5 = [[UINavigationController alloc] initWithRootViewController:vc5];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+    UINavigationController *nav2 = [[UINavigationController alloc] initWithRootViewController:vc2];
+    UINavigationController *nav3 = [[UINavigationController alloc] initWithRootViewController:vc3];
+    UINavigationController *nav4 = [[UINavigationController alloc] initWithRootViewController:vc4];
+    UINavigationController *nav5 = [[UINavigationController alloc] initWithRootViewController:vc5];
+    
+    self.viewControllers = @[nav,nav2,nav3,nav4,nav5];
+    
+    [[[[self tabBar] items] objectAtIndex:0] setEnabled:FALSE];
+    [[[[self tabBar] items] objectAtIndex:1] setEnabled:FALSE];
+    [[[[self tabBar] items] objectAtIndex:2] setEnabled:FALSE];
+    [[[[self tabBar] items] objectAtIndex:3] setEnabled:FALSE];
+    [[[[self tabBar] items] objectAtIndex:4] setEnabled:FALSE];
 
-    self.viewControllers = @[navi,navi2,navi3,navi4,navi5];
 }
 
 - (void)dealloc {

@@ -27,9 +27,9 @@
     if (self = [super init])
     {
         self.currentIndex = 0;
-        self.page = 1;
-        self.lineArray = [NSMutableArray array];
-        self.nearByArray = [NSMutableArray array];
+        self.page         = 1;
+        self.lineArray    = [NSMutableArray array];
+        self.nearByArray  = [NSMutableArray array];
     }
     
     return self;
@@ -53,35 +53,41 @@
 
 - (void)initTableView
 {
-    self.tableView = [[BaseTableView alloc] initWithFrame:CGRectMake(10, 10, ScreenWidth - 20, ScreenHeight - 84) style:UITableViewStyleGrouped];
-    self.tableView.delegate = self;
-    self.tableView.dataSource = self;
+    self.tableView                 = [[BaseTableView alloc] initWithFrame:CGRectMake(10, 10, ScreenWidth - 20, ScreenHeight - 84) style:UITableViewStyleGrouped];
+    self.tableView.delegate        = self;
+    self.tableView.dataSource      = self;
     self.tableView.backgroundColor = [UIColor clearColor];
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.separatorStyle  = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:_tableView];
     
     WEAKSELF
     [self.tableView createHeaderViewBlock:^{
         STRONGSELF
         strongSelf.page = 1;
-        [strongSelf searchPoiByCenterCoordinate];
+        [strongSelf initUserLocation];
     }];
 }
 
 - (void)locationServiceUnEnabled
 {
-    self.maskView = [CustomBusMode locationServiceUnEnabled:self.view.frame];
-    [self.view addSubview:self.maskView];
-    [self.view bringSubviewToFront:self.maskView];
+//    self.maskView = [CustomBusMode locationServiceUnEnabled:self.view.frame];
+//    [self.view addSubview:self.maskView];
+//    [self.view bringSubviewToFront:self.maskView];
 }
 
 - (void)initUserLocation
 {
     if ([[Locator sharedLocator] IsLocationServiceEnabled]) {
+        self.tableView.footer.hidden = NO;
         [self searchPoiByCenterCoordinate];
     }else{
-        [self locationServiceUnEnabled];
+        [self.nearByArray removeAllObjects];
+        [self.tableView reloadData];
+        [self.tableView endHeaderRefreshing];
+        self.tableView.footer.hidden = YES;
     }
+    [self.tableView configBlankPage:DataIsNothingWithLocation hasData:([[Locator sharedLocator] IsLocationServiceEnabled]) hasError:(NO) reloadButtonBlock:^(id sender) {
+    }];
 }
 
 #pragma mark - AMapSearchDelegate
@@ -207,12 +213,12 @@
             NSArray* temp = [poi.address componentsSeparatedByString:@";"];
             for (int i = 0 ; i<temp.count; i++) {
                 AMapPOI *subPoi = [[AMapPOI alloc] init];
-                subPoi.uid = poi.uid;
-                subPoi.name = poi.name;
-                subPoi.type = poi.type;
+                subPoi.uid      = poi.uid;
+                subPoi.name     = poi.name;
+                subPoi.type     = poi.type;
                 subPoi.location = poi.location;
                 subPoi.distance = poi.distance;
-                subPoi.address = temp[i];
+                subPoi.address  = temp[i];
                 [data addObject:subPoi];
             }
         }else{
@@ -267,33 +273,33 @@
     if ([self.nearByArray[indexPath.section] subPOIs].count == 0) {
         
     }else{
-        cell.lbl_busNumber.text = [CustomBusMode handleStringWithBrackets:[(AMapPOI *)self.nearByArray[indexPath.section] address]];
-        cell.lbl_busNumberSub.text = [CustomBusMode handleStringGetBrackets:[(AMapPOI *)self.nearByArray[indexPath.section] address]];
-        cell.lbl_busGoto.text = [CustomBusMode replaceStringWithBusModel:[[self.nearByArray[indexPath.section] subPOIs][self.currentIndex] endStop]];
-        
-        cell.lbl_busFirstTime.text = [CustomBusMode replaceStringWithBusModel:[CustomBusMode getBusTimeFromString:[[self.nearByArray[indexPath.section] subPOIs][self.currentIndex] startTime]]];
-        cell.lbl_busEndTime.text = [CustomBusMode replaceStringWithBusModel:[CustomBusMode getBusTimeFromString:[[self.nearByArray[indexPath.section] subPOIs][self.currentIndex] endTime]]];
-        cell.lbl_busNearbyStop.text = [CustomBusMode handleStringWithBrackets:[(AMapPOI *)self.nearByArray[indexPath.section] name]];
-        cell.lbl_busDistance.text = [NSString stringWithFormat:@"%ld米",(long)[(AMapPOI *)self.nearByArray[indexPath.section] distance]];
-        
+        cell.lbl_busNumber.text         = [CustomBusMode handleStringWithBrackets:[(AMapPOI *)self.nearByArray[indexPath.section] address]];
+        cell.lbl_busNumberSub.text      = [CustomBusMode handleStringGetBrackets:[(AMapPOI *)self.nearByArray[indexPath.section] address]];
+        cell.lbl_busGoto.text           = [CustomBusMode replaceStringWithBusModel:[[self.nearByArray[indexPath.section] subPOIs][self.currentIndex] endStop]];
+
+        cell.lbl_busFirstTime.text      = [CustomBusMode replaceStringWithBusModel:[CustomBusMode getBusTimeFromString:[[self.nearByArray[indexPath.section] subPOIs][self.currentIndex] startTime]]];
+        cell.lbl_busEndTime.text        = [CustomBusMode replaceStringWithBusModel:[CustomBusMode getBusTimeFromString:[[self.nearByArray[indexPath.section] subPOIs][self.currentIndex] endTime]]];
+        cell.lbl_busNearbyStop.text     = [CustomBusMode handleStringWithBrackets:[(AMapPOI *)self.nearByArray[indexPath.section] name]];
+        cell.lbl_busDistance.text       = [NSString stringWithFormat:@"%ld米",(long)[(AMapPOI *)self.nearByArray[indexPath.section] distance]];
+
         if ([[self.nearByArray[indexPath.section] subPOIs][self.currentIndex] basicPrice] == [[self.nearByArray[indexPath.section] subPOIs][self.currentIndex] totalPrice] ) {
-            NSString *temp = [CustomBusMode replaceStringWithBusModel:[NSString stringWithFormat:@"%.1f",[[self.nearByArray [indexPath.section] subPOIs][self.currentIndex] basicPrice]]];
-            cell.lbl_busPrice.text = [NSString stringWithFormat:@"%@",temp];
+            NSString *temp                  = [CustomBusMode replaceStringWithBusModel:[NSString stringWithFormat:@"%.1f",[[self.nearByArray [indexPath.section] subPOIs][self.currentIndex] basicPrice]]];
+            cell.lbl_busPrice.text          = [NSString stringWithFormat:@"%@",temp];
         }else{
-            cell.lbl_busPrice.text = [NSString stringWithFormat:@"%@-%@",[CustomBusMode replaceStringWithBusModel:[NSString stringWithFormat:@"%.1f",[[self.nearByArray[indexPath.section] subPOIs][self.currentIndex] basicPrice]]],[CustomBusMode replaceStringWithBusModel:[NSString stringWithFormat:@"%.1f",[[self.nearByArray[indexPath.section] subPOIs][self.currentIndex] totalPrice]]]];
+            cell.lbl_busPrice.text          = [NSString stringWithFormat:@"%@-%@",[CustomBusMode replaceStringWithBusModel:[NSString stringWithFormat:@"%.1f",[[self.nearByArray[indexPath.section] subPOIs][self.currentIndex] basicPrice]]],[CustomBusMode replaceStringWithBusModel:[NSString stringWithFormat:@"%.1f",[[self.nearByArray[indexPath.section] subPOIs][self.currentIndex] totalPrice]]]];
         }
-        
-        cell.lbl_busFullDistance.text = [NSString stringWithFormat:@"%@公里",[CustomBusMode replaceStringWithBusModel:[NSString stringWithFormat:@"%.2f",[(AMapBusLine *)[self.nearByArray[indexPath.section] subPOIs][self.currentIndex] distance]]]];
+
+        cell.lbl_busFullDistance.text   = [NSString stringWithFormat:@"%@公里",[CustomBusMode replaceStringWithBusModel:[NSString stringWithFormat:@"%.2f",[(AMapBusLine *)[self.nearByArray[indexPath.section] subPOIs][self.currentIndex] distance]]]];
         cell.arrImg.autoresizesSubviews = NO;
         CLLocationCoordinate2D target;
-        target.latitude = [[(AMapPOI *)self.nearByArray[indexPath.section] valueForKey:@"location"] latitude];
-        target.longitude = [[(AMapPOI *)self.nearByArray[indexPath.section] valueForKey:@"location"] longitude];
-        cell.arrImg.target = target;
-        
+        target.latitude                 = [[(AMapPOI *)self.nearByArray[indexPath.section] valueForKey:@"location"] latitude];
+        target.longitude                = [[(AMapPOI *)self.nearByArray[indexPath.section] valueForKey:@"location"] longitude];
+        cell.arrImg.target              = target;
+
         if ([CustomBusMode isFavoed_withID:[NSString stringWithFormat:@"%@%@",BUSLINEFAV,cell.lbl_busNumber.text] withFavoID:cell.lbl_busNumber.text forType:myBusLine]) {
-            cell.btn_fav.selected = true;
+            cell.btn_fav.selected           = true;
         }else{
-            cell.btn_fav.selected = false;
+            cell.btn_fav.selected           = false;
         }
     }
     
@@ -311,8 +317,8 @@
             return;
         }
         BusLineDetailViewController *vc = [[BusLineDetailViewController alloc] init];
-        vc.title = [self.nearByArray[indexPath.section] valueForKey:@"address"];
-        vc.busLineArray = [NSMutableArray arrayWithArray:[self.nearByArray[indexPath.section] subPOIs]];
+        vc.title                        = [self.nearByArray[indexPath.section] valueForKey:@"address"];
+        vc.busLineArray                 = [NSMutableArray arrayWithArray:[self.nearByArray[indexPath.section] subPOIs]];
         [self.parentViewController.navigationController pushViewController:vc animated:YES];
     }else{
         [self showHudTipStr:@"当前车辆信息可能出错了"];

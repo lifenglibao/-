@@ -12,14 +12,14 @@
 
 @interface BusStopDetailViewController : BaseViewController<UITableViewDataSource,UITableViewDelegate,AMapSearchDelegate>
 
-@property (nonatomic, strong) BaseTableView *tableView;
+@property (nonatomic, strong) BaseTableView  *tableView;
 @property (nonatomic, strong) NSMutableArray *busStopArray;
 @property (nonatomic, strong) NSMutableArray *lineArray;
 
-@property (nonatomic) BOOL isFav;
-@property (nonatomic, strong) UIButton *favBtn;
-@property (nonatomic, strong) AMapBusStop *busStop;
-@property (nonatomic, strong) AMapSearchAPI *search;
+@property (nonatomic        ) BOOL           isFav;
+@property (nonatomic, strong) UIButton       *favBtn;
+@property (nonatomic, strong) AMapBusStop    *busStop;
+@property (nonatomic, strong) AMapSearchAPI  *search;
 
-@property (nonatomic) NSInteger currentIndex;
+@property (nonatomic        ) NSInteger      currentIndex;
 @end

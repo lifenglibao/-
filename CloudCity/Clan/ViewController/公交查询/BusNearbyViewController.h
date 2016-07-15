@@ -11,13 +11,13 @@
 
 @interface BusNearbyViewController : BaseViewController<UITableViewDataSource,UITableViewDelegate,CLLocationManagerDelegate,AMapSearchDelegate>
 
-@property (nonatomic, strong) BaseTableView *tableView;
+@property (nonatomic, strong) BaseTableView  *tableView;
 @property (nonatomic, strong) NSMutableArray *nearByArray;
-@property (nonatomic, strong) AMapSearchAPI *search;
+@property (nonatomic, strong) AMapSearchAPI  *search;
 @property (nonatomic, strong) NSMutableArray *lineArray;
-@property (nonatomic) NSInteger currentIndex;
-@property (assign, nonatomic) NSInteger page;
-@property (assign, nonatomic) BOOL isReadMore;
-@property (assign, nonatomic) BOOL isNoMore;
-@property (strong, nonatomic) UIView *maskView;
+@property (nonatomic        ) NSInteger      currentIndex;
+@property (assign, nonatomic) NSInteger      page;
+@property (assign, nonatomic) BOOL           isReadMore;
+@property (assign, nonatomic) BOOL           isNoMore;
+@property (strong, nonatomic) UIView         *maskView;
 @end

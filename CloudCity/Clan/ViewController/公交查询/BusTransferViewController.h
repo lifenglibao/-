@@ -20,12 +20,12 @@
 @property (nonatomic, strong) IBOutlet UIButton *searchBtn;
 @property (nonatomic, strong) IBOutlet UIView *sepView;
 
-@property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic, strong) NSMutableArray *tips;
-@property (nonatomic, strong) NSMutableArray *routeResultArr;
-@property (nonatomic, strong) AMapSearchAPI *search;
+@property (nonatomic, strong) UITableView                    *tableView;
+@property (nonatomic, strong) NSMutableArray                 *tips;
+@property (nonatomic, strong) NSMutableArray                 *routeResultArr;
+@property (nonatomic, strong) AMapSearchAPI                  *search;
 @property (nonatomic, strong) BusSearchHistoryViewController * historyTableView;
-@property (nonatomic, strong) NSString *invertGeoResult;
+@property (nonatomic        ) NSString                       *invertGeoResult;
 
 typedef NS_ENUM(NSInteger, AMapRoutePlanningType)
 {

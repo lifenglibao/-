@@ -145,7 +145,8 @@ typedef enum {
 + (CGFloat)widthForText:(NSString*)text font:(UIFont*)font withinHeight:(CGFloat)height;
 
 //让某些function过一段时间才会执行一次.
-+ (BOOL)oneDayPast;
++ (BOOL)showSplashAd;
++ (BOOL)showUpdateDialog;
 
 //比较APP VERSION
 

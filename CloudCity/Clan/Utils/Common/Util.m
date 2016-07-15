@@ -744,19 +744,37 @@
     return size.width;
 }
 
-+ (BOOL)oneDayPast {
++ (BOOL)showSplashAd {
     
-    NSDate *lastDate = [[NSUserDefaults standardUserDefaults] objectForKey:@"time_interval"] ? [[NSUserDefaults standardUserDefaults] objectForKey:@"time_interval"] : [NSDate date];
+    NSDate *lastDate = [[NSUserDefaults standardUserDefaults] objectForKey:@"splash_time_interval"] ? [[NSUserDefaults standardUserDefaults] objectForKey:@"splash_time_interval"] : [NSDate date];
     
     NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     NSDateComponents *components = [gregorian components:NSDayCalendarUnit fromDate:lastDate toDate:[NSDate date] options:0];
     NSInteger days = [components day];
-    if (days >= DEFAULT_INTERVAL || ![[NSUserDefaults standardUserDefaults] objectForKey:@"time_interval"]) {
-        [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:@"time_interval"];
+    if (days >= DEFAULT_INTERVAL || ![[NSUserDefaults standardUserDefaults] objectForKey:@"splash_time_interval"]) {
+        [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:@"splash_time_interval"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         return true;
     }else{
-        [[NSUserDefaults standardUserDefaults] setObject:lastDate forKey:@"time_interval"];
+        [[NSUserDefaults standardUserDefaults] setObject:lastDate forKey:@"splash_time_interval"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        return false;
+    }
+}
+
++ (BOOL)showUpdateDialog {
+    
+    NSDate *lastDate = [[NSUserDefaults standardUserDefaults] objectForKey:@"update_dialog_time_interval"] ? [[NSUserDefaults standardUserDefaults] objectForKey:@"update_dialog_time_interval"] : [NSDate date];
+    
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *components = [gregorian components:NSDayCalendarUnit fromDate:lastDate toDate:[NSDate date] options:0];
+    NSInteger days = [components day];
+    if (days >= DEFAULT_INTERVAL || ![[NSUserDefaults standardUserDefaults] objectForKey:@"update_dialog_time_interval"]) {
+        [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:@"update_dialog_time_interval"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        return true;
+    }else{
+        [[NSUserDefaults standardUserDefaults] setObject:lastDate forKey:@"update_dialog_time_interval"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         return false;
     }

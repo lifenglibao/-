@@ -1173,7 +1173,7 @@
 //获取splash ad
 - (void)request_SplashWithBlock:(void(^)(id data, NSError *error))block
 {
-    [[ClanNetAPI sharedCCJsonClient] requestJsonDataWithPath:@"ad/ad/getSplashScreenAD" withParams:nil withMethodType:Post andBlock:^(id data, NSError *error) {
+    [[ClanNetAPI sharedCCJsonClient] requestJsonDataWithPath:@"ad/getSplashScreenAD" withParams:nil withMethodType:Post andBlock:^(id data, NSError *error) {
         if (error) {
             block(nil,error);
         }else{

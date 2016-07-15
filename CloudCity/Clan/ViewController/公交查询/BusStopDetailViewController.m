@@ -72,17 +72,17 @@
 
 - (void)addHeaderView
 {
-    _headerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.width, 44)];
-    UILabel *nameLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, self.view.width, 44)];
-    nameLabel.font = [UIFont systemFontOfSize:15.0f];
-    nameLabel.textColor = [UIColor blackColor];
-    nameLabel.backgroundColor = [UIColor clearColor];
-    nameLabel.textAlignment = NSTextAlignmentCenter;
-    nameLabel.tag = 10086;
+    _headerView                 = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.width, 44)];
+    UILabel *nameLabel          = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, self.view.width, 44)];
+    nameLabel.font              = [UIFont systemFontOfSize:15.0f];
+    nameLabel.textColor         = [UIColor blackColor];
+    nameLabel.backgroundColor   = [UIColor clearColor];
+    nameLabel.textAlignment     = NSTextAlignmentCenter;
+    nameLabel.tag               = 10086;
     [_headerView addSubview:nameLabel];
-    
-    UILabel *line = [[UILabel alloc]initWithFrame:CGRectMake(0, _headerView.bottom-0.5, self.view.width, 0.5)];
-    line.backgroundColor = [UIColor returnColorWithPlist:YZSegMentColor];
+
+    UILabel *line               = [[UILabel alloc]initWithFrame:CGRectMake(0, _headerView.bottom-0.5, self.view.width, 0.5)];
+    line.backgroundColor        = [UIColor returnColorWithPlist:YZSegMentColor];
     [_headerView addSubview:line];
     _headerView.backgroundColor = kCOLOR_BG_GRAY;
     
@@ -107,11 +107,11 @@
 
 - (void)initTableView {
     
-    self.tableView = [[BaseTableView alloc] initWithFrame:CGRectMake(10, 10 + _headerView.bottom, ScreenWidth - 20, ScreenHeight - 120) style:UITableViewStyleGrouped];
-    self.tableView.delegate = self;
-    self.tableView.dataSource = self;
+    self.tableView                 = [[BaseTableView alloc] initWithFrame:CGRectMake(10, 10 + _headerView.bottom, ScreenWidth - 20, ScreenHeight - 120) style:UITableViewStyleGrouped];
+    self.tableView.delegate        = self;
+    self.tableView.dataSource      = self;
     self.tableView.backgroundColor = [UIColor clearColor];
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.separatorStyle  = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:_tableView];
 }
 
@@ -222,44 +222,44 @@
 {
     if ([self.busStopArray count] != 0) {
         
-        cell.lbl_busNumber.text = [CustomBusMode handleStringWithCharRoad:[(AMapBusLine *)self.busStopArray[indexPath.section][self.currentIndex] name]];
+        cell.lbl_busNumber.text         = [CustomBusMode handleStringWithCharRoad:[(AMapBusLine *)self.busStopArray[indexPath.section][self.currentIndex] name]];
 //        cell.lbl_busNumberSub.text = [CustomBusMode handleStringGetBrackets:[(AMapBusLine *)self.busStopArray[indexPath.section][self.currentIndex] name]];
-        cell.lbl_busGoto.text = [CustomBusMode replaceStringWithBusModel:[self.busStopArray[indexPath.section][self.currentIndex] endStop]];
-        
-        cell.lbl_busFirstTime.text = [CustomBusMode replaceStringWithBusModel:[CustomBusMode getBusTimeFromString:[self.busStopArray[indexPath.section][self.currentIndex] startTime]]];
-        cell.lbl_busEndTime.text = [CustomBusMode replaceStringWithBusModel:[CustomBusMode getBusTimeFromString:[self.busStopArray[indexPath.section][self.currentIndex] endTime]]];
-        
-        if ([[Locator sharedLocator] IsLocationServiceEnabled]) {
-            
-            NSDictionary *dic = [CustomBusMode calculateNearestStopWithUserLocation:MACoordinateConvert([(Locator *)[Locator sharedLocator] userLocation], MACoordinateTypeGPS) data:self.busStopArray[indexPath.section][self.currentIndex]];
-            
-            cell.lbl_busDistance.text   = [NSString stringWithFormat:@"%.0f米",[[dic objectForKey:@"distance"] floatValue]];
-            cell.lbl_busNearbyStop.text = [dic objectForKey:@"name"];
+        cell.lbl_busGoto.text           = [CustomBusMode replaceStringWithBusModel:[self.busStopArray[indexPath.section][self.currentIndex] endStop]];
 
+        cell.lbl_busFirstTime.text      = [CustomBusMode replaceStringWithBusModel:[CustomBusMode getBusTimeFromString:[self.busStopArray[indexPath.section][self.currentIndex] startTime]]];
+        cell.lbl_busEndTime.text        = [CustomBusMode replaceStringWithBusModel:[CustomBusMode getBusTimeFromString:[self.busStopArray[indexPath.section][self.currentIndex] endTime]]];
+
+        if ([[Locator sharedLocator] IsLocationServiceEnabled]) {
+
+            NSDictionary *dic               = [CustomBusMode calculateNearestStopWithUserLocation:MACoordinateConvert([(Locator *)[Locator sharedLocator] userLocation], MACoordinateTypeGPS) data:self.busStopArray[indexPath.section][self.currentIndex]];
+            
+            cell.lbl_busDistance.text       = [NSString stringWithFormat:@"%.0f米",[[dic objectForKey:@"distance"] floatValue]];
+            cell.lbl_busNearbyStop.text     = [dic objectForKey:@"name"];
+            
             cell.arrImg.autoresizesSubviews = NO;
             CLLocationCoordinate2D target;
-            target.latitude = [[dic objectForKey:@"lat"] floatValue];
-            target.longitude = [[dic objectForKey:@"long"] floatValue];
-            cell.arrImg.target = target;
-            
+            target.latitude                 = [[dic objectForKey:@"lat"] floatValue];
+            target.longitude                = [[dic objectForKey:@"long"] floatValue];
+            cell.arrImg.target              = target;
+
         }else{
-            cell.lbl_busNearbyStop.text = @"无法获取";
-            cell.lbl_busDistance.text   = @"无法获取";
+            cell.lbl_busNearbyStop.text     = @"无法获取";
+            cell.lbl_busDistance.text       = @"无法获取";
         }
-        
+
         if ([self.busStopArray[indexPath.section][self.currentIndex] basicPrice] == [self.busStopArray[indexPath.section][self.currentIndex] totalPrice] ) {
-            NSString *temp = [CustomBusMode replaceStringWithBusModel:[NSString stringWithFormat:@"%.1f",[self.busStopArray[indexPath.section][self.currentIndex] basicPrice]]];
-            cell.lbl_busPrice.text = [NSString stringWithFormat:@"%@",temp];
+            NSString *temp                  = [CustomBusMode replaceStringWithBusModel:[NSString stringWithFormat:@"%.1f",[self.busStopArray[indexPath.section][self.currentIndex] basicPrice]]];
+            cell.lbl_busPrice.text          = [NSString stringWithFormat:@"%@",temp];
         }else{
-            cell.lbl_busPrice.text = [NSString stringWithFormat:@"%@-%@",[CustomBusMode replaceStringWithBusModel:[NSString stringWithFormat:@"%.1f",[self.busStopArray[indexPath.section][self.currentIndex] basicPrice]]],[CustomBusMode replaceStringWithBusModel:[NSString stringWithFormat:@"%.1f",[self.busStopArray[indexPath.section][self.currentIndex] totalPrice]]]];
+            cell.lbl_busPrice.text          = [NSString stringWithFormat:@"%@-%@",[CustomBusMode replaceStringWithBusModel:[NSString stringWithFormat:@"%.1f",[self.busStopArray[indexPath.section][self.currentIndex] basicPrice]]],[CustomBusMode replaceStringWithBusModel:[NSString stringWithFormat:@"%.1f",[self.busStopArray[indexPath.section][self.currentIndex] totalPrice]]]];
         }
-        
-        cell.lbl_busFullDistance.text = [NSString stringWithFormat:@"%@公里",[CustomBusMode replaceStringWithBusModel:[NSString stringWithFormat:@"%.2f",[(AMapBusLine *)self.busStopArray[indexPath.section][self.currentIndex] distance]]]];
-        
+
+        cell.lbl_busFullDistance.text   = [NSString stringWithFormat:@"%@公里",[CustomBusMode replaceStringWithBusModel:[NSString stringWithFormat:@"%.2f",[(AMapBusLine *)self.busStopArray[indexPath.section][self.currentIndex] distance]]]];
+
         if ([CustomBusMode isFavoed_withID:[NSString stringWithFormat:@"%@%@",BUSLINEFAV,cell.lbl_busNumber.text] withFavoID:cell.lbl_busNumber.text forType:myBusLine]) {
-            cell.btn_fav.selected = true;
+            cell.btn_fav.selected           = true;
         }else{
-            cell.btn_fav.selected = false;
+            cell.btn_fav.selected           = false;
         }
     }
 }
@@ -272,8 +272,8 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     BusLineDetailViewController *vc = [[BusLineDetailViewController alloc] init];
-    vc.title = [CustomBusMode handleStringWithCharRoad:[(AMapBusLine *)self.busStopArray[indexPath.section][self.currentIndex] name]];
-    vc.busLineArray = [NSMutableArray arrayWithArray:self.busStopArray[indexPath.section]];
+    vc.title                        = [CustomBusMode handleStringWithCharRoad:[(AMapBusLine *)self.busStopArray[indexPath.section][self.currentIndex] name]];
+    vc.busLineArray                 = [NSMutableArray arrayWithArray:self.busStopArray[indexPath.section]];
     [self.navigationController pushViewController:vc animated:YES];
 }
 

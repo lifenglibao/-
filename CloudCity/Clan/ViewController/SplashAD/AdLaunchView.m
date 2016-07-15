@@ -73,12 +73,12 @@ AdLaunchType state = AdLaunchProgressType;
 - (void)viewDidLoad {
     
     self.splashData = [NSMutableArray array];
-    state = AdLaunchProgressType;
+    state = AdLaunchTimerType;
     [self loadmodel];
 //    [self buildUI];
     
     
-    if([Util oneDayPast])
+    if([Util showSplashAd])
     {
         WEAKSELF
         [_configViewModel getAppSplashcfgWithBlock:^(id result) {
@@ -208,8 +208,8 @@ AdLaunchType state = AdLaunchProgressType;
             
             [self.progressButtonView mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.size.mas_equalTo(CGSizeMake(64, 24));
-                make.top.equalTo(self).offset(24);
-                make.right.equalTo(self).offset(-16);
+                make.top.equalTo(self.adBackground).offset(24);
+                make.right.equalTo(self.adBackground).offset(-16);
             }];
             
             [timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {

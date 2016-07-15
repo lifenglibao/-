@@ -12,25 +12,25 @@
 
 @interface BusMapViewController : BaseViewController<MAMapViewDelegate, AMapSearchDelegate>
 
-@property (nonatomic, strong) UIButton *gpsBtn;
-@property (nonatomic, strong) UIButton *trafficBtn;
+@property (nonatomic, strong) UIButton               *gpsBtn;
+@property (nonatomic, strong) UIButton               *trafficBtn;
 /* 起始点经纬度. */
-@property (nonatomic) CLLocationCoordinate2D startCoordinate;
+@property (nonatomic        ) CLLocationCoordinate2D startCoordinate;
 /* 终点经纬度. */
-@property (nonatomic) CLLocationCoordinate2D destinationCoordinate;
+@property (nonatomic        ) CLLocationCoordinate2D destinationCoordinate;
 
 /* 起始点名称. */
-@property (nonatomic) NSString *startLocationName;
+@property (nonatomic        ) NSString               *startLocationName;
 /* 终点名称. */
-@property (nonatomic) NSString *destinationLocationName;
+@property (nonatomic        ) NSString               *destinationLocationName;
 
-@property (nonatomic, strong) AMapBusLine *busLine;
-@property (nonatomic, strong) AMapBusStop *busStop;
-@property (nonatomic, strong) AMapRoute *busRoute;
-@property (nonatomic) NSInteger currentCourse;
+@property (nonatomic, strong) AMapBusLine            *busLine;
+@property (nonatomic, strong) AMapBusStop            *busStop;
+@property (nonatomic, strong) AMapRoute              *busRoute;
+@property (nonatomic        ) NSInteger              currentCourse;
 
-@property (nonatomic, strong) MAMapView *mapView;
-@property (nonatomic) BOOL needShowDetailView;
-@property (nonatomic, strong) UIView *detailView;
+@property (nonatomic, strong) MAMapView              *mapView;
+@property (nonatomic        ) BOOL                   needShowDetailView;
+@property (nonatomic, strong) UIView                 *detailView;
 
 @end

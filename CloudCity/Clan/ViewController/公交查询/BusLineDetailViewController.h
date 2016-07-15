@@ -17,11 +17,11 @@
     UILabel * busPrice;
 }
 
-@property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) UITableView    *tableView;
 @property (nonatomic, strong) NSMutableArray *busLineArray;
-@property (nonatomic) CGFloat lastScrollOffset;
-@property (nonatomic) BOOL isFav;
-@property (nonatomic, strong) UIButton *favBtn;
-@property (nonatomic, strong) AMapBusLine *line;
+@property (nonatomic        ) CGFloat        lastScrollOffset;
+@property (nonatomic        ) BOOL           isFav;
+@property (nonatomic, strong) UIButton       *favBtn;
+@property (nonatomic, strong) AMapBusLine    *line;
 
 @end

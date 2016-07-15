@@ -60,11 +60,11 @@
 }
 - (void)initTableView
 {
-    self.tableView = [[BaseTableView alloc] initWithFrame:CGRectMake(10, 20, ScreenWidth - 20, ScreenBoundsHeight - 50) style:UITableViewStylePlain];
-    self.tableView.delegate = self;
-    self.tableView.dataSource = self;
-    self.tableView.backgroundColor = [UIColor clearColor];
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView                              = [[BaseTableView alloc] initWithFrame:CGRectMake(10, 20, ScreenWidth - 20, ScreenBoundsHeight - 50) style:UITableViewStylePlain];
+    self.tableView.delegate                     = self;
+    self.tableView.dataSource                   = self;
+    self.tableView.backgroundColor              = [UIColor clearColor];
+    self.tableView.separatorStyle               = UITableViewCellSeparatorStyleNone;
     self.tableView.showsVerticalScrollIndicator = NO;
     [self.view addSubview:_tableView];
 }
@@ -126,48 +126,48 @@
 
     
     if ([self.routeData[indexPath.row] objectForKey:@"start"]) {
-        cell.textLabel.text  = self.routeStartLocation;
-        cell.imageView.image = kIMG(@"icon_start_stop");
+        cell.textLabel.text               = self.routeStartLocation;
+        cell.imageView.image              = kIMG(@"icon_start_stop");
         cell.imageView.layer.cornerRadius = 15;
-        
+
     }else if ([self.routeData[indexPath.row] objectForKey:@"walking"]) {
-        cell.textLabel.text  = [self.routeData[indexPath.row] objectForKey:@"walking"];
-        cell.imageView.image = kIMG(@"walking_man");
-        cell.imageView.frame = CGRectMake(20, 0, 10, 10);
+        cell.textLabel.text               = [self.routeData[indexPath.row] objectForKey:@"walking"];
+        cell.imageView.image              = kIMG(@"walking_man");
+        cell.imageView.frame              = CGRectMake(20, 0, 10, 10);
 
     }else if ([self.routeData[indexPath.row] objectForKey:@"departureStop"]) {
-        cell.textLabel.text = [self.routeData[indexPath.row] objectForKey:@"departureStop"];
-        cell.imageView.image = [UIImage imageWithColor:[UIColor clearColor] withFrame:CGRectMake(0, 0, 5, 5) alpha:1];
-        
+        cell.textLabel.text               = [self.routeData[indexPath.row] objectForKey:@"departureStop"];
+        cell.imageView.image              = [UIImage imageWithColor:[UIColor clearColor] withFrame:CGRectMake(0, 0, 5, 5) alpha:1];
+
     }else if ([self.routeData[indexPath.row] objectForKey:@"endStop"]) {
-        cell.textLabel.textColor = [UIColor grayColor];
-        cell.textLabel.font = [UIFont systemFontOfSize:13];
-        cell.textLabel.text = [self.routeData[indexPath.row] objectForKey:@"endStop"];
-        cell.imageView.image = kIMG(@"bus");
-        cell.imageView.frame = CGRectMake(20, 0, 10, 10);
-        
-        cell.accessoryView = [[ UIImageView alloc ] initWithImage:kIMG(@"rate_down")];
+        cell.textLabel.textColor          = [UIColor grayColor];
+        cell.textLabel.font               = [UIFont systemFontOfSize:13];
+        cell.textLabel.text               = [self.routeData[indexPath.row] objectForKey:@"endStop"];
+        cell.imageView.image              = kIMG(@"bus");
+        cell.imageView.frame              = CGRectMake(20, 0, 10, 10);
+
+        cell.accessoryView                = [[ UIImageView alloc ] initWithImage:kIMG(@"rate_down")];
         [cell.accessoryView setFrame:CGRectMake(0, 0, 15, 15)];
-        
+
     }else if ([self.routeData[indexPath.row] objectForKey:@"arrivalStop"]){
-        cell.textLabel.text = [self.routeData[indexPath.row] objectForKey:@"arrivalStop"];
-        cell.imageView.image = [UIImage imageWithColor:[UIColor clearColor] withFrame:CGRectMake(0, 0, 5, 5) alpha:1];
+        cell.textLabel.text               = [self.routeData[indexPath.row] objectForKey:@"arrivalStop"];
+        cell.imageView.image              = [UIImage imageWithColor:[UIColor clearColor] withFrame:CGRectMake(0, 0, 5, 5) alpha:1];
 
     }else if ([self.routeData[indexPath.row] objectForKey:@"walking"]) {
-        cell.textLabel.text  = [self.routeData[indexPath.row] objectForKey:@"walking"];
-        cell.imageView.image = kIMG(@"walking_man");
-        cell.imageView.frame = CGRectMake(20, 0, 10, 10);
-        
+        cell.textLabel.text               = [self.routeData[indexPath.row] objectForKey:@"walking"];
+        cell.imageView.image              = kIMG(@"walking_man");
+        cell.imageView.frame              = CGRectMake(20, 0, 10, 10);
+
     }else if ([self.routeData[indexPath.row] objectForKey:@"end"]) {
-        cell.textLabel.text  = self.routeDestinationLocation;
-        cell.imageView.image = kIMG(@"icon_end_stop");
+        cell.textLabel.text               = self.routeDestinationLocation;
+        cell.imageView.image              = kIMG(@"icon_end_stop");
         cell.imageView.layer.cornerRadius = 15;
 
     }
 
     
-    cell.selectedBackgroundView = [[UIView alloc] init];
-    cell.backgroundColor = [UIColor clearColor];
+    cell.selectedBackgroundView        = [[UIView alloc] init];
+    cell.backgroundColor               = [UIColor clearColor];
     [cell.textLabel sizeToFit];
     [cell.textLabel setNumberOfLines:0];
     [cell.textLabel setLineBreakMode:NSLineBreakByCharWrapping];

@@ -11,7 +11,7 @@
 
 @class CustomBusMode;
 
-@interface BusViewController : UITabBarController
+@interface BusViewController : UITabBarController<UITabBarControllerDelegate>
 
 
 @end

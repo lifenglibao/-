@@ -23,12 +23,12 @@
     self = [super initWithFrame:frame];
     if (self)
     {
-        self.label = [[UILabel alloc] init];
-        self.label.font = [UIFont systemFontOfSize:15];
-        self.label.left = 20;
-        
-        self.lineView = [[UIView alloc] init];
-        self.lineView.frame = CGRectMake(0, 30, ScreenWidth, 0.5);
+        self.label                    = [[UILabel alloc] init];
+        self.label.font               = [UIFont systemFontOfSize:15];
+        self.label.left               = 20;
+
+        self.lineView                 = [[UIView alloc] init];
+        self.lineView.frame           = CGRectMake(0, 30, ScreenWidth, 0.5);
         self.lineView.backgroundColor = [UIColor lightGrayColor];
         [self addSubview:self.label];
         [self addSubview:self.lineView];

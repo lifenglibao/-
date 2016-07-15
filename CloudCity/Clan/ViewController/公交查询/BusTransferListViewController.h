@@ -11,19 +11,19 @@
 
 @interface BusTransferListViewController : BaseViewController<UITableViewDataSource,UITableViewDelegate>
 
-@property (nonatomic) NSInteger currentCourse;
-@property (nonatomic) NSInteger selectedFilterIndex;
-@property (nonatomic, strong) UIView *headerView;
+@property (nonatomic        ) NSInteger      currentCourse;
+@property (nonatomic        ) NSInteger      selectedFilterIndex;
+@property (nonatomic, strong) UIView         *headerView;
 @property (nonatomic, strong) NSMutableArray *totalBusRoute;
-@property (nonatomic, strong) AMapRoute *busRoute;
-@property (nonatomic, strong) BaseTableView *tableView;
-@property (nonatomic, strong) UITableView *filterTableView;
+@property (nonatomic, strong) AMapRoute      *busRoute;
+@property (nonatomic, strong) BaseTableView  *tableView;
+@property (nonatomic, strong) UITableView    *filterTableView;
 
-@property (nonatomic) NSString *routeStartLocation;
-@property (nonatomic) NSString *routeDestinationLocation;
-@property (strong, nonatomic) UIButton *viewMoreBtn;
-@property (nonatomic) BOOL isFav;
-@property (nonatomic, strong) UIButton *favBtn;
+@property (nonatomic        ) NSString       *routeStartLocation;
+@property (nonatomic        ) NSString       *routeDestinationLocation;
+@property (strong, nonatomic) UIButton       *viewMoreBtn;
+@property (nonatomic        ) BOOL           isFav;
+@property (nonatomic, strong) UIButton       *favBtn;
 
 /* 起始点经纬度. */
 @property (nonatomic) CLLocationCoordinate2D startCoordinate;

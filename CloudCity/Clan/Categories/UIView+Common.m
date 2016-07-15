@@ -285,6 +285,12 @@ static char LoadingViewKey, BlankPageViewKey;
                 tipStr = @"无搜索结果\n换个关键字试试";
             }
                 break;
+            case DataIsNothingWithLocation:
+            {
+                imageName = @"dataNothing";
+                tipStr = @"抱歉\n定位失败,或者您还未开启定位服务";
+            }
+                break;
             default:
             {
                 imageName = @"blankpage_image_Sleep";

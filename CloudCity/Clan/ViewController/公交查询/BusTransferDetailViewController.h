@@ -13,15 +13,15 @@
 
 
 /* 当前路线方案索引值. */
-@property (nonatomic) NSInteger currentCourse;
-@property (nonatomic, strong) AMapRoute *busRoute;
-@property (nonatomic, strong) BaseTableView *tableView;
+@property (nonatomic        ) NSInteger      currentCourse;
+@property (nonatomic, strong) AMapRoute      *busRoute;
+@property (nonatomic, strong) BaseTableView  *tableView;
 
-@property (nonatomic) NSString *routeStartLocation;
-@property (nonatomic) NSString *routeDestinationLocation;
+@property (nonatomic        ) NSString       *routeStartLocation;
+@property (nonatomic        ) NSString       *routeDestinationLocation;
 
-@property (nonatomic) NSMutableArray *routeData;
-@property (nonatomic) BOOL isOpen;
-@property (nonatomic) NSInteger selectIndex;
+@property (nonatomic        ) NSMutableArray *routeData;
+@property (nonatomic        ) BOOL           isOpen;
+@property (nonatomic        ) NSInteger      selectIndex;
 
 @end

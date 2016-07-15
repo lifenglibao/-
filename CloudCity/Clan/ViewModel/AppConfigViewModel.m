@@ -281,17 +281,16 @@
         
         if (!error && data && [[data objectForKey:API_STATUS_CODE] integerValue] == 200) {
             
-            NSMutableArray *array = [NSMutableArray array];
             if ([[TMCache sharedCache] objectForKey:@"CCDiscoverLatestInfo"]) {
 
                 DiscoverModel *_discoverModel = [DiscoverModel mj_objectWithKeyValues:[[TMCache sharedCache] objectForKey:@"CCDiscoverLatestInfo"]];
                 DiscoverModel *discoverModel = [DiscoverModel mj_objectWithKeyValues:[data objectForKey:@"result"]];
 
-                if (![_discoverModel.discover_id isEqualToString:discoverModel.discover_id] && ![_discoverModel.group_id isEqualToString:discoverModel.group_id]) {
+                if (![_discoverModel.discover_id isEqualToString:discoverModel.discover_id] || ![_discoverModel.group_id isEqualToString:discoverModel.group_id]) {
                     [discoverModel setIs_selected:@"0"];
-                    [array addObject:discoverModel];
+                    NSDictionary *dic = [discoverModel mj_keyValues];
                     [[TMCache sharedCache] removeObjectForKey:@"CCDiscoverLatestInfo"];
-                    [[TMCache sharedCache] setObject:array forKey:@"CCDiscoverLatestInfo"];
+                    [[TMCache sharedCache] setObject:dic forKey:@"CCDiscoverLatestInfo"];
                 }
                 
             }else{

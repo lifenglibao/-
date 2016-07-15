@@ -67,7 +67,7 @@ static NSString *const customRecommendType = @"2";
 
 - (void)showUpdateDialog {
     
-    if([Util oneDayPast])
+    if([Util showUpdateDialog])
     {
         if ([Util version:[Util currentAppVersion] lessthan:[[TMCache sharedCache] objectForKey:APP_IOS_CURRENT_VERSION]]) {
             
@@ -416,6 +416,10 @@ static NSString *const customRecommendType = @"2";
     self.configViewModel = [AppConfigViewModel new];
 
     [_configViewModel getCCLatestDiscoverWithBlock:^(BOOL result) {
+        
+    }];
+    
+    [_configViewModel getCCDiscoverWithBlock:^(BOOL result) {
         
     }];
 }
