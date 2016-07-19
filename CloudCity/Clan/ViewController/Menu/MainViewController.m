@@ -19,7 +19,7 @@
 #import "BoardModel.h"
 #import "PostDetailViewController.h"
 #import "XLPagerTabStripViewController.h"
-//#import "MessageController.h"
+#import "MessageController.h"
 //#import "TOWebViewController.h"
 #import "WebNaviViewController.h"
 #import "BannerModel.h"
@@ -34,6 +34,7 @@
 #import "ShareMenu.h"
 #import "MessageVC.h"
 #import "DiscoverViewController.h"
+
 static float interval = 60.f;
 
 @interface MainViewController ()
@@ -86,7 +87,7 @@ static float interval = 60.f;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificationCome:) name:@"KNEWS_FRIEND_MESSAGE" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificationCome:) name:@"GET_kBOARDSTYLE" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificationCome:) name:@"GET_LATEST_DISCOVER" object:nil];
-
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificationCome:) name:@"GET_UNREAD_NOTIFICATION_COUNT" object:nil];
 
     UserModel *cUser = [UserModel currentUserInfo];
     [cUser addObserver:self forKeyPath:@"logined" options:NSKeyValueObservingOptionNew context:NULL];
@@ -94,10 +95,9 @@ static float interval = 60.f;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificationCome:) name:@"Avatar_Changed" object:nil];
 
     [self customTabBarView];
-    [self newMessTip];
+//    [self newMessTip];
     [self loadBoardStyleVC:[NSString returnPlistWithKeyValue:kBOARDSTYLE]];
 }
-
 
 - (void)dealloc
 {
@@ -383,9 +383,9 @@ static float interval = 60.f;
             self.messageVCExist = YES;
             //先判断是否登录
             if ([UserModel currentUserInfo].logined) {
-                typeClassStrValue = @"MessageVC";
+                typeClassStrValue = @"MessageController";
             } else {
-                typeClassStrValue = @"UIViewController";
+                typeClassStrValue = @"MessageController";
             }
         }
         else if (button_type && button_type.intValue == 5) {
@@ -461,10 +461,11 @@ static float interval = 60.f;
                 ArticleViewController *articleVc = (ArticleViewController *)vc;
                 articleVc.nav_title = navTitle;
                 articleVc.customNavArray = navGetArray;
-            }else if (typeClass == NSClassFromString(@"MessageVC")) {
+            }else if (typeClass == NSClassFromString(@"MessageController")) {
                 //消息页面
-                MessageVC *messvc = (MessageVC *)vc;
-                messvc.fromTabbar = YES;
+                MessageController *messagevc = (MessageController *)vc;
+//                MessageVC *messvc = (MessageVC *)vc;
+//                messvc.fromTabbar = YES;
             }
             DZNavigationController * navi = [[DZNavigationController alloc]initWithRootViewController:vc];
             navi.tabType = tabType;
@@ -756,7 +757,6 @@ static float interval = 60.f;
             //当前的视图要刷新
             [[NSNotificationCenter defaultCenter] postNotificationName:@"DO_DIALOG_UPDATE" object:nil];
         }
-        [self newMessTip];
     }
     else if ([noti.name isEqualToString:@"KNEWS_FRIEND_MESSAGE"]) {
         [customVc initNav];
@@ -770,6 +770,16 @@ static float interval = 60.f;
     }
     else if ([noti.name isEqualToString:@"GET_LATEST_DISCOVER"]) {
         [self newDiscover];
+    }
+    else if ([noti.name isEqualToString:@"GET_UNREAD_NOTIFICATION_COUNT"]) {
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"UPDATE_MESSAGEVC_GRIDVIEW" object:nil];
+
+        if (_lastButton.tabtype == DZTabType_MessagePage) {
+            //当前的视图要刷新
+//            [[NSNotificationCenter defaultCenter] postNotificationName:@"DO_DIALOG_UPDATE" object:nil];
+        }
+        [self newMessTip];
     }
 }
 
@@ -817,7 +827,14 @@ static float interval = 60.f;
 //新消息提示
 - (void)newMessTip
 {
-    NSNumber *valNum = [[NSUserDefaults standardUserDefaults] objectForKey:@"KNEWS_MESSAGE"];
+    NSDictionary *count = [[NSUserDefaults standardUserDefaults] objectForKey:@"NotificationCount"];
+    
+    if (![count.allKeys containsObject:@"pm_count"] || ![count.allKeys containsObject:@"notification_count"]) {
+        return;
+    }
+    
+    int valNum = [[count objectForKey:@"pm_count"] intValue] + [[count objectForKey:@"notification_count"] intValue];
+//    NSNumber *valNum = [[NSUserDefaults standardUserDefaults] objectForKey:@"KNEWS_MESSAGE"];
     for (UIViewController *subvc in self.viewControllers) {
         if ([subvc isKindOfClass:[UINavigationController class]]) {
             DZNavigationController *subnavi = (DZNavigationController *)subvc;
@@ -830,7 +847,8 @@ static float interval = 60.f;
                 UIView *newmess = [zhanneixinBtn viewWithTag:9876];
                 [newmess removeFromSuperview];
                 newmess = nil;
-                if (!isNull(valNum) && valNum.intValue != 0) {
+//                if ((!isNull(valNum) && valNum.intValue != 0 ) || (!isNull(warnNum) && warnNum.intValue != 0)) {
+                if (valNum && valNum != 0) {
                     //改变
                     UIButton *newMess_btn = [UIButton buttonWithType:UIButtonTypeCustom];
                     [zhanneixinBtn addSubview:newMess_btn];
@@ -838,10 +856,23 @@ static float interval = 60.f;
                     newMess_btn.layer.cornerRadius = 10;
                     newMess_btn.clipsToBounds = YES;
                     newMess_btn.tag = 9876;
-                    if (valNum.intValue > 99) {
+//                    if (valNum.intValue > 99) {
+//                        [newMess_btn setTitle:@"99+" forState:UIControlStateNormal];
+//                    }
+//                    else if (warnNum.intValue > 99) {
+//                        [newMess_btn setTitle:@"99+" forState:UIControlStateNormal];
+//                    }
+//                    else if (valNum.intValue + warnNum.intValue > 99) {
+//                        [newMess_btn setTitle:@"99+" forState:UIControlStateNormal];
+//                    }
+//                    else {
+//                        [newMess_btn setTitle:[NSString stringWithFormat:@"%d",valNum.intValue + warnNum.intValue] forState:UIControlStateNormal];
+//                    }
+                    if (valNum > 99) {
                         [newMess_btn setTitle:@"99+" forState:UIControlStateNormal];
-                    } else {
-                        [newMess_btn setTitle:[NSString stringWithFormat:@"%@",valNum] forState:UIControlStateNormal];
+                    }
+                    else {
+                        [newMess_btn setTitle:[NSString stringWithFormat:@"%d",valNum] forState:UIControlStateNormal];
                     }
                     [newMess_btn.titleLabel setFont:[UIFont fitFontWithSize:K_FONTSIZE_Icon]];
                     [newMess_btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];

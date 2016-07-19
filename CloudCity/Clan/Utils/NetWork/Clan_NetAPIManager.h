@@ -202,6 +202,21 @@
 
 
 /**
+ * 获取未读提醒
+ */
+- (void)request_UnReadWarnListWithResultBlock:(void (^)(id data, NSError *error))block;
+
+/*
+ * 标记当前消息为已读
+ */
+- (void)read_WarnListWithID:(NSString *)notification_id andResultBlock:(void (^)(id data, NSError *error))block;
+
+/*
+ 提醒列表
+ */
+- (void)request_WarnListWithResultBlock:(void (^)(id data, NSError *error))block;
+
+/**
  * 消息列表
  *
  */

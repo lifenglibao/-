@@ -27,6 +27,7 @@
 @property (nonatomic, strong)  UIBarButtonItem *backButton;
 @property (nonatomic, strong)  UIBarButtonItem *editButton;
 @property (nonatomic, weak)  BaseViewController *targetVC;
+@property (nonatomic, strong)  NSString *currentID;
 
 @end
 
@@ -37,7 +38,6 @@
 {
     [super viewDidLoad];
     _dataSourceArr = [NSMutableArray new];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveNotification:) name:@"dialog_list_update" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doAutoUpdate) name:@"AUTO_REFRESH_XINXI" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveNotification:) name:@"DO_DIALOG_UPDATE" object:nil];
     self.title = @"消息";
@@ -60,13 +60,8 @@
     }else{
         self.backButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav_back"] style:UIBarButtonItemStylePlain target:self action:@selector(backView)];
     }
-
-    self.editButton = [[UIBarButtonItem alloc]initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(editAction:)];
-    self.deleteButton = [[UIBarButtonItem alloc]initWithTitle:@"删除" style:UIBarButtonItemStylePlain target:self action:@selector(deleteAction:)];
-    self.cancelButton = [[UIBarButtonItem alloc]initWithTitle:@"取消" style:UIBarButtonItemStylePlain target:self action:@selector(cancleAction:)];
-    self.navigationItem.rightBarButtonItem = self.editButton;
     [self addPullRefreshAction];
-    [self.tableview beginLoading];
+    [self showProgressHUDWithStatus:@""];
     [self requestData];
     
     
@@ -81,9 +76,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    if (_update) {
-        [self requestData];
-    }
+    [self requestData];
     
     if (_tobeReloadPath) {
         [self.tableview deselectRowAtIndexPath:_tobeReloadPath animated:YES];
@@ -121,11 +114,7 @@
 #pragma mark - 接收通知
 - (void) receiveNotification:(NSNotification*)notification
 {
-    if ([notification.name isEqualToString:@"dialog_list_update"])
-    {
-        _update = YES;
-    }
-    else if ([notification.name isEqualToString:@"DO_DIALOG_UPDATE"]) {
+    if ([notification.name isEqualToString:@"DO_DIALOG_UPDATE"]) {
         _laterDisappear = YES;
         [self requestData];
     }
@@ -141,6 +130,7 @@
 {
     BOOL islogin = [UserModel currentUserInfo].logined;
     if (!islogin) {
+        [self hideProgressHUD];
         [self.tableview endHeaderRefreshing];
         [self.tableview hideTableFooter];
         [self goToLoginPage];
@@ -152,10 +142,10 @@
     WEAKSELF
     [_viewmodel requestDialogListWithReturnBlock:^(bool success, id data) {
         STRONGSELF
-        if (!strongSelf.laterDisappear) {
-            [strongSelf removeTheTip];
-        }
-        [strongSelf.tableview endLoading];
+//        if (!strongSelf.laterDisappear) {
+//            [strongSelf removeTheTip];
+//        }
+        [self hideProgressHUD];
         [strongSelf.tableview endHeaderRefreshing];
         if (success) {
             strongSelf.update = NO;
@@ -171,15 +161,16 @@
         [strongSelf.view configBlankPage:DataIsNothingWithDefault hasData:(strongSelf.dataSourceArr.count > 0) hasError:(NO) reloadButtonBlock:^(id sender) {
             [strongSelf requestData];
         }];
-        [strongSelf updateButtonsToMatchTableState];
     }];
+    
+    [self updateNotificationCount];
 }
 
-- (void)removeTheTip
+- (void)updateNotificationCount
 {
-    //无新消息
-    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:0] forKey:@"KNEWS_MESSAGE"];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"KNEWS_MESSAGE_COME" object:nil];
+    [_viewmodel requestUnReadWarnListWithReturnBlock:^(bool success, id data) {
+        
+    }];
 }
 
 //上拉下拉刷新
@@ -225,28 +216,22 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    DialogListModel *model = _dataSourceArr[indexPath.row];
+    model.isnew = @"0";
+    _currentID = model.plid;
+    
     if (tableView.editing) {
         [self.view endEditing:YES];
-        [self updateButtonsToMatchTableState];
         return;
     } else {
-        [self removeTheTip];
+        [self updateNotificationCount];
     }
     _tobeReloadPath = indexPath;
     ChatViewController *chatVC = [[ChatViewController alloc]initWithNibName:NSStringFromClass([ChatViewController class]) bundle:nil];
     chatVC.hidesBottomBarWhenPushed = YES;
-    DialogListModel *model = _dataSourceArr[indexPath.row];
-    model.isnew = @"0";
+
     chatVC.dialogModel = _dataSourceArr[indexPath.row];
     [self.navigationController pushViewController:chatVC animated:YES];
-}
-
-- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    [self.view endEditing:YES];
-    if (tableView.editing) {
-        [self updateDeleteButtonTitle];
-    }
 }
 
 #pragma mark - actions
@@ -260,125 +245,6 @@
     user.uid = dialog.msgtoid;
     home.user = user;
     [self.navigationController pushViewController:home animated:YES];
-}
-
-- (IBAction)editAction:(id)sender
-{
-    [self.tableview setEditing:YES animated:YES];
-    [self updateButtonsToMatchTableState];
-}
-
-- (IBAction)cancleAction:(id)sender
-{
-    [self.tableview setEditing:NO animated:YES];
-    [self updateButtonsToMatchTableState];
-}
-
-- (IBAction)deleteAction:(id)sender
-{
-    NSArray *selectedRows = [self.tableview indexPathsForSelectedRows];
-    NSString *toBeDeleteString = @"";
-    for (int i = 0; i < selectedRows.count; i++) {
-        NSIndexPath *path = selectedRows[i];
-        DialogListModel *model = _dataSourceArr[path.row];
-        NSString *str = model.msgtoid;
-        if (i != 0) {
-            str = [NSString stringWithFormat:@"_%@",model.msgtoid];
-        }
-        toBeDeleteString = [toBeDeleteString stringByAppendingString:str];
-    }
-    WEAKSELF
-    [_viewmodel delete_DialogListwithDeletepm_deluid:toBeDeleteString andReturnBlock:^(bool success, id data) {
-        STRONGSELF
-        if (success) {
-            NSMutableIndexSet *indicesOfItemsToDelete = [NSMutableIndexSet new];
-            for (NSIndexPath *selectionIndex in selectedRows)
-            {
-                [indicesOfItemsToDelete addIndex:selectionIndex.row];
-            }
-            [strongSelf.dataSourceArr removeObjectsAtIndexes:indicesOfItemsToDelete];
-            [strongSelf.tableview deleteRowsAtIndexPaths:selectedRows withRowAnimation:UITableViewRowAnimationAutomatic];
-        }
-    } ];
-    [self.tableview setEditing:NO animated:YES];
-    [self updateButtonsToMatchTableState];
-}
-
-- (void)updateButtonsToMatchTableState
-{
-    if (self.tableview.editing)
-    {
-        // Show the option to cancel the edit.
-        self.navigationItem.rightBarButtonItem = self.cancelButton;
-        if (_targetVC) {
-            _targetVC.navigationItem.rightBarButtonItem = self.cancelButton;
-        }
-        
-        [self updateDeleteButtonTitle];
-        
-        // Show the delete button.
-        self.navigationItem.leftBarButtonItem = self.deleteButton;
-        if (_targetVC) {
-            _targetVC.navigationItem.leftBarButtonItem = self.deleteButton;
-        }
-    }
-    else
-    {
-        self.navigationItem.leftBarButtonItem = self.backButton;
-        if (_targetVC) {
-            if (self.backButton) {
-                if (!_isRightItemBar) {
-                    [_targetVC addBackBtn];
-                }else{
-                    _targetVC.navigationItem.leftBarButtonItem = self.backButton;
-                }
-            } else {
-                if (_isRightItemBar) {
-                    _targetVC.navigationItem.leftBarButtonItem = self.backButton;
-                }
-                _targetVC.navigationItem.leftBarButtonItem = nil;
-            }
-        }
-        if (_dataSourceArr.count > 0)
-        {
-            self.editButton.enabled = YES;
-        }
-        else
-        {
-            self.editButton.enabled = NO;
-        }
-        self.navigationItem.rightBarButtonItem = self.editButton;
-        if (_targetVC) {
-            _targetVC.navigationItem.rightBarButtonItem = self.editButton;
-        }
-    }
-}
-
-- (void)updateDeleteButtonTitle
-{
-    NSArray *selectedRows = [self.tableview indexPathsForSelectedRows];
-    if (!selectedRows) {
-        self.deleteButton.enabled = NO;
-    } else {
-        self.deleteButton.enabled = YES;
-    }
-    if (!selectedRows) {
-        self.deleteButton.title = NSLocalizedString(@"删除", @"");
-        return;
-    }
-    BOOL allItemsAreSelected = selectedRows.count == _dataSourceArr.count;
-    BOOL noItemsAreSelected = selectedRows.count == 0;
-    
-    if (allItemsAreSelected || noItemsAreSelected)
-    {
-        self.deleteButton.title = NSLocalizedString(@"删除全部", @"");
-    }
-    else
-    {
-        NSString *titleFormatString =
-        NSLocalizedString(@"删除(%d)", @"Title for delete button with placeholder for number");
-        self.deleteButton.title = [NSString stringWithFormat:titleFormatString, selectedRows.count];
-    }
 }
 
 - (void)setupNavigationButtonsForVC:(UIViewController *)vc

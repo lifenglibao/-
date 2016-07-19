@@ -102,6 +102,11 @@
 		0D5DCAE11D30E8B800515D3B /* LxGridViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D5DCADD1D30E8B500515D3B /* LxGridViewCell.m */; };
 		0D5DCAE21D30E8B800515D3B /* LxGridViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D5DCADF1D30E8B500515D3B /* LxGridViewFlowLayout.m */; };
 		0D5DCAE51D31006600515D3B /* DiscoverHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D5DCAE41D31006500515D3B /* DiscoverHeaderView.m */; };
+		0D83466F1D3A093A00E08A5B /* NotificationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D83466E1D3A093A00E08A5B /* NotificationModel.m */; };
+		0D8346721D3A164800E08A5B /* LFGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8346711D3A164800E08A5B /* LFGridView.m */; };
+		0D8346761D3C6E1200E08A5B /* WarnListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8346741D3C6E1200E08A5B /* WarnListCell.m */; };
+		0D8346771D3C6E1200E08A5B /* WarnListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D8346751D3C6E1200E08A5B /* WarnListCell.xib */; };
+		0D8346791D3C748900E08A5B /* WarnController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D8346781D3C748900E08A5B /* WarnController.xib */; };
 		0D9B2A971D1E6ACE0054B87D /* BusTransferDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D9B2A961D1E6ACE0054B87D /* BusTransferDetailTableViewCell.m */; };
 		0D9B2AAA1D1E90970054B87D /* icArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D9B2A9E1D1E90970054B87D /* icArrow.png */; };
 		0D9B2AAB1D1E90970054B87D /* icArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D9B2A9F1D1E90970054B87D /* icArrow@2x.png */; };
@@ -1333,6 +1338,14 @@
 		0D5DCADF1D30E8B500515D3B /* LxGridViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LxGridViewFlowLayout.m; sourceTree = "<group>"; };
 		0D5DCAE31D31006500515D3B /* DiscoverHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DiscoverHeaderView.h; path = Discover/DiscoverHeaderView.h; sourceTree = "<group>"; };
 		0D5DCAE41D31006500515D3B /* DiscoverHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DiscoverHeaderView.m; path = Discover/DiscoverHeaderView.m; sourceTree = "<group>"; };
+		0D83466D1D3A093A00E08A5B /* NotificationModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationModel.h; sourceTree = "<group>"; };
+		0D83466E1D3A093A00E08A5B /* NotificationModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationModel.m; sourceTree = "<group>"; };
+		0D8346701D3A164800E08A5B /* LFGridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFGridView.h; sourceTree = "<group>"; };
+		0D8346711D3A164800E08A5B /* LFGridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LFGridView.m; sourceTree = "<group>"; };
+		0D8346731D3C6E1200E08A5B /* WarnListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WarnListCell.h; sourceTree = "<group>"; };
+		0D8346741D3C6E1200E08A5B /* WarnListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WarnListCell.m; sourceTree = "<group>"; };
+		0D8346751D3C6E1200E08A5B /* WarnListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WarnListCell.xib; sourceTree = "<group>"; };
+		0D8346781D3C748900E08A5B /* WarnController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WarnController.xib; sourceTree = "<group>"; };
 		0D9B2A951D1E6ACE0054B87D /* BusTransferDetailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BusTransferDetailTableViewCell.h; path = "公交查询/BusTransferDetailTableViewCell.h"; sourceTree = "<group>"; };
 		0D9B2A961D1E6ACE0054B87D /* BusTransferDetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BusTransferDetailTableViewCell.m; path = "公交查询/BusTransferDetailTableViewCell.m"; sourceTree = "<group>"; };
 		0D9B2A9E1D1E90970054B87D /* icArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icArrow.png; sourceTree = "<group>"; };
@@ -3581,6 +3594,7 @@
 				6DA10EBE1BA012260077158B /* MessageController.m */,
 				6DA10EC01BA016FC0077158B /* WarnController.h */,
 				6DA10EC11BA016FC0077158B /* WarnController.m */,
+				0D8346781D3C748900E08A5B /* WarnController.xib */,
 				8A46171A1BCE60D800B0337B /* HBEmojiLabel.h */,
 				8A46171B1BCE60D800B0337B /* HBEmojiLabel.m */,
 				8A46171C1BCE60D800B0337B /* SJRichLabel.h */,
@@ -3599,6 +3613,8 @@
 				6D5CCF391ADB8BAA00A156CA /* DialogListModel.m */,
 				6D725B851ADBD62B00EDABFB /* SessionModel.h */,
 				6D725B861ADBD62B00EDABFB /* SessionModel.m */,
+				0D83466D1D3A093A00E08A5B /* NotificationModel.h */,
+				0D83466E1D3A093A00E08A5B /* NotificationModel.m */,
 			);
 			path = "站内消息";
 			sourceTree = "<group>";
@@ -3662,6 +3678,8 @@
 				8A86D2131B4CBC4B00F5B273 /* YZSearchGridView.m */,
 				8A86D22C1B4D62A500F5B273 /* SearchView.h */,
 				8A86D22D1B4D62A500F5B273 /* SearchView.m */,
+				0D8346701D3A164800E08A5B /* LFGridView.h */,
+				0D8346711D3A164800E08A5B /* LFGridView.m */,
 			);
 			name = views;
 			sourceTree = "<group>";
@@ -5278,6 +5296,9 @@
 				6DE372041C04132100BD73B0 /* RateCell.m */,
 				8A2AC86B1C158A72004F55BF /* PostActivityExpandCell.h */,
 				8A2AC86C1C158A72004F55BF /* PostActivityExpandCell.m */,
+				0D8346731D3C6E1200E08A5B /* WarnListCell.h */,
+				0D8346741D3C6E1200E08A5B /* WarnListCell.m */,
+				0D8346751D3C6E1200E08A5B /* WarnListCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -6061,7 +6082,6 @@
 				TargetAttributes = {
 					8AB7CC481AA00D7D007A17E8 = {
 						CreatedOnToolsVersion = 6.1;
-						DevelopmentTeam = 8CMF227875;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -6176,6 +6196,7 @@
 				6D65F0A21C0ECCD70032B5DD /* detail_tiaolou@2x.png in Resources */,
 				6D65EFCE1C0ECCD70032B5DD /* portrait_small@2x.png in Resources */,
 				6D65EF491C0ECCD70032B5DD /* 3_1_H@3x.png in Resources */,
+				0D8346771D3C6E1200E08A5B /* WarnListCell.xib in Resources */,
 				6D65F0821C0ECCD70032B5DD /* login_btn@2x.png in Resources */,
 				6D65F08C1C0ECCD70032B5DD /* left_bubble@2x.png in Resources */,
 				0D5B223D1CD452FE00EFBB44 /* download@3x.png in Resources */,
@@ -6521,6 +6542,7 @@
 				6D65EF291C0ECCD70032B5DD /* 3_12_H@3x.png in Resources */,
 				6D65EF501C0ECCD70032B5DD /* 3_21_H@2x.png in Resources */,
 				6D65F09C1C0ECCD70032B5DD /* detail_favo@2x.png in Resources */,
+				0D8346791D3C748900E08A5B /* WarnController.xib in Resources */,
 				6D7859C01ADE061A002B4707 /* chat_animation3.png in Resources */,
 				6D65F06C1C0ECCD70032B5DD /* act_up@2x.png in Resources */,
 				6D65F0401C0ECCD70032B5DD /* 7@2x.png in Resources */,
@@ -6866,6 +6888,7 @@
 				6D61B79B1B8F695300F2DEE2 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				8AB835F61AC2999A00C6404D /* QBAssetsCollectionCheckmarkView.m in Sources */,
 				8AB835FC1AC2999A00C6404D /* QBAssetsCollectionViewLayout.m in Sources */,
+				0D8346721D3A164800E08A5B /* LFGridView.m in Sources */,
 				6D1163711AE8C9D800705FAC /* DACircularProgressView.m in Sources */,
 				8AF57F311B82DA48005DD63A /* mztools.c in Sources */,
 				8A2B68401AB82D8100794565 /* BoardViewController.m in Sources */,
@@ -7068,8 +7091,10 @@
 				0D0D04851D02B33200ACA542 /* MJPropertyKey.m in Sources */,
 				8A1FE0351AC3DC6C008F10F0 /* UIImageView+MJWebCache.m in Sources */,
 				8AB7CD121AA6F584007A17E8 /* NSString+FontAwesome.m in Sources */,
+				0D8346761D3C6E1200E08A5B /* WarnListCell.m in Sources */,
 				6DFAF1DC1B254AC900B179D5 /* SVIndefiniteAnimatedView.m in Sources */,
 				6D80C8941B4BB55300959E52 /* FMDatabaseAdditions.m in Sources */,
+				0D83466F1D3A093A00E08A5B /* NotificationModel.m in Sources */,
 				8A9E34421ABFF2EE0058F279 /* UIView+YALConstraints.m in Sources */,
 				6DFAF1F91B254B4800B179D5 /* MJRefreshComponent.m in Sources */,
 				8AB7CC521AA00D7D007A17E8 /* AppDelegate.m in Sources */,

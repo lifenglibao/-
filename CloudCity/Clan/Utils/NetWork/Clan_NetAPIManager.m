@@ -775,6 +775,73 @@
     }];
 }
 
+
+/**
+ * 获取未读提醒
+ */
+- (void)request_UnReadWarnListWithResultBlock:(void (^)(id data, NSError *error))block
+{
+    [[ClanNetAPI sharedCCJsonClient] requestJsonDataWithPath:@"notification/Notification/getUnReadNotificationCount" withParams:nil withMethodType:Get andBlock:^(id data, NSError *error) {
+        if (error) {
+            block(nil, error);
+        }
+        else {
+            
+            id resultData = nil;
+            if ([[data objectForKey:API_STATUS_CODE] integerValue] == 200) {
+                resultData = [data objectForKey:@"result"];
+            }
+            block(resultData, nil);
+        }
+    }];
+}
+
+/*
+ * 标记当前消息为已读
+ */
+- (void)read_WarnListWithID:(NSString *)notification_id andResultBlock:(void (^)(id data, NSError *error))block;
+{
+    NSDictionary *paraDic = @{
+                              @"id":notification_id
+                              };
+    [[ClanNetAPI sharedCCJsonClient] requestJsonDataWithPath:@"notification/Notification/readNotification" withParams:paraDic withMethodType:Post andBlock:^(id data, NSError *error) {
+        if (error) {
+            block(nil, error);
+        }
+        else {
+            
+            id resultData = nil;
+            if ([[data objectForKey:API_STATUS_CODE] integerValue] == 200) {
+                /* "1" 是成功, "0"是失败*/
+                resultData = [data objectForKey:@"result"];
+            }
+            block(resultData, nil);
+        }
+    }];
+}
+
+/*
+提醒列表
+*/
+- (void)request_WarnListWithResultBlock:(void (^)(id data, NSError *error))block
+{
+    
+    [[ClanNetAPI sharedCCJsonClient] requestJsonDataWithPath:@"notification/Notification/getNotifications" withParams:nil withMethodType:Get andBlock:^(id data, NSError *error) {
+        if (error) {
+            block(nil, error);
+        }
+        else {
+            
+            id resultData = nil;
+            if ([[data objectForKey:API_STATUS_CODE] integerValue] == 200) {
+                resultData = [data objectForKey:@"result"];
+            }
+            block(resultData, nil);
+        }
+    }];
+}
+
+
 /**
  * 消息列表
  *

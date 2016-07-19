@@ -91,6 +91,22 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
+    {
+        [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings
+                                                                             settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge)
+                                                                             categories:nil]];
+        
+        
+        [[UIApplication sharedApplication] registerForRemoteNotifications];
+    }else{
+        UIRemoteNotificationType allowedNotifications = UIRemoteNotificationTypeAlert
+        | UIRemoteNotificationTypeSound
+        | UIRemoteNotificationTypeBadge;
+        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:allowedNotifications];
+    }
+    
     IQKeyboardManager *magngerKeyboard = [IQKeyboardManager sharedManager];
     [magngerKeyboard disableInViewControllerClass:NSClassFromString(@"PostDetailVC")];
     [magngerKeyboard disableInViewControllerClass:NSClassFromString(@"PostDetailViewController")];
@@ -136,6 +152,7 @@
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     [UserModel saveToLocal];
+    [UserModel saveCurrentBadge];
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
 }
@@ -160,6 +177,7 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     [UserModel saveToLocal];
+    [UserModel saveCurrentBadge];
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
@@ -466,4 +484,49 @@
     }
 }
 
+
+#pragma mark - Push Notification
+
+- (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings
+{
+    [application registerForRemoteNotifications];
+    
+}
+
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)pDeviceToken{
+    NSString *strDeviceToken = [[[pDeviceToken description]
+                                 stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]]
+                                stringByReplacingOccurrencesOfString:@" "
+                                withString:@""];
+    
+    NSLog(@"didRegisterForRemoteNotificationsWithDeviceToken : %@",strDeviceToken);
+    [self postDeviceTokenIfNeeded];
+}
+
+
+
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error{
+    NSLog(@"didFailToRegisterForRemoteNotificationsWithError : %@",error);
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo{
+
+}
+
+- (void)handlePush:(NSDictionary *)userInfo{
+    
+    if ([[UIApplication sharedApplication] applicationState]  ) {
+        
+    }
+    if ([[UIApplication sharedApplication] applicationState] == UIApplicationStateActive ) {
+        
+    }
+    else {
+        
+    }
+}
+
+- (void)postDeviceTokenIfNeeded{
+
+}
 @end

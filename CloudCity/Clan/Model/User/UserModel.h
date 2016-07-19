@@ -35,6 +35,7 @@
 #pragma mark - current user
 + (UserModel * )currentUserInfo;
 
++ (void)saveCurrentBadge;
 //赋值
 - (void)setValueWithObject:(id)obj;
 + (void)saveToLocal;

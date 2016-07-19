@@ -129,6 +129,18 @@
     [[NSUserDefaults standardUserDefaults] setObject:date forKey:kKEY_CURRENT_USER];
 }
 
++ (void)saveCurrentBadge
+{
+    NSDictionary *count = [[NSUserDefaults standardUserDefaults] objectForKey:@"NotificationCount"];
+    
+    if ([count objectForKey:@"pm_count"] && [count objectForKey:@"notification_count"]) {
+        
+        int valNum = [[count objectForKey:@"pm_count"] intValue] + [[count objectForKey:@"notification_count"] intValue];
+        
+        [[UIApplication sharedApplication] setApplicationIconBadgeNumber:valNum];
+    }
+}
+
 //退出登录
 - (void)logout
 {

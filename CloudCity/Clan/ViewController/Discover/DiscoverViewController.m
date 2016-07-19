@@ -9,6 +9,7 @@
 #import "DiscoverViewController.h"
 #import "DiscoverHeaderView.h"
 #import "TOWebViewController.h"
+#import "SearchViewController.h"
 
 static NSString * const LxGridViewCellReuseIdentifier = @stringify(LxGridViewCellReuseIdentifier);
 
@@ -26,12 +27,13 @@ static NSString * const LxGridViewCellReuseIdentifier = @stringify(LxGridViewCel
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [self  initNav];
     [self  loadMoel];
     [_gridView reloadData];
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title     = @"发现";
+//    self.title     = @"发现";
     _homeviewmodel = [HomeViewModel new];
     [self  initCollectionView];
     // Do any additional setup after loading the view.
@@ -40,6 +42,63 @@ static NSString * const LxGridViewCellReuseIdentifier = @stringify(LxGridViewCel
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)initNav
+{
+    UIView *rightView;
+        self.navigationItem.title = [NSString returnStringWithPlist:YZBBSName];
+    if (!rightView) {
+        rightView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 40, 40)];
+    }
+    for (UIView *view in rightView.subviews) {
+        [view removeFromSuperview];
+    }
+    
+    [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"sousuoshouye"] style:UIBarButtonItemStylePlain target:self action:@selector(searchAction)] animated:NO];
+    
+    
+    NSNumber *valNum = [[NSUserDefaults standardUserDefaults] objectForKey:@"KNEWS_MESSAGE"];
+    NSString *navTitle = @"nav_left";
+    
+    UIButton *leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    leftButton.frame = CGRectMake(0, 5, 30, 30);
+    [leftButton addTarget:self action:@selector(presentLeftMenuViewController:) forControlEvents:UIControlEventTouchUpInside];
+    leftButton.layer.cornerRadius = 15;
+    leftButton.clipsToBounds = YES;
+    UserModel *cUsr = [UserModel currentUserInfo];
+    if (cUsr && cUsr.logined) {
+        [leftButton sd_setBackgroundImageWithURL:[NSURL URLWithString:cUsr.avatar] forState:UIControlStateNormal placeholderImage:kIMG(@"portrait_small")];
+    } else {
+        [leftButton sd_cancelBackgroundImageLoadForState:UIControlStateNormal];
+        [leftButton sd_cancelImageLoadForState:UIControlStateNormal];
+        [leftButton setImage:kIMG(navTitle) forState:UIControlStateNormal];
+    }
+    [rightView addSubview:leftButton];
+    if ((!isNull(valNum) && valNum.intValue != 0)) {
+        //加红点
+        UIImageView *redPod = nil;
+        redPod = [[UIImageView alloc]initWithImage:[Util imageWithColor:[UIColor redColor]]];
+        redPod.backgroundColor = [UIColor redColor];
+        redPod.layer.cornerRadius = 4;
+        redPod.clipsToBounds = YES;
+        [rightView addSubview:redPod];
+        [redPod mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.trailing.equalTo(rightView.mas_trailing).offset(-8);
+            make.top.equalTo(rightView.mas_top).offset(6);
+            make.width.equalTo(@8);
+            make.height.equalTo(@8);
+        }];
+    }
+    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc]initWithCustomView:rightView];
+    self.navigationItem.leftBarButtonItem = leftItem ;
+}
+
+- (void)searchAction
+{
+    SearchViewController *searchVC = [[SearchViewController alloc]init];
+    UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:searchVC];
+    [self.navigationController presentViewController:nav animated:NO completion:nil];
 }
 
 - (void)loadMoel {

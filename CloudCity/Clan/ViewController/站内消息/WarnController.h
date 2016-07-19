@@ -9,5 +9,6 @@
 #import "BaseViewController.h"
 
 @interface WarnController : BaseViewController
-
+@property (weak, nonatomic) IBOutlet BaseTableView *tableview;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomToSuperView;
 @end

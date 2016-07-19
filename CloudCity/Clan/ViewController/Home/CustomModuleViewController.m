@@ -33,10 +33,12 @@
 #import "LinkModel.h"
 #import "SFDraggableDialogView.h"
 #import "AppConfigViewModel.h"
+#import "DialogListViewModel.h"
 
 @interface CustomModuleViewController ()<SDCycleScrollViewDelegate,CustomRightItemDelegate,SFDraggableDialogViewDelegate>
 
 
+@property (strong, nonatomic) DialogListViewModel *dialogListViewModel;
 @property (strong, nonatomic) AppConfigViewModel *configViewModel;
 @property (strong, nonatomic)BaseTableView *tableView;
 @property (strong, nonatomic)HomeViewModel *homeViewModel;
@@ -233,6 +235,9 @@ static NSString *const customRecommendType = @"2";
     if (!_homeViewModel) {
         _homeViewModel = [HomeViewModel new];
     }
+    if (!_dialogListViewModel) {
+        _dialogListViewModel = [DialogListViewModel new];
+    }
     [self initWithTable];
     
     self.automaticallyAdjustsScrollViewInsets = NO;
@@ -421,6 +426,10 @@ static NSString *const customRecommendType = @"2";
     
     [_configViewModel getCCDiscoverWithBlock:^(BOOL result) {
         
+    }];
+    
+    [_dialogListViewModel requestUnReadWarnListWithReturnBlock:^(bool success, id data) {
+
     }];
 }
 - (void)initForums{

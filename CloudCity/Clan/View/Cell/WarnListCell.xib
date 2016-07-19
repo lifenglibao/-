@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="WarnListCell" rowHeight="68" id="RRN-Wk-9eY" customClass="WarnListCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="68"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="RRN-Wk-9eY" id="DCK-4T-qug">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="67"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Anc-86-DdL" userLabel="头像跳转" customClass="YZButton">
+                        <rect key="frame" x="15" y="12" width="45" height="45"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="45" id="4wC-h1-EFA"/>
+                            <constraint firstAttribute="width" constant="45" id="hq1-sd-wL5"/>
+                        </constraints>
+                        <state key="normal" image="portrait.png">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Za9-Z0-uWv" userLabel="lbl_name">
+                        <rect key="frame" x="70" y="15" width="0.0" height="0.0"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w7u-n8-ky4" userLabel="lbl_content">
+                        <rect key="frame" x="70" y="23" width="220" height="34"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5iZ-S4-W3l" userLabel="iv_line">
+                        <rect key="frame" x="70" y="67" width="250" height="0.0"/>
+                        <accessibility key="accessibilityConfiguration" label=""/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="0.5" id="C55-ZS-UAh"/>
+                        </constraints>
+                    </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="jiantou.png" translatesAutoresizingMaskIntoConstraints="NO" id="MJH-6A-wHh" userLabel="iv_indicator">
+                        <rect key="frame" x="298" y="28" width="8" height="13"/>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="w7u-n8-ky4" firstAttribute="top" secondItem="Za9-Z0-uWv" secondAttribute="bottom" constant="8" id="7Am-u3-U8o"/>
+                    <constraint firstItem="Anc-86-DdL" firstAttribute="top" secondItem="DCK-4T-qug" secondAttribute="top" constant="12" id="Bro-mm-3Ua"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="MJH-6A-wHh" secondAttribute="trailing" constant="6" id="CXB-ai-8Kk"/>
+                    <constraint firstItem="Za9-Z0-uWv" firstAttribute="top" secondItem="DCK-4T-qug" secondAttribute="top" constant="15" id="Cth-1B-g7g"/>
+                    <constraint firstAttribute="trailing" secondItem="5iZ-S4-W3l" secondAttribute="trailing" id="Hzr-9W-SpH"/>
+                    <constraint firstItem="5iZ-S4-W3l" firstAttribute="top" secondItem="MJH-6A-wHh" secondAttribute="bottom" constant="26" id="Kxe-2e-wek"/>
+                    <constraint firstItem="MJH-6A-wHh" firstAttribute="leading" secondItem="w7u-n8-ky4" secondAttribute="trailing" constant="8" symbolic="YES" id="Odz-MA-Ryb"/>
+                    <constraint firstItem="Za9-Z0-uWv" firstAttribute="leading" secondItem="Anc-86-DdL" secondAttribute="trailing" constant="10" id="Tyd-gq-HWZ"/>
+                    <constraint firstItem="MJH-6A-wHh" firstAttribute="centerY" secondItem="Anc-86-DdL" secondAttribute="centerY" id="Wmw-xE-YJI"/>
+                    <constraint firstAttribute="bottom" secondItem="5iZ-S4-W3l" secondAttribute="bottom" id="ZHb-da-Y6j"/>
+                    <constraint firstAttribute="trailing" secondItem="w7u-n8-ky4" secondAttribute="trailing" constant="30" id="ae7-eI-25h"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="Anc-86-DdL" secondAttribute="trailing" constant="272" id="fZL-HR-bEu"/>
+                    <constraint firstItem="w7u-n8-ky4" firstAttribute="leading" secondItem="Anc-86-DdL" secondAttribute="trailing" constant="10" id="gIN-pA-bAB"/>
+                    <constraint firstItem="Anc-86-DdL" firstAttribute="leading" secondItem="DCK-4T-qug" secondAttribute="leading" constant="15" id="tl1-Vs-i6U"/>
+                    <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="Anc-86-DdL" secondAttribute="bottom" constant="2" id="uga-3s-UQt"/>
+                    <constraint firstItem="5iZ-S4-W3l" firstAttribute="leading" secondItem="Za9-Z0-uWv" secondAttribute="leading" id="vU6-g4-9aQ"/>
+                    <constraint firstAttribute="bottom" secondItem="w7u-n8-ky4" secondAttribute="bottom" constant="10" id="xyJ-tc-JWV"/>
+                </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="fZL-HR-bEu"/>
+                    </mask>
+                </variation>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="btn_avatar" destination="Anc-86-DdL" id="a8b-Zy-kx6"/>
+                <outlet property="iv_line" destination="5iZ-S4-W3l" id="Q8u-bs-8xc"/>
+                <outlet property="lbl_content" destination="w7u-n8-ky4" id="4xy-Hg-JXW"/>
+                <outlet property="lbl_name" destination="Za9-Z0-uWv" id="wDg-ag-vn1"/>
+            </connections>
+            <point key="canvasLocation" x="183" y="421"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="jiantou.png" width="58" height="58"/>
+        <image name="portrait.png" width="58" height="58"/>
+    </resources>
+</document>
