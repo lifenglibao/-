@@ -11,9 +11,12 @@
 @implementation BaseTableView
 
 - (void)createHeaderViewBlock:(void (^)())block{
-    [self addLegendHeaderWithRefreshingBlock:^{
+    [self addGifHeaderWithRefreshingBlock:^{
         block();
     }];
+//    [self addLegendHeaderWithRefreshingBlock:^{
+//        block();
+//    }];
 }
 
 - (void)createFooterViewBlock:(void (^)())block{
@@ -24,7 +27,8 @@
 
 - (void)beginRefreshing
 {
-    [self.legendHeader beginRefreshing];
+    [self.gifHeader beginRefreshing];
+//    [self.legendHeader beginRefreshing];
 }
 
 - (void)loadDataArray
@@ -43,12 +47,14 @@
 
 - (void)endHeaderRefreshing
 {
-    [self.legendHeader endRefreshing];
+    [self.gifHeader endRefreshing];
+//    [self.legendHeader endRefreshing];
 }
 
 - (BOOL)isHeaderRefreshing
 {
-    return self.legendHeader.isRefreshing;
+    return self.gifHeader.isRefreshing;
+//    return self.legendHeader.isRefreshing;
 }
 
 - (BOOL)isFooterrRefreshing

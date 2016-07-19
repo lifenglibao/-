@@ -83,6 +83,9 @@ static NSInteger const topListHeight = 37;
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    self.page = 1;
+    [self requestData:self.type];
+    
     if (_toBeReload) {
         [_tableView reloadRowsAtIndexPaths:@[_toBeReload] withRowAnimation:UITableViewRowAnimationAutomatic];
         _toBeReload = nil;

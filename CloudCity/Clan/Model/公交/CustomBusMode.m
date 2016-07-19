@@ -364,9 +364,13 @@
                 str = [str stringByAppendingString:@"\n\n"];
             }
         }
-        [temp addObject:[NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"开往%@\n\n%@",[self handleStringGetBusEndStop:line.name],str] forKey:@"endStop"]];
+        
+        [temp addObject:[NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"\n%@\n\n%@",line.name,str] forKey:@"endStop"]];
         
         [temp addObject:[NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"%@下车",line.arrivalStop.name] forKey:@"arrivalStop"]];
+        
+//        [temp addObject:[NSDictionary dictionaryWithObject:[NSNumber numberWithInteger:line.viaBusStops.count] forKey:@"total_stop"]];
+
     }
 //    [busLine enumerateObjectsUsingBlock:^(AMapBusLine *line, NSUInteger idx, BOOL *stop) {
 //        

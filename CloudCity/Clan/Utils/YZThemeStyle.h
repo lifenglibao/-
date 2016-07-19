@@ -15,7 +15,7 @@
 #define YZBasePath @"upload/api/mobile/iyz_index.php"
 #define CCBaseURL @"http://192.168.1.171/CloudCity/cc_api2/index.php/"
 #define CC_FUNCTION_NOT_FOUND  [NSString stringWithFormat:@"%@app/AppConfig/funcNotFound",CCBaseURL]
-#define kAPP_DOWNLOAD_URL @"" //app下载地址
+#define kAPP_DOWNLOAD_URL @"http://192.168.1.171/cc_api/index.php/app/AppDownload/downloadApp" //app下载地址
 #define kShareAppkeySina @"ShareAppkeySina"
 #define kShareAppkeyTecent @"ShareAppkeyTecent"
 #define kShareAppkeyWechat @"ShareAppkeyWechat"
@@ -68,7 +68,7 @@
 #define BUSSTOPFAV @"busStopFav_"    //公交站点收藏
 #define BUSTRANSFERFAV @"busTransferFav_"   //公交换乘收藏
 
-#define API_STATUS_CODE @"code"   //公交换乘收藏
+#define API_STATUS_CODE @"code"
 #define DEFAULT_INTERVAL 1   //多少天执行一次某些方法
 #define IOS_APP 1
 #define APP_IOS_CURRENT_VERSION @"APP_IOS_CURRENT_VERSION"

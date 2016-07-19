@@ -75,7 +75,6 @@ AdLaunchType state = AdLaunchProgressType;
     self.splashData = [NSMutableArray array];
     state = AdLaunchTimerType;
     [self loadmodel];
-//    [self buildUI];
     
     
     if([Util showSplashAd])
@@ -116,11 +115,18 @@ AdLaunchType state = AdLaunchProgressType;
             }
         }];
         
+        [self requestAppBaseDatas];
+
     }else{
-        [self toHidenState];
+        [self requestAppBaseDatas];
+        [self buildUI];
+        dispatch_time_t show = dispatch_time(DISPATCH_TIME_NOW, 5 * NSEC_PER_SEC);
+        dispatch_after(show, dispatch_get_main_queue(), ^(void){
+            [self hiddenAnimation];
+            [self toHidenState];
+        });
     }
 
-    [self requestAppBaseDatas];
 }
 
 

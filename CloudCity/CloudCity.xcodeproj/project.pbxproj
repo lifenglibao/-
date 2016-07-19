@@ -123,6 +123,9 @@
 		0DE4B77C1CCF7FE400AE4C63 /* AMapTipAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DE4B77B1CCF7FE400AE4C63 /* AMapTipAnnotation.m */; };
 		0DE4B77F1CCF803900AE4C63 /* BusStopAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DE4B77E1CCF803900AE4C63 /* BusStopAnnotation.m */; };
 		0DE4B7821CCF948F00AE4C63 /* BusLineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DE4B7811CCF948F00AE4C63 /* BusLineViewController.m */; };
+		0DE5E8DF1D3E098700E81058 /* yunduo_gif_8.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DE5E8D91D3E098700E81058 /* yunduo_gif_8.png */; };
+		0DE5E8E31D3E098700E81058 /* yunduo_gif_3.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DE5E8DD1D3E098700E81058 /* yunduo_gif_3.png */; };
+		0DE5E8E41D3E098700E81058 /* yunduo_gif_7.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DE5E8DE1D3E098700E81058 /* yunduo_gif_7.png */; };
 		0DF11D6A1CE342E600FD6D28 /* MANaviRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DF11D691CE342E600FD6D28 /* MANaviRoute.m */; };
 		0DF11D6F1CE345BC00FD6D28 /* MANaviAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DF11D6C1CE345BC00FD6D28 /* MANaviAnnotation.m */; };
 		0DF11D701CE345BC00FD6D28 /* MANaviPolyline.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DF11D6E1CE345BC00FD6D28 /* MANaviPolyline.m */; };
@@ -1371,6 +1374,9 @@
 		0DE4B77E1CCF803900AE4C63 /* BusStopAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BusStopAnnotation.m; path = "公交/BusStopAnnotation.m"; sourceTree = "<group>"; };
 		0DE4B7801CCF948F00AE4C63 /* BusLineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BusLineViewController.h; path = "公交查询/BusLineViewController.h"; sourceTree = "<group>"; };
 		0DE4B7811CCF948F00AE4C63 /* BusLineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BusLineViewController.m; path = "公交查询/BusLineViewController.m"; sourceTree = "<group>"; };
+		0DE5E8D91D3E098700E81058 /* yunduo_gif_8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yunduo_gif_8.png; sourceTree = "<group>"; };
+		0DE5E8DD1D3E098700E81058 /* yunduo_gif_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yunduo_gif_3.png; sourceTree = "<group>"; };
+		0DE5E8DE1D3E098700E81058 /* yunduo_gif_7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yunduo_gif_7.png; sourceTree = "<group>"; };
 		0DF11D681CE342E600FD6D28 /* MANaviRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MANaviRoute.h; path = "公交/MANaviRoute.h"; sourceTree = "<group>"; };
 		0DF11D691CE342E600FD6D28 /* MANaviRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MANaviRoute.m; path = "公交/MANaviRoute.m"; sourceTree = "<group>"; };
 		0DF11D6B1CE345BC00FD6D28 /* MANaviAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MANaviAnnotation.h; path = "公交/MANaviAnnotation.h"; sourceTree = "<group>"; };
@@ -3280,6 +3286,16 @@
 			name = "公交";
 			sourceTree = "<group>";
 		};
+		0DE5E8CC1D3DD44D00E81058 /* LaunchPage */ = {
+			isa = PBXGroup;
+			children = (
+				0DE5E8D91D3E098700E81058 /* yunduo_gif_8.png */,
+				0DE5E8DD1D3E098700E81058 /* yunduo_gif_3.png */,
+				0DE5E8DE1D3E098700E81058 /* yunduo_gif_7.png */,
+			);
+			path = LaunchPage;
+			sourceTree = "<group>";
+		};
 		3DB707BE3E821E83FB93A447 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -3711,6 +3727,7 @@
 		6D65ECA81C0ECCD60032B5DD /* images */ = {
 			isa = PBXGroup;
 			children = (
+				0DE5E8CC1D3DD44D00E81058 /* LaunchPage */,
 				0D5B22081CD4522C00EFBB44 /* Map */,
 				6DFF6A7A1C196BAD00310161 /* 消息提醒 */,
 				6D65ECA91C0ECCD60032B5DD /* Tabbar */,
@@ -6334,6 +6351,7 @@
 				6D65F0CA1C0ECCD70032B5DD /* shouye_toupiaotie@2x.png in Resources */,
 				0D9B2AB01D1E90970054B87D /* icCross@2x.png in Resources */,
 				6D65EF691C0ECCD70032B5DD /* 3_27_H@3x.png in Resources */,
+				0DE5E8E31D3E098700E81058 /* yunduo_gif_3.png in Resources */,
 				6D65F0761C0ECCD70032B5DD /* anniu@2x.png in Resources */,
 				6D65F0611C0ECCD70032B5DD /* xinxi@3x.png in Resources */,
 				6D65F0C21C0ECCD70032B5DD /* bm_huodongtie@2x.png in Resources */,
@@ -6438,6 +6456,7 @@
 				6D65EFAB1C0ECCD70032B5DD /* tianjiapengyou@3x.png in Resources */,
 				6D65EF071C0ECCD70032B5DD /* 1_9@3x.png in Resources */,
 				6D65EF581C0ECCD70032B5DD /* 3_23_H@2x.png in Resources */,
+				0DE5E8DF1D3E098700E81058 /* yunduo_gif_8.png in Resources */,
 				6D65F0531C0ECCD70032B5DD /* tuiguang@3x.png in Resources */,
 				6D65EFA41C0ECCD70032B5DD /* send_msg@2x.png in Resources */,
 				6D65EFB31C0ECCD70032B5DD /* xinhaoyou@3x.png in Resources */,
@@ -6735,6 +6754,7 @@
 				6D65F0141C0ECCD70032B5DD /* reply@2x.png in Resources */,
 				6D65EEDB1C0ECCD70032B5DD /* nav_1_6@3x.png in Resources */,
 				6D65F0431C0ECCD70032B5DD /* 8@3x.png in Resources */,
+				0DE5E8E41D3E098700E81058 /* yunduo_gif_7.png in Resources */,
 				8A1FE02E1AC3DC6C008F10F0 /* MJPhotoBrowser.bundle in Resources */,
 				6D7859C91ADE061A002B4707 /* chat_voice_record.png in Resources */,
 				6D65EF9C1C0ECCD70032B5DD /* icon_shequ@2x.png in Resources */,

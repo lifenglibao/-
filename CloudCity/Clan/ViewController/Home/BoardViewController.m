@@ -30,7 +30,8 @@
 {
     [super viewWillAppear:animated];
     [self initNav];
-
+    [self requestBoardData];
+    
     if (_toBeReloadPath) {
         [self.tableView deselectRowAtIndexPath:_toBeReloadPath animated:YES];
         _toBeReloadPath = nil;

@@ -47,6 +47,9 @@
         [_titleArray addObject:title];
         [_actionDic setObject:NSStringFromSelector(selector) forKey:title];
     }
+    if (!_tempBtn) {
+        _tempBtn = [[UIButton alloc] init];
+    }
 }
 
 - (void)resetViews
@@ -100,13 +103,11 @@
         }
     }
 
-    NSLog(@"%f",_tempBtn.titleLabel.size.width);
-    //由于第一次取不到titleview的frame 所以先移动一次
     UIView *indicatorView = [[UIView alloc]init];
     indicatorView.tag = 5555;
     indicatorView.backgroundColor = UIColorFromRGB(0xff9900);
-    NSLog(@"%f",_tempBtn.center.x);
-    indicatorView.frame = CGRectMake(_tempBtn.center.x - 59/2, kVIEW_H(self)-3, 59, 3);
+    UIButton *button = (UIButton *)[self viewWithTag:1000];
+    indicatorView.frame = CGRectMake(button.center.x - 59/2, kVIEW_H(self)-3, 59, 3);
     [self addSubview:indicatorView];
 }
 

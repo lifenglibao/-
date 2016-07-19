@@ -49,7 +49,7 @@ static NSString *noImgKey = @"NoImgMode";
     [super viewDidLoad];
     self.view.backgroundColor = kCOLOR_BG_GRAY;
     self.title = @"设置";
-    _titleArr = @[@"清除缓存", @"关于我们"];
+    _titleArr = @[@"清除缓存", @"关于我们", @"给我们好评"];
 
     UISegmentedControl *selector = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"左边", @"禁用", @"右边", nil]];
     selector.layer.cornerRadius = 4.f;
@@ -180,6 +180,13 @@ static NSString *noImgKey = @"NoImgMode";
         } else {
             cell.selectionStyle = UITableViewCellSelectionStyleGray;
         }
+        
+        if ([_titleArr[indexPath.row] isEqualToString:@"给我们好评"]) {
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        } else {
+            cell.selectionStyle = UITableViewCellSelectionStyleGray;
+        }
+
         cell.textLabel.textColor = K_COLOR_LIGHT_DARK;
         UIImageView *line = (UIImageView *)[cell.contentView viewWithTag:4455];
         line.hidden = indexPath.row == 3 ? YES : NO;

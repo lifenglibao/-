@@ -829,6 +829,9 @@ static float interval = 60.f;
 {
     NSDictionary *count = [[NSUserDefaults standardUserDefaults] objectForKey:@"NotificationCount"];
     
+    if (count.count >2) {
+        return;
+    }
     if (![count.allKeys containsObject:@"pm_count"] || ![count.allKeys containsObject:@"notification_count"]) {
         return;
     }
@@ -847,7 +850,6 @@ static float interval = 60.f;
                 UIView *newmess = [zhanneixinBtn viewWithTag:9876];
                 [newmess removeFromSuperview];
                 newmess = nil;
-//                if ((!isNull(valNum) && valNum.intValue != 0 ) || (!isNull(warnNum) && warnNum.intValue != 0)) {
                 if (valNum && valNum != 0) {
                     //改变
                     UIButton *newMess_btn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -856,18 +858,7 @@ static float interval = 60.f;
                     newMess_btn.layer.cornerRadius = 10;
                     newMess_btn.clipsToBounds = YES;
                     newMess_btn.tag = 9876;
-//                    if (valNum.intValue > 99) {
-//                        [newMess_btn setTitle:@"99+" forState:UIControlStateNormal];
-//                    }
-//                    else if (warnNum.intValue > 99) {
-//                        [newMess_btn setTitle:@"99+" forState:UIControlStateNormal];
-//                    }
-//                    else if (valNum.intValue + warnNum.intValue > 99) {
-//                        [newMess_btn setTitle:@"99+" forState:UIControlStateNormal];
-//                    }
-//                    else {
-//                        [newMess_btn setTitle:[NSString stringWithFormat:@"%d",valNum.intValue + warnNum.intValue] forState:UIControlStateNormal];
-//                    }
+
                     if (valNum > 99) {
                         [newMess_btn setTitle:@"99+" forState:UIControlStateNormal];
                     }

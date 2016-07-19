@@ -760,8 +760,10 @@
     }
     [_sendViewModel request_classifyForForumsId:fid withBlock:^(id data, BOOL success) {
         if (success) {
-            threadtypesModel *model = (threadtypesModel *)data;
-            [_threadtypeDic setObject:model forKey:fid];
+            if (data) {
+                threadtypesModel *model = (threadtypesModel *)data;
+                [_threadtypeDic setObject:model forKey:fid];
+            }
         } else {
             [SVProgressHUD dismiss];
         }
