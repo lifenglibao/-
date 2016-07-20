@@ -136,7 +136,7 @@ static NSInteger const topListHeight = 37;
     NSArray *viewControllers = self.navigationController.viewControllers;
     if (viewControllers.count == 1) {
         UIButton* leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        leftButton.backgroundColor = [UIColor clearColor];
+        leftButton.backgroundColor = kCLEARCOLOR;
         leftButton.frame = CGRectMake(0, 0, 26, 26);
         [leftButton setBackgroundImage :[UIImage imageNamed:@"nav_back"] forState:UIControlStateNormal];
         [leftButton addTarget:self action:@selector(navback) forControlEvents:UIControlEventTouchUpInside];
@@ -163,7 +163,7 @@ static NSInteger const topListHeight = 37;
     self.view.backgroundColor = kCOLOR_BG_GRAY;
     _tableView = [[BaseTableView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenBoundsHeight) style:UITableViewStylePlain];
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    _tableView.backgroundColor = [UIColor clearColor];
+    _tableView.backgroundColor = kCLEARCOLOR;
     _tableView.sectionHeaderHeight = 0;
     _tableView.sectionFooterHeight = 0;
     UIView *footView = [[UIView alloc]init];

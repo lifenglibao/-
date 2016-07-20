@@ -186,7 +186,7 @@
 {
     _itemSleceted = itemSleceted;
     if (itemSleceted) {
-        [self.btn_select setImage:[[UIImage imageNamed:@"act_select_h"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
+        [self.btn_select setImage:[kIMG(@"act_select_h") imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
     } else {
         [self.btn_select setImage:kIMG(@"act_select_n") forState:UIControlStateNormal];
     }

@@ -218,9 +218,9 @@
 - (void)enableBottomViewButton
 {
     [self.agreeButton setTitleColor:[Util mainThemeColor] forState:UIControlStateNormal];
-    [self.agreeButton setImage:[[UIImage imageNamed:@"act_agree"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
+    [self.agreeButton setImage:[kIMG(@"act_agree") imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
     [self.refuseButton setTitleColor:[Util mainThemeColor] forState:UIControlStateNormal];
-    [self.refuseButton setImage:[[UIImage imageNamed:@"act_refuse"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
+    [self.refuseButton setImage:[kIMG(@"act_refuse") imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
     self.agreeButton.enabled = YES;
     self.refuseButton.enabled = YES;
 }
@@ -345,7 +345,7 @@
         [selectBtn setImage:kIMG(@"act_select_n") forState:UIControlStateNormal];
     } else {
         [_selectIDs addObject:item.applyid];
-        [selectBtn setImage:[[UIImage imageNamed:@"act_select_h"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
+        [selectBtn setImage:[kIMG(@"act_select_h") imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
     }
     if (_selectIDs.count > 0) {
         [self enableBottomViewButton];

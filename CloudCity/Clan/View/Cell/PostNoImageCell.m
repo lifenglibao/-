@@ -39,7 +39,7 @@
     _faceImage.layer.cornerRadius = 15;
     _faceImage.clipsToBounds = YES;
     
-    [_faceImage sd_setImageWithURL:[NSURL URLWithString:_postModel.avatar] placeholderImage:[UIImage imageNamed:@"portrait"]];
+    [_faceImage sd_setImageWithURL:[NSURL URLWithString:_postModel.avatar] placeholderImage:kIMG(@"portrait")];
     _nameLabel.text = _postModel.author;
     _datelineLabel.text = _postModel.dateline;
     _contentLabel.text = _postModel.message_abstract;
@@ -91,7 +91,7 @@
         if (self.listable) {
             UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
             [self.contentView addSubview:btn];
-            btn.backgroundColor = [UIColor clearColor];
+            btn.backgroundColor = kCLEARCOLOR;
             
             [btn addTarget:self action:@selector(goToThemePost) forControlEvents:UIControlEventTouchUpInside];
             [btn setTitle:[NSString stringWithFormat:@" %@ ",_postModel.type_name] forState:UIControlStateNormal];

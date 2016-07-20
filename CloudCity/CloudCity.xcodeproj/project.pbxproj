@@ -10,8 +10,6 @@
 		0D0880431CD8C6C500DE33E7 /* shoucang@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D0880411CD8C6C400DE33E7 /* shoucang@2x.png */; };
 		0D0880441CD8C6C500DE33E7 /* shoucang@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D0880421CD8C6C400DE33E7 /* shoucang@3x.png */; };
 		0D0880471CD983DE00DE33E7 /* BusStopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D0880461CD983DE00DE33E7 /* BusStopViewController.m */; };
-		0D0C3A801CF2A169007C7F94 /* icon_map_transfer@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D0C3A7E1CF2A169007C7F94 /* icon_map_transfer@2x.png */; };
-		0D0C3A811CF2A169007C7F94 /* icon_map_transfer@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D0C3A7F1CF2A169007C7F94 /* icon_map_transfer@3x.png */; };
 		0D0C3A851CF2B82A007C7F94 /* BusTransferListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D0C3A831CF2B82A007C7F94 /* BusTransferListViewController.m */; };
 		0D0D04681D00185000ACA542 /* Locator.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D0D04671D00185000ACA542 /* Locator.m */; };
 		0D0D04811D02B33200ACA542 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0D0D046B1D02B33200ACA542 /* Info.plist */; };
@@ -1227,8 +1225,6 @@
 		0D0880421CD8C6C400DE33E7 /* shoucang@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "shoucang@3x.png"; path = "Map/shoucang@3x.png"; sourceTree = "<group>"; };
 		0D0880451CD983DE00DE33E7 /* BusStopViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BusStopViewController.h; path = "公交查询/BusStopViewController.h"; sourceTree = "<group>"; };
 		0D0880461CD983DE00DE33E7 /* BusStopViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BusStopViewController.m; path = "公交查询/BusStopViewController.m"; sourceTree = "<group>"; };
-		0D0C3A7E1CF2A169007C7F94 /* icon_map_transfer@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon_map_transfer@2x.png"; path = "Map/icon_map_transfer@2x.png"; sourceTree = "<group>"; };
-		0D0C3A7F1CF2A169007C7F94 /* icon_map_transfer@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon_map_transfer@3x.png"; path = "Map/icon_map_transfer@3x.png"; sourceTree = "<group>"; };
 		0D0C3A821CF2B82A007C7F94 /* BusTransferListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BusTransferListViewController.h; path = "公交查询/BusTransferListViewController.h"; sourceTree = "<group>"; };
 		0D0C3A831CF2B82A007C7F94 /* BusTransferListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BusTransferListViewController.m; path = "公交查询/BusTransferListViewController.m"; sourceTree = "<group>"; };
 		0D0D04661D00185000ACA542 /* Locator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Locator.h; sourceTree = "<group>"; };
@@ -3175,8 +3171,6 @@
 				0DE5E8E81D3F0E6300E81058 /* dir_start.png */,
 				0DE5E8E91D3F0E6300E81058 /* dir_station.png */,
 				0D5DCABC1D27A47D00515D3B /* walking_man.png */,
-				0D0C3A7E1CF2A169007C7F94 /* icon_map_transfer@2x.png */,
-				0D0C3A7F1CF2A169007C7F94 /* icon_map_transfer@3x.png */,
 				0DFC7AC01CEDB80F0076C9ED /* icon_bus_end.png */,
 				0DFC7AC11CEDB80F0076C9ED /* icon_bus_start.png */,
 				0D1B06B91CE09EAA0020A5B0 /* icon_arrow.png */,
@@ -6711,7 +6705,6 @@
 				6D65EFE71C0ECCD70032B5DD /* sousuo_gray@2x.png in Resources */,
 				8A9789E51AB19DD400022F47 /* InputTextCell.xib in Resources */,
 				6D65EFDF1C0ECCD70032B5DD /* jiantou_me@2x.png in Resources */,
-				0D0C3A801CF2A169007C7F94 /* icon_map_transfer@2x.png in Resources */,
 				6D65EF0A1C0ECCD70032B5DD /* 2_1@2x.png in Resources */,
 				6D65EFA61C0ECCD70032B5DD /* shanhaoyou@2x.png in Resources */,
 				6D65F0831C0ECCD70032B5DD /* login_btn@3x.png in Resources */,
@@ -6738,7 +6731,6 @@
 				0D5B22341CD452FE00EFBB44 /* car.png in Resources */,
 				6D7859D71ADE0989002B4707 /* ChatViewController.xib in Resources */,
 				6D65EF101C0ECCD70032B5DD /* 2_2_H@2x.png in Resources */,
-				0D0C3A811CF2A169007C7F94 /* icon_map_transfer@3x.png in Resources */,
 				6D65F0071C0ECCD70032B5DD /* fav_unAction@3x.png in Resources */,
 				6D65F0A51C0ECCD70032B5DD /* download_H@3x.png in Resources */,
 				6D65EF031C0ECCD70032B5DD /* 1_8@3x.png in Resources */,

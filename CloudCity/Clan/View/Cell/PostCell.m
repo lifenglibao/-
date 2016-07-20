@@ -89,7 +89,7 @@
         if (self.listable) {
             UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
             [self.contentView addSubview:btn];
-            btn.backgroundColor = [UIColor clearColor];
+            btn.backgroundColor = kCLEARCOLOR;
             
             [btn addTarget:self action:@selector(goToThemePost) forControlEvents:UIControlEventTouchUpInside];
             [btn setTitle:[NSString stringWithFormat:@" %@ ",_postModel.type_name] forState:UIControlStateNormal];

@@ -98,7 +98,7 @@
     _singleImage.hidden = _imageType != KSingleImage;
     _v_images.hidden = _imageType != KMoreImage;
     //头像
-    [_iv_avatar sd_setImageWithURL:[NSURL URLWithString:_postModel.avatar] placeholderImage:[UIImage imageNamed:@"list_avatar"]];
+    [_iv_avatar sd_setImageWithURL:[NSURL URLWithString:_postModel.avatar] placeholderImage:kIMG(@"list_avatar")];
     //名字
     _lbl_name.text = _postModel.author;
     //日期
@@ -180,7 +180,7 @@
         if (!typeBtn) {
             typeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
             [self.contentView addSubview:typeBtn];
-            typeBtn.backgroundColor = [UIColor clearColor];
+            typeBtn.backgroundColor = kCLEARCOLOR;
             
             [typeBtn addTarget:self action:@selector(goToThemePost) forControlEvents:UIControlEventTouchUpInside];
             [typeBtn setTitle:[NSString stringWithFormat:@" %@ ",_postModel.type_name] forState:UIControlStateNormal];
@@ -316,7 +316,7 @@
 - (UIView *)digestsView{
     if (!_digestsView) {
         _digestsView = [[UIView alloc]initWithFrame:CGRectMake(ScreenWidth-200, 0, 200, 25)];
-        _digestsView.backgroundColor = [UIColor clearColor];
+        _digestsView.backgroundColor = kCLEARCOLOR;
     }
     return _digestsView;
 }
@@ -351,7 +351,7 @@
 - (UIView *)v_images{
     if (!_v_images) {
         _v_images = [[UIView alloc]init];
-        _v_images.backgroundColor = [UIColor clearColor];
+        _v_images.backgroundColor = kCLEARCOLOR;
     }
     return _v_images;
 }
@@ -359,7 +359,7 @@
 - (UIView *)forumView{
     if (!_forumView) {
         _forumView = [[UIView alloc]init];
-        _forumView.backgroundColor = [UIColor clearColor];
+        _forumView.backgroundColor = kCLEARCOLOR;
     }
     return _forumView;
 }

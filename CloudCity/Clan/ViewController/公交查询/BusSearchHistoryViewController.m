@@ -48,7 +48,7 @@
         self.delegate = self;
         self.dataSource = self;
         self.separatorStyle = UITableViewCellSeparatorStyleNone;
-        self.backgroundColor = [UIColor clearColor];
+        self.backgroundColor = kCLEARCOLOR;
     }
     
     return self;
@@ -93,7 +93,7 @@
     UILabel *nameLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, self.width/3, 33)];
     nameLabel.font = [UIFont systemFontOfSize:12.0f];
     nameLabel.textColor = UIColorFromRGB(0xa6a6a6);
-    nameLabel.backgroundColor = [UIColor clearColor];
+    nameLabel.backgroundColor = kCLEARCOLOR;
     nameLabel.text = @"最近查询";
     [_headerView addSubview:nameLabel];
     
@@ -153,7 +153,7 @@
             [cell.contentView addSubview:line];
         }
     }
-    cell.backgroundColor = [UIColor clearColor];
+    cell.backgroundColor = kCLEARCOLOR;
     return cell;
 }
 

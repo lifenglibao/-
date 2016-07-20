@@ -129,7 +129,7 @@
     _displayVC.delegate = self;
     
     BaseTableView *table = [[BaseTableView alloc]initWithFrame:CGRectMake(0, 0, kSCREEN_WIDTH, kSCREEN_HEIGHT-64) style:UITableViewStyleGrouped];
-    table.backgroundColor = [UIColor clearColor];
+    table.backgroundColor = kCLEARCOLOR;
     table.delegate = self;
     table.separatorStyle = UITableViewCellSeparatorStyleNone;
     table.dataSource = self;

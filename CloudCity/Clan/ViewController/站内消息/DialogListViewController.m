@@ -58,7 +58,7 @@
     if (!_isRightItemBar) {
         self.backButton = self.navigationItem.leftBarButtonItem;
     }else{
-        self.backButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav_back"] style:UIBarButtonItemStylePlain target:self action:@selector(backView)];
+        self.backButton = [[UIBarButtonItem alloc] initWithImage:kIMG(@"nav_back") style:UIBarButtonItemStylePlain target:self action:@selector(backView)];
     }
     [self addPullRefreshAction];
     [self showProgressHUDWithStatus:@""];

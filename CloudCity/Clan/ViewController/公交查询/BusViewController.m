@@ -46,9 +46,9 @@
 - (void)addBackBtn {
     
     UIButton* leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    leftButton.backgroundColor = [UIColor clearColor];
+    leftButton.backgroundColor = kCLEARCOLOR;
     leftButton.frame = CGRectMake(0, 0, 26, 26);
-    [leftButton setBackgroundImage :[UIImage imageNamed:@"nav_back"] forState:UIControlStateNormal];
+    [leftButton setBackgroundImage :kIMG(@"nav_back") forState:UIControlStateNormal];
     [leftButton addTarget:self action:@selector(navback:) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:leftButton];
 }

@@ -31,7 +31,7 @@
     
     // 小标题
     _title = [[UILabel alloc] initWithFrame:CGRectMake(0, _item.bottom+6, self.width, 15)];
-    _title.backgroundColor = [UIColor clearColor];
+    _title.backgroundColor = kCLEARCOLOR;
     _title.textColor = UIColorFromRGB(0x424242);
     _title.font = [UIFont systemFontOfSize:13];
     _title.textAlignment = NSTextAlignmentCenter;

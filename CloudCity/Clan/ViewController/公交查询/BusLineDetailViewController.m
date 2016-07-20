@@ -54,7 +54,7 @@
     _headerView.backgroundColor = [UIColor whiteColor];
     CustomGridView *gridView = [[CustomGridView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 61)];
     [gridView initScrollView];
-    gridView.backgroundColor = [UIColor clearColor];
+    gridView.backgroundColor = kCLEARCOLOR;
     gridView.target = self;
     NSArray * title = [NSArray arrayWithObjects:[self.busLineArray.firstObject valueForKey:@"endStop"],[self.busLineArray.lastObject valueForKey:@"endStop"], nil];
     for (int index = 0; index<title.count; index++) {
@@ -65,7 +65,7 @@
     [_headerView addSubview:gridView];
     
     UIView * busInfo = [[UIView alloc] initWithFrame:CGRectMake(0, gridView.bottom, ScreenWidth, 25)];
-    busInfo.backgroundColor = [UIColor clearColor];
+    busInfo.backgroundColor = kCLEARCOLOR;
     
     UIImageView *firstBusImg = [[UIImageView alloc] initWithFrame:CGRectMake(15, 0, 15, 15)];
     firstBusImg.image = kIMG(@"icon_bus_start");
@@ -152,7 +152,7 @@
     self.tableView                    = [[UITableView alloc] initWithFrame:CGRectMake(10, 10, ScreenWidth - 20, ScreenHeight - 84) style:UITableViewStylePlain];
     self.tableView.delegate           = self;
     self.tableView.dataSource         = self;
-    self.tableView.backgroundColor    = [UIColor clearColor];
+    self.tableView.backgroundColor    = kCLEARCOLOR;
     self.tableView.layer.shadowOffset = CGSizeMake(2.5, 2.5);
     self.tableView.layer.shadowColor  = [UIColor darkGrayColor].CGColor;
     [self.view addSubview:_tableView];
@@ -239,7 +239,7 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.width, 84)];
-    view.backgroundColor = [UIColor clearColor];
+    view.backgroundColor = kCLEARCOLOR;
     return view;
 }
 
@@ -251,7 +251,7 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
     UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.width, 54)];
-    view.backgroundColor = [UIColor clearColor];
+    view.backgroundColor = kCLEARCOLOR;
     return view;
 }
 

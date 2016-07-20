@@ -33,9 +33,9 @@
 - (void)viewWillAppear:(BOOL)animated{
     self.title = @"发起活动";
     UIButton* leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    leftButton.backgroundColor = [UIColor clearColor];
+    leftButton.backgroundColor = kCLEARCOLOR;
     leftButton.frame = CGRectMake(0, 0, 26, 26);
-    [leftButton setBackgroundImage :[UIImage imageNamed:@"nav_back"] forState:UIControlStateNormal];
+    [leftButton setBackgroundImage :kIMG(@"nav_back") forState:UIControlStateNormal];
     [leftButton addTarget:self action:@selector(cancelBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:leftButton];
     [self rightItemType];
@@ -66,7 +66,7 @@
     CGFloat itemWidth = ScreenWidth/titleArray.count;
     for (NSInteger index = 0; index < titleArray.count ; index++) {
         UIView *itemView = [[UIView alloc]initWithFrame:CGRectMake(itemViewLeft, 0, itemWidth, 80)];
-        itemView.backgroundColor = [UIColor clearColor];
+        itemView.backgroundColor = kCLEARCOLOR;
         [_headerView addSubview:itemView];
         UIButton *itemButton = [[UIButton alloc]initWithFrame:CGRectMake(itemView.width/2- 30, itemView.height/2 - 30, 60, 60)];
         itemButton.tag = 100+index;
@@ -74,7 +74,7 @@
         [itemButton setTitle:titleArray[index] forState:UIControlStateNormal];
         [itemButton setTitleColor:UIColorFromRGB(0x666666) forState:UIControlStateNormal];
         [itemButton setTitleColor:[UIColor returnColorWithPlist:YZSegMentColor] forState:UIControlStateSelected];
-        itemButton.backgroundColor = [UIColor clearColor];
+        itemButton.backgroundColor = kCLEARCOLOR;
         if (index == 0) {
             itemButton.layer.cornerRadius = itemButton.width/2;
             itemButton.layer.borderWidth = 2;

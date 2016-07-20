@@ -237,14 +237,14 @@
         newsF.title = @"新的朋友";
         [self.navigationController pushViewController:newsF animated:YES];
     }
-    else if ([model.type isEqualToString:@""]) {
-        MeViewController *home = [[MeViewController alloc]init];
-        home.hidesBottomBarWhenPushed = YES;
-        UserModel *user = [UserModel new];
-        user.uid = model.authorid;
-        home.user = user;
-        [self.navigationController pushViewController:home animated:YES];
-    }
+//    else if ([model.type isEqualToString:@""]) {
+//        MeViewController *home = [[MeViewController alloc]init];
+//        home.hidesBottomBarWhenPushed = YES;
+//        UserModel *user = [UserModel new];
+//        user.uid = model.authorid;
+//        home.user = user;
+//        [self.navigationController pushViewController:home animated:YES];
+//    }
 }
 
 #pragma mark - actions

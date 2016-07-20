@@ -49,7 +49,7 @@
 - (void)setPostModel:(PostModel *)postModel
 {
     _postModel = postModel;
-    [_iv_avatar sd_setImageWithURL:[NSURL URLWithString:_postModel.avatar] placeholderImage:[UIImage imageNamed:@"list_avatar"]];
+    [_iv_avatar sd_setImageWithURL:[NSURL URLWithString:_postModel.avatar] placeholderImage:kIMG(@"list_avatar")];
     _lbl_name.text = _postModel.author;
     _lbl_time.text = _postModel.dateline ? _postModel.dateline : @"没有日期";
     if ([Util hasRead:_postModel.tid]) {
@@ -90,7 +90,7 @@
         if (self.listable) {
             UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
             [self.contentView addSubview:btn];
-            btn.backgroundColor = [UIColor clearColor];
+            btn.backgroundColor = kCLEARCOLOR;
             
             [btn addTarget:self action:@selector(goToThemePost) forControlEvents:UIControlEventTouchUpInside];
             [btn setTitle:[NSString stringWithFormat:@" %@ ",_postModel.type_name] forState:UIControlStateNormal];

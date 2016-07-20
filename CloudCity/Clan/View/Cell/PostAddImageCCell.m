@@ -25,7 +25,7 @@
         _imgView.image = [_sendImage.image scaledToSize:_imgView.bounds.size highQuality:YES];
         if (!_deleteBtn) {
             _deleteBtn = [[UIButton alloc] initWithFrame:CGRectMake(kTweetSendImageCCell_Width-20, 0, 20, 20)];
-            [_deleteBtn setImage:[UIImage imageNamed:@"btn_delete_tweetimage"] forState:UIControlStateNormal];
+            [_deleteBtn setImage:kIMG(@"btn_delete_tweetimage") forState:UIControlStateNormal];
             _deleteBtn.backgroundColor = [UIColor blackColor];
             _deleteBtn.layer.cornerRadius = CGRectGetWidth(_deleteBtn.bounds)/2;
             _deleteBtn.layer.masksToBounds = YES;
@@ -35,7 +35,7 @@
         }
         _deleteBtn.hidden = NO;
     }else{
-        UIImage *addimage = [UIImage imageNamed:@"addPictureBgImage"];
+        UIImage *addimage = kIMG(@"addPictureBgImage");
         _imgView.image = addimage;
         if (_deleteBtn) {
             _deleteBtn.hidden = YES;

@@ -10,7 +10,7 @@
 #define Clan_YZThemeStyle_h
 
 // API LOCAL
-//#define YZBaseURL @"http://192.168.1.123/cloudCity_temp/bbs/"
+//#define YZBaseURL @"http://192.168.1.171/CloudCity/community/"
 //#define YZBasePath @"upload/api/mobile/iyz_index.php"
 //#define CCBaseURL @"http://192.168.1.171/CloudCity/cc_api2/index.php/"
 //#define CC_FUNCTION_NOT_FOUND  [NSString stringWithFormat:@"%@app/AppConfig/funcNotFound",CCBaseURL]

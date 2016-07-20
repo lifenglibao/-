@@ -116,9 +116,9 @@ static float kStayHeight = 64.f;
     NSArray *viewControllers = self.navigationController.viewControllers;
     if (viewControllers.count == 1) {
         UIButton* leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        leftButton.backgroundColor = [UIColor clearColor];
+        leftButton.backgroundColor = kCLEARCOLOR;
         leftButton.frame = CGRectMake(0, 0, 26, 26);
-        [leftButton setBackgroundImage :[UIImage imageNamed:@"nav_back"] forState:UIControlStateNormal];
+        [leftButton setBackgroundImage :kIMG(@"nav_back") forState:UIControlStateNormal];
         [leftButton addTarget:self action:@selector(navback) forControlEvents:UIControlEventTouchUpInside];
         self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:leftButton];
     }
@@ -162,7 +162,7 @@ static float kStayHeight = 64.f;
     //正常状态的tilte
     UILabel *lbl_t = [[UILabel alloc]init];
     lbl_t.bounds = CGRectMake(0, 0, kSCREEN_WIDTH-100, 44);
-    lbl_t.backgroundColor = [UIColor clearColor];
+    lbl_t.backgroundColor = kCLEARCOLOR;
     lbl_t.textColor = [UIColor whiteColor];
     lbl_t.textAlignment = NSTextAlignmentCenter;
     lbl_t.center = CGPointMake(kSCREEN_WIDTH/2, 20+22);
@@ -241,7 +241,7 @@ static float kStayHeight = 64.f;
     titl.bounds = CGRectMake(0, 0, kSCREEN_WIDTH-100, 44);
     [self.view addSubview:titl];
     titl.alpha = 0;
-    titl.backgroundColor = [UIColor clearColor];
+    titl.backgroundColor = kCLEARCOLOR;
     titl.textColor = [UIColor whiteColor];
     _titleLabel = titl;
     _titleLabel.font = [UIFont fitFontWithSize:K_FONTSIZE_TITLE];
@@ -516,7 +516,7 @@ static float kStayHeight = 64.f;
     
     if (!self.isSelf) {
         //举报按钮
-        [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"list_jubao"] style:UIBarButtonItemStylePlain target:self action:@selector(reportAction)] animated:NO];
+        [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithImage:kIMG(@"list_jubao") style:UIBarButtonItemStylePlain target:self action:@selector(reportAction)] animated:NO];
 
         //发消息 加好友按钮
         [_iv_topView addSubview:addFriend];

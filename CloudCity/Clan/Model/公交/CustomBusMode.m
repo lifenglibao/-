@@ -41,9 +41,9 @@
 +(UIView*)setLeftViewWithTextField:(UITextField *)textField imageName:(NSString *)imageName{
     
     UIView * leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 50, textField.height)];
-    leftView.backgroundColor = [UIColor clearColor];
+    leftView.backgroundColor = kCLEARCOLOR;
     UIImageView *img = [[UIImageView alloc]init];
-    img.image = [UIImage imageNamed:imageName];
+    img.image = kIMG(imageName);
     img.frame = CGRectMake(10, 10, 30, 30);
     img.contentMode = UIViewContentModeCenter;
     [leftView addSubview:img];
@@ -59,8 +59,8 @@
     if (title) {
         [gpsBtn setTitle:title forState:UIControlStateNormal];
     }
-    [gpsBtn setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
-    [gpsBtn setImage:[UIImage imageNamed:@"shezhi"] forState:UIControlStateSelected];
+    [gpsBtn setImage:kIMG(imageName) forState:UIControlStateNormal];
+    [gpsBtn setImage:kIMG(@"shezhi") forState:UIControlStateSelected];
     [gpsBtn addTarget:tar action:ac forControlEvents:UIControlEventTouchUpInside];
     return gpsBtn;
 }
@@ -72,8 +72,8 @@
     if (title) {
         [trafficBtn setTitle:title forState:UIControlStateNormal];
     }
-    [trafficBtn setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
-    [trafficBtn setImage:[UIImage imageNamed:@"shezhi"] forState:UIControlStateSelected];
+    [trafficBtn setImage:kIMG(imageName) forState:UIControlStateNormal];
+    [trafficBtn setImage:kIMG(@"shezhi") forState:UIControlStateSelected];
     [trafficBtn addTarget:tar action:ac forControlEvents:UIControlEventTouchUpInside];
     return trafficBtn;
 }

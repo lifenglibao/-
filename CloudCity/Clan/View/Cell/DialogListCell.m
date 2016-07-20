@@ -28,8 +28,8 @@
     self.btn_avatar.clipsToBounds = YES;
     self.iv_line.image = [Util imageWithColor:K_COLOR_MOST_LIGHT_GRAY];
     
-    self.backgroundColor = [UIColor clearColor];
-    self.contentView.backgroundColor = [UIColor clearColor];
+    self.backgroundColor = kCLEARCOLOR;
+    self.contentView.backgroundColor = kCLEARCOLOR;
     self.iv_newmess = [[UIImageView alloc]initWithImage:[Util imageWithColor:[UIColor redColor]]];
 
     [self.contentView addSubview:self.iv_newmess];

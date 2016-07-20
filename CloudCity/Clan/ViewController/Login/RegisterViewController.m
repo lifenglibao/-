@@ -216,7 +216,7 @@
     
     //条款按钮
     UIView *rulesView = [[UIView alloc]initWithFrame:CGRectMake(0, _tableView.bottom, ScreenWidth, 31)];
-    rulesView.backgroundColor = [UIColor clearColor];
+    rulesView.backgroundColor = kCLEARCOLOR;
     _rulesBtn = [[UIButton alloc]initWithFrame:CGRectMake(12, rulesView.height/2 - 10 , 20, 20)];
     [_rulesBtn setImage:kIMG(@"gouxuan_acton") forState:UIControlStateNormal];
     [_rulesBtn setImage:kIMG(@"gouxuan_unAction") forState:UIControlStateSelected];

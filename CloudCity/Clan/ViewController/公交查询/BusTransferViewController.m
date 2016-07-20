@@ -97,12 +97,12 @@
     [self.busTransferEndSearchFiled addTarget:self action:@selector(isEditing:) forControlEvents:UIControlEventAllEditingEvents];
     
     UILabel * leftView = [[UILabel alloc] initWithFrame:CGRectMake(10,0,10,_busTransferStartSearchFiled.height)];
-    leftView.backgroundColor = [UIColor clearColor];
+    leftView.backgroundColor = kCLEARCOLOR;
     _busTransferStartSearchFiled.leftView = leftView;
     _busTransferStartSearchFiled.leftViewMode = UITextFieldViewModeAlways;
     
     UILabel * leftView2 = [[UILabel alloc] initWithFrame:CGRectMake(10,0,10,_busTransferEndSearchFiled.height)];
-    leftView2.backgroundColor = [UIColor clearColor];
+    leftView2.backgroundColor = kCLEARCOLOR;
     _busTransferEndSearchFiled.leftView = leftView2;
     _busTransferEndSearchFiled.leftViewMode = UITextFieldViewModeAlways;
 }

@@ -67,7 +67,7 @@ static float interval = 60.f;
         }
     }
     if ([UserModel currentUserInfo].logined) {
-        [self doCheckIfHasNewMessage];
+//        [self doCheckIfHasNewMessage];
         [self startTimer];
     }
 }
@@ -139,12 +139,14 @@ static float interval = 60.f;
 {
     [self stopTimer];
     _timer = [NSTimer scheduledTimerWithTimeInterval:interval target:self selector:@selector(doAutoCheck) userInfo:nil repeats:YES];
+    [_timer fire];
 }
 
 - (void)doAutoCheck
 {
     if (_messageVCExist) {
         [self doCheckIfHasNewMessage];
+        [self doCheckIfHasNewUnReadNotification];
     }
     if (_meVCExist) {
         [self doCheckIfHasNewFriends];
@@ -152,6 +154,23 @@ static float interval = 60.f;
 }
 
 //轮询
+
+- (void)doCheckIfHasNewUnReadNotification
+{
+    [[Clan_NetAPIManager sharedManager] request_UnReadWarnListWithResultBlock:^(id data, NSError *error) {
+        
+        if (data && !error) {
+            
+            [[NSUserDefaults standardUserDefaults] setObject:data forKey:@"NotificationCount"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            
+            if ([[data objectForKey:@"pm_count"] intValue] + [[data objectForKey:@"notification_count"] intValue] > 0) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"GET_UNREAD_NOTIFICATION_COUNT" object:nil];
+            }
+        }
+    }];
+}
+
 - (void)doCheckIfHasNewMessage
 {
     [[Clan_NetAPIManager sharedManager] checkNewMessageComeWithResultBlock:^(id data, NSError *error) {
@@ -273,12 +292,12 @@ static float interval = 60.f;
             
         }else {
             
-            [button setImage:[UIImage imageNamed:backImage] forState:UIControlStateNormal];
-            UIImage *seleimage = [UIImage imageNamed:backImage_H];
+            [button setImage:kIMG(backImage) forState:UIControlStateNormal];
+            UIImage *seleimage = kIMG(backImage_H);
             if (!seleimage) {
-                seleimage = [[UIImage imageNamed:backImage] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+                seleimage = [kIMG(backImage) imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
             } else {
-                seleimage = [[UIImage imageNamed:backImage_H] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+                seleimage = [kIMG(backImage_H) imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
             }
             [button setImage:seleimage forState:UIControlStateSelected];
         }

@@ -28,7 +28,7 @@ static float topspace = 26.f;
     self = [super initWithFrame:frame];
     if (self) {
         self.frame = frame;
-        self.backgroundColor = [UIColor clearColor];
+        self.backgroundColor = kCLEARCOLOR;
         _datasources = [NSMutableArray new];
         buttons_ = [[NSMutableArray alloc] initWithCapacity:6];
         bgview_ = [UIControl new];
@@ -39,7 +39,7 @@ static float topspace = 26.f;
         
         control_ = [UIControl new];
         [control_ addTarget:self action:@selector(dismiss:) forControlEvents:UIControlEventTouchUpInside];
-        control_.backgroundColor = [UIColor clearColor];
+        control_.backgroundColor = kCLEARCOLOR;
         [self addSubview:control_];
         
         _contentBGView = [UIImageView new];
@@ -51,7 +51,7 @@ static float topspace = 26.f;
         [self addSubview:_contentBGView];
         
         _contentView = [[UIView alloc]initWithFrame:CGRectZero];
-        _contentView.backgroundColor = [UIColor clearColor];
+        _contentView.backgroundColor = kCLEARCOLOR;
         [_contentBGView addSubview:_contentView];
     }
     return self;
@@ -248,7 +248,7 @@ static float topspace = 26.f;
 //        line.frame = CGRectMake(0, kVIEW_H(self)-50, kSCREEN_WIDTH, 0.5);
 //        line.image = [Util imageWithColor:kCOLOR_BORDER];
 //        [self addSubview:line];
-        [dismissBtn_ setBackgroundColor:[UIColor clearColor]];
+        [dismissBtn_ setBackgroundColor:kCLEARCOLOR];
         [dismissBtn_ setImage:kIMG(@"shouye_guanbi") forState:UIControlStateNormal];
     } else {
         [dismissBtn_ setTitle:@"取消" forState:UIControlStateNormal];
@@ -430,7 +430,7 @@ static float topspace = 26.f;
         case MenuViewMode_FullScreen:
         {
             bgview_.backgroundColor = kUIColorFromRGBWithTransparent(0xf3f3f3, 0.5);
-            _contentBGView.backgroundColor = [UIColor clearColor];
+            _contentBGView.backgroundColor = kCLEARCOLOR;
             
 //            bgview_.backgroundColor = [UIColor clearColor];
 //            AMBlurView *blurView = [AMBlurView new];

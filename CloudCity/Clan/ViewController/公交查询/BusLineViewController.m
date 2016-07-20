@@ -139,14 +139,14 @@
     {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle
                                       reuseIdentifier:tipCellIdentifier];
-        cell.imageView.image = [UIImage imageNamed:@"sousuo_gray"];
+        cell.imageView.image = kIMG(@"sousuo_gray");
     }
     
     AMapTip *tip = self.tips[indexPath.row];
     
     if (tip.location == nil)
     {
-        cell.imageView.image = [UIImage imageNamed:@"sousuo_gray"];
+        cell.imageView.image = kIMG(@"sousuo_gray");
     }
     
     cell.accessoryType  = UITableViewCellAccessoryDisclosureIndicator;

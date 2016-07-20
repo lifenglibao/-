@@ -63,7 +63,7 @@
     self.tableView                              = [[BaseTableView alloc] initWithFrame:CGRectMake(10, 20, ScreenWidth - 20, ScreenBoundsHeight - 50) style:UITableViewStylePlain];
     self.tableView.delegate                     = self;
     self.tableView.dataSource                   = self;
-    self.tableView.backgroundColor              = [UIColor clearColor];
+    self.tableView.backgroundColor              = kCLEARCOLOR;
     self.tableView.separatorStyle               = UITableViewCellSeparatorStyleNone;
     self.tableView.showsVerticalScrollIndicator = NO;
     [self.view addSubview:_tableView];
@@ -135,7 +135,7 @@
 
     }else if ([self.routeData[indexPath.row] objectForKey:@"departureStop"]) {
         cell.textLabel.text               = [self.routeData[indexPath.row] objectForKey:@"departureStop"];
-        cell.imageView.image              = [UIImage imageWithColor:[UIColor clearColor] withFrame:CGRectMake(0, 0, 5, 5) alpha:1];
+        cell.imageView.image              = [UIImage imageWithColor:kCLEARCOLOR withFrame:CGRectMake(0, 0, 5, 5) alpha:1];
 
     }else if ([self.routeData[indexPath.row] objectForKey:@"endStop"]) {
         cell.textLabel.textColor          = [UIColor grayColor];
@@ -148,7 +148,7 @@
 
     }else if ([self.routeData[indexPath.row] objectForKey:@"arrivalStop"]){
         cell.textLabel.text               = [self.routeData[indexPath.row] objectForKey:@"arrivalStop"];
-        cell.imageView.image              = [UIImage imageWithColor:[UIColor clearColor] withFrame:CGRectMake(0, 0, 5, 5) alpha:1];
+        cell.imageView.image              = [UIImage imageWithColor:kCLEARCOLOR withFrame:CGRectMake(0, 0, 5, 5) alpha:1];
 
     }else if ([self.routeData[indexPath.row] objectForKey:@"walking"]) {
         cell.textLabel.text               = [self.routeData[indexPath.row] objectForKey:@"walking"];
@@ -161,7 +161,7 @@
 
     
     cell.selectedBackgroundView        = [[UIView alloc] init];
-    cell.backgroundColor               = [UIColor clearColor];
+    cell.backgroundColor               = kCLEARCOLOR;
     [cell.textLabel sizeToFit];
     [cell.textLabel setNumberOfLines:0];
     [cell.textLabel setLineBreakMode:NSLineBreakByCharWrapping];

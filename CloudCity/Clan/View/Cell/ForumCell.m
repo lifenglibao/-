@@ -37,7 +37,7 @@
     _imageView2.layer.cornerRadius = 44/2;
     _imageView2.contentMode = UIViewContentModeScaleAspectFill;
     _imageView2.clipsToBounds = YES;
-    [_imageView1 sd_setImageWithURL:[NSURL URLWithString:model1.pic] placeholderImage:[UIImage imageNamed:@"board_icon"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+    [_imageView1 sd_setImageWithURL:[NSURL URLWithString:model1.pic] placeholderImage:kIMG(@"board_icon") completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         
     }];
     _view1.tag = 100;

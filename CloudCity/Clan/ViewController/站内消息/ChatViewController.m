@@ -58,9 +58,9 @@
     NSArray *viewControllers = self.navigationController.viewControllers;
     if (viewControllers.count == 1) {
         UIButton* leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        leftButton.backgroundColor = [UIColor clearColor];
+        leftButton.backgroundColor = kCLEARCOLOR;
         leftButton.frame = CGRectMake(0, 0, 26, 26);
-        [leftButton setBackgroundImage :[UIImage imageNamed:@"nav_back"] forState:UIControlStateNormal];
+        [leftButton setBackgroundImage :kIMG(@"nav_back") forState:UIControlStateNormal];
         [leftButton addTarget:self action:@selector(navback) forControlEvents:UIControlEventTouchUpInside];
         self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:leftButton];
     }
@@ -69,7 +69,7 @@
 
     self.view.backgroundColor = kCOLOR_BG_GRAY;
     _tempArray = [NSMutableArray new];
-    self.tableview.backgroundColor = [UIColor clearColor];
+    self.tableview.backgroundColor = kCLEARCOLOR;
     self.tableview.allowsMultipleSelectionDuringEditing = YES;
     [self initBar];
     [self loadBaseViewsAndData];
@@ -251,7 +251,7 @@
         _IFView = [[UUInputFunctionView alloc]initWithSuperVC:self];
         _IFView.delegate = self;
         [self.view addSubview:_IFView];
-        [_IFView.btnSendPicture setImage:[UIImage imageNamed:@"keyboard_emotion"] forState:UIControlStateNormal];
+        [_IFView.btnSendPicture setImage:kIMG(@"keyboard_emotion") forState:UIControlStateNormal];
         [_IFView.btnSendPicture addTarget:self action:@selector(emotionButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     }
     [self.view beginLoading];
@@ -465,10 +465,10 @@
 {
     if (_IFView.TextViewInput.inputView != _emojiKeyboardView) {
         _IFView.TextViewInput.inputView = self.emojiKeyboardView;
-        [_IFView.btnSendPicture setImage:[UIImage imageNamed:@"keyboard_keyboard"] forState:UIControlStateNormal];
+        [_IFView.btnSendPicture setImage:kIMG(@"keyboard_keyboard") forState:UIControlStateNormal];
     }else{
         _IFView.TextViewInput.inputView = nil;
-        [_IFView.btnSendPicture setImage:[UIImage imageNamed:@"keyboard_emotion"] forState:UIControlStateNormal];
+        [_IFView.btnSendPicture setImage:kIMG(@"keyboard_emotion") forState:UIControlStateNormal];
     }
     [_IFView.TextViewInput resignFirstResponder];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -509,17 +509,17 @@
 
 - (UIImage *)emojiKeyboardView:(AGEmojiKeyboardView *)emojiKeyboardView imageForSelectedCategory:(AGEmojiKeyboardViewCategoryImage)category
 {
-    return [UIImage imageNamed:@"keyboard_emotion_emoji"];
+    return kIMG(@"keyboard_emotion_emoji");
 }
 
 - (UIImage *)emojiKeyboardView:(AGEmojiKeyboardView *)emojiKeyboardView imageForNonSelectedCategory:(AGEmojiKeyboardViewCategoryImage)category
 {
-    return [UIImage imageNamed:@"keyboard_emotion_emoji"];
+    return kIMG(@"keyboard_emotion_emoji");
 }
 
 - (UIImage *)backSpaceButtonImageForEmojiKeyboardView:(AGEmojiKeyboardView *)emojiKeyboardView
 {
-    UIImage *img = [UIImage imageNamed:@"keyboard_emotion_delete"];
+    UIImage *img = kIMG(@"keyboard_emotion_delete");
     return img;
 }
 

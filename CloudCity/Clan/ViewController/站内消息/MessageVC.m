@@ -82,7 +82,7 @@
 - (void)setUpNaviButtons
 {
     if (!_fromTabbar) {
-        UIBarButtonItem *itemBtn = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav_back"] style:UIBarButtonItemStylePlain target:self action:@selector(backAction:)];
+        UIBarButtonItem *itemBtn = [[UIBarButtonItem alloc] initWithImage:kIMG(@"nav_back") style:UIBarButtonItemStylePlain target:self action:@selector(backAction:)];
         self.backButton = itemBtn;
         self.navigationItem.leftBarButtonItem = itemBtn;
     }

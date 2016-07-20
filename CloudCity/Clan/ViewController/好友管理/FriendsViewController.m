@@ -106,9 +106,9 @@
         self.title = @"TA的好友";
     }
     UIButton* rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    rightButton.backgroundColor = [UIColor clearColor];
+    rightButton.backgroundColor = kCLEARCOLOR;
     rightButton.frame = CGRectMake(0, 0, 24, 21);
-    [rightButton setBackgroundImage :[UIImage imageNamed:@"tianjiapengyou"] forState:UIControlStateNormal];
+    [rightButton setBackgroundImage :kIMG(@"tianjiapengyou") forState:UIControlStateNormal];
     [rightButton addTarget:self action:@selector(gotoFriendSearch) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:rightButton];
     
@@ -129,7 +129,7 @@
     _displayVC.delegate = self;
     
     BaseTableView *table = [[BaseTableView alloc]initWithFrame:CGRectMake(0, 0, kSCREEN_WIDTH, kSCREEN_HEIGHT-64) style:UITableViewStyleGrouped];
-    table.backgroundColor = [UIColor clearColor];
+    table.backgroundColor = kCLEARCOLOR;
     table.delegate = self;
     table.separatorStyle = UITableViewCellSeparatorStyleNone;
     table.dataSource = self;

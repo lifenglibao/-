@@ -266,15 +266,15 @@ const NSInteger RoutePlanningPaddingEdge                    = 20;
         /* 起点. */
         if ([[annotation title] isEqualToString:self.busLine.startStop])
         {
-            poiAnnotationView.image = [UIImage imageNamed:@"start"];
+            poiAnnotationView.image = kIMG(@"start");
         }
         /* 终点. */
         else if([[annotation title] isEqualToString:self.busLine.endStop])
         {
-            poiAnnotationView.image = [UIImage imageNamed:@"end"];
+            poiAnnotationView.image = kIMG(@"end");
         }
         else {
-            poiAnnotationView.image = [UIImage imageNamed:@"route_bus_select"];
+            poiAnnotationView.image = kIMG(@"route_bus_select");
         }
         return poiAnnotationView;
     }
@@ -297,15 +297,15 @@ const NSInteger RoutePlanningPaddingEdge                    = 20;
             switch (((MANaviAnnotation*)annotation).type)
             {
                 case MANaviAnnotationTypeBus:
-                    poiAnnotationView.image = [UIImage imageNamed:@"route_bus_select"];
+                    poiAnnotationView.image = kIMG(@"route_bus_select");
                     break;
                     
                 case MANaviAnnotationTypeDrive:
-                    poiAnnotationView.image = [UIImage imageNamed:@"car"];
+                    poiAnnotationView.image = kIMG(@"car");
                     break;
                     
                 case MANaviAnnotationTypeWalking:
-                    poiAnnotationView.image = [UIImage imageNamed:@"route_walk_select"];
+                    poiAnnotationView.image = kIMG(@"route_walk_select");
                     break;
                     
                 default:
@@ -317,12 +317,12 @@ const NSInteger RoutePlanningPaddingEdge                    = 20;
             /* 起点. */
             if ([[annotation title] isEqualToString:(NSString*)RoutePlanningViewControllerStartTitle])
             {
-                poiAnnotationView.image = [UIImage imageNamed:@"start"];
+                poiAnnotationView.image = kIMG(@"start");
             }
             /* 终点. */
             else if([[annotation title] isEqualToString:(NSString*)RoutePlanningViewControllerDestinationTitle])
             {
-                poiAnnotationView.image = [UIImage imageNamed:@"end"];
+                poiAnnotationView.image = kIMG(@"end");
             }
             
         }
@@ -342,7 +342,7 @@ const NSInteger RoutePlanningPaddingEdge                    = 20;
             MAPolylineRenderer *polylineRenderer = [[MAPolylineRenderer alloc] initWithPolyline:overlay];
             
             polylineRenderer.lineWidth   = 8.f;
-            [polylineRenderer loadStrokeTextureImage:[UIImage imageNamed:@"arrowTexture_green"]];
+            [polylineRenderer loadStrokeTextureImage:kIMG(@"arrowTexture_green")];
             
             return polylineRenderer;
         }
@@ -353,7 +353,7 @@ const NSInteger RoutePlanningPaddingEdge                    = 20;
             MAPolylineRenderer *polylineRenderer = [[MAPolylineRenderer alloc] initWithPolyline:((LineDashPolyline *)overlay).polyline];
             polylineRenderer.lineDash    = YES;
             polylineRenderer.lineWidth   = 7;
-            [polylineRenderer loadStrokeTextureImage:[UIImage imageNamed:@"arrowTexture"]];
+            [polylineRenderer loadStrokeTextureImage:kIMG(@"arrowTexture")];
             
             return polylineRenderer;
             
@@ -362,7 +362,7 @@ const NSInteger RoutePlanningPaddingEdge                    = 20;
             MANaviPolyline *naviPolyline = (MANaviPolyline *)overlay;
             MAPolylineRenderer *polylineRenderer = [[MAPolylineRenderer alloc] initWithPolyline:naviPolyline.polyline];
             polylineRenderer.lineWidth = 8;
-            [polylineRenderer loadStrokeTextureImage:[UIImage imageNamed:@"arrowTexture_green"]];
+            [polylineRenderer loadStrokeTextureImage:kIMG(@"arrowTexture_green")];
 
             return polylineRenderer;
         }

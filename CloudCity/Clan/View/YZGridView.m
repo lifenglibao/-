@@ -90,11 +90,11 @@ static const CGFloat itemHeight = 90.f;
         _scroll.frame = CGRectMake(0, 0, kVIEW_W(self), kVIEW_H(self));
     }
     
-    self.backgroundColor = [UIColor clearColor];
+    self.backgroundColor = kCLEARCOLOR;
     for (int i = 0; i < page; i ++) {
         UIView *view_c = [UIView new];
         view_c.tag = 1000+i;
-        view_c.backgroundColor = [UIColor clearColor];
+        view_c.backgroundColor = kCLEARCOLOR;
         view_c.frame = CGRectMake(i*kVIEW_W(self), 0, kVIEW_W(self), kVIEW_H(self));
         [_scroll addSubview:view_c];
     }
@@ -121,7 +121,7 @@ static const CGFloat itemHeight = 90.f;
             itemView = [[ItemView alloc]initWithFrame:CGRectMake(margin_h+itemWidth*loc, row==0?0:itemHeight, itemWidth, itemHeight)];
         }
 
-        itemView.backgroundColor = [UIColor clearColor];
+        itemView.backgroundColor = kCLEARCOLOR;
         itemView.tag = 100+loaction_inpage;
         itemView.linkmodel = link;
         itemView.title.text = link.title;
@@ -148,7 +148,7 @@ static const CGFloat itemHeight = 90.f;
     }
     
     
-    if ([link.url isEqualToString:@"func_bus_search111"]) {
+    if ([link.url isEqualToString:@"func_bus_search"]) {
         BusViewController *bus = [[BusViewController alloc] init];
         bus.hidesBottomBarWhenPushed = YES;
         [self.additionsViewController.navigationController pushViewController:bus animated:YES];

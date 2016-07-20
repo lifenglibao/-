@@ -176,7 +176,7 @@ AdLaunchType state = AdLaunchProgressType;
             self.progressButtonView = [[UIButton alloc] initWithFrame: CGRectMake([UIScreen mainScreen].bounds.size.width - 60, 20, 40, 40)];
             [self.progressButtonView setTitle: @"跳" forState: UIControlStateNormal];
             self.progressButtonView.titleLabel.textAlignment = NSTextAlignmentCenter;
-            self.progressButtonView.backgroundColor = [UIColor clearColor];
+            self.progressButtonView.backgroundColor = kCLEARCOLOR;
             [self.progressButtonView addTarget: self
                                         action: @selector(toHidenState)
                               forControlEvents: UIControlEventTouchUpInside];
@@ -254,7 +254,7 @@ AdLaunchType state = AdLaunchProgressType;
 //    }];
     
    self.adBackground = [[UIView alloc] initWithFrame: [UIScreen mainScreen].bounds];
-    self.adBackground.backgroundColor = [UIColor clearColor];
+    self.adBackground.backgroundColor = kCLEARCOLOR;
     
     [self.view addSubview:self.adBackground];
 }

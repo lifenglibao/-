@@ -466,7 +466,7 @@ static NSString *aPostCellIdentifer = @"APostCell";
 
     if (searchDic) {
         if ([searchDic[@"enable"] isEqualToString:@"1"]) {
-            [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"sousuoshouye"] style:UIBarButtonItemStylePlain target:self action:@selector(searchAction)] animated:NO];
+            [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithImage:kIMG(@"sousuoshouye") style:UIBarButtonItemStylePlain target:self action:@selector(searchAction)] animated:NO];
             for (NSDictionary *dic in searchDic[@"setting"]) {
                 if ([dic[@"key"] isEqualToString:@"forum"]) {
                     //论坛搜索
@@ -518,7 +518,7 @@ static NSString *aPostCellIdentifer = @"APostCell";
     CustomGridView *gridView = [[CustomGridView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 41)];
     gridView.gridType = @"searchType";
     [gridView initScrollView];
-    gridView.backgroundColor = [UIColor clearColor];
+    gridView.backgroundColor = kCLEARCOLOR;
     gridView.target = self;
     for (int index = 0; index<_listArray.count; index++) {
         [gridView addCardWithTitle:[(CustomHomeListModel *)_listArray[index] title] withSel:@selector(customListAction:)];

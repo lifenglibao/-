@@ -37,7 +37,7 @@
 {
 //    _isImage.hidden = ![_postModel.attachment isEqualToString:@"2"];
     _isImage.hidden = !(_postModel.attachment.intValue == 2);
-    [_faceImage sd_setImageWithURL:[NSURL URLWithString:_postModel.avatar] placeholderImage:[UIImage imageNamed:@"portrait"]];
+    [_faceImage sd_setImageWithURL:[NSURL URLWithString:_postModel.avatar] placeholderImage:kIMG(@"portrait")];
     _faceImage.layer.cornerRadius = 43 /2;
     _faceImage.clipsToBounds = YES;
     _titleLabel.text = _postModel.subject;

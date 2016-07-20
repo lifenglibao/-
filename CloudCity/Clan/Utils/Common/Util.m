@@ -550,7 +550,7 @@
     [_portraitImageView setContentMode:UIViewContentModeScaleAspectFill];
     [_portraitImageView setClipsToBounds:YES];
     _portraitImageView.userInteractionEnabled = YES;
-    _portraitImageView.backgroundColor = [UIColor clearColor];
+    _portraitImageView.backgroundColor = kCLEARCOLOR;
     return _portraitImageView;
 }
 

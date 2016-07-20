@@ -104,7 +104,7 @@
         [self resetNaviTitleThreadTypeSelectedView];
     }
     UIButton* leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    leftButton.backgroundColor = [UIColor clearColor];
+    leftButton.backgroundColor = kCLEARCOLOR;
     leftButton.frame = CGRectMake(0, 0, 26, 26);
     [leftButton setBackgroundImage :[UIImage imageNamed:@"nav_back"] forState:UIControlStateNormal];
     [leftButton addTarget:self action:@selector(cancelBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
@@ -164,7 +164,7 @@
 }
 - (void)initWithTable{
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-64) style:UITableViewStylePlain];
-    _tableView.backgroundColor = [UIColor clearColor];
+    _tableView.backgroundColor = kCLEARCOLOR;
     _tableView.dataSource = self;
     _tableView.delegate = self;
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;

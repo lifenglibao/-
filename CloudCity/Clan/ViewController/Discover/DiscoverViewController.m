@@ -55,7 +55,7 @@ static NSString * const LxGridViewCellReuseIdentifier = @stringify(LxGridViewCel
         [view removeFromSuperview];
     }
     
-    [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"sousuoshouye"] style:UIBarButtonItemStylePlain target:self action:@selector(searchAction)] animated:NO];
+    [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithImage:kIMG(@"sousuoshouye") style:UIBarButtonItemStylePlain target:self action:@selector(searchAction)] animated:NO];
     
     
     NSNumber *valNum = [[NSUserDefaults standardUserDefaults] objectForKey:@"KNEWS_MESSAGE"];

@@ -22,7 +22,7 @@
 
 - (void)buildUI
 {
-    self.backgroundColor = [UIColor clearColor];
+    self.backgroundColor = kCLEARCOLOR;
     
 //    int searchViewWidth = _showCanecelButton ? kVIEW_W(self) - 10 - 58 : kVIEW_W(self) - 20;
     _searchView = [[UIView alloc] initWithFrame:CGRectMake(10, 11, kSCREEN_WIDTH-20, 31)];//searchViewWidth
@@ -53,7 +53,7 @@
     if (_showCanecelButton) {
         _cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
         _cancelButton.frame = CGRectMake(10+kVIEW_BX(_searchView), 11, 58, 31);
-        _cancelButton.backgroundColor = [UIColor clearColor];
+        _cancelButton.backgroundColor = kCLEARCOLOR;
         [_cancelButton setTitle:@"取消" forState:UIControlStateNormal];
         [_cancelButton.titleLabel setFont:[UIFont systemFontOfSize:15]];
         [_cancelButton addTarget:self action:@selector(cancelButtonClicked) forControlEvents:UIControlEventTouchUpInside];
@@ -75,7 +75,7 @@
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     button.frame = _textField.frame;
     _textField.userInteractionEnabled = YES;
-    button.backgroundColor = [UIColor clearColor];
+    button.backgroundColor = kCLEARCOLOR;
     button.exclusiveTouch = NO;
     _jumpButton = button;
     _textField.placeholder = @"输入关键词";

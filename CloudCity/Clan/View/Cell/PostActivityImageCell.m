@@ -22,7 +22,7 @@
     if (self) {
         // Initialization code
         self.selectionStyle = UITableViewCellSelectionStyleNone;
-        self.backgroundColor = [UIColor clearColor];
+        self.backgroundColor = kCLEARCOLOR;
         [self.contentView addSubview:self.scrollView];
         
     }
@@ -51,7 +51,7 @@
             imageView.image = sendImage.image;
             [_scrollView addSubview:imageView];
             UIButton *deleteBtn = [[UIButton alloc] initWithFrame:CGRectMake(imageView.width-22, 0, 22, 22)];
-            [deleteBtn setImage:[UIImage imageNamed:@"deleteBtn"] forState:UIControlStateNormal];
+            [deleteBtn setImage:kIMG(@"deleteBtn") forState:UIControlStateNormal];
             deleteBtn.tag = index + 1000;
             [deleteBtn addTarget:self action:@selector(deleteBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
             [imageView addSubview:deleteBtn];

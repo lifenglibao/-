@@ -80,8 +80,8 @@ static const NSInteger kKeyboardView_Height = 216;
 - (UIButton *)deleteBtn{
     if (!_deleteBtn) {
         _deleteBtn = [[UIButton alloc] initWithFrame:CGRectMake(_coverView.width-22, 0, 22, 22)];
-        [_deleteBtn setImage:[UIImage imageNamed:@"deleteBtn"] forState:UIControlStateNormal];
-        _deleteBtn.backgroundColor = [UIColor clearColor];
+        [_deleteBtn setImage:kIMG(@"deleteBtn") forState:UIControlStateNormal];
+        _deleteBtn.backgroundColor = kCLEARCOLOR;
 //        _deleteBtn.layer.cornerRadius = CGRectGetWidth(_deleteBtn.bounds)/2;
 //        _deleteBtn.layer.masksToBounds = YES;
         
@@ -154,7 +154,7 @@ static const NSInteger kKeyboardView_Height = 216;
         
         CGFloat toolBarHeight = CGRectGetHeight(_keyboardToolBar.frame);
         _emotionButton = [[UIButton alloc] initWithFrame:CGRectMake(15, (toolBarHeight - 30)/2, 30, 30)];
-        [_emotionButton setImage:[UIImage imageNamed:@"keyboard_emotion"] forState:UIControlStateNormal];
+        [_emotionButton setImage:kIMG(@"keyboard_emotion") forState:UIControlStateNormal];
         [_emotionButton addTarget:self action:@selector(emotionButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
         [_keyboardToolBar addSubview:_emotionButton];
     }
@@ -165,10 +165,10 @@ static const NSInteger kKeyboardView_Height = 216;
 {
     if (self.textView.inputView != self.emojiKeyboardView) {
         self.textView.inputView = self.emojiKeyboardView;
-        [_emotionButton setImage:[UIImage imageNamed:@"keyboard_keyboard"] forState:UIControlStateNormal];
+        [_emotionButton setImage:kIMG(@"keyboard_keyboard") forState:UIControlStateNormal];
     }else{
         self.textView.inputView = nil;
-        [_emotionButton setImage:[UIImage imageNamed:@"keyboard_emotion"] forState:UIControlStateNormal];
+        [_emotionButton setImage:kIMG(@"keyboard_emotion") forState:UIControlStateNormal];
     }
     [self.textView resignFirstResponder];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -216,15 +216,15 @@ static const NSInteger kKeyboardView_Height = 216;
 }
 
 - (UIImage *)emojiKeyboardView:(AGEmojiKeyboardView *)emojiKeyboardView imageForSelectedCategory:(AGEmojiKeyboardViewCategoryImage)category {
-    return [UIImage imageNamed:@"keyboard_emotion_emoji"];
+    return kIMG(@"keyboard_emotion_emoji");
 }
 
 - (UIImage *)emojiKeyboardView:(AGEmojiKeyboardView *)emojiKeyboardView imageForNonSelectedCategory:(AGEmojiKeyboardViewCategoryImage)category {
-    return [UIImage imageNamed:@"keyboard_emotion_emoji"];
+    return kIMG(@"keyboard_emotion_emoji");
 }
 
 - (UIImage *)backSpaceButtonImageForEmojiKeyboardView:(AGEmojiKeyboardView *)emojiKeyboardView {
-    UIImage *img = [UIImage imageNamed:@"keyboard_emotion_delete"];
+    UIImage *img = kIMG(@"keyboard_emotion_delete");
     return img;
 }
 

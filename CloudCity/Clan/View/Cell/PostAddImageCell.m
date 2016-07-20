@@ -32,13 +32,13 @@
     if (self) {
         // Initialization code
         self.selectionStyle = UITableViewCellSelectionStyleNone;
-        self.backgroundColor = [UIColor clearColor];
+        self.backgroundColor = kCLEARCOLOR;
         if (!self.mediaView) {
             UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
             self.mediaView = [[UICollectionView alloc] initWithFrame:CGRectMake(15, 0, ScreenWidth-2*15, 80) collectionViewLayout:layout];
             self.mediaView.scrollEnabled = NO;
             [self.mediaView setBackgroundView:nil];
-            [self.mediaView setBackgroundColor:[UIColor clearColor]];
+            [self.mediaView setBackgroundColor:kCLEARCOLOR];
             [self.mediaView registerClass:[PostAddImageCCell class] forCellWithReuseIdentifier:kCCellIdentifier_PostAddImageCCell];
             self.mediaView.dataSource = self;
             self.mediaView.delegate = self;

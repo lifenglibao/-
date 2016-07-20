@@ -124,9 +124,9 @@
     }
     
     UIButton* leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    leftButton.backgroundColor = [UIColor clearColor];
+    leftButton.backgroundColor = kCLEARCOLOR;
     leftButton.frame = CGRectMake(0, 0, 26, 26);
-    [leftButton setBackgroundImage :[UIImage imageNamed:@"nav_back"] forState:UIControlStateNormal];
+    [leftButton setBackgroundImage :kIMG(@"nav_back") forState:UIControlStateNormal];
     [leftButton addTarget:self action:@selector(backView) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:leftButton];
     
@@ -567,7 +567,7 @@
 - (UIView *)customHeaderView
 {
     UIView *headerV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight/3)];
-    UIImage *bgImage = [UIImage imageNamed:@"login_logo"];
+    UIImage *bgImage = kIMG(@"login_logo");
     _iconUserView = [[UIImageView alloc] initWithImage:bgImage];
     _iconUserView.center = headerV.center;
     _iconUserView.top = headerV.top + 30;
@@ -588,7 +588,7 @@
     footerV.backgroundColor = [UIColor redColor];
     UIButton *loginButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [loginButton addTarget:self action:@selector(loginAction) forControlEvents:UIControlEventTouchUpInside];
-    [loginButton setImage:[UIImage imageNamed:@"login_btn"] forState:UIControlStateNormal];
+    [loginButton setImage:kIMG(@"login_btn") forState:UIControlStateNormal];
     loginButton.frame = CGRectMake(0, 0, iconUserViewWidth, iconUserViewWidth);
     loginButton.center = footerV.center;
     [footerV addSubview:loginButton];

@@ -76,7 +76,7 @@
     UILabel *nameLabel          = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, self.view.width, 44)];
     nameLabel.font              = [UIFont systemFontOfSize:15.0f];
     nameLabel.textColor         = [UIColor blackColor];
-    nameLabel.backgroundColor   = [UIColor clearColor];
+    nameLabel.backgroundColor   = kCLEARCOLOR;
     nameLabel.textAlignment     = NSTextAlignmentCenter;
     nameLabel.tag               = 10086;
     [_headerView addSubview:nameLabel];
@@ -110,7 +110,7 @@
     self.tableView                 = [[BaseTableView alloc] initWithFrame:CGRectMake(10, 10 + _headerView.bottom, ScreenWidth - 20, ScreenHeight - 120) style:UITableViewStyleGrouped];
     self.tableView.delegate        = self;
     self.tableView.dataSource      = self;
-    self.tableView.backgroundColor = [UIColor clearColor];
+    self.tableView.backgroundColor = kCLEARCOLOR;
     self.tableView.separatorStyle  = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:_tableView];
 }

@@ -22,7 +22,7 @@
     _iv_avatar.clipsToBounds = YES;
     self.iv_avatar.backgroundColor = [UIColor blackColor];
     self.iv_line.image = [Util imageWithColor:K_COLOR_MOST_LIGHT_GRAY];
-    self.backgroundColor = [UIColor clearColor];    
+    self.backgroundColor = kCLEARCOLOR;    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated

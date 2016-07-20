@@ -30,7 +30,7 @@
         titleLabel_ = [UILabel new];
         titleLabel_.userInteractionEnabled = NO;
         titleLabel_.textAlignment = NSTextAlignmentCenter;
-        titleLabel_.backgroundColor = [UIColor clearColor];
+        titleLabel_.backgroundColor = kCLEARCOLOR;
         if (_textColor) {
             titleLabel_.textColor = _textColor;
         } else {
@@ -54,7 +54,7 @@
 //            make.centerX.equalTo(self.mas_centerX);
 //            make.bottom.equalTo(self.mas_bottom).offset(-20);
 //        }];
-        self.backgroundColor = [UIColor clearColor];
+        self.backgroundColor = kCLEARCOLOR;
     }
     return self;
 }

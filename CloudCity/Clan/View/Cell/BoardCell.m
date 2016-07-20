@@ -58,7 +58,7 @@
 //    _iconImageView.backgroundColor = [UIColor returnColorWithPlist:YZSegMentColor];
     //    _iconImageView.backgroundColor = isLogin ? [UIColor returnColorWithPlist:YZSegMentColor] : kCLEARCOLOR;
     
-    [_iconImageView sd_setImageWithURL:[NSURL URLWithString:_forumsModel.icon] placeholderImage:[UIImage imageNamed:@"board_icon"]];
+    [_iconImageView sd_setImageWithURL:[NSURL URLWithString:_forumsModel.icon] placeholderImage:kIMG(@"board_icon")];
     _titleLabel.text = [NSString stringWithFormat:@"%@",_forumsModel.name];
     _detailLabel.text = [NSString stringWithFormat:@"主题:%@   |   帖子数:%@",_forumsModel.threads,_forumsModel.posts];
     _countLabel.text = [NSString stringWithFormat:@"今日:%@",_forumsModel.todayposts];

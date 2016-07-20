@@ -99,7 +99,7 @@
     self.tableView                 = [[BaseTableView alloc] initWithFrame:CGRectMake(0, _headerView.bottom + 10, ScreenWidth, ScreenHeight - 84 - _headerView.height) style:UITableViewStyleGrouped];
     self.tableView.delegate        = self;
     self.tableView.dataSource      = self;
-    self.tableView.backgroundColor = [UIColor clearColor];
+    self.tableView.backgroundColor = kCLEARCOLOR;
     self.tableView.separatorStyle  = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:_tableView];
 }

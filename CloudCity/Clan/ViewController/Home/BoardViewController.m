@@ -44,9 +44,9 @@
 //    self.navigationItem.title = @"论坛";
     if (!_isTabBarItem) {
         UIButton* leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        leftButton.backgroundColor = [UIColor clearColor];
+        leftButton.backgroundColor = kCLEARCOLOR;
         leftButton.frame = CGRectMake(0, 0, 26, 26);
-        [leftButton setBackgroundImage :[UIImage imageNamed:@"nav_back"] forState:UIControlStateNormal];
+        [leftButton setBackgroundImage :kIMG(@"nav_back") forState:UIControlStateNormal];
         [leftButton addTarget:self action:@selector(backView) forControlEvents:UIControlEventTouchUpInside];
         self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:leftButton];
     }
@@ -70,7 +70,7 @@
         [view removeFromSuperview];
     }
     
-    [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"sousuoshouye"] style:UIBarButtonItemStylePlain target:self action:@selector(searchAction)] animated:NO];
+    [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithImage:kIMG(@"sousuoshouye") style:UIBarButtonItemStylePlain target:self action:@selector(searchAction)] animated:NO];
     
     
     NSNumber *valNum = [[NSUserDefaults standardUserDefaults] objectForKey:@"KNEWS_MESSAGE"];

@@ -138,9 +138,9 @@ static float kHeaderHeight = 210.f-64.f;
 {
     if (_isPresentMode || _isRightItem) {
         UIButton* leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        leftButton.backgroundColor = [UIColor clearColor];
+        leftButton.backgroundColor = kCLEARCOLOR;
         leftButton.frame = CGRectMake(0, 0, 26, 26);
-        [leftButton setBackgroundImage :[UIImage imageNamed:@"nav_back"] forState:UIControlStateNormal];
+        [leftButton setBackgroundImage :kIMG(@"nav_back") forState:UIControlStateNormal];
         [leftButton addTarget:self action:@selector(navback1:) forControlEvents:UIControlEventTouchUpInside];
         self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:leftButton];
     }
@@ -263,9 +263,9 @@ static float kHeaderHeight = 210.f-64.f;
         
        //添加签到按钮
         _checkinBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        _checkinBtn.backgroundColor = [UIColor clearColor];
+        _checkinBtn.backgroundColor = kCLEARCOLOR;
         _checkinBtn.frame = CGRectMake(0, 0, 60, 30);
-        [_checkinBtn setImage:[UIImage imageNamed:@"checkin"] forState:UIControlStateNormal];
+        [_checkinBtn setImage:kIMG(@"checkin") forState:UIControlStateNormal];
         [_checkinBtn addTarget:self action:@selector(doCheckInAction) forControlEvents:UIControlEventTouchUpInside];
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:_checkinBtn];
 
@@ -384,7 +384,7 @@ static float kHeaderHeight = 210.f-64.f;
         [postChat setTitleEdgeInsets:UIEdgeInsetsMake(1, 6, 0, 0)];
         
         //举报按钮
-        [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"list_jubao"] style:UIBarButtonItemStylePlain target:self action:@selector(reportAction)] animated:NO];
+        [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithImage:kIMG(@"list_jubao") style:UIBarButtonItemStylePlain target:self action:@selector(reportAction)] animated:NO];
         
         //发消息 加好友按钮
         [_iv_topView addSubview:addFriend];
@@ -501,9 +501,9 @@ static float kHeaderHeight = 210.f-64.f;
         if (!_checkinBtn) {
             //添加签到按钮
             _checkinBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-            _checkinBtn.backgroundColor = [UIColor clearColor];
+            _checkinBtn.backgroundColor = kCLEARCOLOR;
             _checkinBtn.frame = CGRectMake(0, 0, 30, 30);
-            [_checkinBtn setImage:[UIImage imageNamed:@"checkin"] forState:UIControlStateNormal];
+            [_checkinBtn setImage:kIMG(@"checkin") forState:UIControlStateNormal];
             [_checkinBtn addTarget:self action:@selector(doCheckInAction) forControlEvents:UIControlEventTouchUpInside];
             self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:_checkinBtn];
         }

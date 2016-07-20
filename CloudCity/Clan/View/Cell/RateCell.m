@@ -71,7 +71,7 @@
     IQDropDownTextField *tf = [[IQDropDownTextField alloc]initWithFrame:v_btnback.bounds];
     tf.delegate = self;
     tf.text = @"0";
-    tf.textColor = [UIColor clearColor];
+    tf.textColor = kCLEARCOLOR;
     self.tf_value = tf;
     [v_btnback addSubview:tf];
     

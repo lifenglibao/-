@@ -40,7 +40,7 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    self.backgroundColor = _isRegister? [UIColor whiteColor]: [UIColor clearColor];
+    self.backgroundColor = _isRegister? [UIColor whiteColor]: kCLEARCOLOR;
     self.textField.font = [UIFont fitFontWithSize:17.f];
     self.textField.textColor = KCOLOR_TEXT_DARK;
     self.textField.clearButtonMode = _isRegister? UITextFieldViewModeWhileEditing: UITextFieldViewModeNever;

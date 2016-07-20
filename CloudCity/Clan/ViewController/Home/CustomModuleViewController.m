@@ -75,7 +75,7 @@ static NSString *const customRecommendType = @"2";
             
             SFDraggableDialogView *dialogView = [[[NSBundle mainBundle] loadNibNamed:@"SFDraggableDialogView" owner:self options:nil] firstObject];
             dialogView.frame = kScreen_Bounds;
-            dialogView.photo = [UIImage imageNamed:@"face"];
+            dialogView.photo = kIMG(@"face");
             dialogView.delegate = self;
             dialogView.titleText = [[NSMutableAttributedString alloc] initWithString:@"更新内容:"];
             dialogView.messageText = [self exampleAttributeString];
@@ -703,7 +703,7 @@ static NSString *const customRecommendType = @"2";
     
     if (searchDic) {
         if ([searchDic[@"enable"] isEqualToString:@"1"]) {
-            [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"sousuoshouye"] style:UIBarButtonItemStylePlain target:self action:@selector(searchAction)] animated:NO];
+            [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithImage:kIMG(@"sousuoshouye") style:UIBarButtonItemStylePlain target:self action:@selector(searchAction)] animated:NO];
             for (NSDictionary *dic in searchDic[@"setting"]) {
                 if ([dic[@"key"] isEqualToString:@"forum"]) {
                     //论坛搜索
@@ -736,7 +736,7 @@ static NSString *const customRecommendType = @"2";
     CustomGridView *gridView = [[CustomGridView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 41)];
     gridView.gridType = @"searchType";
     [gridView initScrollView];
-    gridView.backgroundColor = [UIColor clearColor];
+    gridView.backgroundColor = kCLEARCOLOR;
     gridView.target = self;
     for (int index = 0; index<_customHomeModel.recommend.count; index++) {
         [gridView addCardWithTitle:[(CustomHomeListModel *)_customHomeModel.recommend[index] title] withSel:@selector(customListAction:)];

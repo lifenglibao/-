@@ -515,9 +515,6 @@
 
 - (void)handlePush:(NSDictionary *)userInfo{
     
-    if ([[UIApplication sharedApplication] applicationState]  ) {
-        
-    }
     if ([[UIApplication sharedApplication] applicationState] == UIApplicationStateActive ) {
         
     }

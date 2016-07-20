@@ -84,7 +84,7 @@
 {
     self.title = @"我要评分";
     UIButton* leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    leftButton.backgroundColor = [UIColor clearColor];
+    leftButton.backgroundColor = kCLEARCOLOR;
     leftButton.titleLabel.font = [UIFont systemFontOfSize:15.f];
     leftButton.frame = CGRectMake(0, 0, 40, 26);
     [leftButton setTitle:@"提 交" forState:UIControlStateNormal];

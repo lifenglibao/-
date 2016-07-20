@@ -36,7 +36,7 @@ static const CGFloat itemHeight = 106;
         itemView.tag = 100+index;
         itemView.delegate = self;
 //        [itemView.item sd_setImageWithURL:[NSURL URLWithString:link.pic] placeholderImage:nil];
-        [itemView.item setImageURL:[NSURL URLWithString:link.pic] placeholder:[UIImage imageNamed:@"board_icon"]];
+        [itemView.item setImageURL:[NSURL URLWithString:link.pic] placeholder:kIMG(@"board_icon")];
         itemView.title.text = link.title;
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(selectLinkView:)];
         [itemView addGestureRecognizer:tap];

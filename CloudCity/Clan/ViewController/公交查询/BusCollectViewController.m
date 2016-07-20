@@ -72,7 +72,7 @@
     self.tableView                              = [[BaseTableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenBoundsHeight) style:UITableViewStylePlain];
     self.tableView.delegate                     = self;
     self.tableView.dataSource                   = self;
-    self.tableView.backgroundColor              = [UIColor clearColor];
+    self.tableView.backgroundColor              = kCLEARCOLOR;
     self.tableView.showsVerticalScrollIndicator = NO;
     self.tableView.tableFooterView              = [[UIView alloc] init];
     [self.view addSubview:_tableView];
@@ -106,7 +106,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                                      reuseIdentifier:busCellIdentifier];
         
-        cell.backgroundColor = [UIColor clearColor];
+        cell.backgroundColor = kCLEARCOLOR;
         [cell.textLabel sizeToFit];
         [cell.textLabel setNumberOfLines:0];
         [cell.textLabel setLineBreakMode:NSLineBreakByCharWrapping];

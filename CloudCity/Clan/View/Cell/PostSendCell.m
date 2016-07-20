@@ -25,7 +25,7 @@ static const NSInteger kKeyboardView_Height = 216;
     if (self) {
         // Initialization code
         self.selectionStyle = UITableViewCellSelectionStyleNone;
-        self.backgroundColor = [UIColor clearColor];
+        self.backgroundColor = kCLEARCOLOR;
         _selectedForumsBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         [_selectedForumsBtn setBackgroundImage:[Util imageWithColor:[UIColor whiteColor]] forState:UIControlStateNormal];
         _selectedForumsBtn.exclusiveTouch = YES;
@@ -64,7 +64,7 @@ static const NSInteger kKeyboardView_Height = 216;
     }
     if (!_tweetContentView) {
         _tweetContentView = [[UIPlaceHolderTextView alloc] initWithFrame:CGRectMake(6, _isRelayPost ?kVIEW_BY(_selectedForumsBtn)+7:_titleField.bottom+5, ScreenWidth-7*2, 220-20-45)];
-        _tweetContentView.backgroundColor = [UIColor clearColor];
+        _tweetContentView.backgroundColor = kCLEARCOLOR;
         _tweetContentView.font = [UIFont fitFontWithSize:17.f];
         _tweetContentView.delegate = self;
         _tweetContentView.placeholder = @"说点什么吧~";
@@ -153,7 +153,7 @@ static const NSInteger kKeyboardView_Height = 216;
         
         CGFloat toolBarHeight = CGRectGetHeight(_keyboardToolBar.frame);
         _emotionButton = [[UIButton alloc] initWithFrame:CGRectMake(15, (toolBarHeight - 30)/2, 30, 30)];
-        [_emotionButton setImage:[UIImage imageNamed:@"keyboard_emotion"] forState:UIControlStateNormal];
+        [_emotionButton setImage:kIMG(@"keyboard_emotion") forState:UIControlStateNormal];
         [_emotionButton addTarget:self action:@selector(emotionButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
         [_keyboardToolBar addSubview:_emotionButton];
     }
@@ -163,10 +163,10 @@ static const NSInteger kKeyboardView_Height = 216;
 {
     if (self.tweetContentView.inputView != self.emojiKeyboardView) {
         self.tweetContentView.inputView = self.emojiKeyboardView;
-        [_emotionButton setImage:[UIImage imageNamed:@"keyboard_keyboard"] forState:UIControlStateNormal];
+        [_emotionButton setImage:kIMG(@"keyboard_keyboard") forState:UIControlStateNormal];
     }else{
         self.tweetContentView.inputView = nil;
-        [_emotionButton setImage:[UIImage imageNamed:@"keyboard_emotion"] forState:UIControlStateNormal];
+        [_emotionButton setImage:kIMG(@"keyboard_emotion") forState:UIControlStateNormal];
     }
     [self.tweetContentView resignFirstResponder];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -214,15 +214,15 @@ static const NSInteger kKeyboardView_Height = 216;
 }
 
 - (UIImage *)emojiKeyboardView:(AGEmojiKeyboardView *)emojiKeyboardView imageForSelectedCategory:(AGEmojiKeyboardViewCategoryImage)category {
-    return [UIImage imageNamed:@"keyboard_emotion_emoji"];
+    return kIMG(@"keyboard_emotion_emoji");
 }
 
 - (UIImage *)emojiKeyboardView:(AGEmojiKeyboardView *)emojiKeyboardView imageForNonSelectedCategory:(AGEmojiKeyboardViewCategoryImage)category {
-    return [UIImage imageNamed:@"keyboard_emotion_emoji"];
+    return kIMG(@"keyboard_emotion_emoji");
 }
 
 - (UIImage *)backSpaceButtonImageForEmojiKeyboardView:(AGEmojiKeyboardView *)emojiKeyboardView {
-    UIImage *img = [UIImage imageNamed:@"keyboard_emotion_delete"];
+    UIImage *img = kIMG(@"keyboard_emotion_delete");
     return img;
 }
 
