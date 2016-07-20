@@ -10,9 +10,6 @@
 		0D0880431CD8C6C500DE33E7 /* shoucang@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D0880411CD8C6C400DE33E7 /* shoucang@2x.png */; };
 		0D0880441CD8C6C500DE33E7 /* shoucang@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D0880421CD8C6C400DE33E7 /* shoucang@3x.png */; };
 		0D0880471CD983DE00DE33E7 /* BusStopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D0880461CD983DE00DE33E7 /* BusStopViewController.m */; };
-		0D0C3A7B1CF0336D007C7F94 /* icon_end_stop.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D0C3A781CF0336D007C7F94 /* icon_end_stop.png */; };
-		0D0C3A7C1CF0336D007C7F94 /* icon_start_stop.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D0C3A791CF0336D007C7F94 /* icon_start_stop.png */; };
-		0D0C3A7D1CF0336D007C7F94 /* icon_stop.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D0C3A7A1CF0336D007C7F94 /* icon_stop.png */; };
 		0D0C3A801CF2A169007C7F94 /* icon_map_transfer@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D0C3A7E1CF2A169007C7F94 /* icon_map_transfer@2x.png */; };
 		0D0C3A811CF2A169007C7F94 /* icon_map_transfer@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D0C3A7F1CF2A169007C7F94 /* icon_map_transfer@3x.png */; };
 		0D0C3A851CF2B82A007C7F94 /* BusTransferListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D0C3A831CF2B82A007C7F94 /* BusTransferListViewController.m */; };
@@ -126,6 +123,19 @@
 		0DE5E8DF1D3E098700E81058 /* yunduo_gif_8.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DE5E8D91D3E098700E81058 /* yunduo_gif_8.png */; };
 		0DE5E8E31D3E098700E81058 /* yunduo_gif_3.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DE5E8DD1D3E098700E81058 /* yunduo_gif_3.png */; };
 		0DE5E8E41D3E098700E81058 /* yunduo_gif_7.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DE5E8DE1D3E098700E81058 /* yunduo_gif_7.png */; };
+		0DE5E8EA1D3F0E6300E81058 /* dir_end.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DE5E8E71D3F0E6300E81058 /* dir_end.png */; };
+		0DE5E8EB1D3F0E6300E81058 /* dir_start.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DE5E8E81D3F0E6300E81058 /* dir_start.png */; };
+		0DE5E8EC1D3F0E6300E81058 /* dir_station.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DE5E8E91D3F0E6300E81058 /* dir_station.png */; };
+		0DE5E8EF1D3F0F5700E81058 /* dir_bus.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DE5E8ED1D3F0F5700E81058 /* dir_bus.png */; };
+		0DE5E8F01D3F0F5700E81058 /* dir_man.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DE5E8EE1D3F0F5700E81058 /* dir_man.png */; };
+		0DE5E8F51D3F0FC700E81058 /* route_bus_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DE5E8F11D3F0FC700E81058 /* route_bus_normal.png */; };
+		0DE5E8F61D3F0FC700E81058 /* route_bus_select.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DE5E8F21D3F0FC700E81058 /* route_bus_select.png */; };
+		0DE5E8F71D3F0FC700E81058 /* route_walk_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DE5E8F31D3F0FC700E81058 /* route_walk_normal.png */; };
+		0DE5E8F81D3F0FC700E81058 /* route_walk_select.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DE5E8F41D3F0FC700E81058 /* route_walk_select.png */; };
+		0DE5E8FF1D3F11B800E81058 /* end.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DE5E8FD1D3F11B800E81058 /* end.png */; };
+		0DE5E9001D3F11B800E81058 /* start.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DE5E8FE1D3F11B800E81058 /* start.png */; };
+		0DE5E9021D3F15CD00E81058 /* arrowTexture_green.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DE5E9011D3F15CD00E81058 /* arrowTexture_green.png */; };
+		0DE5E9041D3F1ABC00E81058 /* transfer.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DE5E9031D3F1ABC00E81058 /* transfer.png */; };
 		0DF11D6A1CE342E600FD6D28 /* MANaviRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DF11D691CE342E600FD6D28 /* MANaviRoute.m */; };
 		0DF11D6F1CE345BC00FD6D28 /* MANaviAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DF11D6C1CE345BC00FD6D28 /* MANaviAnnotation.m */; };
 		0DF11D701CE345BC00FD6D28 /* MANaviPolyline.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DF11D6E1CE345BC00FD6D28 /* MANaviPolyline.m */; };
@@ -1217,9 +1227,6 @@
 		0D0880421CD8C6C400DE33E7 /* shoucang@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "shoucang@3x.png"; path = "Map/shoucang@3x.png"; sourceTree = "<group>"; };
 		0D0880451CD983DE00DE33E7 /* BusStopViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BusStopViewController.h; path = "公交查询/BusStopViewController.h"; sourceTree = "<group>"; };
 		0D0880461CD983DE00DE33E7 /* BusStopViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BusStopViewController.m; path = "公交查询/BusStopViewController.m"; sourceTree = "<group>"; };
-		0D0C3A781CF0336D007C7F94 /* icon_end_stop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon_end_stop.png; path = Map/icon_end_stop.png; sourceTree = "<group>"; };
-		0D0C3A791CF0336D007C7F94 /* icon_start_stop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon_start_stop.png; path = Map/icon_start_stop.png; sourceTree = "<group>"; };
-		0D0C3A7A1CF0336D007C7F94 /* icon_stop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon_stop.png; path = Map/icon_stop.png; sourceTree = "<group>"; };
 		0D0C3A7E1CF2A169007C7F94 /* icon_map_transfer@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon_map_transfer@2x.png"; path = "Map/icon_map_transfer@2x.png"; sourceTree = "<group>"; };
 		0D0C3A7F1CF2A169007C7F94 /* icon_map_transfer@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon_map_transfer@3x.png"; path = "Map/icon_map_transfer@3x.png"; sourceTree = "<group>"; };
 		0D0C3A821CF2B82A007C7F94 /* BusTransferListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BusTransferListViewController.h; path = "公交查询/BusTransferListViewController.h"; sourceTree = "<group>"; };
@@ -1377,6 +1384,19 @@
 		0DE5E8D91D3E098700E81058 /* yunduo_gif_8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yunduo_gif_8.png; sourceTree = "<group>"; };
 		0DE5E8DD1D3E098700E81058 /* yunduo_gif_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yunduo_gif_3.png; sourceTree = "<group>"; };
 		0DE5E8DE1D3E098700E81058 /* yunduo_gif_7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yunduo_gif_7.png; sourceTree = "<group>"; };
+		0DE5E8E71D3F0E6300E81058 /* dir_end.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = dir_end.png; path = Map/dir_end.png; sourceTree = "<group>"; };
+		0DE5E8E81D3F0E6300E81058 /* dir_start.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = dir_start.png; path = Map/dir_start.png; sourceTree = "<group>"; };
+		0DE5E8E91D3F0E6300E81058 /* dir_station.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = dir_station.png; path = Map/dir_station.png; sourceTree = "<group>"; };
+		0DE5E8ED1D3F0F5700E81058 /* dir_bus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = dir_bus.png; path = Map/dir_bus.png; sourceTree = "<group>"; };
+		0DE5E8EE1D3F0F5700E81058 /* dir_man.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = dir_man.png; path = Map/dir_man.png; sourceTree = "<group>"; };
+		0DE5E8F11D3F0FC700E81058 /* route_bus_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = route_bus_normal.png; path = Map/route_bus_normal.png; sourceTree = "<group>"; };
+		0DE5E8F21D3F0FC700E81058 /* route_bus_select.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = route_bus_select.png; path = Map/route_bus_select.png; sourceTree = "<group>"; };
+		0DE5E8F31D3F0FC700E81058 /* route_walk_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = route_walk_normal.png; path = Map/route_walk_normal.png; sourceTree = "<group>"; };
+		0DE5E8F41D3F0FC700E81058 /* route_walk_select.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = route_walk_select.png; path = Map/route_walk_select.png; sourceTree = "<group>"; };
+		0DE5E8FD1D3F11B800E81058 /* end.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = end.png; path = Map/end.png; sourceTree = "<group>"; };
+		0DE5E8FE1D3F11B800E81058 /* start.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = start.png; path = Map/start.png; sourceTree = "<group>"; };
+		0DE5E9011D3F15CD00E81058 /* arrowTexture_green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = arrowTexture_green.png; path = Map/arrowTexture_green.png; sourceTree = "<group>"; };
+		0DE5E9031D3F1ABC00E81058 /* transfer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = transfer.png; path = Map/transfer.png; sourceTree = "<group>"; };
 		0DF11D681CE342E600FD6D28 /* MANaviRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MANaviRoute.h; path = "公交/MANaviRoute.h"; sourceTree = "<group>"; };
 		0DF11D691CE342E600FD6D28 /* MANaviRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MANaviRoute.m; path = "公交/MANaviRoute.m"; sourceTree = "<group>"; };
 		0DF11D6B1CE345BC00FD6D28 /* MANaviAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MANaviAnnotation.h; path = "公交/MANaviAnnotation.h"; sourceTree = "<group>"; };
@@ -3141,12 +3161,22 @@
 		0D5B22081CD4522C00EFBB44 /* Map */ = {
 			isa = PBXGroup;
 			children = (
+				0DE5E9031D3F1ABC00E81058 /* transfer.png */,
+				0DE5E9011D3F15CD00E81058 /* arrowTexture_green.png */,
+				0DE5E8FD1D3F11B800E81058 /* end.png */,
+				0DE5E8FE1D3F11B800E81058 /* start.png */,
+				0DE5E8F11D3F0FC700E81058 /* route_bus_normal.png */,
+				0DE5E8F21D3F0FC700E81058 /* route_bus_select.png */,
+				0DE5E8F31D3F0FC700E81058 /* route_walk_normal.png */,
+				0DE5E8F41D3F0FC700E81058 /* route_walk_select.png */,
+				0DE5E8ED1D3F0F5700E81058 /* dir_bus.png */,
+				0DE5E8EE1D3F0F5700E81058 /* dir_man.png */,
+				0DE5E8E71D3F0E6300E81058 /* dir_end.png */,
+				0DE5E8E81D3F0E6300E81058 /* dir_start.png */,
+				0DE5E8E91D3F0E6300E81058 /* dir_station.png */,
 				0D5DCABC1D27A47D00515D3B /* walking_man.png */,
 				0D0C3A7E1CF2A169007C7F94 /* icon_map_transfer@2x.png */,
 				0D0C3A7F1CF2A169007C7F94 /* icon_map_transfer@3x.png */,
-				0D0C3A781CF0336D007C7F94 /* icon_end_stop.png */,
-				0D0C3A791CF0336D007C7F94 /* icon_start_stop.png */,
-				0D0C3A7A1CF0336D007C7F94 /* icon_stop.png */,
 				0DFC7AC01CEDB80F0076C9ED /* icon_bus_end.png */,
 				0DFC7AC11CEDB80F0076C9ED /* icon_bus_start.png */,
 				0D1B06B91CE09EAA0020A5B0 /* icon_arrow.png */,
@@ -6222,6 +6252,7 @@
 				6D65F0AC1C0ECCD70032B5DD /* jump_N@2x.png in Resources */,
 				6D65F0BF1C0ECCD70032B5DD /* keyboard_keyboard@2x.png in Resources */,
 				6D65F0D51C0ECEE00032B5DD /* favo_H@3x.png in Resources */,
+				0DE5E8EC1D3F0E6300E81058 /* dir_station.png in Resources */,
 				6D65EF8A1C0ECCD70032B5DD /* 3_8@2x.png in Resources */,
 				6D65EFB71C0ECCD70032B5DD /* left_menu_female@3x.png in Resources */,
 				6D65F06E1C0ECCD70032B5DD /* add_cover@2x.png in Resources */,
@@ -6267,6 +6298,7 @@
 				6D65EFF31C0ECCD70032B5DD /* share_sina@3x.png in Resources */,
 				8AF57F2E1B82DA48005DD63A /* Info.plist in Resources */,
 				6D65EF171C0ECCD70032B5DD /* 2_4@3x.png in Resources */,
+				0DE5E8F61D3F0FC700E81058 /* route_bus_select.png in Resources */,
 				6D65F0631C0ECCD70032B5DD /* act_agree@3x.png in Resources */,
 				6D65F0321C0ECCD70032B5DD /* 1@2x.png in Resources */,
 				6D7859C71ADE061A002B4707 /* chat_send_message.png in Resources */,
@@ -6340,6 +6372,7 @@
 				6D65EEF51C0ECCD70032B5DD /* 1_4_H@3x.png in Resources */,
 				6D65EFFE1C0ECCD70032B5DD /* default_image@2x.png in Resources */,
 				6D65EEC71C0ECCD70032B5DD /* nav_1_10@3x.png in Resources */,
+				0DE5E8F81D3F0FC700E81058 /* route_walk_select.png in Resources */,
 				6D65F0621C0ECCD70032B5DD /* act_agree@2x.png in Resources */,
 				6D65F07A1C0ECCD70032B5DD /* ask@2x.png in Resources */,
 				6D65F0A41C0ECCD70032B5DD /* download_H@2x.png in Resources */,
@@ -6360,6 +6393,7 @@
 				6D65EF5B1C0ECCD70032B5DD /* 3_24@3x.png in Resources */,
 				0D5B22311CD452FE00EFBB44 /* arrowTexture.png in Resources */,
 				6D65F0451C0ECCD70032B5DD /* 9@3x.png in Resources */,
+				0DE5E9021D3F15CD00E81058 /* arrowTexture_green.png in Resources */,
 				6D65EF011C0ECCD70032B5DD /* 1_7_H@3x.png in Resources */,
 				0D5B224B1CD452FE00EFBB44 /* startPoint@2x.png in Resources */,
 				6D65EFC21C0ECCD70032B5DD /* left_menu_shouye@2x.png in Resources */,
@@ -6395,6 +6429,7 @@
 				6D65F0381C0ECCD70032B5DD /* 3@2x.png in Resources */,
 				6D65EFF01C0ECCD70032B5DD /* share_qq@2x.png in Resources */,
 				6D65EF5E1C0ECCD70032B5DD /* 3_25@2x.png in Resources */,
+				0DE5E9041D3F1ABC00E81058 /* transfer.png in Resources */,
 				6D65F0231C0ECCD70032B5DD /* 12@3x.png in Resources */,
 				8AB7CD191AA6F584007A17E8 /* fontawesome-webfont.ttf in Resources */,
 				6DFF6A8E1C196BAE00310161 /* message_xitong@3x.png in Resources */,
@@ -6460,6 +6495,7 @@
 				6D65F0531C0ECCD70032B5DD /* tuiguang@3x.png in Resources */,
 				6D65EFA41C0ECCD70032B5DD /* send_msg@2x.png in Resources */,
 				6D65EFB31C0ECCD70032B5DD /* xinhaoyou@3x.png in Resources */,
+				0DE5E8FF1D3F11B800E81058 /* end.png in Resources */,
 				6D65EF061C0ECCD70032B5DD /* 1_9@2x.png in Resources */,
 				6D65EF371C0ECCD70032B5DD /* 3_16@3x.png in Resources */,
 				6D65F04B1C0ECCD70032B5DD /* d3@3x.png in Resources */,
@@ -6590,6 +6626,7 @@
 				6D65EF7E1C0ECCD70032B5DD /* 3_5@2x.png in Resources */,
 				6D65EF261C0ECCD70032B5DD /* 3_12@2x.png in Resources */,
 				0D5B22421CD452FE00EFBB44 /* locate@2x.png in Resources */,
+				0DE5E8F01D3F0F5700E81058 /* dir_man.png in Resources */,
 				6D65EF081C0ECCD70032B5DD /* 1_9_H@2x.png in Resources */,
 				6D65F00A1C0ECCD70032B5DD /* icon_tupian@2x.png in Resources */,
 				6D65EFDA1C0ECCD70032B5DD /* dataNothing@3x.png in Resources */,
@@ -6603,7 +6640,6 @@
 				6D65F0251C0ECCD70032B5DD /* 13@3x.png in Resources */,
 				6D65EEF01C0ECCD70032B5DD /* 1_3_H@2x.png in Resources */,
 				6D65F0D01C0ECE260032B5DD /* favo_N@2x.png in Resources */,
-				0D0C3A7D1CF0336D007C7F94 /* icon_stop.png in Resources */,
 				6D65F0CD1C0ECCD70032B5DD /* shouye_zhutie@3x.png in Resources */,
 				6D65EEC91C0ECCD70032B5DD /* nav_1_11@3x.png in Resources */,
 				6D65F04F1C0ECCD70032B5DD /* t_14@3x.png in Resources */,
@@ -6639,7 +6675,6 @@
 				6D65F0871C0ECCD70032B5DD /* login_weibo@3x.png in Resources */,
 				6D65F0A81C0ECCD70032B5DD /* icon_returnTop@2x.png in Resources */,
 				6D65F04D1C0ECCD70032B5DD /* t_10@3x.png in Resources */,
-				0D0C3A7C1CF0336D007C7F94 /* icon_start_stop.png in Resources */,
 				6D65EF271C0ECCD70032B5DD /* 3_12@3x.png in Resources */,
 				6D65EFBB1C0ECCD70032B5DD /* left_menu_home@3x.png in Resources */,
 				6D65F0541C0ECCD70032B5DD /* qiehuanxuanxiang@2x.png in Resources */,
@@ -6714,7 +6749,6 @@
 				6D65F0BE1C0ECCD70032B5DD /* keyboard_fasong@3x.png in Resources */,
 				6D65F06F1C0ECCD70032B5DD /* add_cover@3x.png in Resources */,
 				6D65EF771C0ECCD70032B5DD /* 3_3@3x.png in Resources */,
-				0D0C3A7B1CF0336D007C7F94 /* icon_end_stop.png in Resources */,
 				6D65EF121C0ECCD70032B5DD /* 2_3@2x.png in Resources */,
 				6D65EFB41C0ECCD70032B5DD /* fatie_big@2x.png in Resources */,
 				0D0D04811D02B33200ACA542 /* Info.plist in Resources */,
@@ -6722,6 +6756,7 @@
 				6D65EF751C0ECCD70032B5DD /* 3_2_H@3x.png in Resources */,
 				6D65EEEE1C0ECCD70032B5DD /* 1_3@2x.png in Resources */,
 				6D65F0061C0ECCD70032B5DD /* fav_unAction@2x.png in Resources */,
+				0DE5E8EA1D3F0E6300E81058 /* dir_end.png in Resources */,
 				6D65F06D1C0ECCD70032B5DD /* act_up@3x.png in Resources */,
 				6D65EF6B1C0ECCD70032B5DD /* 3_28@3x.png in Resources */,
 				6D65EEE71C0ECCD70032B5DD /* 1_1@3x.png in Resources */,
@@ -6732,7 +6767,9 @@
 				6D65F03E1C0ECCD70032B5DD /* 6@2x.png in Resources */,
 				0D5B223C1CD452FE00EFBB44 /* delete@3x.png in Resources */,
 				6D65F0971C0ECCD70032B5DD /* cancle_n@3x.png in Resources */,
+				0DE5E8EB1D3F0E6300E81058 /* dir_start.png in Resources */,
 				6D65EFC51C0ECCD70032B5DD /* left_menu_tiezi@3x.png in Resources */,
+				0DE5E8F71D3F0FC700E81058 /* route_walk_normal.png in Resources */,
 				6D65F0A61C0ECCD70032B5DD /* download_N@2x.png in Resources */,
 				6D65EFE31C0ECCD70032B5DD /* nav_back@2x.png in Resources */,
 				6D65EF571C0ECCD70032B5DD /* 3_23@3x.png in Resources */,
@@ -6744,6 +6781,7 @@
 				6D65F0961C0ECCD70032B5DD /* cancle_n@2x.png in Resources */,
 				6D65F0791C0ECCD70032B5DD /* anquan@3x.png in Resources */,
 				6D65EF5D1C0ECCD70032B5DD /* 3_24_H@3x.png in Resources */,
+				0DE5E8F51D3F0FC700E81058 /* route_bus_normal.png in Resources */,
 				6D65F01E1C0ECCD70032B5DD /* 10@2x.png in Resources */,
 				8A9E34491AC000F30058F279 /* ContextMenuCell.xib in Resources */,
 				6D65F04A1C0ECCD70032B5DD /* d3@2x.png in Resources */,
@@ -6754,6 +6792,7 @@
 				6D65F0141C0ECCD70032B5DD /* reply@2x.png in Resources */,
 				6D65EEDB1C0ECCD70032B5DD /* nav_1_6@3x.png in Resources */,
 				6D65F0431C0ECCD70032B5DD /* 8@3x.png in Resources */,
+				0DE5E8EF1D3F0F5700E81058 /* dir_bus.png in Resources */,
 				0DE5E8E41D3E098700E81058 /* yunduo_gif_7.png in Resources */,
 				8A1FE02E1AC3DC6C008F10F0 /* MJPhotoBrowser.bundle in Resources */,
 				6D7859C91ADE061A002B4707 /* chat_voice_record.png in Resources */,
@@ -6824,6 +6863,7 @@
 				6D65F0721C0ECCD70032B5DD /* comt_icon_h@2x.png in Resources */,
 				0D5B22431CD452FE00EFBB44 /* man.png in Resources */,
 				6D65EF741C0ECCD70032B5DD /* 3_2_H@2x.png in Resources */,
+				0DE5E9001D3F11B800E81058 /* start.png in Resources */,
 				6D73B97C1AFF232A00E522DC /* bbs.html in Resources */,
 				6D65EFC11C0ECCD70032B5DD /* left_menu_shoucang@3x.png in Resources */,
 				6D65EF2A1C0ECCD70032B5DD /* 3_13@2x.png in Resources */,

@@ -239,6 +239,8 @@
         subViewController.currentCourse           = indexPath.section;
         subViewController.startLocationName       = self.routeStartLocation;
         subViewController.destinationLocationName = self.routeDestinationLocation;
+        subViewController.titleName               = [NSString stringWithFormat:@"%@ > %@",self.routeStartLocation,self.routeDestinationLocation];
+
         [self.navigationController pushViewController:subViewController animated:YES];
     }
 }

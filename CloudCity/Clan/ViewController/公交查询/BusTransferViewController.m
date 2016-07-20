@@ -84,6 +84,7 @@
     self.tableView.dataSource = self;
     self.tableView.delegate   = self;
     self.tableView.hidden     = YES;
+    self.tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
     [self.view addSubview:self.tableView];
 }
 
@@ -94,6 +95,16 @@
 
     self.busTransferEndSearchFiled.delegate   = self;
     [self.busTransferEndSearchFiled addTarget:self action:@selector(isEditing:) forControlEvents:UIControlEventAllEditingEvents];
+    
+    UILabel * leftView = [[UILabel alloc] initWithFrame:CGRectMake(10,0,10,_busTransferStartSearchFiled.height)];
+    leftView.backgroundColor = [UIColor clearColor];
+    _busTransferStartSearchFiled.leftView = leftView;
+    _busTransferStartSearchFiled.leftViewMode = UITextFieldViewModeAlways;
+    
+    UILabel * leftView2 = [[UILabel alloc] initWithFrame:CGRectMake(10,0,10,_busTransferEndSearchFiled.height)];
+    leftView2.backgroundColor = [UIColor clearColor];
+    _busTransferEndSearchFiled.leftView = leftView2;
+    _busTransferEndSearchFiled.leftViewMode = UITextFieldViewModeAlways;
 }
 
 - (void)addSearchHistory
@@ -202,18 +213,18 @@
     BusTransferListViewController *vc       = [[BusTransferListViewController alloc] init];
     vc.totalBusRoute                        = self.routeResultArr;
 
-        if (![Util isBlankString:self.invertGeoResult]) {
-            if ([self.busTransferStartSearchFiled.text isEqualToString:@"我的位置"]) {
-    vc.routeStartLocation                   = self.invertGeoResult;
-    vc.routeDestinationLocation             = self.busTransferEndSearchFiled.text;
-            }else if ([self.busTransferEndSearchFiled.text isEqualToString:@"我的位置"]){
-    vc.routeStartLocation                   = self.busTransferStartSearchFiled.text;
-    vc.routeDestinationLocation             = self.invertGeoResult;
-            }
-        }else{
-    vc.routeStartLocation                   = self.busTransferStartSearchFiled.text;
-    vc.routeDestinationLocation             = self.busTransferEndSearchFiled.text;
+    if (![Util isBlankString:self.invertGeoResult]) {
+        if ([self.busTransferStartSearchFiled.text isEqualToString:@"我的位置"]) {
+            vc.routeStartLocation                   = self.invertGeoResult;
+            vc.routeDestinationLocation             = self.busTransferEndSearchFiled.text;
+        }else if ([self.busTransferEndSearchFiled.text isEqualToString:@"我的位置"]){
+            vc.routeStartLocation                   = self.busTransferStartSearchFiled.text;
+            vc.routeDestinationLocation             = self.invertGeoResult;
         }
+    }else{
+        vc.routeStartLocation                   = self.busTransferStartSearchFiled.text;
+        vc.routeDestinationLocation             = self.busTransferEndSearchFiled.text;
+    }
 
     vc.startCoordinate                      = self.startCoordinate;
     vc.destinationCoordinate                = self.destinationCoordinate;
@@ -262,9 +273,9 @@
 - (void) textFieldDidBeginEditing:(UITextField *)textField
 {
     if (textField == self.busTransferStartSearchFiled) {
-        self.tableView.frame  = CGRectMake(self.backGroundView.frame.origin.x, self.busTransferStartSearchFiled.bottom + 10, self.backGroundView.width, 200);
+        self.tableView.frame  = CGRectMake(self.backGroundView.frame.origin.x, self.busTransferStartSearchFiled.bottom + 20, self.backGroundView.width, 200);
     }else if (textField == self.busTransferEndSearchFiled) {
-        self.tableView.frame  = CGRectMake(self.backGroundView.frame.origin.x, self.busTransferEndSearchFiled.bottom + 10, self.backGroundView.width, 200);
+        self.tableView.frame  = CGRectMake(self.backGroundView.frame.origin.x, self.busTransferEndSearchFiled.bottom + 20, self.backGroundView.width, 200);
     }
     self.tableView.hidden = NO;
     [self.view bringSubviewToFront:self.tableView];

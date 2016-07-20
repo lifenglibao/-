@@ -32,5 +32,6 @@
 @property (nonatomic, strong) MAMapView              *mapView;
 @property (nonatomic        ) BOOL                   needShowDetailView;
 @property (nonatomic, strong) UIView                 *detailView;
+@property (nonatomic        ) NSString               *titleName;
 
 @end

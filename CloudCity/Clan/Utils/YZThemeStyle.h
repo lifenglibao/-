@@ -8,14 +8,23 @@
 
 #ifndef Clan_YZThemeStyle_h
 #define Clan_YZThemeStyle_h
+
+// API LOCAL
+//#define YZBaseURL @"http://192.168.1.123/cloudCity_temp/bbs/"
+//#define YZBasePath @"upload/api/mobile/iyz_index.php"
+//#define CCBaseURL @"http://192.168.1.171/CloudCity/cc_api2/index.php/"
+//#define CC_FUNCTION_NOT_FOUND  [NSString stringWithFormat:@"%@app/AppConfig/funcNotFound",CCBaseURL]
+
+// API SERVER
+#define YZBaseURL @"http://123.206.23.53/cc_bbs/"
+#define YZBasePath @"api/mobile/iyz_index.php"
+#define CCBaseURL @"http://123.206.23.53/cc_api/index.php/"
+#define CC_FUNCTION_NOT_FOUND  [NSString stringWithFormat:@"%@app/AppConfig/funcNotFound",CCBaseURL]
+
+#define kAPP_DOWNLOAD_URL @"http://192.168.1.171/cc_api/index.php/app/AppDownload/downloadApp" //app下载地址
 #define ThemeStyle @"ThemeStyle" //plist文件名
 #define YZSegMentColor @"YZSegMent" //分割栏
 #define YZBBSName @"YZBBSName" //论坛名
-#define YZBaseURL @"http://192.168.1.171/CloudCity/community/"
-#define YZBasePath @"upload/api/mobile/iyz_index.php"
-#define CCBaseURL @"http://192.168.1.171/CloudCity/cc_api2/index.php/"
-#define CC_FUNCTION_NOT_FOUND  [NSString stringWithFormat:@"%@app/AppConfig/funcNotFound",CCBaseURL]
-#define kAPP_DOWNLOAD_URL @"http://192.168.1.171/cc_api/index.php/app/AppDownload/downloadApp" //app下载地址
 #define kShareAppkeySina @"ShareAppkeySina"
 #define kShareAppkeyTecent @"ShareAppkeyTecent"
 #define kShareAppkeyWechat @"ShareAppkeyWechat"

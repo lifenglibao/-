@@ -18,7 +18,6 @@
 @property (nonatomic, strong) IBOutlet UITextField *busTransferEndSearchFiled;
 @property (nonatomic, strong) IBOutlet UIButton *transferBtn;
 @property (nonatomic, strong) IBOutlet UIButton *searchBtn;
-@property (nonatomic, strong) IBOutlet UIView *sepView;
 
 @property (nonatomic, strong) UITableView                    *tableView;
 @property (nonatomic, strong) NSMutableArray                 *tips;

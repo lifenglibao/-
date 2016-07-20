@@ -30,6 +30,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"公交";
+    [self addBackBtn];
     [self initTabBar];
     [self addGridView];
     [self initAMapSearchSer];
@@ -42,6 +43,15 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)addBackBtn {
+    
+    UIButton* leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    leftButton.backgroundColor = [UIColor clearColor];
+    leftButton.frame = CGRectMake(0, 0, 26, 26);
+    [leftButton setBackgroundImage :[UIImage imageNamed:@"nav_back"] forState:UIControlStateNormal];
+    [leftButton addTarget:self action:@selector(navback:) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:leftButton];
+}
 - (void)initAMapSearchSer {
     [AMapSearchServices sharedServices].apiKey = [NSString returnStringWithPlist:MAPKEY];
 }
@@ -89,6 +99,19 @@
     [[[[self tabBar] items] objectAtIndex:3] setEnabled:FALSE];
     [[[[self tabBar] items] objectAtIndex:4] setEnabled:FALSE];
 
+}
+
+//返回按钮
+- (void)navback:(id)sender
+{
+    if (self.navigationController)
+    {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+    else
+    {
+        [self dismissViewControllerAnimated:YES completion:NULL];
+    }
 }
 
 - (void)dealloc {

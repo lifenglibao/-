@@ -198,6 +198,7 @@
     
     BusMapViewController *subViewController = [[BusMapViewController alloc] init];
     subViewController.busLine = self.line;
+    subViewController.titleName = self.title;
     [self.navigationController pushViewController:subViewController animated:YES];
     
 }
@@ -277,19 +278,15 @@
     cell.textLabel.text = [self.line.busStops[indexPath.row] valueForKey:@"name"];
     
     if ([cell.textLabel.text isEqualToString:self.line.startStop] ) {
-        cell.imageView.image = kIMG(@"icon_start_stop");
-        cell.imageView.layer.cornerRadius = 15;
+        cell.imageView.image = kIMG(@"dir_start");
     }
     else if ([cell.textLabel.text isEqualToString:self.line.endStop] ) {
-        cell.imageView.image = kIMG(@"icon_end_stop");
-        cell.imageView.layer.cornerRadius = 15;
+        cell.imageView.image = kIMG(@"dir_end");
     }
     else {
-        cell.imageView.image = kIMG(@"icon_stop");
-        cell.imageView.layer.cornerRadius = 10;
+        cell.imageView.image = kIMG(@"dir_station");
     }
     cell.contentView.backgroundColor = [UIColor whiteColor];
-    cell.imageView.layer.masksToBounds = YES;
     return cell;
 }
 
