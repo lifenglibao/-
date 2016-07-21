@@ -134,6 +134,8 @@
 		0DE5E9001D3F11B800E81058 /* start.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DE5E8FE1D3F11B800E81058 /* start.png */; };
 		0DE5E9021D3F15CD00E81058 /* arrowTexture_green.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DE5E9011D3F15CD00E81058 /* arrowTexture_green.png */; };
 		0DE5E9041D3F1ABC00E81058 /* transfer.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DE5E9031D3F1ABC00E81058 /* transfer.png */; };
+		0DE5E9071D40A01A00E81058 /* icon_map_transfer@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DE5E9051D40A01900E81058 /* icon_map_transfer@2x.png */; };
+		0DE5E9081D40A01A00E81058 /* icon_map_transfer@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DE5E9061D40A01A00E81058 /* icon_map_transfer@3x.png */; };
 		0DF11D6A1CE342E600FD6D28 /* MANaviRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DF11D691CE342E600FD6D28 /* MANaviRoute.m */; };
 		0DF11D6F1CE345BC00FD6D28 /* MANaviAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DF11D6C1CE345BC00FD6D28 /* MANaviAnnotation.m */; };
 		0DF11D701CE345BC00FD6D28 /* MANaviPolyline.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DF11D6E1CE345BC00FD6D28 /* MANaviPolyline.m */; };
@@ -1393,6 +1395,8 @@
 		0DE5E8FE1D3F11B800E81058 /* start.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = start.png; path = Map/start.png; sourceTree = "<group>"; };
 		0DE5E9011D3F15CD00E81058 /* arrowTexture_green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = arrowTexture_green.png; path = Map/arrowTexture_green.png; sourceTree = "<group>"; };
 		0DE5E9031D3F1ABC00E81058 /* transfer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = transfer.png; path = Map/transfer.png; sourceTree = "<group>"; };
+		0DE5E9051D40A01900E81058 /* icon_map_transfer@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon_map_transfer@2x.png"; path = "Map/icon_map_transfer@2x.png"; sourceTree = "<group>"; };
+		0DE5E9061D40A01A00E81058 /* icon_map_transfer@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon_map_transfer@3x.png"; path = "Map/icon_map_transfer@3x.png"; sourceTree = "<group>"; };
 		0DF11D681CE342E600FD6D28 /* MANaviRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MANaviRoute.h; path = "公交/MANaviRoute.h"; sourceTree = "<group>"; };
 		0DF11D691CE342E600FD6D28 /* MANaviRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MANaviRoute.m; path = "公交/MANaviRoute.m"; sourceTree = "<group>"; };
 		0DF11D6B1CE345BC00FD6D28 /* MANaviAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MANaviAnnotation.h; path = "公交/MANaviAnnotation.h"; sourceTree = "<group>"; };
@@ -3157,6 +3161,8 @@
 		0D5B22081CD4522C00EFBB44 /* Map */ = {
 			isa = PBXGroup;
 			children = (
+				0DE5E9051D40A01900E81058 /* icon_map_transfer@2x.png */,
+				0DE5E9061D40A01A00E81058 /* icon_map_transfer@3x.png */,
 				0DE5E9031D3F1ABC00E81058 /* transfer.png */,
 				0DE5E9011D3F15CD00E81058 /* arrowTexture_green.png */,
 				0DE5E8FD1D3F11B800E81058 /* end.png */,
@@ -6407,6 +6413,7 @@
 				6D7859BF1ADE061A002B4707 /* chat_animation2.png in Resources */,
 				6D65EED91C0ECCD70032B5DD /* nav_1_5@3x.png in Resources */,
 				6D65EFEE1C0ECCD70032B5DD /* share_moments@2x.png in Resources */,
+				0DE5E9071D40A01A00E81058 /* icon_map_transfer@2x.png in Resources */,
 				6D65EFB61C0ECCD70032B5DD /* left_menu_female@2x.png in Resources */,
 				6D65EF981C0ECCD70032B5DD /* icon_clock@2x.png in Resources */,
 				0D5B22361CD452FE00EFBB44 /* compass.png in Resources */,
@@ -6526,6 +6533,7 @@
 				6D65EFF41C0ECCD70032B5DD /* share_tecent@2x.png in Resources */,
 				6D65EEF71C0ECCD70032B5DD /* 1_5@3x.png in Resources */,
 				6D65EF391C0ECCD70032B5DD /* 3_16_H@3x.png in Resources */,
+				0DE5E9081D40A01A00E81058 /* icon_map_transfer@3x.png in Resources */,
 				6D65EF681C0ECCD70032B5DD /* 3_27_H@2x.png in Resources */,
 				6D65F0461C0ECCD70032B5DD /* d1@2x.png in Resources */,
 				0D5B222D1CD452FE00EFBB44 /* arrow_down.png in Resources */,
