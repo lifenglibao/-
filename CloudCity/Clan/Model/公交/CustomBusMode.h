@@ -22,6 +22,7 @@
 
 +(UITextField*)setSearchTextFieldWithFrame:(CGRect)frame;
 +(UIButton*)setGPSButtonWithTitle:(NSString *)title imageName:(NSString *)imageName CGRect:(CGRect)frame target:(id)tar action:(SEL)ac;
++(UIView*)setTrafficButtonWithTitle:(NSString *)title imageName:(NSString *)imageName CGRect:(CGRect)frame target:(id)tar action:(SEL)ac;
 + (NSString *)handleStringWithBrackets:(NSString *)str;
 + (NSString *)handleStringGetBrackets:(NSString *)str;
 + (NSString *)replaceStringWithBusModel:(NSString *)str;

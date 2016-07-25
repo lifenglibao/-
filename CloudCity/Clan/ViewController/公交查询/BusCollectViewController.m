@@ -111,18 +111,17 @@
         [cell.textLabel setNumberOfLines:0];
         [cell.textLabel setLineBreakMode:NSLineBreakByCharWrapping];
         cell.imageView.layer.masksToBounds = YES;
+        cell.imageView.image = kIMG(@"route_bus_select");
     }
     
     if ([self.collectData[indexPath.row] valueForKey:kKEY_FAVO_BUSLINE]) {
         
         cell.textLabel.text  = [self.collectData[indexPath.row] valueForKey:kKEY_FAVO_BUSLINE];
-        cell.imageView.image = kIMG(@"route_bus_select");
     }
     
     if ([self.collectData[indexPath.row] valueForKey:kKEY_FAVO_BUSSTOP]) {
         
         cell.textLabel.text  = [self.collectData[indexPath.row] valueForKey:kKEY_FAVO_BUSSTOP];
-        cell.imageView.image = kIMG(@"route_bus_select");
     }
     
     if ([self.collectData[indexPath.row] valueForKey:kKEY_FAVO_BUSTRANSFER]) {

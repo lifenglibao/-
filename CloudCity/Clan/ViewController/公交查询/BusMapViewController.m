@@ -63,7 +63,7 @@ const NSInteger RoutePlanningPaddingEdge                    = 20;
     }
     [self addUserGPS];
     [self addUserMapPlusAndMin];
-//    [self addTraffic];
+    [self addTraffic];
 }
 
 - (void)addDetailView
@@ -113,26 +113,26 @@ const NSInteger RoutePlanningPaddingEdge                    = 20;
 
 - (void)addUserMapPlusAndMin
 {
-    self.plusBtn = [CustomBusMode setGPSButtonWithTitle:@"" imageName:@"icon_plus" CGRect:CGRectMake(self.mapView.right - 60, self.mapView.bottom - 185, 30, 30) target:self action:@selector(plusMap)];
+    self.plusBtn = [CustomBusMode setGPSButtonWithTitle:@"" imageName:@"icon_plus" CGRect:CGRectMake(self.mapView.right - 40, self.mapView.bottom - 185, 35, 35) target:self action:@selector(plusMap)];
     
     [self.mapView addSubview:self.plusBtn];
     
-    self.minusBtn = [CustomBusMode setGPSButtonWithTitle:@"" imageName:@"icon_min" CGRect:CGRectMake(self.mapView.right - 60, self.mapView.bottom - 150, 30, 30) target:self action:@selector(minusMap)];
+    self.minusBtn = [CustomBusMode setGPSButtonWithTitle:@"" imageName:@"icon_min" CGRect:CGRectMake(self.mapView.right - 40, self.mapView.bottom - 145, 35, 35) target:self action:@selector(minusMap)];
     
     [self.mapView addSubview:self.minusBtn];
 }
 
 - (void)addUserGPS
 {
-    self.gpsBtn = [CustomBusMode setGPSButtonWithTitle:@"" imageName:@"write_upload_del" CGRect:CGRectMake(10, self.mapView.bottom - 150, 30, 30) target:self action:@selector(findUserLocation)];
+    self.gpsBtn = [CustomBusMode setGPSButtonWithTitle:@"" imageName:@"icon_user_location" CGRect:CGRectMake(10, self.mapView.bottom - 150, 35, 35) target:self action:@selector(findUserLocation)];
  
     [self.mapView addSubview:self.gpsBtn];
 }
 
 - (void)addTraffic
 {
-    self.trafficBtn = [CustomBusMode setGPSButtonWithTitle:@"" imageName:@"write_upload_del" CGRect:CGRectMake(self.mapView.right - 100, 100, 30, 30) target:self action:@selector(showTrafficLine)];
-    [self.mapView addSubview:self.trafficBtn];
+    self.trafficView = [CustomBusMode setTrafficButtonWithTitle:@"路况" imageName:@"icon_traffic" CGRect:CGRectMake(self.mapView.right - 40, 90, 35, 35) target:self action:@selector(showTrafficLine)];
+    [self.mapView addSubview:self.trafficView];
 }
 
 #pragma mark - GPS
@@ -166,12 +166,7 @@ const NSInteger RoutePlanningPaddingEdge                    = 20;
 
 - (void)showTrafficLine
 {
-    self.trafficBtn.selected = !self.trafficBtn.selected;
-    if (self.trafficBtn.selected) {
-        self.mapView.showTraffic = YES;
-    }else{
-        self.mapView.showTraffic = NO;
-    }
+    self.mapView.showTraffic = !self.mapView.showTraffic;
 }
 
 #pragma mark - BUS

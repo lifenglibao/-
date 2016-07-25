@@ -14,7 +14,7 @@
 
 @property (nonatomic        ) CGFloat                currentZoomLevel;
 @property (nonatomic, strong) UIButton               *gpsBtn;
-@property (nonatomic, strong) UIButton               *trafficBtn;
+@property (nonatomic, strong) UIView                 *trafficView;
 
 @property (nonatomic, strong) UIButton               *plusBtn;
 @property (nonatomic, strong) UIButton               *minusBtn;

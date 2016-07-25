@@ -28,52 +28,71 @@
 }
 
 +(UITextField*)setSearchTextFieldWithFrame:(CGRect)frame {
-    
-    UITextField *field = [[UITextField alloc] initWithFrame:frame];
+
+    UITextField *field    = [[UITextField alloc] initWithFrame:frame];
     field.backgroundColor = [UIColor whiteColor];
-    field.borderStyle = UITextBorderStyleNone;
+    field.borderStyle     = UITextBorderStyleNone;
     field.clearButtonMode = UITextFieldViewModeWhileEditing;
-    field.leftView = [self setLeftViewWithTextField:field imageName:@"sousuo_gray"];
+    field.leftView        = [self setLeftViewWithTextField:field imageName:@"sousuo_gray"];
     
     return field;
 }
 
 +(UIView*)setLeftViewWithTextField:(UITextField *)textField imageName:(NSString *)imageName{
     
-    UIView * leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 50, textField.height)];
+    UIView * leftView        = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 50, textField.height)];
     leftView.backgroundColor = kCLEARCOLOR;
-    UIImageView *img = [[UIImageView alloc]init];
-    img.image = kIMG(imageName);
-    img.frame = CGRectMake(10, 10, 30, 30);
-    img.contentMode = UIViewContentModeCenter;
+    UIImageView *img         = [[UIImageView alloc]init];
+    img.image                = kIMG(imageName);
+    img.frame                = CGRectMake(10, 10, 30, 30);
+    img.contentMode          = UIViewContentModeCenter;
     [leftView addSubview:img];
-    textField.leftView = leftView;
-    textField.leftViewMode = UITextFieldViewModeAlways;
+    textField.leftView       = leftView;
+    textField.leftViewMode   = UITextFieldViewModeAlways;
     return leftView;
 }
 
 +(UIButton*)setGPSButtonWithTitle:(NSString *)title imageName:(NSString *)imageName CGRect:(CGRect)frame target:(id)tar action:(SEL)ac{
     
-    UIButton *gpsBtn = [[UIButton alloc] init];
-    gpsBtn.frame = frame;
+    UIButton *gpsBtn           = [[UIButton alloc] init];
+    gpsBtn.frame               = frame;
     if (title) {
         [gpsBtn setTitle:title forState:UIControlStateNormal];
     }
     [gpsBtn setImage:kIMG(imageName) forState:UIControlStateNormal];
     [gpsBtn addTarget:tar action:ac forControlEvents:UIControlEventTouchUpInside];
+
+    gpsBtn.layer.shadowOffset  = CGSizeMake(0, 1);
+    gpsBtn.layer.shadowColor   = [UIColor darkGrayColor].CGColor;
+    gpsBtn.layer.shadowRadius  = 1;
+    gpsBtn.layer.shadowOpacity = .5f;
+    CGRect shadowFrame         = gpsBtn.layer.bounds;
+    CGPathRef shadowPath       = [UIBezierPath
+                            bezierPathWithRect:shadowFrame].CGPath;
+    gpsBtn.layer.shadowPath    = shadowPath;
+    
     return gpsBtn;
 }
 
-+(UIButton*)setTrafficButtonWithTitle:(NSString *)title imageName:(NSString *)imageName CGRect:(CGRect)frame target:(id)tar action:(SEL)ac{
++(UIView*)setTrafficButtonWithTitle:(NSString *)title imageName:(NSString *)imageName CGRect:(CGRect)frame target:(id)tar action:(SEL)ac{
     
-    UIButton *trafficBtn = [[UIButton alloc] init];
-    trafficBtn.frame = frame;
-    if (title) {
-        [trafficBtn setTitle:title forState:UIControlStateNormal];
-    }
-    [trafficBtn setImage:kIMG(imageName) forState:UIControlStateNormal];
-    [trafficBtn addTarget:tar action:ac forControlEvents:UIControlEventTouchUpInside];
-    return trafficBtn;
+    UIView *trafficView         = [[UIView alloc] init];
+    trafficView.frame           = frame;
+    trafficView.backgroundColor = [UIColor lightGrayColor];
+    [trafficView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:tar action:ac]];
+
+    UIImageView *img            = [[UIImageView alloc] initWithFrame:CGRectMake(5, 0, trafficView.width - 10, 25)];
+    img.image                   = kIMG(imageName);
+
+    UILabel *lbl                = [[UILabel alloc] initWithFrame:CGRectMake(5, img.bottom - 5, img.width, 10)];
+    lbl.textAlignment           = NSTextAlignmentCenter;
+    lbl.font                    = [UIFont systemFontOfSize:12];
+    lbl.textColor               = [UIColor whiteColor];
+    lbl.text                    = title;
+
+    [trafficView addSubview:img];
+    [trafficView addSubview:lbl];
+    return trafficView;
 }
 
 + (NSString*)timeformatFromSeconds:(long)seconds
