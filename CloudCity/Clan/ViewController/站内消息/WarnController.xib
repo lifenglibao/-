@@ -36,9 +36,9 @@
                     <exclude reference="H67-lq-R57"/>
                 </mask>
                 <mask key="constraints">
+                    <exclude reference="1Ot-IW-CsV"/>
                     <exclude reference="4QS-Ja-xK7"/>
                     <exclude reference="PeD-sh-XMn"/>
-                    <exclude reference="1Ot-IW-CsV"/>
                     <exclude reference="u2S-4s-0ww"/>
                 </mask>
             </variation>
@@ -47,9 +47,9 @@
                     <include reference="H67-lq-R57"/>
                 </mask>
                 <mask key="constraints">
+                    <include reference="1Ot-IW-CsV"/>
                     <include reference="4QS-Ja-xK7"/>
                     <include reference="PeD-sh-XMn"/>
-                    <include reference="1Ot-IW-CsV"/>
                     <include reference="u2S-4s-0ww"/>
                 </mask>
             </variation>

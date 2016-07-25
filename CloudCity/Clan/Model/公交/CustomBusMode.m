@@ -60,7 +60,6 @@
         [gpsBtn setTitle:title forState:UIControlStateNormal];
     }
     [gpsBtn setImage:kIMG(imageName) forState:UIControlStateNormal];
-    [gpsBtn setImage:kIMG(@"shezhi") forState:UIControlStateSelected];
     [gpsBtn addTarget:tar action:ac forControlEvents:UIControlEventTouchUpInside];
     return gpsBtn;
 }
@@ -73,7 +72,6 @@
         [trafficBtn setTitle:title forState:UIControlStateNormal];
     }
     [trafficBtn setImage:kIMG(imageName) forState:UIControlStateNormal];
-    [trafficBtn setImage:kIMG(@"shezhi") forState:UIControlStateSelected];
     [trafficBtn addTarget:tar action:ac forControlEvents:UIControlEventTouchUpInside];
     return trafficBtn;
 }

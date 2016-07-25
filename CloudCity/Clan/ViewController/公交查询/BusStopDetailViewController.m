@@ -67,7 +67,7 @@
 
 - (void)locationServiceUnEnabled
 {
-    [self showHudTipStr:@"抱歉,定位失败,或者您还未开启定位服务,无法获取站点的距离信息"];
+    [self showHudTipStr:@"定位失败或者您还未开启定位,无法获取站点的距离信息"];
 }
 
 - (void)addHeaderView

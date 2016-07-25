@@ -44,6 +44,8 @@ const NSInteger RoutePlanningPaddingEdge                    = 20;
     self.mapView.visibleMapRect           = MAMapRectMake(LUOHE_MAP_RECT_MAKE_X,LUOHE_MAP_RECT_MAKE_Y,LUOHE_MAP_RECT_MAKE_WIDTH,LUOHE_MAP_RECT_MAKE_HEIGHT);
     self.mapView.showsUserLocation        = YES;
     self.mapView.delegate                 = self;
+    self.mapView.userTrackingMode         = MAUserTrackingModeFollow;
+    self.currentZoomLevel                 = self.mapView.zoomLevel;
     [self.view addSubview:self.mapView];
 
 }
@@ -60,6 +62,7 @@ const NSInteger RoutePlanningPaddingEdge                    = 20;
         [self addDetailView];
     }
     [self addUserGPS];
+    [self addUserMapPlusAndMin];
 //    [self addTraffic];
 }
 
@@ -108,6 +111,17 @@ const NSInteger RoutePlanningPaddingEdge                    = 20;
 
 }
 
+- (void)addUserMapPlusAndMin
+{
+    self.plusBtn = [CustomBusMode setGPSButtonWithTitle:@"" imageName:@"icon_plus" CGRect:CGRectMake(self.mapView.right - 60, self.mapView.bottom - 185, 30, 30) target:self action:@selector(plusMap)];
+    
+    [self.mapView addSubview:self.plusBtn];
+    
+    self.minusBtn = [CustomBusMode setGPSButtonWithTitle:@"" imageName:@"icon_min" CGRect:CGRectMake(self.mapView.right - 60, self.mapView.bottom - 150, 30, 30) target:self action:@selector(minusMap)];
+    
+    [self.mapView addSubview:self.minusBtn];
+}
+
 - (void)addUserGPS
 {
     self.gpsBtn = [CustomBusMode setGPSButtonWithTitle:@"" imageName:@"write_upload_del" CGRect:CGRectMake(10, self.mapView.bottom - 150, 30, 30) target:self action:@selector(findUserLocation)];
@@ -129,6 +143,26 @@ const NSInteger RoutePlanningPaddingEdge                    = 20;
 }
 
 #pragma mark - GPS
+
+
+- (void)plusMap
+{
+    
+    if (self.currentZoomLevel == self.mapView.maxZoomLevel) {
+        return;
+    }
+    self.currentZoomLevel += 2.0;
+    [self.mapView setZoomLevel:self.currentZoomLevel animated:YES];
+}
+
+- (void)minusMap
+{
+    if (self.currentZoomLevel == self.mapView.minZoomLevel) {
+        return;
+    }
+    self.currentZoomLevel -= 2.0;
+    [self.mapView setZoomLevel:self.currentZoomLevel animated:YES];
+}
 
 - (void)showTrafficLine
 {
@@ -330,6 +364,24 @@ const NSInteger RoutePlanningPaddingEdge                    = 20;
         return poiAnnotationView;
     }
 
+    /* 自定义userLocation对应的annotationView. */
+//    if ([annotation isKindOfClass:[MAUserLocation class]])
+//    {
+//        static NSString *userLocationStyleReuseIndetifier = @"userLocationStyleReuseIndetifier";
+//        MAAnnotationView *annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:userLocationStyleReuseIndetifier];
+//        if (annotationView == nil)
+//        {
+//            annotationView = [[MAPinAnnotationView alloc] initWithAnnotation:annotation
+//                                                             reuseIdentifier:userLocationStyleReuseIndetifier];
+//        }
+//        
+//        annotationView.image = [UIImage imageNamed:@"userPosition"];
+//        
+//        self.userLocationAnnotationView = annotationView;
+//        
+//        return annotationView;
+//    }
+
     
     return nil;
 }
@@ -371,6 +423,18 @@ const NSInteger RoutePlanningPaddingEdge                    = 20;
     return nil;
 }
 
+//- (void)mapView:(MAMapView *)mapView didUpdateUserLocation:(MAUserLocation *)userLocation updatingLocation:(BOOL)updatingLocation
+//{
+//    if (!updatingLocation && self.userLocationAnnotationView != nil)
+//    {
+//        [UIView animateWithDuration:0.1 animations:^{
+//            
+//            double degree = userLocation.heading.trueHeading - self.mapView.rotationDegree;
+//            self.userLocationAnnotationView.transform = CGAffineTransformMakeRotation(degree * M_PI / 180.f );
+//            
+//        }];
+//    }
+//}
 
 - (void)dealloc
 {

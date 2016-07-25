@@ -12,8 +12,13 @@
 
 @interface BusMapViewController : BaseViewController<MAMapViewDelegate, AMapSearchDelegate>
 
+@property (nonatomic        ) CGFloat                currentZoomLevel;
 @property (nonatomic, strong) UIButton               *gpsBtn;
 @property (nonatomic, strong) UIButton               *trafficBtn;
+
+@property (nonatomic, strong) UIButton               *plusBtn;
+@property (nonatomic, strong) UIButton               *minusBtn;
+
 /* 起始点经纬度. */
 @property (nonatomic        ) CLLocationCoordinate2D startCoordinate;
 /* 终点经纬度. */
@@ -33,5 +38,6 @@
 @property (nonatomic        ) BOOL                   needShowDetailView;
 @property (nonatomic, strong) UIView                 *detailView;
 @property (nonatomic        ) NSString               *titleName;
+//@property (nonatomic, strong) MAAnnotationView       *userLocationAnnotationView;
 
 @end

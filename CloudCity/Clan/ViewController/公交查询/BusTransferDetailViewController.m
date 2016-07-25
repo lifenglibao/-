@@ -98,6 +98,14 @@
         cell = [[BusTransferDetailTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                       reuseIdentifier:busCellIdentifier];
         
+        cell.selectedBackgroundView        = [[UIView alloc] init];
+        cell.backgroundColor               = kCLEARCOLOR;
+        [cell.textLabel sizeToFit];
+        [cell.textLabel setNumberOfLines:0];
+        [cell.textLabel setLineBreakMode:NSLineBreakByCharWrapping];
+        UILabel *lineLabel = [self lineViewWithFrame:CGRectMake(0, cell.contentView.bottom - 0.5, ScreenWidth, 0.5)];
+        [cell.contentView addSubview:lineLabel];
+        
     }
     
 //    if ([self.routeData[indexPath.row] objectForKey:@"start"]) {
@@ -159,12 +167,6 @@
         cell.imageView.image              = kIMG(@"dir_end");
     }
 
-    
-    cell.selectedBackgroundView        = [[UIView alloc] init];
-    cell.backgroundColor               = kCLEARCOLOR;
-    [cell.textLabel sizeToFit];
-    [cell.textLabel setNumberOfLines:0];
-    [cell.textLabel setLineBreakMode:NSLineBreakByCharWrapping];
     return cell;
 }
 
@@ -197,6 +199,13 @@
     [tableView endUpdates];
 }
 
+#pragma mark - 添加分割线
+- (UILabel *)lineViewWithFrame:(CGRect)frame
+{
+    UILabel *lineLabel = [[UILabel alloc]initWithFrame:frame];
+    lineLabel.backgroundColor = UIColorFromRGB(0xeeeeee);
+    return lineLabel;
+}
 
 /*
 #pragma mark - Navigation
