@@ -15,9 +15,7 @@
 @property (nonatomic        ) CGFloat                currentZoomLevel;
 @property (nonatomic, strong) UIButton               *gpsBtn;
 @property (nonatomic, strong) UIView                 *trafficView;
-
-@property (nonatomic, strong) UIButton               *plusBtn;
-@property (nonatomic, strong) UIButton               *minusBtn;
+@property (nonatomic, strong) UIView                 *zoomView;
 
 /* 起始点经纬度. */
 @property (nonatomic        ) CLLocationCoordinate2D startCoordinate;

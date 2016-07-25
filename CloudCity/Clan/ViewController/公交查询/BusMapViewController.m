@@ -113,18 +113,14 @@ const NSInteger RoutePlanningPaddingEdge                    = 20;
 
 - (void)addUserMapPlusAndMin
 {
-    self.plusBtn = [CustomBusMode setGPSButtonWithTitle:@"" imageName:@"icon_plus" CGRect:CGRectMake(self.mapView.right - 40, self.mapView.bottom - 185, 35, 35) target:self action:@selector(plusMap)];
+    self.zoomView = [CustomBusMode setZoomViewWithFrame:CGRectMake(self.mapView.right - 40, self.mapView.bottom - 185, 35, 80) target:self action1:@selector(plusMap) action2:@selector(minusMap)];
     
-    [self.mapView addSubview:self.plusBtn];
-    
-    self.minusBtn = [CustomBusMode setGPSButtonWithTitle:@"" imageName:@"icon_min" CGRect:CGRectMake(self.mapView.right - 40, self.mapView.bottom - 145, 35, 35) target:self action:@selector(minusMap)];
-    
-    [self.mapView addSubview:self.minusBtn];
+    [self.mapView addSubview:self.zoomView];
 }
 
 - (void)addUserGPS
 {
-    self.gpsBtn = [CustomBusMode setGPSButtonWithTitle:@"" imageName:@"icon_user_location" CGRect:CGRectMake(10, self.mapView.bottom - 150, 35, 35) target:self action:@selector(findUserLocation)];
+    self.gpsBtn = [CustomBusMode setGPSButtonWithTitle:@"" imageName:@"icon_user_location" CGRect:CGRectMake(10, self.mapView.bottom - 140, 35, 35) target:self action:@selector(findUserLocation)];
  
     [self.mapView addSubview:self.gpsBtn];
 }
@@ -147,7 +143,6 @@ const NSInteger RoutePlanningPaddingEdge                    = 20;
 
 - (void)plusMap
 {
-    
     if (self.currentZoomLevel == self.mapView.maxZoomLevel) {
         return;
     }

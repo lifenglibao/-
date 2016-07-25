@@ -95,6 +95,41 @@
     return trafficView;
 }
 
++(UIView*)setZoomViewWithFrame:(CGRect)frame target:(id)tar action1:(SEL)ac1 action2:(SEL)ac2{
+    
+    UIView *view                   = [[UIView alloc] init];
+    view.backgroundColor           = [UIColor whiteColor];
+    view.frame                     = frame;
+    view.userInteractionEnabled    = YES;
+    
+    UIImageView *imgPlus           = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 35, 35)];
+    imgPlus.userInteractionEnabled = YES;
+    imgPlus.image                  = kIMG(@"icon_plus");
+    [imgPlus addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:tar action:ac1]];
+
+    UILabel *lineLabel             = [[UILabel alloc]initWithFrame:CGRectMake(5, view.height/2 - 0.5, view.width - 10, 0.5)];
+    lineLabel.backgroundColor      = [UIColor grayColor];
+
+    UIImageView *imgMin            = [[UIImageView alloc] initWithFrame:CGRectMake(0, view.height/2 + 5, 35, 35)];
+    imgMin.userInteractionEnabled  = YES;
+    imgMin.image                   = kIMG(@"icon_min");
+    [imgMin addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:tar action:ac2]];
+
+    view.layer.shadowOffset        = CGSizeMake(0, 1);
+    view.layer.shadowColor         = [UIColor darkGrayColor].CGColor;
+    view.layer.shadowRadius        = 1;
+    view.layer.shadowOpacity       = .5f;
+    CGRect shadowFrame             = view.layer.bounds;
+    CGPathRef shadowPath           = [UIBezierPath bezierPathWithRect:shadowFrame].CGPath;
+    view.layer.shadowPath          = shadowPath;
+
+    [view addSubview:imgPlus];
+    [view addSubview:lineLabel];
+    [view addSubview:imgMin];
+
+    return view;
+}
+
 + (NSString*)timeformatFromSeconds:(long)seconds
 {
     NSString *minute = [NSString stringWithFormat:@"%ld",(seconds%3600)/60];
