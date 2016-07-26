@@ -234,6 +234,11 @@ static NSString *const customRecommendType = @"2";
     if (!_homeViewModel) {
         _homeViewModel = [HomeViewModel new];
     }
+    
+    if (!_configViewModel) {
+        _configViewModel = [AppConfigViewModel new];
+    }
+
     if (!_dialogListViewModel) {
         _dialogListViewModel = [DialogListViewModel new];
     }
@@ -417,8 +422,6 @@ static NSString *const customRecommendType = @"2";
         
     }];
     
-    self.configViewModel = [AppConfigViewModel new];
-
     [_configViewModel getCCLatestDiscoverWithBlock:^(BOOL result) {
         
     }];

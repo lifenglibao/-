@@ -93,7 +93,6 @@
                         <state key="selected" image="detail_favo_H.png"/>
                         <connections>
                             <action selector="btnFavClicked:" destination="-1" eventType="touchUpInside" id="Eb8-Wu-y0e"/>
-                            <action selector="btnFavClicked:" destination="-2" eventType="touchUpInside" id="xr5-7b-M3J"/>
                         </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="开往" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q9b-KG-lHh">

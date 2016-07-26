@@ -135,6 +135,7 @@
     
     if (![self.busTransferStartSearchFiled.text isEqualToString:@""] && ![self.busTransferEndSearchFiled.text isEqualToString:@""]) {
         
+        [self.routeResultArr removeAllObjects];
         [self showProgressHUDWithStatus:@""];
         [self invertGeo];
         self.routePlanningType = AMapRoutePlanningTypeBus;
@@ -210,24 +211,24 @@
 
         [self hideProgressHUD];
 
-    BusTransferListViewController *vc       = [[BusTransferListViewController alloc] init];
-    vc.totalBusRoute                        = self.routeResultArr;
-
-    if (![Util isBlankString:self.invertGeoResult]) {
-        if ([self.busTransferStartSearchFiled.text isEqualToString:@"我的位置"]) {
-            vc.routeStartLocation                   = self.invertGeoResult;
-            vc.routeDestinationLocation             = self.busTransferEndSearchFiled.text;
-        }else if ([self.busTransferEndSearchFiled.text isEqualToString:@"我的位置"]){
+        BusTransferListViewController *vc       = [[BusTransferListViewController alloc] init];
+        vc.totalBusRoute                        = self.routeResultArr;
+        
+        if (![Util isBlankString:self.invertGeoResult]) {
+            if ([self.busTransferStartSearchFiled.text isEqualToString:@"我的位置"]) {
+                vc.routeStartLocation                   = self.invertGeoResult;
+                vc.routeDestinationLocation             = self.busTransferEndSearchFiled.text;
+            }else if ([self.busTransferEndSearchFiled.text isEqualToString:@"我的位置"]){
+                vc.routeStartLocation                   = self.busTransferStartSearchFiled.text;
+                vc.routeDestinationLocation             = self.invertGeoResult;
+            }
+        }else{
             vc.routeStartLocation                   = self.busTransferStartSearchFiled.text;
-            vc.routeDestinationLocation             = self.invertGeoResult;
+            vc.routeDestinationLocation             = self.busTransferEndSearchFiled.text;
         }
-    }else{
-        vc.routeStartLocation                   = self.busTransferStartSearchFiled.text;
-        vc.routeDestinationLocation             = self.busTransferEndSearchFiled.text;
-    }
 
-    vc.startCoordinate                      = self.startCoordinate;
-    vc.destinationCoordinate                = self.destinationCoordinate;
+        vc.startCoordinate                      = self.startCoordinate;
+        vc.destinationCoordinate                = self.destinationCoordinate;
         [self.parentViewController.navigationController pushViewController:vc animated:YES];
     }else{
         [self.search AMapTransitRouteSearch:naviBack];
