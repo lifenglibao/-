@@ -125,7 +125,7 @@
     [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithImage:kIMG(@"sousuoshouye") style:UIBarButtonItemStylePlain target:self action:@selector(searchAction)] animated:NO];
     
     
-    NSNumber *valNum = [[NSUserDefaults standardUserDefaults] objectForKey:@"KNEWS_MESSAGE"];
+    NSNumber *valNum = [[NSUserDefaults standardUserDefaults] objectForKey:@"KNEWS_FRIEND_MESSAGE"];
     NSString *navTitle = @"nav_left";
     
     UIButton *leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -135,7 +135,7 @@
     leftButton.clipsToBounds = YES;
     UserModel *cUsr = [UserModel currentUserInfo];
     if (cUsr && cUsr.logined) {
-        [leftButton sd_setBackgroundImageWithURL:[NSURL URLWithString:cUsr.avatar] forState:UIControlStateNormal placeholderImage:kIMG(@"portrait_small")];
+        [leftButton sd_setBackgroundImageWithURL:[NSURL URLWithString:cUsr.avatar] forState:UIControlStateNormal placeholderImage:kIMG(navTitle)];
     } else {
         [leftButton sd_cancelBackgroundImageLoadForState:UIControlStateNormal];
         [leftButton sd_cancelImageLoadForState:UIControlStateNormal];

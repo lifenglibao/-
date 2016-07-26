@@ -147,8 +147,6 @@ static float interval = 60.f;
     if (_messageVCExist) {
         [self doCheckIfHasNewMessage];
         [self doCheckIfHasNewUnReadNotification];
-    }
-    if (_meVCExist) {
         [self doCheckIfHasNewFriends];
     }
 }
@@ -712,10 +710,11 @@ static float interval = 60.f;
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
     if ([keyPath isEqualToString:@"logined"] || [keyPath isEqualToString:@"avatar"]) {
-        CustomModuleViewController *customVc = [[CustomModuleViewController alloc] init];
-        [customVc initNav];
     }
     
+    if ([keyPath isEqualToString:@"avatar"]) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"AUTO_REFRESH_NAVIGATION_BAR" object:nil];
+    }
 //    if ([keyPath isEqualToString:@"logined"]) {
 //        for (UIView* obj in self.tabBar.subviews) {
 //            if (obj != _tabBarBG) {
@@ -766,11 +765,7 @@ static float interval = 60.f;
 #pragma mark - notification
 - (void)notificationCome:(NSNotification *)noti
 {
-    CustomModuleViewController *customVc = [[CustomModuleViewController alloc] init];
-
     if ([noti.name isEqualToString:@"KNEWS_MESSAGE_COME"]) {
-        
-        [customVc initNav];
         
         if (_lastButton.tabtype == DZTabType_MessagePage) {
             //当前的视图要刷新
@@ -778,11 +773,11 @@ static float interval = 60.f;
         }
     }
     else if ([noti.name isEqualToString:@"KNEWS_FRIEND_MESSAGE"]) {
-        [customVc initNav];
 //        [self newFriendTip];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"AUTO_REFRESH_NAVIGATION_BAR" object:nil];
+
     }else if ([noti.name isEqualToString:@"Avatar_Changed"]) {
         [[SDImageCache sharedImageCache] removeImageForKey:[UserModel currentUserInfo].avatar fromDisk:YES];
-        [customVc initNav];
     }
     else if ([noti.name isEqualToString:@"GET_kBOARDSTYLE"]) {
         [self loadBoardStyleVC:[NSString returnPlistWithKeyValue:kBOARDSTYLE]];
@@ -908,13 +903,13 @@ static float interval = 60.f;
 //    for (UIViewController *subvc in self.viewControllers) {
 //        if ([subvc isKindOfClass:[UINavigationController class]]) {
 //            DZNavigationController *subnavi = (DZNavigationController *)subvc;
-//            if (subnavi.tabType == DZTabType_MePage) {
+//            if (subnavi.tabType == DZTabType_Custom_SinglePage) {
 //                //遍历出所有的 “我的” 页面
 //                NSInteger btnindex = subnavi.tabBarButtonIndex;
 //                NSInteger btnTag = btnindex+1000;
 //                UIButton *meBtn = (UIButton *)[_tabBarBG viewWithTag:btnTag];
 //                //新消息到达
-//                UIView *newmess = [meBtn viewWithTag:9876];
+//                UIView *newmess = [meBtn viewWithTag:9877];
 //                [newmess removeFromSuperview];
 //                newmess = nil;
 //                if (!isNull(valNum) && valNum.intValue > 0) {
@@ -924,7 +919,7 @@ static float interval = 60.f;
 //                    newMess_btn.enabled = NO;
 //                    newMess_btn.layer.cornerRadius = 10;
 //                    newMess_btn.clipsToBounds = YES;
-//                    newMess_btn.tag = 9876;
+//                    newMess_btn.tag = 9877;
 //                    if (valNum.intValue > 99) {
 //                        [newMess_btn setTitle:@"99+" forState:UIControlStateNormal];
 //                    } else {

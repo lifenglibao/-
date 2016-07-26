@@ -48,10 +48,12 @@ AdLaunchType state = AdLaunchProgressType;
     self.adLocalBackground.alpha = 0.0;
     [self.view addSubview:self.adLocalBackground];
     
+    /*
     [UIView beginAnimations:nil context:nil];//标记动画块开始
     [UIView setAnimationCurve:UIViewAnimationCurveEaseIn];//定义动画加速和减速方式
     [UIView setAnimationDuration:1.5];//动画时长
     [UIView setAnimationDelegate:self];
+     */
     self.adLocalBackground.alpha = 1.0;
     //动画结束后回调方法
     

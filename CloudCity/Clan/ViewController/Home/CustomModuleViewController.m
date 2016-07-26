@@ -149,14 +149,10 @@ static NSString *const customRecommendType = @"2";
         [view removeFromSuperview];
     }
     
-//    [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"sousuoshouye"] style:UIBarButtonItemStylePlain target:self action:@selector(searchAction)] animated:NO];
+//    [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithImage:kIMG(@"sousuoshouye") style:UIBarButtonItemStylePlain target:self action:@selector(searchAction)] animated:NO];
     
-    
-    NSNumber *valNum = [[NSUserDefaults standardUserDefaults] objectForKey:@"KNEWS_MESSAGE"];
     NSString *navTitle = @"nav_left";
-    //    if (valNum && valNum.intValue != 0) {
-    //        navTitle = @"nav_left_news";
-    //    }
+
     UIButton *leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
     leftButton.frame = CGRectMake(0, 5, 30, 30);
     [leftButton addTarget:self action:@selector(presentLeftMenuViewController:) forControlEvents:UIControlEventTouchUpInside];
@@ -164,14 +160,16 @@ static NSString *const customRecommendType = @"2";
     leftButton.clipsToBounds = YES;
     UserModel *cUsr = [UserModel currentUserInfo];
     if (cUsr && cUsr.logined) {
-        [leftButton sd_setBackgroundImageWithURL:[NSURL URLWithString:cUsr.avatar] forState:UIControlStateNormal placeholderImage:kIMG(@"portrait_small")];
+        
+        [leftButton sd_setBackgroundImageWithURL:[NSURL URLWithString:cUsr.avatar] forState:UIControlStateNormal placeholderImage:kIMG(navTitle)];
+
     } else {
         [leftButton sd_cancelBackgroundImageLoadForState:UIControlStateNormal];
         [leftButton sd_cancelImageLoadForState:UIControlStateNormal];
         [leftButton setImage:kIMG(navTitle) forState:UIControlStateNormal];
     }
     [_baseView addSubview:leftButton];
-    if ((!isNull(valNum) && valNum.intValue != 0) || [self newFriendTip]) {
+    if ([self newFriendTip]) {
         //加红点
         UIImageView *redPod = nil;
         redPod = [[UIImageView alloc]initWithImage:[Util imageWithColor:[UIColor redColor]]];
@@ -231,6 +229,7 @@ static NSString *const customRecommendType = @"2";
     //sectionHeaderView
 //    [self addGridView];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doAutoUpdate) name:@"AUTO_REFRESH_SHOWYE" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(initNav) name:@"AUTO_REFRESH_NAVIGATION_BAR" object:nil];
     self.navigationItem.title = _customHomeModel.navTitle.length > 0 ? _customHomeModel.navTitle : [NSString returnStringWithPlist:YZBBSName];
     if (!_homeViewModel) {
         _homeViewModel = [HomeViewModel new];
@@ -723,7 +722,7 @@ static NSString *const customRecommendType = @"2";
 - (void)viewForOrderBy{
     NSArray *listArray = _customHomeModel.recommend;
     if (listArray && listArray.count > 0) {
-        _listType = listArray[2];
+        _listType = listArray[0];
     }
 }
 
