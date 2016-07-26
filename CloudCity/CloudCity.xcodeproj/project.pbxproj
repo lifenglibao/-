@@ -1263,6 +1263,8 @@
 		0D18A1E71D460125006D1CCA /* icon_traffic@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon_traffic@2x.png"; path = "Map/icon_traffic@2x.png"; sourceTree = "<group>"; };
 		0D18A1E81D460125006D1CCA /* icon_traffic@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon_traffic@3x.png"; path = "Map/icon_traffic@3x.png"; sourceTree = "<group>"; };
 		0D18A1EB1D4609FB006D1CCA /* icon_user_location.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon_user_location.png; path = Map/icon_user_location.png; sourceTree = "<group>"; };
+		0D18A1ED1D474EAB006D1CCA /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		0D18A1EE1D474EAB006D1CCA /* Clan.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Clan.pch; sourceTree = "<group>"; };
 		0D19422A1CCE345C0034D6FF /* BusViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BusViewController.h; path = "公交查询/BusViewController.h"; sourceTree = "<group>"; };
 		0D19422B1CCE345C0034D6FF /* BusViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BusViewController.m; path = "公交查询/BusViewController.m"; sourceTree = "<group>"; };
 		0D1942321CCE3B2A0034D6FF /* AMapSearchKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AMapSearchKit.framework; sourceTree = "<group>"; };
@@ -2328,7 +2330,6 @@
 		6DB7DB5B1BE3A44E00389A8E /* ShareSDKConnector.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ShareSDKConnector.framework; sourceTree = "<group>"; };
 		6DB7DB5C1BE3A44E00389A8E /* ShareSDKExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ShareSDKExtension.framework; sourceTree = "<group>"; };
 		6DB979191B625E9D00C09F89 /* BigApp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BigApp.h; sourceTree = "<group>"; };
-		6DBE3F8F1AD3BDEB0067C4EC /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		6DBE3FC21AD3C0630067C4EC /* UserInfoViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoViewModel.h; sourceTree = "<group>"; };
 		6DBE3FC31AD3C0630067C4EC /* UserInfoViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoViewModel.m; sourceTree = "<group>"; };
 		6DBE3FC51AD3C17E0067C4EC /* Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Util.h; sourceTree = "<group>"; };
@@ -2825,7 +2826,6 @@
 		8AB7CC7F1AA0512E007A17E8 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
 		8AB7CC801AA0512E007A17E8 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
 		8AB7CCBA1AA404A2007A17E8 /* ThemeStyle.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = ThemeStyle.plist; path = ../Resource/ThemeStyle.plist; sourceTree = "<group>"; };
-		8AB7CCCE1AA59BEB007A17E8 /* Clan.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Clan.pch; sourceTree = "<group>"; };
 		8AB7CCD21AA5A327007A17E8 /* YZHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YZHelper.h; sourceTree = "<group>"; };
 		8AB7CCD31AA5A327007A17E8 /* YZHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YZHelper.m; sourceTree = "<group>"; };
 		8AB7CCD51AA5A41D007A17E8 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -5533,10 +5533,8 @@
 		8AB7CC4C1AA00D7D007A17E8 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				6DBE3F8F1AD3BDEB0067C4EC /* Constants.h */,
 				8AB7CC4D1AA00D7D007A17E8 /* Info.plist */,
 				8AB7CC4E1AA00D7D007A17E8 /* main.m */,
-				8AB7CCCE1AA59BEB007A17E8 /* Clan.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -5562,6 +5560,8 @@
 		8AB7CC731AA04E96007A17E8 /* Application */ = {
 			isa = PBXGroup;
 			children = (
+				0D18A1ED1D474EAB006D1CCA /* Constants.h */,
+				0D18A1EE1D474EAB006D1CCA /* Clan.pch */,
 				8AFDEE311AD3D92F001D267B /* YZThemeStyle.h */,
 				8AB7CCBA1AA404A2007A17E8 /* ThemeStyle.plist */,
 				8AB7CC501AA00D7D007A17E8 /* AppDelegate.h */,
@@ -7517,7 +7517,7 @@
 					"$(PROJECT_DIR)/Clan/Vendor/Map",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(SRCROOT)/Clan/Clan.pch";
+				GCC_PREFIX_HEADER = "$(SRCROOT)/Clan/Application/Clan.pch";
 				INFOPLIST_FILE = Clan/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -7575,7 +7575,7 @@
 					"$(PROJECT_DIR)/Clan/Vendor/Map",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(SRCROOT)/Clan/Clan.pch";
+				GCC_PREFIX_HEADER = "$(SRCROOT)/Clan/Application/Clan.pch";
 				INFOPLIST_FILE = Clan/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

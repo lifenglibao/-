@@ -72,14 +72,14 @@
 
 - (void)addHeaderView
 {
-    _headerView                 = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.width, 44)];
-    UILabel *nameLabel          = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, self.view.width, 44)];
-    nameLabel.font              = [UIFont systemFontOfSize:15.0f];
-    nameLabel.textColor         = [UIColor blackColor];
-    nameLabel.backgroundColor   = kCLEARCOLOR;
-    nameLabel.textAlignment     = NSTextAlignmentCenter;
-    nameLabel.tag               = 10086;
-    [_headerView addSubview:nameLabel];
+    _headerView                   = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.width, 44)];
+    UILabel *headerLabel          = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, self.view.width, 44)];
+    headerLabel.font              = [UIFont systemFontOfSize:15.0f];
+    headerLabel.textColor         = [UIColor blackColor];
+    headerLabel.backgroundColor   = kCLEARCOLOR;
+    headerLabel.textAlignment     = NSTextAlignmentCenter;
+    headerLabel.tag               = 10086;
+    [_headerView addSubview:headerLabel];
 
     UILabel *line               = [[UILabel alloc]initWithFrame:CGRectMake(0, _headerView.bottom-0.5, self.view.width, 0.5)];
     line.backgroundColor        = [UIColor returnColorWithPlist:YZSegMentColor];
